@@ -23,3 +23,11 @@ To run the website in the browser:
 
 To run your website tests:
 1. Run `yarn website-test $WEBSITE_NAME_LISP_CASE`
+
+### Convenience commands for single website
+
+If you have a single website called `Article, the following are synonyms for the above:
+- `yarn bundle`
+- `yarn serve`
+- `yarn test`
+
