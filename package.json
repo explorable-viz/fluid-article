@@ -12,9 +12,9 @@
     "url": "https://github.com/explorable-viz/fluid/issues"
   },
   "scripts": {
-    "bundle": "yarn fluid publish -w Website -l",
-    "serve": "npx http-serve dist/website",
-    "test": "yarn website-test website"
+    "bundle": "yarn fluid publish -w Article -l",
+    "serve": "npx http-serve dist/article",
+    "test": "yarn website-test article"
   },
   "packageManager": "yarn@1.22.22",
   "dependencies": {
