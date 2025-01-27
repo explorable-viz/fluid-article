@@ -24,7 +24,8 @@ jobs:
         yarn install
         set -x -e
         yarn fluid publish -w Article -l
-        # export PUPPETEER_CACHE_DIR=$GITHUB_WORKSPACE/
+        ls -laR dist/
+        export PUPPETEER_CACHE_DIR=$GITHUB_WORKSPACE/
         # requires Puppeteer to be installed at same version as used in Fluid
         yarn puppeteer browsers install chrome
         yarn puppeteer browsers install firefox
