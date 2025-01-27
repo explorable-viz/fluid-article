@@ -27787,8 +27787,7 @@ var dataTypes = /* @__PURE__ */ foldrArray(Cons)(Nil)([
     /* @__PURE__ */ $Tuple("Viewport", 9)
   ]),
   /* @__PURE__ */ dataType("Transform")([/* @__PURE__ */ $Tuple("Scale", 2), /* @__PURE__ */ $Tuple("Translate", 2)]),
-  /* @__PURE__ */ dataType("Marker")([/* @__PURE__ */ $Tuple("Arrowhead", 0)]),
-  /* @__PURE__ */ dataType("Explanation")([/* @__PURE__ */ $Tuple("Explained", 2)])
+  /* @__PURE__ */ dataType("Marker")([/* @__PURE__ */ $Tuple("Arrowhead", 0)])
 ]);
 var ctrToDataType = /* @__PURE__ */ (() => fromFoldable(foldableList)(bindList.bind(listMap((d) => listMap((v) => $Tuple(
   v,
@@ -34840,7 +34839,6 @@ var forDefs = (\u03C1) => (\u03C3) => {
 };
 
 // output-es/Primitive/index.js
-var $Explanation = (_1, _2, _3) => ({ tag: "Explanation", _1, _2, _3 });
 var fanin2 = /* @__PURE__ */ fanin(categoryFn)(choiceFn);
 var isZeroNumber = { isZero: ($0) => 0 === $0 };
 var isZeroInt = { isZero: ($0) => 0 === $0 };
@@ -34914,30 +34912,6 @@ var number5 = {
       return v._1;
     }
     return typeError(v)("Float");
-  }
-};
-var linkedTextEntry = {
-  pack: (v) => {
-    if (v.tag === "Left") {
-      return $BaseVal("Str", v._1);
-    }
-    if (v.tag === "Right") {
-      return $BaseVal(
-        "Constr",
-        "Explained",
-        $List("Cons", $Val(v._1._1, $BaseVal("Str", v._1._2)), $List("Cons", $Val(v._1._3._1, v._1._3._2), Nil))
-      );
-    }
-    fail();
-  },
-  unpack: (v) => {
-    if (v.tag === "Str") {
-      return $Either("Left", v._1);
-    }
-    if (v.tag === "Constr" && v._2.tag === "Cons" && v._2._1._2.tag === "Str" && v._2._2.tag === "Cons" && v._2._2._2.tag === "Nil" && v._1 === "Explained") {
-      return $Either("Right", $Explanation(v._2._2._1._1, v._2._1._2._1, v._2._2._1));
-    }
-    return typeError(v)("String or Explanation");
   }
 };
 var intOrNumberOrString = {
@@ -36593,7 +36567,19 @@ var reflectDictSelState\u{1D54A}$x215ValS3 = {
     })()
   })
 };
-var reflectDictSelState\u{1D54A}$x215ValS12 = { from: () => (r) => ({ x: get_intOrNumber("x")(r), y: get_intOrNumber("y")(r) }) };
+var reflectDictSelState\u{1D54A}$x215ValS12 = {
+  from: () => (r) => ({
+    x: (() => {
+      const $0 = $$get2(showString)(mapDictString)("x")(r);
+      return $Tuple($0._2._2.tag === "Str" ? $0._2._2._1 : typeError($0._2._2)("Str"), $0._2._1);
+    })(),
+    y: (() => {
+      const $0 = $$get2(showString)(mapDictString)("y")(r);
+      return $Tuple($0._2._2.tag === "Str" ? $0._2._2._1 : typeError($0._2._2)("Str"), $0._2._1);
+    })()
+  })
+};
+var reflectDictSelState\u{1D54A}$x215ValS23 = { from: () => (r) => ({ x: get_intOrNumber("x")(r), y: get_intOrNumber("y")(r) }) };
 
 // output-es/App.View.LineChart/index.js
 var identity27 = (x2) => x2;
@@ -36622,7 +36608,7 @@ var reflectDictSelState\u{1D54A}$x215ValS4 = {
       const $0 = $$get2(showString)(mapDictString)("name")(r);
       return $Tuple($0._2._2.tag === "Str" ? $0._2._2._1 : typeError($0._2._2)("Str"), $0._2._1);
     })(),
-    points: arrayMap(dict(reflectDictSelState\u{1D54A}$x215ValS12.from()))(reflectValSelState\u{1D54A}ArrayV.from()($$get2(showString)(mapDictString)("points")(r)._2))
+    points: arrayMap(dict(reflectDictSelState\u{1D54A}$x215ValS23.from()))(reflectValSelState\u{1D54A}ArrayV.from()($$get2(showString)(mapDictString)("points")(r)._2))
   })
 };
 var reflectValSelState\u{1D54A}LinePl = {
@@ -36897,113 +36883,83 @@ var drawableLineChart = {
   }
 };
 
-// output-es/App.View.LinkedText/foreign.js
-selection_default.prototype.attrs = function(m) {
-  for (const k in m) {
-    this.attr(k, m[k]);
-  }
-  return this;
-};
-function setSelState3({ accessAnn }, {
-  selState: selState2,
-  selClasses: selClasses2,
-  selClassesFor: selClassesFor2,
-  join: join3
-}, div, view2, selListener2) {
-  div.selectAll("span").each(function(textElem) {
-    var sel;
-    if (textElem.conts.tag == "Left") {
-      sel = accessAnn(view2[textElem.i]);
-    } else {
-      sel = accessAnn(view2[textElem.i]);
-    }
-    select_default2(this).classed(selClasses2, false).classed(selClassesFor2(sel), true).on("mousedown", (e) => {
-      selListener2(e);
-    }).on("mouseenter", (e) => {
-      selListener2(e);
-    }).on("mouseleave", (e) => {
-      selListener2(e);
-    });
-  });
-}
-function drawLinkedText_({
-  explanation,
-  contents,
-  accessAnn
-}, uiHelpers2, {
-  divId,
-  suffix,
-  view: view2
-}, selListener2) {
-  return () => {
-    const div = select_default2("#" + divId);
-    const childId = divId + "-" + suffix;
-    let rootElement = div.selectAll("#" + childId);
-    if (rootElement.empty()) {
-      rootElement = div.append("div").attr("id", childId).text(view2._1).attr("class", "linked-text-parent");
-      rootElement.selectAll("span").data([...view2.entries()].map(([i, conts]) => {
-        return { i, conts };
-      })).enter().append("span").attr("id", childId).text((d) => contents(d.conts)).attr("class", "linked-text");
-    }
-    setSelState3({ accessAnn }, uiHelpers2, rootElement, view2, selListener2);
-  };
-}
-var drawLinkedText = (x1) => (x2) => (x3) => (x4) => drawLinkedText_(x1, x2, x3, x4);
-
 // output-es/App.View.LinkedText/index.js
-var linkedTextHelpers = {
-  explanation: (v) => {
-    if (v.tag === "Left") {
-      return v._1._1;
-    }
-    if (v.tag === "Right") {
-      return v._1._1._2;
-    }
-    fail();
-  },
-  contents: (v) => {
-    if (v.tag === "Left") {
-      return v._1._1;
-    }
-    if (v.tag === "Right") {
-      if (v._1._1._3._2.tag === "Str") {
-        return v._1._1._3._2._1;
-      }
-      return typeError(v._1._1._3._2)("Str");
-    }
-    fail();
-  },
-  accessAnn: (v) => {
-    if (v.tag === "Left") {
-      return v._1._2;
-    }
-    if (v.tag === "Right") {
-      return v._1._1._1;
-    }
-    fail();
-  }
+var for_4 = /* @__PURE__ */ for_(applicativeEffect)(foldableArray);
+var forWithIndex_2 = /* @__PURE__ */ forWithIndex_(applicativeEffect)(foldableWithIndexArray);
+var reflectValSelState\u{1D54A}Linked = {
+  from: () => (r) => arrayMap((v) => $Tuple(v._2.tag === "Str" ? v._2._1 : typeError(v._2)("Str"), v._1))(reflectValSelState\u{1D54A}ArrayV.from()(r))
 };
+var setSelState3 = (v) => (redraw) => (rootElement) => {
+  const $0 = selectAll2(".linked-text")(rootElement);
+  return () => {
+    const elems$p = $0();
+    return for_4(elems$p)((elem2) => {
+      const $1 = datum2(elem2);
+      return () => {
+        const v1 = $1();
+        const $2 = definitely("index within bounds")(index(v)(v1.i));
+        const $3 = styles(elem2)(fromFoldable10([
+          $Tuple("border-bottom", isTransient($2._2) ? "1px solid blue" : "none"),
+          $Tuple(
+            "background",
+            (() => {
+              if (isPrimary($2._2) && isPersistent($2._2)) {
+                return "#93E9BE";
+              }
+              if (isSecondary($2._2) && isPersistent($2._2)) {
+                return "rgb(226, 226, 226)";
+              }
+              return "white";
+            })()
+          ),
+          $Tuple(
+            "color",
+            (() => {
+              if (isPrimary($2._2) && isTransient($2._2)) {
+                return "blue";
+              }
+              if (isSecondary($2._2) && isTransient($2._2)) {
+                return "royalblue";
+              }
+              return "black";
+            })()
+          )
+        ]))();
+        return for_2(["mousedown", "mouseenter", "mouseleave"])((ev) => on(ev)(redraw)($3))();
+      };
+    })();
+  };
+};
+var createRootElement2 = (v) => (div) => (childId) => {
+  const $0 = createChild(div)(showElementType.show(Text2))(fromFoldable10([
+    classes(["linked-text-parent"]),
+    $Tuple("id", childId)
+  ]));
+  return () => {
+    const rootElement = $0();
+    forWithIndex_2(v)((i) => (elem2) => {
+      const $1 = createChild(rootElement)(showElementType.show(Text2))(fromFoldable10([
+        classes(["linked-text"]),
+        $Tuple("id", childId)
+      ]));
+      return () => {
+        const elem$p = $1();
+        const $2 = setText(elem2._1)(elem$p)();
+        return setDatum({ i })($2)();
+      };
+    })();
+    return rootElement;
+  };
+};
+var drawable2LinkedText = { createRootElement: createRootElement2, setSelState: setSelState3 };
 var drawableLinkedText = {
   draw: (rSpec) => (figVal) => (v) => (redraw) => {
-    const $0 = drawLinkedText(linkedTextHelpers)(uiHelpers)(rSpec);
-    const $1 = selListener(figVal)(redraw)((v1) => (x2) => constrArg("LinkedText")(0)(listElement(v1.i)(x2)));
+    const $0 = selListener(figVal)(redraw)((v1) => (x2) => constrArg("LinkedText")(0)(listElement(v1.i)(x2)));
     return () => {
-      const $2 = $1();
-      return $0($2)();
+      const $1 = $0();
+      return draw$p(drawable2LinkedText)(uiHelpers)(rSpec)($1)();
     };
   }
-};
-var reflectValSelState\u{1D54A}Linked = {
-  from: () => (r) => arrayMap((x2) => {
-    const $0 = linkedTextEntry.unpack(x2._2);
-    if ($0.tag === "Left") {
-      return $Either("Left", $Tuple($0._1, x2._1));
-    }
-    if ($0.tag === "Right") {
-      return $Either("Right", $Tuple($0._1, x2._1));
-    }
-    fail();
-  })(reflectValSelState\u{1D54A}ArrayV.from()(r))
 };
 
 // output-es/App.View.MatrixView/foreign.js
@@ -37188,8 +37144,7 @@ function drawScatterPlot_(scatterPlotHelpers2, uiHelpers2, {
   view: {
     caption,
     points,
-    xlabel,
-    ylabel
+    labels
   }
 }, listener) {
   return () => {
@@ -37215,8 +37170,8 @@ function drawScatterPlot_(scatterPlotHelpers2, uiHelpers2, {
       rootElement.append("g").attr("transform", "translate(0," + height + ")").call(axisBottom(x2).tickSizeOuter(0)).selectAll("text").style("text-anchor", "middle");
       const y2 = linear2().domain([Math.min(0, y_min), y_max]).range([height, 0]);
       rootElement.append("g").call(axisLeft(y2).tickSizeOuter(0));
-      rootElement.append("text").attr("x", width).attr("y", height + 25).style("text-anchor", "end").style("font-size", "10px").text(val(xlabel));
-      rootElement.append("text").attr("transform", "rotate(-90)").attr("x", -margin.top).attr("y", -margin.left + 20).style("text-anchor", "end").style("font-size", "10px").text(val(ylabel));
+      rootElement.append("text").attr("x", width).attr("y", height + 25).style("text-anchor", "end").style("font-size", "10px").text(val(labels.x));
+      rootElement.append("text").attr("transform", "rotate(-90)").attr("x", -margin.top).attr("y", -margin.left + 20).style("text-anchor", "end").style("font-size", "10px").text(val(labels.y));
       rootElement.append("g").selectAll("circle").data([...points.entries()].map(([i, point2]) => {
         return { i, point: point2 };
       })).enter().append("circle").classed("scatterplot-point", true).attr("cx", ({ point: point2 }) => x2(val(point2.x))).attr("cy", ({ point: point2 }) => y2(val(point2.y))).attr("stroke-width", 0.5);
@@ -37236,15 +37191,8 @@ var reflectDictSelState\u{1D54A}$x215ValS5 = {
       const $0 = $$get2(showString)(mapDictString)("caption")(r);
       return $Tuple($0._2._2.tag === "Str" ? $0._2._2._1 : typeError($0._2._2)("Str"), $0._2._1);
     })(),
-    points: arrayMap(dict(reflectDictSelState\u{1D54A}$x215ValS12.from()))(reflectValSelState\u{1D54A}ArrayV.from()($$get2(showString)(mapDictString)("points")(r)._2)),
-    xlabel: (() => {
-      const $0 = $$get2(showString)(mapDictString)("xlabel")(r);
-      return $Tuple($0._2._2.tag === "Str" ? $0._2._2._1 : typeError($0._2._2)("Str"), $0._2._1);
-    })(),
-    ylabel: (() => {
-      const $0 = $$get2(showString)(mapDictString)("ylabel")(r);
-      return $Tuple($0._2._2.tag === "Str" ? $0._2._2._1 : typeError($0._2._2)("Str"), $0._2._1);
-    })()
+    points: arrayMap(dict(reflectDictSelState\u{1D54A}$x215ValS23.from()))(reflectValSelState\u{1D54A}ArrayV.from()($$get2(showString)(mapDictString)("points")(r)._2)),
+    labels: dict(reflectDictSelState\u{1D54A}$x215ValS12.from())($$get2(showString)(mapDictString)("labels")(r)._2)
   })
 };
 var scatterPlotHelpers = {
@@ -37334,12 +37282,12 @@ var toStringWith = (v) => {
 // output-es/App.View.TableView/index.js
 var $Filter = (tag) => tag;
 var toUnfoldable9 = /* @__PURE__ */ toUnfoldable4(unfoldableArray);
-var forWithIndex_2 = /* @__PURE__ */ forWithIndex_(applicativeEffect)(foldableWithIndexArray);
+var forWithIndex_3 = /* @__PURE__ */ forWithIndex_(applicativeEffect)(foldableWithIndexArray);
 var $$for = /* @__PURE__ */ (() => {
   const traverse2 = traversableArray.traverse(applicativeEffect);
   return (x2) => (f) => traverse2(f)(x2);
 })();
-var for_4 = /* @__PURE__ */ for_(applicativeEffect)(foldableArray);
+var for_5 = /* @__PURE__ */ for_(applicativeEffect)(foldableArray);
 var Interactive = /* @__PURE__ */ $Filter("Interactive");
 var prim = (v) => {
   if (v._2.tag === "Int") {
@@ -37363,7 +37311,7 @@ var record_isVisible = (r) => filter((v) => {
   }
   fail();
 })(r).length !== 0;
-var createRootElement2 = (v) => (div) => (childId) => {
+var createRootElement3 = (v) => (div) => (childId) => {
   const $0 = v.colNames;
   const $1 = v.filter;
   const $2 = v.rows;
@@ -37381,7 +37329,7 @@ var createRootElement2 = (v) => (div) => (childId) => {
     const colNames$p = ["__n", ...$0];
     const $4 = createChild(rootElement)(showElementType.show(THead))(fromFoldable10([]))();
     const row = createChild($4)(showElementType.show(TR))(fromFoldable10([]))();
-    forWithIndex_2(colNames$p)((j) => (colName) => {
+    forWithIndex_3(colNames$p)((j) => (colName) => {
       const value = (() => {
         if (colName === "__n") {
           if ($1 === "Relevant") {
@@ -37403,7 +37351,7 @@ var createRootElement2 = (v) => (div) => (childId) => {
       };
     })();
     const body = createChild(rootElement)(showElementType.show(TBody))(fromFoldable10([]))();
-    forWithIndex_2($2)((i) => (row$1) => {
+    forWithIndex_3($2)((i) => (row$1) => {
       const $5 = createChild(body)(showElementType.show(TR))(fromFoldable10([
         classes(["table-row"])
       ]));
@@ -37411,7 +37359,7 @@ var createRootElement2 = (v) => (div) => (childId) => {
       return () => {
         const $7 = $5();
         const row$p = $6($7)();
-        return forWithIndex_2([showIntImpl(i + 1 | 0), ...arrayMap(prim)(row$1)])((j) => (value) => {
+        return forWithIndex_3([showIntImpl(i + 1 | 0), ...arrayMap(prim)(row$1)])((j) => (value) => {
           const $8 = createChild(row$p)(showElementType.show(TD))(fromFoldable10([
             classes(j >= 0 ? ["table-cell"] : [])
           ]));
@@ -37487,7 +37435,7 @@ var setSelState6 = (v) => (redraw) => (rootElement) => {
   const $3 = selectAll2(".table-cell")(rootElement);
   return () => {
     const cells = $3();
-    for_4(cells)((cell) => {
+    for_5(cells)((cell) => {
       const $42 = datum2(cell);
       return () => {
         const v12 = $42();
@@ -37545,11 +37493,11 @@ var setSelState6 = (v) => (redraw) => (rootElement) => {
       };
     })();
     const v1 = partition(snd)(a$p);
-    for_4(v1.no)((() => {
+    for_5(v1.no)((() => {
       const $42 = classed("hidden")(true);
       return (x2) => $42(x2._1);
     })())();
-    for_4(v1.yes)((() => {
+    for_5(v1.yes)((() => {
       const $42 = classed("hidden")(false);
       return (x2) => $42(x2._1);
     })())();
@@ -37557,7 +37505,7 @@ var setSelState6 = (v) => (redraw) => (rootElement) => {
     setText($1 + " (" + showIntImpl($0.length - v1.no.length | 0) + " of " + showIntImpl($0.length) + ")")($4)();
   };
 };
-var drawable2TableView = { createRootElement: createRootElement2, setSelState: setSelState6 };
+var drawable2TableView = { createRootElement: createRootElement3, setSelState: setSelState6 };
 var drawableTableView = {
   draw: (rSpec) => (figVal) => (v) => (redraw) => {
     const $0 = selListener(figVal)(redraw)((v1) => (x2) => listElement(v1.i)(dictVal(v1.colName)(x2)));

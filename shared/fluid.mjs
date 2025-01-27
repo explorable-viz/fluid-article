@@ -10170,8 +10170,7 @@ var dataTypes = /* @__PURE__ */ foldrArray(Cons)(Nil)([
     /* @__PURE__ */ $Tuple("Viewport", 9)
   ]),
   /* @__PURE__ */ dataType("Transform")([/* @__PURE__ */ $Tuple("Scale", 2), /* @__PURE__ */ $Tuple("Translate", 2)]),
-  /* @__PURE__ */ dataType("Marker")([/* @__PURE__ */ $Tuple("Arrowhead", 0)]),
-  /* @__PURE__ */ dataType("Explanation")([/* @__PURE__ */ $Tuple("Explained", 2)])
+  /* @__PURE__ */ dataType("Marker")([/* @__PURE__ */ $Tuple("Arrowhead", 0)])
 ]);
 var ctrToDataType = /* @__PURE__ */ (() => fromFoldable2(foldableList)(bindList.bind(listMap((d) => listMap((v) => $Tuple(
   v,
@@ -28437,8 +28436,8 @@ var dispatchCommand = (v) => {
     return _bind(evaluate(v._1))((v1) => _liftEffect(log(intercalate4("\n")(removeDocWS(prettyVal(highlightableUnit).pretty(v1)).lines))));
   }
   if (v.tag === "Publish") {
-    return _bind(_map((v$1) => {
-    })(_liftEffect(publish(v._1)(v._2))))(() => _liftEffect(log("Published")));
+    return _map((v$1) => {
+    })(_liftEffect(publish(v._1)(v._2)));
   }
   fail();
 };
@@ -28447,7 +28446,8 @@ var callback = (v) => {
     return log(showErrorImpl(v._1));
   }
   if (v.tag === "Right") {
-    return log("Success");
+    return () => {
+    };
   }
   fail();
 };
