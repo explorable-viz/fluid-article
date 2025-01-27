@@ -1,5 +1,12 @@
 # fluid-article
-Template repo for Fluid article.
+Template repo for Fluid article. To create a new online article:
+
+- Create a new repository from this template
+- In the Workflow Permissions settings for the new repo, enable the following for GitHub Actions:
+   - Read and write permissions
+   - Create and approve pull requests
+- One the `test-deploy` workflow has succeeded, go to the Pages settings for the repo and configure GitHub Pages to deploy from the `gh-pages` branch
+- When `pages-build-deployment` completes your website should be live
 
 ## Website instructions
 
