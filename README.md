@@ -30,4 +30,3 @@ If you have a single website called `Article`, the following are synonyms for th
 - `yarn bundle`
 - `yarn serve`
 - `yarn test`
-
