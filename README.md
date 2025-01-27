@@ -26,7 +26,7 @@ To run your website tests:
 
 ### Convenience commands for single website
 
-If you have a single website called `Article, the following are synonyms for the above:
+If you have a single website called `Article`, the following are synonyms for the above:
 - `yarn bundle`
 - `yarn serve`
 - `yarn test`
