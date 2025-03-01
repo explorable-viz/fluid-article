@@ -23,13 +23,13 @@ This will create a folder in `dist` with a Lisp-cased version of `$WEBSITE_NAME`
 ### Serving Website Locally
 
 To run the website in the browser:
-1. run `npx http-serve dist/$WEBSITE_NAME_LISP_CASE -a 127.0.0.1 -c-1`
+1. run `npx http-serve dist/$WEBSITE_NAME -a 127.0.0.1 -c-1`
 2. Open browser at localhost
 
 ### Running Puppeteer Tests
 
 To run your website tests:
-1. Run `yarn website-test $WEBSITE_NAME_LISP_CASE`
+1. Run `yarn website-test $WEBSITE_NAME`
 
 ### Convenience commands for single website
 
