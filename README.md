@@ -16,9 +16,9 @@ folders under `website`.
 ### Bundling Website
 
 To bundle a website:
-1. Run `yarn fluid publish -w $WEBSITE_NAME -l`
+1. Run `yarn fluid bundle-website -w $WEBSITE_NAME -l`
 
-This will create a folder in `dist` with a Lisp-cased version of `$WEBSITE_NAME`.
+This will create a folder in `dist` called `$WEBSITE_NAME`.
 
 ### Serving Website Locally
 
@@ -33,7 +33,7 @@ To run your website tests:
 
 ### Convenience commands for single website
 
-If you have a single website called `Article`, the following are synonyms for the above:
+If you have a single website called `article`, the following are synonyms for the above:
 - `yarn bundle`
 - `yarn serve`
 - `yarn test`
