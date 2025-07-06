@@ -4,35 +4,35 @@
 
 @font-face {
    font-family: 'OdiseanTech';
-   src: url('../font/OdiseanTech.woff2') format('woff2');
+   src: url('/font/OdiseanTech.woff2') format('woff2');
    font-weight: normal;
    font-style: normal;
 }
 
 @font-face {
    font-family: 'GraphikLight';
-   src: url('../font/GraphikLight.woff2') format('woff2');
+   src: url('/font/GraphikLight.woff2') format('woff2');
    font-weight: 300;
    font-style: normal;
 }
 
 @font-face {
    font-family: 'GraphikLightItalic';
-   src: url('../font/GraphikLightItalic.woff2') format('woff2');
+   src: url('/font/GraphikLightItalic.woff2') format('woff2');
    font-weight: 300;
    font-style: italic;
 }
 
 @font-face {
    font-family: 'GraphikMedium';
-   src: url('../font/GraphikMedium.woff2') format('woff2');
+   src: url('/font/GraphikMedium.woff2') format('woff2');
    font-weight: 500;
    font-style: normal;
 }
 
 @font-face {
    font-family: 'GraphikMediumItalic';
-   src: url('../font/GraphikMediumItalic.woff2') format('woff2');
+   src: url('/font/GraphikMediumItalic.woff2') format('woff2');
    font-weight: 500;
    font-style: italic;
 }
@@ -88,6 +88,10 @@ body {
    margin-bottom: 10em;
 }
 
+.para-text {
+   font-size: 9pt;
+}
+
 p {
    margin-top: 1em;
    margin-bottom: 1em;
@@ -95,6 +99,10 @@ p {
 
 p + p {
    margin-top: 0;
+}
+
+svg {
+   overflow: visible;
 }
 
 .faq-question {
@@ -212,7 +220,7 @@ nav ul li.active-page a {
    display: grid;
    background-color: #f0f0f0;
    width: 100%;
-   grid-template-columns: 35% 1fr;
+   grid-template-columns: 30% 1fr;
    padding-top: 7px;
    padding-bottom: 7px;
 }
@@ -221,7 +229,7 @@ nav ul li.active-page a {
    display: grid;
    background-color: #f0f0f0;
    width: 100%;
-   grid-template-columns: 35% 1fr;
+   grid-template-columns: 30% 1fr;
    margin-top: 10px;
 }
 
@@ -269,6 +277,12 @@ nav ul li.active-page a {
    align-items: flex-end;
 }
 
+.flex-top-align {
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+}
+
 .flex-bottom-align {
    display: flex;
    flex-direction: row;
@@ -289,7 +303,7 @@ nav ul li.active-page a {
    cursor: pointer;
 }
 
-.data-pane {
+.data-pane-column {
    border-right: 1px dotted #CCCCCC;
 }
 
