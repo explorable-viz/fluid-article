@@ -22,6 +22,7 @@ jobs:
     - name: run-test
       run: |
         yarn install
+        yarn install-article
         set -x -e
         yarn fluid bundle-website -w article -l
         export PUPPETEER_CACHE_DIR=$GITHUB_WORKSPACE/

@@ -21,6 +21,8 @@ Windows users may also require
 ### Installation
 
 1. Run `yarn install`
+2. Run `yarn add @explorable-viz/fluid@latest` to gain access to the latest version of fluid
+3. Run `yarn install-article` to copy the example site from `@exploreable-viz/fluid`
 
 ### Bundling website
 
