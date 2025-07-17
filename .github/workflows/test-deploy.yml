@@ -42,7 +42,7 @@ jobs:
         run: |
           yarn install
           set -x -e
-          yarn fluid bundle-website article -l
+          yarn bundle-website article
       - name: gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
