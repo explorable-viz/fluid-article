@@ -22,10 +22,12 @@ Windows users may also require
 
 1. Run `yarn install`
 
+2. Run `yarn install-article` to copy the example site from `@exploreable-viz/fluid`
+
 ### Bundling website
 
 To bundle a website:
-1. Run `yarn fluid bundle-website -w $WEBSITE_NAME -l`
+1. Run `yarn bundle-website $WEBSITE_NAME`
 
 This will create a folder in `dist` called `$WEBSITE_NAME`.
 
