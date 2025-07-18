@@ -264,17 +264,8 @@ var pureE = function(a) {
     return a;
   };
 };
-var bindE = function(a) {
-  return function(f) {
-    return function() {
-      return f(a())();
-    };
-  };
-};
 
 // output-es/Effect/index.js
-var monadEffect = { Applicative0: () => applicativeEffect, Bind1: () => bindEffect };
-var bindEffect = { bind: bindE, Apply0: () => applyEffect };
 var applyEffect = {
   apply: (f) => (a) => () => {
     const f$p = f();
@@ -23582,55 +23573,12 @@ var loadProgCxt = (dictMonadAff) => {
 
 // output-es/Node.Encoding/index.js
 var $Encoding = (tag) => tag;
-var ASCII = /* @__PURE__ */ $Encoding("ASCII");
 var UTF8 = /* @__PURE__ */ $Encoding("UTF8");
 
 // output-es/Data.Nullable/foreign.js
 function nullable(a, r, f) {
   return a == null ? r : f(a);
 }
-
-// output-es/Node.Buffer.Immutable/foreign.js
-function toStringImpl(enc) {
-  return (buff) => {
-    return buff.toString(enc);
-  };
-}
-
-// output-es/Node.Buffer.Immutable/index.js
-var toString = (x) => toStringImpl((() => {
-  if (x === "ASCII") {
-    return "ascii";
-  }
-  if (x === "UTF8") {
-    return "utf8";
-  }
-  if (x === "UTF16LE") {
-    return "utf16le";
-  }
-  if (x === "UCS2") {
-    return "ucs2";
-  }
-  if (x === "Base64") {
-    return "base64";
-  }
-  if (x === "Latin1") {
-    return "latin1";
-  }
-  if (x === "Binary") {
-    return "binary";
-  }
-  if (x === "Hex") {
-    return "hex";
-  }
-  fail();
-})());
-
-// output-es/Node.Buffer.Internal/index.js
-var toString2 = (dictMonad) => (m) => {
-  const $0 = toString(m);
-  return (buf) => dictMonad.Bind1().Apply0().Functor0().map($0)(dictMonad.Applicative0().pure(buf));
-};
 
 // output-es/Node.FS.Constants/foreign.js
 import { constants } from "node:fs";
@@ -23780,132 +23728,6 @@ var loadFileNodeT = (dictMonadAff) => {
     })
   });
 };
-
-// output-es/Node.ChildProcess/foreign.js
-import { spawn, exec, execFile, execSync, execFileSync, fork as cp_fork } from "child_process";
-function execImpl(command2) {
-  return (opts) => (callback2) => () => exec(
-    command2,
-    opts,
-    (err, stdout, stderr) => {
-      callback2(err)(stdout)(stderr)();
-    }
-  );
-}
-var _undefined = void 0;
-
-// output-es/Node.ChildProcess/index.js
-var convertExecOptions = (opts) => ({
-  cwd: (() => {
-    if (opts.cwd.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.cwd.tag === "Just") {
-      return opts.cwd._1;
-    }
-    fail();
-  })(),
-  env: (() => {
-    if (opts.env.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.env.tag === "Just") {
-      return opts.env._1;
-    }
-    fail();
-  })(),
-  encoding: (() => {
-    if (opts.encoding.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.encoding.tag === "Just") {
-      if (opts.encoding._1 === "ASCII") {
-        return "ascii";
-      }
-      if (opts.encoding._1 === "UTF8") {
-        return "utf8";
-      }
-      if (opts.encoding._1 === "UTF16LE") {
-        return "utf16le";
-      }
-      if (opts.encoding._1 === "UCS2") {
-        return "ucs2";
-      }
-      if (opts.encoding._1 === "Base64") {
-        return "base64";
-      }
-      if (opts.encoding._1 === "Latin1") {
-        return "latin1";
-      }
-      if (opts.encoding._1 === "Binary") {
-        return "binary";
-      }
-      if (opts.encoding._1 === "Hex") {
-        return "hex";
-      }
-    }
-    fail();
-  })(),
-  shell: (() => {
-    if (opts.shell.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.shell.tag === "Just") {
-      return opts.shell._1;
-    }
-    fail();
-  })(),
-  timeout: (() => {
-    if (opts.timeout.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.timeout.tag === "Just") {
-      return opts.timeout._1;
-    }
-    fail();
-  })(),
-  maxBuffer: (() => {
-    if (opts.maxBuffer.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.maxBuffer.tag === "Just") {
-      return opts.maxBuffer._1;
-    }
-    fail();
-  })(),
-  killSignal: (() => {
-    if (opts.killSignal.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.killSignal.tag === "Just") {
-      return opts.killSignal._1;
-    }
-    fail();
-  })(),
-  uid: (() => {
-    if (opts.uid.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.uid.tag === "Just") {
-      return opts.uid._1;
-    }
-    fail();
-  })(),
-  gid: (() => {
-    if (opts.gid.tag === "Nothing") {
-      return _undefined;
-    }
-    if (opts.gid.tag === "Just") {
-      return opts.gid._1;
-    }
-    fail();
-  })()
-});
-var exec2 = (cmd) => (opts) => (callback2) => execImpl(cmd)(convertExecOptions(opts))((err) => (stdout$p) => (stderr$p) => callback2({
-  error: nullable(err, Nothing, Just),
-  stdout: stdout$p,
-  stderr: stderr$p
-}));
 
 // output-es/Options.Applicative.Internal.Utils/index.js
 var whitespaceRegex = /* @__PURE__ */ (() => {
@@ -24860,10 +24682,10 @@ var abortOption = (err) => (m) => {
 };
 
 // output-es/Node.Process/foreign.js
-import process2 from "process";
+import process from "process";
 function exit(code) {
   return () => {
-    process2.exit(code);
+    process.exit(code);
   };
 }
 function copyArray(xs) {
@@ -24871,7 +24693,7 @@ function copyArray(xs) {
 }
 
 // output-es/Node.Process/index.js
-var argv = /* @__PURE__ */ (() => copyArray(process2.argv))();
+var argv = /* @__PURE__ */ (() => copyArray(process.argv))();
 
 // output-es/Node.Stream/foreign.js
 function writeStringImpl(w) {
@@ -27031,7 +26853,7 @@ var handleParseResult = (v) => {
     return () => {
       const progn = getProgName();
       const v1 = renderFailure($0)(progn);
-      writeString(v1._2 === "Success" ? process2.stdout : process2.stderr)(UTF8)(v1._1 + "\n")(mempty22)();
+      writeString(v1._2 === "Success" ? process.stdout : process.stderr)(UTF8)(v1._1 + "\n")(mempty22)();
       return exit(boundedEnumExitCode.fromEnum(v1._2))();
     };
   }
@@ -27040,7 +26862,7 @@ var handleParseResult = (v) => {
     return () => {
       const progn = getProgName();
       const msg = $0.execCompletion(progn)();
-      writeString(process2.stdout)(UTF8)(msg)(mempty22)();
+      writeString(process.stdout)(UTF8)(msg)(mempty22)();
       return exitSuccess();
     };
   }
@@ -27068,16 +26890,14 @@ var execParserPure = (pprefs) => (pinfo) => (args) => {
 };
 
 // output-es/Fluid/index.js
-var $BundleArgs = (_1, _2) => ({ tag: "BundleArgs", _1, _2 });
-var $Command = (tag, _1) => ({ tag, _1 });
+var $Command = (_1) => ({ tag: "Evaluate", _1 });
 var $EvalArgs = (_1) => ({ tag: "EvalArgs", _1 });
 var loadFileNodeT2 = /* @__PURE__ */ loadFileNodeT(monadAffAff)(monadErrorAff);
 var loadProgCxt2 = /* @__PURE__ */ loadProgCxt(monadAffAff)(monadErrorAff)(loadFileNodeT2);
 var prepConfig2 = /* @__PURE__ */ prepConfig(monadAffAff)(monadErrorAff)(loadFileNodeT2);
 var graphEval2 = /* @__PURE__ */ graphEval(monadAffAff)(loadFileNodeT2)(monadErrorAff);
 var fromFoldable25 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
-var Evaluate = (value0) => $Command("Evaluate", value0);
-var BundleWebsite = (value0) => $Command("BundleWebsite", value0);
+var Evaluate = (value0) => $Command(value0);
 var parseLocal = /* @__PURE__ */ $Parser(
   "AltP",
   /* @__PURE__ */ flag$p(true)(/* @__PURE__ */ (() => {
@@ -27112,42 +26932,13 @@ var parseImports = /* @__PURE__ */ $Parser(
     );
   })()))
 );
-var parseBundleArgs = /* @__PURE__ */ (() => $Parser(
-  "MultP",
-  $MultPE(
-    parserFunctor.map((v) => (v1) => $BundleArgs(v, v1))(parserFunctor.map(Folder)(option(readerAsk)((() => {
-      const $0 = help("root directory of website under dist/");
-      const $1 = $0._2._2.tag === "Nothing" ? Nothing : $0._2._2;
-      return $Mod(
-        (x) => $0._1({
-          optNames: [$OptName("OptShort", "w"), $OptName("OptLong", "website"), ...x.optNames],
-          optCompleter: x.optCompleter,
-          optNoArgError: x.optNoArgError
-        }),
-        $DefaultProp($Maybe("Just", "Misc"), $1.tag === "Nothing" ? Nothing : $1),
-        (x) => $0._3(x)
-      );
-    })()))),
-    parseLocal
-  )
-))();
 var evaluate = (v) => {
   const $0 = v._1.fileName;
   const fluidSrcPaths = [v._1.fluidSrcPath, ...v._1.local ? ["node_modules/@explorable-viz/fluid/dist/fluid/fluid"] : []];
   return _bind(loadProgCxt2({ fluidSrcPaths })(v._1.imports)(v._1.datasets))((progCxt) => _bind(prepConfig2({ fluidSrcPaths })($0)(progCxt))((v1) => _bind(graphEval2(v1.gconfig)(v1.e))((v2) => _pure(functorVal.map((v$1) => {
   })(v2["out\u03B1"])))));
 };
-var copyOptions = {
-  cwd: Nothing,
-  env: Nothing,
-  timeout: Nothing,
-  killSignal: Nothing,
-  maxBuffer: Nothing,
-  uid: Nothing,
-  gid: Nothing,
-  encoding: Nothing,
-  shell: Nothing
-};
+var dispatchCommand = (v) => _bind(evaluate(v._1))((v1) => _liftEffect(log(intercalate4("\n")(removeDocWS(prettyVal(highlightableUnit).pretty(v1)).lines))));
 var callback = (v) => {
   if (v.tag === "Left") {
     return log(showErrorImpl(v._1));
@@ -27155,29 +26946,6 @@ var callback = (v) => {
   if (v.tag === "Right") {
     return () => {
     };
-  }
-  fail();
-};
-var bundleWebsite = (v) => exec2((v._2 ? "./node_modules/@explorable-viz/fluid/script/bundle-website.sh -w " : "./script/bundle-website.sh -w ") + (v._2 ? v._1 + " -l" : v._1 + ""))(copyOptions)((v1) => {
-  if (v1.error.tag === "Just") {
-    return log(showErrorImpl(v1.error._1));
-  }
-  if (v1.error.tag === "Nothing") {
-    const $0 = toString2(monadEffect)(ASCII)(v1.stdout);
-    return () => {
-      const $1 = $0();
-      return log($1)();
-    };
-  }
-  fail();
-});
-var dispatchCommand = (v) => {
-  if (v.tag === "Evaluate") {
-    return _bind(evaluate(v._1))((v1) => _liftEffect(log(intercalate4("\n")(removeDocWS(prettyVal(highlightableUnit).pretty(v1)).lines))));
-  }
-  if (v.tag === "BundleWebsite") {
-    return _map((v$1) => {
-    })(_liftEffect(bundleWebsite(v._1)));
   }
   fail();
 };
@@ -27275,32 +27043,16 @@ var parseEvaluate = /* @__PURE__ */ (() => $Parser(
     })()))
   )
 ))();
-var commands = /* @__PURE__ */ (() => ({ bundleWebsite: parserFunctor.map(BundleWebsite)(parseBundleArgs), evaluate: parserFunctor.map(Evaluate)(parseEvaluate) }))();
-var commandParser = /* @__PURE__ */ subparser(/* @__PURE__ */ (() => {
-  const $0 = command("evaluate")(progDesc("Evaluate a file")({
-    infoParser: commands.evaluate,
-    infoFullDesc: true,
-    infoProgDesc: mempty12,
-    infoHeader: mempty12,
-    infoFooter: mempty12,
-    infoFailureCode: $$Error,
-    infoPolicy: Intersperse
-  }));
-  const $1 = command("bundle-website")(progDesc("Bundle a website to dist")({
-    infoParser: commands.bundleWebsite,
-    infoFullDesc: true,
-    infoProgDesc: mempty12,
-    infoHeader: mempty12,
-    infoFooter: mempty12,
-    infoFailureCode: $$Error,
-    infoPolicy: Intersperse
-  }));
-  return $Mod(
-    (x) => $1._1($0._1(x)),
-    $DefaultProp($1._2._1.tag === "Nothing" ? $0._2._1 : $1._2._1, $1._2._2.tag === "Nothing" ? $0._2._2 : $1._2._2),
-    (x) => $1._3($0._3(x))
-  );
-})());
+var commands = /* @__PURE__ */ (() => ({ evaluate: parserFunctor.map(Evaluate)(parseEvaluate) }))();
+var commandParser = /* @__PURE__ */ (() => subparser(command("evaluate")(progDesc("Evaluate a file")({
+  infoParser: commands.evaluate,
+  infoFullDesc: true,
+  infoProgDesc: mempty12,
+  infoHeader: mempty12,
+  infoFooter: mempty12,
+  infoFailureCode: $$Error,
+  infoPolicy: Intersperse
+}))))();
 var main = /* @__PURE__ */ (() => {
   const $0 = runAff(callback)(_bind(_liftEffect((() => {
     const $02 = header("parse - a simple parser")(progDesc("Parse a file")({
