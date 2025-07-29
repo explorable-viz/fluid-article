@@ -68,10 +68,10 @@
     style-mod "^4.1.0"
     w3c-keyname "^2.2.4"
 
-"@explorable-viz/fluid@^0.7.99":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@explorable-viz/fluid/-/fluid-0.7.99.tgz#9160b5dc73ec1b2d5e3e7d7eabf6db24e4d6d862"
-  integrity sha512-w5EI2h9cCKpRq0L7cQaQqtYEPh1z0aPOifwa2xHnj+l/ACzp4uoNZczUsKazUQ1ZACCiN4ORFFlsH4aRt+DQ6w==
+"@explorable-viz/fluid@^0.7.100":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@explorable-viz/fluid/-/fluid-0.7.100.tgz#a64ce98b6c37a17078f03c3db9b2d89b859fe711"
+  integrity sha512-d27tqfo1lurXGArNVNMOz58WONNB092guwpqIW3KCFuGVgpalrQQ4WnmejMhIZOzkoyzR2CoTWK2WVJcEZ8ofg==
   dependencies:
     "@codemirror/commands" "6.2.2"
     "@codemirror/state" "6.2.0"
