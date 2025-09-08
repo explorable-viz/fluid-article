@@ -22,7 +22,7 @@ jobs:
     - name: run-test
       run: |
         yarn install
-        yarn install-article
+        yarn install-website article
         set -x -e
         yarn bundle-website article
         export PUPPETEER_CACHE_DIR=$GITHUB_WORKSPACE/
@@ -42,7 +42,7 @@ jobs:
         run: |
           yarn install
           set -x -e
-          yarn install-article
+          yarn install-website article
           yarn bundle-website article
       - name: gh-pages
         uses: peaceiris/actions-gh-pages@v3
