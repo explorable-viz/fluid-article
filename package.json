@@ -15,7 +15,7 @@
     "bundle": "yarn bundle-website article",
     "bundle-serve": "yarn bundle && yarn serve",
     "serve": "npx http-serve dist/article",
-    "test": "yarn website-test article"
+    "test": "yarn test-website article"
   },
   "packageManager": "yarn@1.22.22",
   "dependencies": {

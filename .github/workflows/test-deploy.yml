@@ -29,7 +29,7 @@ jobs:
         # requires Puppeteer to be installed at same version as used in Fluid
         yarn puppeteer browsers install chrome
         yarn puppeteer browsers install firefox
-        yarn website-test article
+        yarn test-website article
 
   deploy-website:
     runs-on: ubuntu-22.04

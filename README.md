@@ -21,8 +21,7 @@ Windows users may also require
 ### Installation
 
 1. Run `yarn install`
-
-2. Run `yarn install-article` to copy the example site from `@exploreable-viz/fluid`
+2. Run `yarn install-website article` to copy the example `article` website from `@exploreable-viz/fluid`
 
 ### Bundling website
 
@@ -40,7 +39,7 @@ To run the website in the browser:
 ### Running Puppeteer tests
 
 To run your website tests:
-1. Run `yarn website-test $WEBSITE_NAME`
+1. Run `yarn test-website $WEBSITE_NAME`
 
 ### Convenience commands for single website
 
