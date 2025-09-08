@@ -1,3 +1,6 @@
+import convolution.testImage
+import convolution.emboss
+
 let lookup m n image =
     let (m_max, n_max) = dims image
     -- in image!(((m - 1) `mod` m_max) + 1, ((n - 1) `mod` n_max) + 1);
@@ -14,7 +17,7 @@ let convolve image kernel =
         (half_i, half_j) = (i `quot` 2, j `quot` 2);
         area = i * j
     in [| let interMatrix =
-              """average these to compute value of element (${m'},${n'})"""
+              @doc("""average these to compute value of element (${m'},${n'})""")
               [| let x = m' + i' - 1 - half_i;
                      y = n' + j' - 1 - half_j in
                 lookup x y image * kernel!(i', j')
