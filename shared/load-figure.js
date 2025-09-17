@@ -11862,25 +11862,25 @@ var Decoration = class extends RangeValue {
   given position.
   */
   static widget(spec) {
-    let side = spec.side || 0, block2 = !!spec.block;
-    side += block2 ? side > 0 ? 3e8 : -4e8 : side > 0 ? 1e8 : -1e8;
-    return new PointDecoration(spec, side, side, block2, spec.widget || null, false);
+    let side = spec.side || 0, block3 = !!spec.block;
+    side += block3 ? side > 0 ? 3e8 : -4e8 : side > 0 ? 1e8 : -1e8;
+    return new PointDecoration(spec, side, side, block3, spec.widget || null, false);
   }
   /**
   Create a replace decoration which replaces the given range with
   a widget, or simply hides it.
   */
   static replace(spec) {
-    let block2 = !!spec.block, startSide, endSide;
+    let block3 = !!spec.block, startSide, endSide;
     if (spec.isBlockGap) {
       startSide = -5e8;
       endSide = 4e8;
     } else {
-      let { start: start2, end } = getInclusive(spec, block2);
-      startSide = (start2 ? block2 ? -3e8 : -1 : 5e8) - 1;
-      endSide = (end ? block2 ? 2e8 : 1 : -6e8) + 1;
+      let { start: start2, end } = getInclusive(spec, block3);
+      startSide = (start2 ? block3 ? -3e8 : -1 : 5e8) - 1;
+      endSide = (end ? block3 ? 2e8 : 1 : -6e8) + 1;
     }
-    return new PointDecoration(spec, startSide, endSide, block2, spec.widget || null, true);
+    return new PointDecoration(spec, startSide, endSide, block3, spec.widget || null, true);
   }
   /**
   Create a line decoration, which can add DOM attributes to the
@@ -11939,11 +11939,11 @@ var LineDecoration = class _LineDecoration extends Decoration {
 LineDecoration.prototype.mapMode = MapMode.TrackBefore;
 LineDecoration.prototype.point = true;
 var PointDecoration = class _PointDecoration extends Decoration {
-  constructor(spec, startSide, endSide, block2, widget, isReplace) {
+  constructor(spec, startSide, endSide, block3, widget, isReplace) {
     super(startSide, endSide, widget, spec);
-    this.block = block2;
+    this.block = block3;
     this.isReplace = isReplace;
-    this.mapMode = !block2 ? MapMode.TrackDel : startSide <= 0 ? MapMode.TrackBefore : MapMode.TrackAfter;
+    this.mapMode = !block3 ? MapMode.TrackDel : startSide <= 0 ? MapMode.TrackBefore : MapMode.TrackAfter;
   }
   // Only relevant when this.block == true
   get type() {
@@ -11964,13 +11964,13 @@ var PointDecoration = class _PointDecoration extends Decoration {
   }
 };
 PointDecoration.prototype.point = true;
-function getInclusive(spec, block2 = false) {
+function getInclusive(spec, block3 = false) {
   let { inclusiveStart: start2, inclusiveEnd: end } = spec;
   if (start2 == null)
     start2 = spec.inclusive;
   if (end == null)
     end = spec.inclusive;
-  return { start: start2 !== null && start2 !== void 0 ? start2 : block2, end: end !== null && end !== void 0 ? end : block2 };
+  return { start: start2 !== null && start2 !== void 0 ? start2 : block3, end: end !== null && end !== void 0 ? end : block3 };
 }
 function widgetsEq(a, b) {
   return a == b || !!(a && b && a.compare(b));
@@ -12126,14 +12126,14 @@ var LineView = class _LineView extends ContentView {
   }
   static find(docView, pos) {
     for (let i = 0, off = 0; i < docView.children.length; i++) {
-      let block2 = docView.children[i], end = off + block2.length;
+      let block3 = docView.children[i], end = off + block3.length;
       if (end >= pos) {
-        if (block2 instanceof _LineView)
-          return block2;
+        if (block3 instanceof _LineView)
+          return block3;
         if (end > pos)
           break;
       }
-      off = end + block2.breakAfter;
+      off = end + block3.breakAfter;
     }
     return null;
   }
@@ -13575,18 +13575,18 @@ function domPosInText(node, x2, y2) {
 function posAtCoords(view2, coords, precise, bias = -1) {
   var _a2, _b;
   let content2 = view2.contentDOM.getBoundingClientRect(), docTop = content2.top + view2.viewState.paddingTop;
-  let block2, { docHeight } = view2.viewState;
+  let block3, { docHeight } = view2.viewState;
   let { x: x2, y: y2 } = coords, yOffset = y2 - docTop;
   if (yOffset < 0)
     return 0;
   if (yOffset > docHeight)
     return view2.state.doc.length;
   for (let halfLine = view2.defaultLineHeight / 2, bounced = false; ; ) {
-    block2 = view2.elementAtHeight(yOffset);
-    if (block2.type == BlockType.Text)
+    block3 = view2.elementAtHeight(yOffset);
+    if (block3.type == BlockType.Text)
       break;
     for (; ; ) {
-      yOffset = bias > 0 ? block2.bottom + halfLine : block2.top - halfLine;
+      yOffset = bias > 0 ? block3.bottom + halfLine : block3.top - halfLine;
       if (yOffset >= 0 && yOffset <= docHeight)
         break;
       if (bounced)
@@ -13596,11 +13596,11 @@ function posAtCoords(view2, coords, precise, bias = -1) {
     }
   }
   y2 = docTop + yOffset;
-  let lineStart = block2.from;
+  let lineStart = block3.from;
   if (lineStart < view2.viewport.from)
-    return view2.viewport.from == 0 ? 0 : precise ? null : posAtCoordsImprecise(view2, content2, block2, x2, y2);
+    return view2.viewport.from == 0 ? 0 : precise ? null : posAtCoordsImprecise(view2, content2, block3, x2, y2);
   if (lineStart > view2.viewport.to)
-    return view2.viewport.to == view2.state.doc.length ? view2.state.doc.length : precise ? null : posAtCoordsImprecise(view2, content2, block2, x2, y2);
+    return view2.viewport.to == view2.state.doc.length ? view2.state.doc.length : precise ? null : posAtCoordsImprecise(view2, content2, block3, x2, y2);
   let doc2 = view2.dom.ownerDocument;
   let root2 = view2.root.elementFromPoint ? view2.root : doc2;
   let element = root2.elementFromPoint(x2, y2);
@@ -13630,7 +13630,7 @@ function posAtCoords(view2, coords, precise, bias = -1) {
   if (!node || !view2.docView.dom.contains(node)) {
     let line2 = LineView.find(view2.docView, lineStart);
     if (!line2)
-      return yOffset > block2.top + block2.height / 2 ? block2.to : block2.from;
+      return yOffset > block3.top + block3.height / 2 ? block3.to : block3.from;
     ({ node, offset } = domPosAtCoords(line2.dom, x2, y2));
   }
   let nearest = view2.docView.nearest(node);
@@ -13643,14 +13643,14 @@ function posAtCoords(view2, coords, precise, bias = -1) {
     return nearest.localPosFromDOM(node, offset) + nearest.posAtStart;
   }
 }
-function posAtCoordsImprecise(view2, contentRect, block2, x2, y2) {
+function posAtCoordsImprecise(view2, contentRect, block3, x2, y2) {
   let into = Math.round((x2 - contentRect.left) * view2.defaultCharacterWidth);
-  if (view2.lineWrapping && block2.height > view2.defaultLineHeight * 1.5) {
-    let line2 = Math.floor((y2 - block2.top) / view2.defaultLineHeight);
+  if (view2.lineWrapping && block3.height > view2.defaultLineHeight * 1.5) {
+    let line2 = Math.floor((y2 - block3.top) / view2.defaultLineHeight);
     into += line2 * view2.viewState.heightOracle.lineLength;
   }
-  let content2 = view2.state.sliceDoc(block2.from, block2.to);
-  return block2.from + findColumn(content2, into, view2.state.tabSize);
+  let content2 = view2.state.sliceDoc(block3.from, block3.to);
+  return block3.from + findColumn(content2, into, view2.state.tabSize);
 }
 function isSuspiciousSafariCaretResult(node, offset, x2) {
   let len;
@@ -15033,14 +15033,14 @@ var NodeBuilder = class _NodeBuilder {
     this.nodes.push(line2);
     return line2;
   }
-  addBlock(block2) {
+  addBlock(block3) {
     this.enterLine();
-    if (block2.type == BlockType.WidgetAfter && !this.isCovered)
+    if (block3.type == BlockType.WidgetAfter && !this.isCovered)
       this.ensureLine();
-    this.nodes.push(block2);
-    this.writtenTo = this.pos = this.pos + block2.length;
-    if (block2.type != BlockType.WidgetBefore)
-      this.covering = block2;
+    this.nodes.push(block3);
+    this.writtenTo = this.pos = this.pos + block3.length;
+    if (block3.type != BlockType.WidgetBefore)
+      this.covering = block3;
   }
   addLineDeco(height, length6) {
     let line2 = this.ensureLine();
@@ -15216,8 +15216,8 @@ var ViewState = class {
   }
   updateViewportLines() {
     this.viewportLines = [];
-    this.heightMap.forEachLine(this.viewport.from, this.viewport.to, this.heightOracle.setDoc(this.state.doc), 0, 0, (block2) => {
-      this.viewportLines.push(this.scaler.scale == 1 ? block2 : scaleBlock(block2, this.scaler));
+    this.heightMap.forEachLine(this.viewport.from, this.viewport.to, this.heightOracle.setDoc(this.state.doc), 0, 0, (block3) => {
+      this.viewportLines.push(this.scaler.scale == 1 ? block3 : scaleBlock(block3, this.scaler));
     });
   }
   update(update3, scrollTarget = null) {
@@ -15340,13 +15340,13 @@ var ViewState = class {
       let { head } = scrollTarget.range;
       if (head < viewport.from || head > viewport.to) {
         let viewHeight = Math.min(this.editorHeight, this.pixelViewport.bottom - this.pixelViewport.top);
-        let block2 = map3.lineAt(head, QueryType.ByPos, oracle, 0, 0), topPos;
+        let block3 = map3.lineAt(head, QueryType.ByPos, oracle, 0, 0), topPos;
         if (scrollTarget.y == "center")
-          topPos = (block2.top + block2.bottom) / 2 - viewHeight / 2;
+          topPos = (block3.top + block3.bottom) / 2 - viewHeight / 2;
         else if (scrollTarget.y == "start" || scrollTarget.y == "nearest" && head < viewport.from)
-          topPos = block2.top;
+          topPos = block3.top;
         else
-          topPos = block2.bottom - viewHeight;
+          topPos = block3.bottom - viewHeight;
         viewport = new Viewport(map3.lineAt(topPos - 1e3 / 2, QueryType.ByHeight, oracle, 0, 0).from, map3.lineAt(topPos + viewHeight + 1e3 / 2, QueryType.ByHeight, oracle, 0, 0).to);
       }
     }
@@ -15614,11 +15614,11 @@ var BigScaler = class {
     }
   }
 };
-function scaleBlock(block2, scaler) {
+function scaleBlock(block3, scaler) {
   if (scaler.scale == 1)
-    return block2;
-  let bTop = scaler.toDOM(block2.top), bBottom = scaler.toDOM(block2.bottom);
-  return new BlockInfo(block2.from, block2.length, bTop, bBottom - bTop, Array.isArray(block2.type) ? block2.type.map((b) => scaleBlock(b, scaler)) : block2.type);
+    return block3;
+  let bTop = scaler.toDOM(block3.top), bBottom = scaler.toDOM(block3.bottom);
+  return new BlockInfo(block3.from, block3.length, bTop, bBottom - bTop, Array.isArray(block3.type) ? block3.type.map((b) => scaleBlock(b, scaler)) : block3.type);
 }
 var theme = /* @__PURE__ */ Facet.define({ combine: (strs) => strs.join(" ") });
 var darkTheme = /* @__PURE__ */ Facet.define({ combine: (values2) => values2.indexOf(true) > -1 });
@@ -21346,18 +21346,18 @@ function moveLine(state, dispatch3, forward) {
   if (state.readOnly)
     return false;
   let changes = [], ranges = [];
-  for (let block2 of selectedLineBlocks(state)) {
-    if (forward ? block2.to == state.doc.length : block2.from == 0)
+  for (let block3 of selectedLineBlocks(state)) {
+    if (forward ? block3.to == state.doc.length : block3.from == 0)
       continue;
-    let nextLine = state.doc.lineAt(forward ? block2.to + 1 : block2.from - 1);
+    let nextLine = state.doc.lineAt(forward ? block3.to + 1 : block3.from - 1);
     let size4 = nextLine.length + 1;
     if (forward) {
-      changes.push({ from: block2.to, to: nextLine.to }, { from: block2.from, insert: nextLine.text + state.lineBreak });
-      for (let r of block2.ranges)
+      changes.push({ from: block3.to, to: nextLine.to }, { from: block3.from, insert: nextLine.text + state.lineBreak });
+      for (let r of block3.ranges)
         ranges.push(EditorSelection.range(Math.min(state.doc.length, r.anchor + size4), Math.min(state.doc.length, r.head + size4)));
     } else {
-      changes.push({ from: nextLine.from, to: block2.from }, { from: block2.to, insert: state.lineBreak + nextLine.text });
-      for (let r of block2.ranges)
+      changes.push({ from: nextLine.from, to: block3.from }, { from: block3.to, insert: state.lineBreak + nextLine.text });
+      for (let r of block3.ranges)
         ranges.push(EditorSelection.range(r.anchor - size4, r.head - size4));
     }
   }
@@ -21377,11 +21377,11 @@ function copyLine(state, dispatch3, forward) {
   if (state.readOnly)
     return false;
   let changes = [];
-  for (let block2 of selectedLineBlocks(state)) {
+  for (let block3 of selectedLineBlocks(state)) {
     if (forward)
-      changes.push({ from: block2.from, insert: state.doc.slice(block2.from, block2.to) + state.lineBreak });
+      changes.push({ from: block3.from, insert: state.doc.slice(block3.from, block3.to) + state.lineBreak });
     else
-      changes.push({ from: block2.to, insert: state.lineBreak + state.doc.slice(block2.from, block2.to) });
+      changes.push({ from: block3.to, insert: state.lineBreak + state.doc.slice(block3.from, block3.to) });
   }
   dispatch3(state.update({ changes, scrollIntoView: true, userEvent: "input.copyline" }));
   return true;
@@ -33387,70 +33387,44 @@ var codePointAt2 = (v) => (v1) => {
 };
 
 // output-es/Temp.Pretty.Doc/index.js
-var $Collection = (tag) => tag;
 var $Doc = (tag, _1, _2) => ({ tag, _1, _2 });
 var $Format = (tag) => tag;
+var $Mode = (tag) => tag;
+var Stmt = /* @__PURE__ */ $Mode("Stmt");
 var Inline = /* @__PURE__ */ $Format("Inline");
 var Multiline = /* @__PURE__ */ $Format("Multiline");
-var Squash = /* @__PURE__ */ $Format("Squash");
-var Record = /* @__PURE__ */ $Collection("Record");
 var Empty = /* @__PURE__ */ $Doc("Empty");
 var Line2 = /* @__PURE__ */ $Doc("Line");
-var Collection = (value0) => (value1) => $Doc("Collection", value0, value1);
-var intercalate3 = (sep) => (xs) => {
-  const go = (go$a0$copy) => (go$a1$copy) => {
-    let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-    while (go$c) {
-      const b = go$a0, v = go$a1;
-      if (v.tag === "Nil") {
-        go$c = false;
-        go$r = b;
-        continue;
-      }
-      if (v.tag === "Cons") {
-        go$a0 = b.init ? { init: false, acc: v._1 } : { init: false, acc: $Doc("Concat", b.acc, $Doc("Concat", sep, v._1)) };
-        go$a1 = v._2;
-        continue;
-      }
-      fail();
+var width = (m) => (doc2) => {
+  if (doc2.tag === "Empty") {
+    return 0;
+  }
+  if (doc2.tag === "Line") {
+    return 0;
+  }
+  if (doc2.tag === "Text") {
+    return toCodePointArray(doc2._1).length;
+  }
+  if (doc2.tag === "Indent") {
+    return width(m)(doc2._1);
+  }
+  if (doc2.tag === "Concat") {
+    return width(m)(doc2._1) + width(m)(doc2._2) | 0;
+  }
+  if (doc2.tag === "Mode") {
+    return width(doc2._1)(doc2._2);
+  }
+  if (doc2.tag === "StmtOrExpr") {
+    if (m === "Stmt") {
+      return width(m)(doc2._1);
     }
-    return go$r;
-  };
-  return go({ init: true, acc: Empty })(xs).acc;
-};
-var widthList = (v) => {
-  if (v.tag === "Nil") {
-    return 0;
-  }
-  if (v.tag === "Cons") {
-    if (v._2.tag === "Nil") {
-      return width(v._1);
+    if (m === "Expr") {
+      return width(m)(doc2._2);
     }
-    return (width(v._1) + 2 | 0) + widthList(v._2) | 0;
+    fail();
   }
-  fail();
-};
-var width = (v) => {
-  if (v.tag === "Empty") {
-    return 0;
-  }
-  if (v.tag === "Line") {
-    return 0;
-  }
-  if (v.tag === "Text") {
-    return toCodePointArray(v._1).length;
-  }
-  if (v.tag === "Indent") {
-    return width(v._1);
-  }
-  if (v.tag === "Concat") {
-    return width(v._1) + width(v._2) | 0;
-  }
-  if (v.tag === "Block") {
-    return width(v._1);
-  }
-  if (v.tag === "Collection") {
-    return widthList(v._2);
+  if (doc2.tag === "InlOrMul") {
+    return width(m)(doc2._1);
   }
   fail();
 };
@@ -33460,113 +33434,140 @@ var spaces = (n) => {
   }
   return " " + spaces(n - 1 | 0);
 };
-var record = /* @__PURE__ */ Collection(Record);
-var inlinable = (doc2) => {
+var inlinable = (m) => (doc2) => {
+  if (doc2.tag === "Empty") {
+    return true;
+  }
   if (doc2.tag === "Line") {
     return false;
+  }
+  if (doc2.tag === "Text") {
+    return true;
   }
   if (doc2.tag === "Indent") {
     return false;
   }
   if (doc2.tag === "Concat") {
-    return inlinable(doc2._1) && inlinable(doc2._2);
+    return inlinable(m)(doc2._1) && inlinable(m)(doc2._2);
   }
-  return true;
-};
-var format2 = (doc2) => {
-  if (doc2.tag === "Block") {
-    if (doc2._1.tag === "Collection") {
-      return Inline;
-    }
-    if (inlinable(doc2._1) && width(doc2._1) < 20) {
-      return Inline;
-    }
-    return Multiline;
+  if (doc2.tag === "Mode") {
+    return inlinable(doc2._1)(doc2._2);
   }
-  if (doc2.tag === "Collection") {
-    if (widthList(doc2._2) === 0) {
-      return Squash;
+  if (doc2.tag === "StmtOrExpr") {
+    if (m === "Stmt") {
+      return false;
     }
-    if (widthList(doc2._2) < 50) {
-      return Inline;
-    }
-    return Multiline;
-  }
-  return Inline;
-};
-var simplifyList = (ds) => (fmt) => {
-  if (fmt === "Squash") {
-    return Empty;
-  }
-  if (fmt === "Inline") {
-    return intercalate3($Doc("Text", ", "))(listMap((d) => simplify(d))(ds));
-  }
-  if (fmt === "Multiline") {
-    return $Doc("Concat", $Doc("Indent", intercalate3($Doc("Text", ","))(listMap((d) => $Doc("Concat", Line2, simplify(d)))(ds))), Line2);
-  }
-  fail();
-};
-var simplify = (doc2) => {
-  const fmt = format2(doc2);
-  if (doc2.tag === "Block") {
-    if (fmt === "Squash") {
-      return $Doc("Concat", $Doc("Text", ": "), simplify(doc2._1));
-    }
-    if (fmt === "Inline") {
-      return $Doc("Concat", $Doc("Text", ": "), simplify(doc2._1));
-    }
-    if (fmt === "Multiline") {
-      return $Doc("Concat", $Doc("Text", ":"), $Doc("Indent", $Doc("Concat", Line2, simplify(doc2._1))));
+    if (m === "Expr") {
+      return inlinable(m)(doc2._2);
     }
     fail();
   }
-  if (doc2.tag === "Collection") {
-    return (() => {
-      if (doc2._1 === "Record") {
-        if (fmt === "Squash") {
-          return (d) => $Doc("Concat", $Doc("Text", "{"), $Doc("Concat", d, $Doc("Text", "}")));
-        }
-        if (fmt === "Inline") {
-          return (d) => $Doc("Concat", $Doc("Text", "{ "), $Doc("Concat", d, $Doc("Text", " }")));
-        }
-        if (fmt === "Multiline") {
-          return (d) => $Doc("Concat", $Doc("Text", "{"), $Doc("Concat", d, $Doc("Text", "}")));
-        }
-        fail();
-      }
-      if (doc2._1 === "Array") {
-        return (d) => $Doc("Concat", $Doc("Text", "["), $Doc("Concat", d, $Doc("Text", "]")));
-      }
-      fail();
-    })()(simplifyList(doc2._2)(fmt));
+  if (doc2.tag === "InlOrMul") {
+    return inlinable(m)(doc2._1);
   }
-  return doc2;
+  fail();
 };
-var renderWithIndent = (n) => (doc2) => {
+var format2 = (m) => (w) => (doc2) => {
+  if (inlinable(m)(doc2) && width(m)(doc2) < (80 - w | 0)) {
+    return Inline;
+  }
+  return Multiline;
+};
+var renderWithIndent = (m) => (i) => (w) => (doc2) => {
+  const indentation = i * 2 | 0;
+  const fmt = format2(m)(w)(doc2);
+  const $0 = (d1, d2) => {
+    const v = renderWithIndent(m)(i)(w)(d1);
+    const v1 = renderWithIndent(m)(i)(v._2)(d2);
+    return $Tuple(v._1 + v1._1, v1._2);
+  };
   if (doc2.tag === "Empty") {
-    return "";
+    return $Tuple("", w);
   }
   if (doc2.tag === "Line") {
-    const $0 = n * 2 | 0;
-    if ($0 <= 0) {
-      return "\n";
-    }
-    return "\n " + spaces($0 - 1 | 0);
-  }
-  if (doc2.tag === "Text") {
-    return doc2._1;
-  }
-  if (doc2.tag === "Indent") {
-    return renderWithIndent(n + 1 | 0)(doc2._1);
+    return $Tuple(indentation <= 0 ? "\n" : "\n " + spaces(indentation - 1 | 0), indentation);
   }
   if (doc2.tag === "Concat") {
-    if (doc2._1.tag === "Line" && doc2._2.tag === "Empty") {
-      return "\n";
+    if (doc2._1.tag === "Line") {
+      if (doc2._2.tag === "Empty") {
+        return $Tuple("\n", 0);
+      }
+      if (doc2._2.tag === "Line") {
+        return $Tuple(indentation <= 0 ? "\n\n" : "\n\n " + spaces(indentation - 1 | 0), indentation);
+      }
     }
-    return renderWithIndent(n)(doc2._1) + renderWithIndent(n)(doc2._2);
+    return $0(doc2._1, doc2._2);
   }
-  return renderWithIndent(n)(simplify(doc2));
+  if (doc2.tag === "Text") {
+    return $Tuple(doc2._1, w + toCodePointArray(doc2._1).length | 0);
+  }
+  if (doc2.tag === "Indent") {
+    return renderWithIndent(m)(i + 1 | 0)(w)(doc2._1);
+  }
+  if (doc2.tag === "Mode") {
+    return renderWithIndent(doc2._1)(i)(w)(doc2._2);
+  }
+  if (doc2.tag === "StmtOrExpr") {
+    if (m === "Stmt") {
+      return renderWithIndent(m)(i)(w)(doc2._1);
+    }
+    if (m === "Expr") {
+      return renderWithIndent(m)(i)(w)(doc2._2);
+    }
+    fail();
+  }
+  if (doc2.tag === "InlOrMul") {
+    if (fmt === "Inline") {
+      return renderWithIndent(m)(i)(w)(doc2._1);
+    }
+    if (fmt === "Multiline") {
+      return renderWithIndent(m)(i)(w)(doc2._2);
+    }
+  }
+  fail();
 };
+
+// output-es/Temp.Pretty.Helpers/index.js
+var sep$p = (v) => (v1) => {
+  if (v1.tag === "Nil") {
+    return Empty;
+  }
+  if (v1.tag === "Cons") {
+    if (v1._2.tag === "Nil") {
+      return v1._1;
+    }
+    return $Doc("Concat", v1._1, $Doc("Concat", v, sep$p(v)(v1._2)));
+  }
+  fail();
+};
+var record = (ds) => $Doc(
+  "InlOrMul",
+  $Doc(
+    "Concat",
+    $Doc("Text", "{"),
+    $Doc(
+      "Concat",
+      $Doc("Text", " "),
+      $Doc(
+        "Concat",
+        sep$p($Doc("Text", ", "))(ds),
+        $Doc("Concat", $Doc("Text", " "), $Doc("Text", "}"))
+      )
+    )
+  ),
+  $Doc(
+    "Concat",
+    $Doc("Text", "{"),
+    $Doc(
+      "Concat",
+      $Doc(
+        "Indent",
+        $Doc("Concat", Line2, sep$p($Doc("Concat", $Doc("Text", ","), Line2))(ds))
+      ),
+      $Doc("Concat", Line2, $Doc("Text", "}"))
+    )
+  )
+);
 
 // output-es/Temp.Pretty/index.js
 var identity27 = (x2) => x2;
@@ -33623,7 +33624,7 @@ var rootOpVal = (dictHighlightable) => ({
     fail();
   }
 });
-var prettyP = (dictPretty) => (x2) => renderWithIndent(0)(dictPretty.pretty(x2));
+var prettyP = (dictPretty) => (x2) => renderWithIndent(Stmt)(0)(0)(dictPretty.pretty(x2))._1;
 var getPrec = (x2) => {
   const v = lookup2(ordString)(x2)(opDefs);
   if (v.tag === "Just") {
@@ -33677,7 +33678,7 @@ var prettyConstr = (dictRootOp) => (dictPretty) => {
   return (v) => (v1) => {
     if (v1.tag === "Nil") {
       if (v === "Nil") {
-        return $Doc("Concat", $Doc("Text", "["), $Doc("Text", "]"));
+        return $Doc("Text", "[]");
       }
       return $Doc("Text", v);
     }
@@ -33793,6 +33794,9 @@ var prettyBaseVal = (dictHighlightable) => {
         );
       }
       if (v.tag === "Dictionary") {
+        if (isEmpty(v._1)) {
+          return $Doc("Text", "{}");
+        }
         return record(listMap(prettyVar$x215$x215Val(dictHighlightable).pretty)(toUnfoldable7(v._1)));
       }
       if (v.tag === "Constr") {
@@ -34902,8 +34906,8 @@ var unary = (dictBoundedJoinSemilattice) => {
     )
   );
 };
-var typeError = (v) => (typeName3) => throwException(error(typeName3 + " expected; got " + renderWithIndent(0)(prettyBaseVal(highlightableUnit).pretty(functorBaseVal.map((v$1) => {
-})(v)))))();
+var typeError = (v) => (typeName3) => throwException(error(typeName3 + " expected; got " + renderWithIndent(Stmt)(0)(0)(prettyBaseVal(highlightableUnit).pretty(functorBaseVal.map((v$1) => {
+})(v)))._1))();
 var string2 = {
   pack: Str2,
   unpack: (v) => {
@@ -37327,11 +37331,11 @@ function setSelection_({
   selState: selState2,
   selClasses: selClasses2,
   selClassesFor: selClassesFor2
-}, { matrix }, select2, rootElement) {
+}, { matrix: matrix2 }, select2, rootElement) {
   return () => {
     var listener = eventListener2(withElement(select2))();
     rootElement.selectAll(".matrix-cell").each(function(cellRect) {
-      const sel = selState2(matrix.cells[cellRect.i - 1][cellRect.j - 1]);
+      const sel = selState2(matrix2.cells[cellRect.i - 1][cellRect.j - 1]);
       select_default2(this).classed(selClasses2, false).classed(selClassesFor2(sel), true).on("mousedown", (e) => {
         listener(e);
       }).on("mouseenter", (e) => {
@@ -37341,31 +37345,31 @@ function setSelection_({
       });
     });
     rootElement.selectAll(".matrix-cell-text").each(function(cellText) {
-      const sel = selState2(matrix.cells[cellText.i - 1][cellText.j - 1]);
+      const sel = selState2(matrix2.cells[cellText.i - 1][cellText.j - 1]);
       select_default2(this).classed(selClasses2, false).classed(selClassesFor2(sel), true);
     });
     rootElement.selectAll(".matrix-cell-hBorder").each(function(hBorder) {
-      select_default2(this).attr("style", hBorderStyles(matrix)(hBorder));
+      select_default2(this).attr("style", hBorderStyles(matrix2)(hBorder));
     });
     rootElement.selectAll(".matrix-cell-vBorder").each(function(vBorder) {
-      select_default2(this).attr("style", vBorderStyles(matrix)(vBorder));
+      select_default2(this).attr("style", vBorderStyles(matrix2)(vBorder));
     });
   };
 }
-function createElement_({ val }, { title: title2, matrix }, parent) {
+function createElement_({ val }, { title: title2, matrix: matrix2 }, parent) {
   return () => {
     const strokeWidth = 0.5;
     const highlightStrokeWidth = 0.5;
     const highlightStrokeColor = "blue";
     const w = 30, h = 30;
-    const [width2, height] = [w * matrix.j + highlightStrokeWidth, h * matrix.i + highlightStrokeWidth];
+    const [width2, height] = [w * matrix2.j + highlightStrokeWidth, h * matrix2.i + highlightStrokeWidth];
     const hMargin = w / 2;
     const vMargin = h / 2;
     const rootElement = parent.append("svg");
     rootElement.attr("width", width2 + hMargin).attr("height", height + vMargin);
     rootElement.append("text").text(title2 === "intermediate" ? " " : title2).attr("x", hMargin / 2).attr("y", vMargin / 2).attr("class", "title-text").attr("dominant-baseline", "middle").attr("text-anchor", "left");
     const matrixGrp = rootElement.append("g").attr("transform", `translate(${highlightStrokeWidth / 2 + hMargin / 2}, ${highlightStrokeWidth / 2 + vMargin})`).attr("fill", "currentColor").attr("stroke", "currentColor").attr("stroke-width", ".25");
-    const rowGrp = matrixGrp.selectAll("g").data([...matrix.cells.entries()].map(([i, ns]) => {
+    const rowGrp = matrixGrp.selectAll("g").data([...matrix2.cells.entries()].map(([i, ns]) => {
       return { i: i + 1, ns };
     })).enter().append("g");
     const cells = rowGrp.selectAll("g").data(({ i, ns }) => [...ns.entries()].map(([j, n]) => {
@@ -37375,14 +37379,14 @@ function createElement_({ val }, { title: title2, matrix }, parent) {
     cells.append("text").text(({ n }) => val(n)).attr("x", ({ j }) => (j - 0.5) * w).attr("y", ({ i }) => (i - 0.5) * h).attr("class", "matrix-cell-text").attr("text-anchor", "middle").attr("dominant-baseline", "middle").attr("pointer-events", "none");
     const bordersGrp = rootElement.append("g").attr("transform", `translate(${highlightStrokeWidth / 2 + hMargin / 2}, ${highlightStrokeWidth / 2 + vMargin})`).attr("fill", "currentColor").attr("stroke", highlightStrokeColor).attr("stroke-width", highlightStrokeWidth);
     const hBordersGrp = bordersGrp.append("g");
-    const hBordersRowGrps = hBordersGrp.selectAll("g").data(range3(matrix.i + 1)).enter().append("g");
+    const hBordersRowGrps = hBordersGrp.selectAll("g").data(range3(matrix2.i + 1)).enter().append("g");
     hBordersRowGrps.each(function(d) {
-      select_default2(this).selectAll("line").data(range3(1, matrix.j + 1).map((j) => ({ i: d, j })), (d2) => d2.j).enter().append("line").attr("x1", ({ j }) => (j - 1) * w).attr("y1", ({ i }) => i * h).attr("x2", ({ j }) => j * w).attr("y2", ({ i }) => i * h).attr("class", "matrix-cell-hBorder");
+      select_default2(this).selectAll("line").data(range3(1, matrix2.j + 1).map((j) => ({ i: d, j })), (d2) => d2.j).enter().append("line").attr("x1", ({ j }) => (j - 1) * w).attr("y1", ({ i }) => i * h).attr("x2", ({ j }) => j * w).attr("y2", ({ i }) => i * h).attr("class", "matrix-cell-hBorder");
     });
     const vBordersGrp = bordersGrp.append("g");
-    const vBordersRowGrps = vBordersGrp.selectAll("g").data(range3(1, matrix.i + 1), (i) => i).enter().append("g");
+    const vBordersRowGrps = vBordersGrp.selectAll("g").data(range3(1, matrix2.i + 1), (i) => i).enter().append("g");
     vBordersRowGrps.each(function(d) {
-      select_default2(this).selectAll("line").data(range3(matrix.j + 1).map((j) => ({ i: d, j }))).enter().append("line").attr("x1", ({ j }) => j * w).attr("y1", ({ i }) => (i - 1) * h).attr("x2", ({ j }) => j * w).attr("y2", ({ i }) => i * h).attr("class", "matrix-cell-vBorder");
+      select_default2(this).selectAll("line").data(range3(matrix2.j + 1).map((j) => ({ i: d, j }))).enter().append("line").attr("x1", ({ j }) => j * w).attr("y1", ({ i }) => (i - 1) * h).attr("x2", ({ j }) => j * w).attr("y2", ({ i }) => i * h).attr("class", "matrix-cell-vBorder");
     });
     return rootElement;
   };
@@ -38665,7 +38669,7 @@ var assertPresent = (v) => (v1) => {
         }
         fail();
       })();
-      return assertWhen(true)($0 + " is an existing vertex")((v2) => present)(() => $Step("Loop", $1))();
+      return assertWhen(false)($0 + " is an existing vertex")((v2) => present)(() => $Step("Loop", $1))();
     };
   }
   fail();
@@ -38894,7 +38898,7 @@ var runWithGraphT = (dictMonad) => {
     const freezeGraph2 = freezeGraph1(dictGraph);
     return (m) => (\u03B1s) => dictMonad.Bind1().bind(freezeGraph2(m)(\u03B1s))((v) => {
       const $0 = v._1;
-      return assertWhen(true)("edgeListGC")((v1) => dictGraph.Eq0().eq($0)(dictGraph.fromEdgeList(Leaf2)(toEdgeList(dictGraph)($0))))(dictMonad.Applicative0().pure($Tuple(
+      return assertWhen(false)("edgeListGC")((v1) => dictGraph.Eq0().eq($0)(dictGraph.fromEdgeList(Leaf2)(toEdgeList(dictGraph)($0))))(dictMonad.Applicative0().pure($Tuple(
         $0,
         v._2
       )));
@@ -38971,7 +38975,7 @@ var fwdSlice = (dictGraph) => {
         return pure2($Step("Loop", { pending: insert3(ordVertex)(v1.es._1._1)(\u03B2s)(v1.pending), es: v1.es._2 }));
       }
       fail();
-    })({ pending: Leaf2, es: inEdges(dictGraph)($0)($1) }))(assertWhen(true)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(dictGraph.sinks($0)).tag === "Leaf")(map2(ordDVertex$p)((\u03B1) => $Tuple(
+    })({ pending: Leaf2, es: inEdges(dictGraph)($0)($1) }))(assertWhen(false)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(dictGraph.sinks($0)).tag === "Leaf")(map2(ordDVertex$p)((\u03B1) => $Tuple(
       \u03B1,
       dictGraph.vertexData($0)(\u03B1)
     ))($1)))._1;
@@ -39015,7 +39019,7 @@ var bwdSlice = (dictGraph) => {
       fail();
     })({
       visited: Leaf2,
-      "\u03B1s": fromFoldable18(assertWhen(true)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(addresses2($0)).tag === "Leaf")($1)),
+      "\u03B1s": fromFoldable18(assertWhen(false)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(addresses2($0)).tag === "Leaf")($1)),
       pending: Nil
     }))(Leaf2)._1;
   };
@@ -39125,7 +39129,7 @@ var match = (dictMonadWithGraphAlloc) => {
           $Tuple(v2._2._1, insert3(ordVertex)($4)()(v2._2._2))
         )))));
       }
-      return Bind1.bind(dataTypeForSetCtr.dataTypeFor(MonadThrow0)(mapObjectString.keys(v1._1)))((d) => MonadThrow0.throwError(error("Pattern mismatch: found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected " + d._1)));
+      return Bind1.bind(dataTypeForSetCtr.dataTypeFor(MonadThrow0)(mapObjectString.keys(v1._1)))((d) => MonadThrow0.throwError(error("Pattern mismatch: found " + renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableVertex).pretty(v))._1 + ", expected " + d._1)));
     }
     if (v1.tag === "ElimDict") {
       if (v._3.tag === "Dictionary") {
@@ -39138,7 +39142,7 @@ var match = (dictMonadWithGraphAlloc) => {
           $Tuple(v2._2._1, insert3(ordVertex)($3)()(v2._2._2))
         ))));
       }
-      return MonadThrow0.throwError(error("Pattern mismatch: found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected " + show22(v1._1)));
+      return MonadThrow0.throwError(error("Pattern mismatch: found " + renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableVertex).pretty(v))._1 + ", expected " + show22(v1._1)));
     }
     fail();
   };
@@ -39352,7 +39356,7 @@ var $$eval = (dictMonadWithGraphAlloc) => {
                 return Nothing;
               })()));
             }
-            return MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected dictionary"));
+            return MonadThrow0.throwError(error("Found " + renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableVertex).pretty(v))._1 + ", expected dictionary"));
           });
         }
         if (e0.tag === "DProject") {
@@ -39368,9 +39372,9 @@ var $$eval = (dictMonadWithGraphAlloc) => {
                   return Nothing;
                 })()));
               }
-              return MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v$p)) + ", expected string"));
+              return MonadThrow0.throwError(error("Found " + renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableVertex).pretty(v$p))._1 + ", expected string"));
             }
-            return MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected dict"));
+            return MonadThrow0.throwError(error("Found " + renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableVertex).pretty(v))._1 + ", expected dict"));
           }));
         }
         if (e0.tag === "App") {
@@ -39425,7 +39429,7 @@ var apply2 = (dictMonadWithGraphAlloc) => {
   return (dictMonadReader) => (dictMonadAff) => {
     const Bind1 = dictMonadAff.MonadEffect0().Monad0().Bind1();
     return (dictLoadFile) => (v) => (v1) => {
-      const $0 = (v2) => MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v2)) + ", expected function"));
+      const $0 = (v2) => MonadThrow0.throwError(error("Found " + renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableVertex).pretty(v2))._1 + ", expected function"));
       if (v._3.tag === "Fun") {
         if (v._3._1.tag === "Closure") {
           const $1 = v._1;
@@ -39669,6 +39673,7 @@ var graphEval = (dictMonadAff) => {
   const monadAffState1 = monadAffState(monadAffState2);
   const $1 = monadAffState2.MonadEffect0().Monad0();
   const $2 = dictMonadAff.MonadEffect0().Monad0();
+  const applicativeStateT2 = applicativeStateT(Monad0);
   return (dictMonadReader) => {
     const monadReaderStateT2 = monadReaderStateT(monadReaderStateT(dictMonadReader));
     return (dictLoadFile) => (dictMonadError) => {
@@ -39684,7 +39689,6 @@ var graphEval = (dictMonadAff) => {
           }
         };
       })());
-      const check2 = check(monadThrowStateT(dictMonadError.MonadThrow0()));
       return (v) => (e) => {
         const $3 = v["\u03B3"];
         const $4 = spyFunWhen(false)("fwdSlice")((x2) => $Tuple(showVertices(x2._1), showEdgeList(toEdgeList(graphGraphImpl)(x2._2))))(showGraph(graphGraphImpl))(fwdSlice2);
@@ -39695,10 +39699,7 @@ var graphEval = (dictMonadAff) => {
         ))))((v1) => {
           const $6 = v1._1;
           const $7 = v1._2;
-          return bindStateT2.bind(check2(difference2(ordDVertex$p)(verticesValVertex.vertices($7))(verticesGraphImpl.vertices($6)).tag === "Leaf")("outputs in graph"))(() => applicativeStateT(Monad0).pure($Tuple(
-            $6,
-            $Tuple($EnvExpr($3, e\u03B1), $7)
-          )));
+          return bindStateT2.bind(applicativeStateT2.pure())(() => applicativeStateT2.pure($Tuple($6, $Tuple($EnvExpr($3, e\u03B1), $7))));
         })))(v.n))((v1) => Monad0.Applicative0().pure({
           g: v1._2._2._1,
           graph_fwd: (a) => (b) => $4($Tuple(a, b)),
@@ -40333,7 +40334,7 @@ var brackets = (e) => {
     )))
   )))));
 };
-var block = (e) => {
+var block2 = (e) => {
   const $0 = delim(":");
   return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => $0(
     state1,
@@ -41164,7 +41165,7 @@ var varDefs$lazy = /* @__PURE__ */ binding(() => {
         $2,
         (v2$1, $6) => $3($ParseState(v2$1._1, v2$1._2, $5), $6),
         (state2$1, a$1) => $1((v2$1) => {
-          const $6 = block(expr$lazy());
+          const $6 = block2(expr$lazy());
           return $1((v1$3) => $6(
             state2$1,
             $1,
@@ -41250,7 +41251,7 @@ var recDefs$lazy = /* @__PURE__ */ binding(() => {
                     $2,
                     (v2$4, $9) => $3($ParseState(v2$4._1, v2$4._2, $5), $9),
                     (state2$4, a$4) => $1((v2$4) => {
-                      const $9 = block(expr$lazy());
+                      const $9 = block2(expr$lazy());
                       return $1((v1$6) => $9(
                         state2$4,
                         $1,
@@ -41408,28 +41409,181 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
       })());
       return foldlArray(makeParser)((() => {
         const $02 = context("simple")((() => {
-          const $03 = context("matrix")((state1, more, lift12, $$throw2, done) => more((v1) => {
-            const $04 = state1._3;
+          const $03 = reserved("def");
+          const varDef = (v1, $12, $22, $32, $42) => {
+            const $52 = v1._3;
+            return $12((v1$1) => $03(
+              v1,
+              $12,
+              $22,
+              (v2, $62) => $32($ParseState(v2._1, v2._2, $52), $62),
+              (state2, a) => $12((v2) => $12((v1$2) => pattern(
+                state2,
+                $12,
+                $22,
+                (v2$1, $62) => $32($ParseState(v2$1._1, v2$1._2, $52), $62),
+                (state2$1, a$1) => $12((v2$1) => {
+                  const $62 = delim(":");
+                  return $12((v1$3) => $62(
+                    state2$1,
+                    $12,
+                    $22,
+                    (v2$2, $72) => $32($ParseState(v2$2._1, v2$2._2, $52), $72),
+                    (state2$2, a$2) => $12((v2$2) => $12((v1$4) => opTree$lazy()(
+                      state2$2,
+                      $12,
+                      $22,
+                      (v2$3, $72) => $32($ParseState(v2$3._1, v2$3._2, $52), $72),
+                      (state2$3, a$3) => $12((v2$3) => {
+                        const $72 = delim(";");
+                        return $12((v1$5) => $72(
+                          state2$3,
+                          $12,
+                          $22,
+                          (v2$4, $82) => $32($ParseState(v2$4._1, v2$4._2, $52), $82),
+                          (state2$4, a$4) => $12((v2$4) => $42(state2$4, $VarDef2(a$1, a$3)))
+                        ));
+                      })
+                    )))
+                  ));
+                })
+              )))
+            ));
+          };
+          const $1 = context("letExpr")((state1, more, lift12, $$throw2, done) => more((v1) => varDef(
+            state1,
+            more,
+            lift12,
+            $$throw2,
+            (state2, a) => more((v2) => {
+              const $12 = manyRec2(varDef);
+              return more((v1$1) => $12(
+                state2,
+                more,
+                lift12,
+                $$throw2,
+                (state2$1, a$1) => more((v2$1) => more((v1$2) => opTree$lazy()(
+                  state2$1,
+                  more,
+                  lift12,
+                  $$throw2,
+                  (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("Let", nonEmptyListNonEmptyList.nonEmpty($List("Cons", a, a$1)), a$2)))
+                )))
+              ));
+            })
+          )));
+          const $2 = reserved("def");
+          const recDef = (v1, $32, $42, $52, $62) => {
+            const $72 = v1._3;
+            return $32((v1$1) => $2(
+              v1,
+              $32,
+              $42,
+              (v2, $82) => $52($ParseState(v2._1, v2._2, $72), $82),
+              (state2, a) => $32((v2) => $32((v1$2) => variable(
+                state2,
+                $32,
+                $42,
+                (v2$1, $82) => $52($ParseState(v2$1._1, v2$1._2, $72), $82),
+                (state2$1, a$1) => $32((v2$1) => {
+                  const $82 = delim("(");
+                  return $32((v1$3) => $82(
+                    state2$1,
+                    $32,
+                    $42,
+                    (v2$2, $9) => $52($ParseState(v2$2._1, v2$2._2, $72), $9),
+                    (state2$2, a$2) => $32((v2$2) => {
+                      const $9 = sepBy1(pattern)(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                      return $32((v1$4) => $9(
+                        state2$2,
+                        $32,
+                        $42,
+                        (v2$3, $10) => $52($ParseState(v2$3._1, v2$3._2, $72), $10),
+                        (state2$3, a$3) => $32((v2$3) => {
+                          const $10 = delim(")");
+                          return $32((v1$5) => $10(
+                            state2$3,
+                            $32,
+                            $42,
+                            (v2$4, $11) => $52($ParseState(v2$4._1, v2$4._2, $72), $11),
+                            (state2$4, a$4) => $32((v2$4) => {
+                              const $11 = delim(":");
+                              return $32((v1$6) => $11(
+                                state2$4,
+                                $32,
+                                $42,
+                                (v2$5, $12) => $52($ParseState(v2$5._1, v2$5._2, $72), $12),
+                                (state2$5, a$5) => $32((v2$5) => $32((v1$7) => opTree$lazy()(
+                                  state2$5,
+                                  $32,
+                                  $42,
+                                  (v2$6, $12) => $52($ParseState(v2$6._1, v2$6._2, $72), $12),
+                                  (state2$6, a$6) => $32((v2$6) => {
+                                    const $12 = delim(";");
+                                    return $32((v1$8) => $12(
+                                      state2$6,
+                                      $32,
+                                      $42,
+                                      (v2$7, $13) => $52($ParseState(v2$7._1, v2$7._2, $72), $13),
+                                      (state2$7, a$7) => $32((v2$7) => $62(state2$7, $Tuple(a$1, $Tuple(a$3, a$6))))
+                                    ));
+                                  })
+                                )))
+                              ));
+                            })
+                          ));
+                        })
+                      ));
+                    })
+                  ));
+                })
+              )))
+            ));
+          };
+          const $3 = context("letRecExpr")((state1, more, lift12, $$throw2, done) => more((v1) => recDef(
+            state1,
+            more,
+            lift12,
+            $$throw2,
+            (state2, a) => more((v2) => {
+              const $32 = manyRec2(recDef);
+              return more((v1$1) => $32(
+                state2,
+                more,
+                lift12,
+                $$throw2,
+                (state2$1, a$1) => more((v2$1) => more((v1$2) => opTree$lazy()(
+                  state2$1,
+                  more,
+                  lift12,
+                  $$throw2,
+                  (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("LetRec", nonEmptyListNonEmptyList.nonEmpty($List("Cons", a, a$1)), a$2)))
+                )))
+              ));
+            })
+          )));
+          const $4 = context("matrix")((state1, more, lift12, $$throw2, done) => more((v1) => {
+            const $42 = state1._3;
             return lexeme(string3("[|"))(
               state1,
               more,
               lift12,
-              (v2, $12) => $$throw2($ParseState(v2._1, v2._2, $04), $12),
+              (v2, $52) => $$throw2($ParseState(v2._1, v2._2, $42), $52),
               (state2, a) => more((v2) => more((v1$1) => opTree$lazy()(
                 state2,
                 more,
                 lift12,
                 $$throw2,
                 (state2$1, a$1) => more((v2$1) => {
-                  const $12 = reserved("for");
-                  return more((v1$2) => $12(
+                  const $52 = reserved("for");
+                  return more((v1$2) => $52(
                     state2$1,
                     more,
                     lift12,
                     $$throw2,
                     (state2$2, a$2) => more((v2$2) => {
-                      const $22 = delim("(");
-                      return more((v1$3) => $22(
+                      const $62 = delim("(");
+                      return more((v1$3) => $62(
                         state2$2,
                         more,
                         lift12,
@@ -41440,8 +41594,8 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
                           lift12,
                           $$throw2,
                           (state2$4, a$4) => more((v2$4) => {
-                            const $32 = delim(",");
-                            return more((v1$5) => $32(
+                            const $72 = delim(",");
+                            return more((v1$5) => $72(
                               state2$4,
                               more,
                               lift12,
@@ -41452,15 +41606,15 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
                                 lift12,
                                 $$throw2,
                                 (state2$6, a$6) => more((v2$6) => {
-                                  const $42 = delim(")");
-                                  return more((v1$7) => $42(
+                                  const $82 = delim(")");
+                                  return more((v1$7) => $82(
                                     state2$6,
                                     more,
                                     lift12,
                                     $$throw2,
                                     (state2$7, a$7) => more((v2$7) => {
-                                      const $52 = reserved("in");
-                                      return more((v1$8) => $52(
+                                      const $9 = reserved("in");
+                                      return more((v1$8) => $9(
                                         state2$7,
                                         more,
                                         lift12,
@@ -41493,98 +41647,98 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
               )))
             );
           }));
-          const $1 = context("listExpr")((() => {
-            const $12 = delim("[");
-            return (state1, more, lift12, $$throw2, done) => more((v1) => $12(
+          const $5 = context("listExpr")((() => {
+            const $52 = delim("[");
+            return (state1, more, lift12, $$throw2, done) => more((v1) => $52(
               state1,
               more,
               lift12,
               $$throw2,
               (state2, a) => more((v2) => {
-                const $22 = optionMaybe((v1$1, $23, $32, $42, $52) => {
-                  const $62 = v1$1._3;
-                  return opTree$lazy()(v1$1, $23, $32, (v2$1, $72) => $42($ParseState(v2$1._1, v2$1._2, $62), $72), $52);
+                const $62 = optionMaybe((v1$1, $63, $72, $82, $9) => {
+                  const $10 = v1$1._3;
+                  return opTree$lazy()(v1$1, $63, $72, (v2$1, $11) => $82($ParseState(v2$1._1, v2$1._2, $10), $11), $9);
                 });
-                return more((v1$1) => $22(
+                return more((v1$1) => $62(
                   state2,
                   more,
                   lift12,
                   $$throw2,
                   (state2$1, a$1) => more((v2$1) => {
                     if (a$1.tag === "Nothing") {
-                      const $32 = delim("]");
-                      return more((v1$2) => $32(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("ListEmpty", void 0)))));
+                      const $72 = delim("]");
+                      return more((v1$2) => $72(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("ListEmpty", void 0)))));
                     }
                     if (a$1.tag === "Just") {
-                      const $32 = a$1._1;
-                      const $42 = context("listEnum")((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$2) => {
-                        const $43 = state1$1._3;
+                      const $72 = a$1._1;
+                      const $82 = context("listEnum")((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$2) => {
+                        const $83 = state1$1._3;
                         return lexeme(string3(".."))(
                           state1$1,
                           more$1,
                           lift1$1,
-                          (v2$2, $53) => throw$1($ParseState(v2$2._1, v2$2._2, $43), $53),
+                          (v2$2, $92) => throw$1($ParseState(v2$2._1, v2$2._2, $83), $92),
                           (state2$2, a$2) => more$1((v2$2) => more$1((v1$3) => opTree$lazy()(
                             state2$2,
                             more$1,
                             lift1$1,
                             throw$1,
                             (state2$3, a$3) => more$1((v2$3) => {
-                              const $53 = delim("]");
-                              return more$1((v1$4) => $53(state2$3, more$1, lift1$1, throw$1, (state2$4, a$4) => more$1((v2$4) => done$1(state2$4, $Expr2("ListEnum", $32, a$3)))));
+                              const $92 = delim("]");
+                              return more$1((v1$4) => $92(state2$3, more$1, lift1$1, throw$1, (state2$4, a$4) => more$1((v2$4) => done$1(state2$4, $Expr2("ListEnum", $72, a$3)))));
                             })
                           )))
                         );
                       }));
-                      const $52 = context("listComp")((() => {
-                        const $53 = many1((() => {
-                          const $54 = reserved("if");
-                          const $63 = reserved("for");
-                          return (v2$2, $73, $82, $9, $10) => {
-                            const $11 = v2$2._1;
-                            const $122 = v2$2._2;
-                            return $73((v3) => {
-                              const $13 = (v4, $132) => {
-                                const $14 = v4._3;
-                                return $73((v5) => {
-                                  if ($14) {
-                                    return $9(v4, $132);
+                      const $9 = context("listComp")((() => {
+                        const $92 = many1((() => {
+                          const $93 = reserved("if");
+                          const $102 = reserved("for");
+                          return (v2$2, $112, $12, $13, $14) => {
+                            const $15 = v2$2._1;
+                            const $16 = v2$2._2;
+                            return $112((v3) => {
+                              const $17 = (v4, $172) => {
+                                const $18 = v4._3;
+                                return $112((v5) => {
+                                  if ($18) {
+                                    return $13(v4, $172);
                                   }
-                                  return $73((v1$2) => {
-                                    const $15 = v2$2._3;
-                                    return $63(
+                                  return $112((v1$2) => {
+                                    const $19 = v2$2._3;
+                                    return $102(
                                       v2$2,
-                                      $73,
-                                      $82,
-                                      (v2$3, $16) => $9($ParseState(v2$3._1, v2$3._2, $15), $16),
-                                      (state2$2, a$2) => $73((v2$3) => $73((v1$3) => pattern(
+                                      $112,
+                                      $12,
+                                      (v2$3, $20) => $13($ParseState(v2$3._1, v2$3._2, $19), $20),
+                                      (state2$2, a$2) => $112((v2$3) => $112((v1$3) => pattern(
                                         state2$2,
-                                        $73,
-                                        $82,
-                                        $9,
-                                        (state2$3, a$3) => $73((v2$4) => {
-                                          const $16 = reserved("in");
-                                          return $73((v1$4) => $16(
+                                        $112,
+                                        $12,
+                                        $13,
+                                        (state2$3, a$3) => $112((v2$4) => {
+                                          const $20 = reserved("in");
+                                          return $112((v1$4) => $20(
                                             state2$3,
-                                            $73,
-                                            $82,
-                                            $9,
-                                            (state2$4, a$4) => $73((v2$5) => {
-                                              const $17 = brackets(opTree$lazy());
-                                              const $18 = state2$4._1;
-                                              const $19 = state2$4._2;
-                                              return $73((v3$1) => $73((v1$5) => $17(
-                                                $ParseState($18, $19, false),
-                                                $73,
-                                                $82,
-                                                (v2$6, $20) => $73((v5$1) => $73((v1$6) => opTree$lazy()(
+                                            $112,
+                                            $12,
+                                            $13,
+                                            (state2$4, a$4) => $112((v2$5) => {
+                                              const $21 = brackets(opTree$lazy());
+                                              const $22 = state2$4._1;
+                                              const $23 = state2$4._2;
+                                              return $112((v3$1) => $112((v1$5) => $21(
+                                                $ParseState($22, $23, false),
+                                                $112,
+                                                $12,
+                                                (v2$6, $24) => $112((v5$1) => $112((v1$6) => opTree$lazy()(
                                                   state2$4,
-                                                  $73,
-                                                  $82,
-                                                  $9,
-                                                  (state2$5, a$5) => $73((v2$7) => $10(state2$5, $Qualifier("ListCompGen", a$3, a$5)))
+                                                  $112,
+                                                  $12,
+                                                  $13,
+                                                  (state2$5, a$5) => $112((v2$7) => $14(state2$5, $Qualifier("ListCompGen", a$3, a$5)))
                                                 ))),
-                                                (state2$5, a$5) => $73((v2$6) => $10(state2$5, $Qualifier("ListCompDecl", $VarDef2(a$3, a$5))))
+                                                (state2$5, a$5) => $112((v2$6) => $14(state2$5, $Qualifier("ListCompDecl", $VarDef2(a$3, a$5))))
                                               )));
                                             })
                                           ));
@@ -41594,111 +41748,111 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
                                   });
                                 });
                               };
-                              return $73((v1$2) => $54(
-                                $ParseState($11, $122, false),
-                                $73,
-                                $82,
-                                (v2$3, $14) => $13($ParseState(v2$3._1, v2$3._2, false), $14),
-                                (state2$2, a$2) => $73((v2$3) => $73((v1$3) => opTree$lazy()(
+                              return $112((v1$2) => $93(
+                                $ParseState($15, $16, false),
+                                $112,
+                                $12,
+                                (v2$3, $18) => $17($ParseState(v2$3._1, v2$3._2, false), $18),
+                                (state2$2, a$2) => $112((v2$3) => $112((v1$3) => opTree$lazy()(
                                   state2$2,
-                                  $73,
-                                  $82,
-                                  $13,
-                                  (state2$3, a$3) => $73((v2$4) => $10(state2$3, $Qualifier("ListCompGuard", a$3)))
+                                  $112,
+                                  $12,
+                                  $17,
+                                  (state2$3, a$3) => $112((v2$4) => $14(state2$3, $Qualifier("ListCompGuard", a$3)))
                                 )))
                               ));
                             });
                           };
                         })());
-                        return (state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$2) => $53(
+                        return (state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$2) => $92(
                           state1$1,
                           more$1,
                           lift1$1,
                           throw$1,
                           (state2$2, a$2) => more$1((v2$2) => {
-                            const $63 = delim("]");
-                            return more$1((v1$3) => $63(
+                            const $102 = delim("]");
+                            return more$1((v1$3) => $102(
                               state2$2,
                               more$1,
                               lift1$1,
                               throw$1,
-                              (state2$3, a$3) => more$1((v2$3) => done$1(state2$3, $Expr2("ListComp", void 0, $32, $List("Cons", a$2._1, a$2._2))))
+                              (state2$3, a$3) => more$1((v2$3) => done$1(state2$3, $Expr2("ListComp", void 0, $72, $List("Cons", a$2._1, a$2._2))))
                             ));
                           })
                         ));
                       })());
                       const listRest$lazy = binding(() => {
-                        const $63 = delim("]");
-                        const $73 = delim(",");
-                        return (v2$2, $82, $9, $10, $11) => {
-                          const $122 = v2$2._1;
-                          const $13 = v2$2._2;
-                          return $82((v3) => $82((v1$2) => $63(
-                            $ParseState($122, $13, false),
-                            $82,
-                            $9,
-                            (v4, $14) => {
-                              const $15 = v4._3;
-                              return $82((v5) => {
-                                if ($15) {
-                                  return $10(v4, $14);
+                        const $102 = delim("]");
+                        const $112 = delim(",");
+                        return (v2$2, $12, $13, $14, $15) => {
+                          const $16 = v2$2._1;
+                          const $17 = v2$2._2;
+                          return $12((v3) => $12((v1$2) => $102(
+                            $ParseState($16, $17, false),
+                            $12,
+                            $13,
+                            (v4, $18) => {
+                              const $19 = v4._3;
+                              return $12((v5) => {
+                                if ($19) {
+                                  return $14(v4, $18);
                                 }
-                                return $82((v1$3) => $73(
+                                return $12((v1$3) => $112(
                                   v2$2,
-                                  $82,
-                                  $9,
-                                  $10,
-                                  (state2$2, a$2) => $82((v2$3) => $82((v1$4) => opTree$lazy()(
+                                  $12,
+                                  $13,
+                                  $14,
+                                  (state2$2, a$2) => $12((v2$3) => $12((v1$4) => opTree$lazy()(
                                     state2$2,
-                                    $82,
-                                    $9,
-                                    $10,
-                                    (state2$3, a$3) => $82((v2$4) => $82((v1$5) => listRest$lazy()(
+                                    $12,
+                                    $13,
+                                    $14,
+                                    (state2$3, a$3) => $12((v2$4) => $12((v1$5) => listRest$lazy()(
                                       state2$3,
-                                      $82,
-                                      $9,
-                                      $10,
-                                      (state2$4, a$4) => $82((v2$5) => $11(state2$4, $ListRest("Next", void 0, a$3, a$4)))
+                                      $12,
+                                      $13,
+                                      $14,
+                                      (state2$4, a$4) => $12((v2$5) => $15(state2$4, $ListRest("Next", void 0, a$3, a$4)))
                                     )))
                                   )))
                                 ));
                               });
                             },
-                            (state2$2, a$2) => $82((v2$3) => $11(state2$2, $ListRest("End", void 0)))
+                            (state2$2, a$2) => $12((v2$3) => $15(state2$2, $ListRest("End", void 0)))
                           )));
                         };
                       });
                       const listRest = listRest$lazy();
-                      const $62 = state2$1._1;
-                      const $72 = state2$1._2;
-                      return more((v3) => $42(
-                        $ParseState($62, $72, false),
+                      const $10 = state2$1._1;
+                      const $11 = state2$1._2;
+                      return more((v3) => $82(
+                        $ParseState($10, $11, false),
                         more,
                         lift12,
-                        (v4, $82) => {
-                          const $9 = v4._3;
+                        (v4, $12) => {
+                          const $13 = v4._3;
                           return more((v5) => {
-                            if ($9) {
-                              return $$throw2(v4, $82);
+                            if ($13) {
+                              return $$throw2(v4, $12);
                             }
-                            const $10 = state2$1._1;
-                            const $11 = state2$1._2;
-                            return more((v3$1) => $52(
-                              $ParseState($10, $11, false),
+                            const $14 = state2$1._1;
+                            const $15 = state2$1._2;
+                            return more((v3$1) => $9(
+                              $ParseState($14, $15, false),
                               more,
                               lift12,
-                              (v4$1, $122) => {
-                                const $13 = v4$1._3;
+                              (v4$1, $16) => {
+                                const $17 = v4$1._3;
                                 return more((v5$1) => {
-                                  if ($13) {
-                                    return $$throw2(v4$1, $122);
+                                  if ($17) {
+                                    return $$throw2(v4$1, $16);
                                   }
                                   return more((v1$2) => listRest(
                                     state2$1,
                                     more,
                                     lift12,
                                     $$throw2,
-                                    (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("ListNonEmpty", void 0, $32, a$2)))
+                                    (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("ListNonEmpty", void 0, $72, a$2)))
                                   ));
                                 });
                               },
@@ -41715,25 +41869,25 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
               })
             ));
           })());
-          const $2 = context("lambda")((() => {
-            const $22 = reserved("lambda");
+          const $6 = context("lambda")((() => {
+            const $62 = reserved("lambda");
             return (state1, more, lift12, $$throw2, done) => more((v1) => {
-              const $32 = state1._3;
-              return $22(
+              const $72 = state1._3;
+              return $62(
                 state1,
                 more,
                 lift12,
-                (v2, $42) => $$throw2($ParseState(v2._1, v2._2, $32), $42),
+                (v2, $82) => $$throw2($ParseState(v2._1, v2._2, $72), $82),
                 (state2, a) => more((v2) => {
-                  const $42 = sepBy1(pattern)(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
-                  return more((v1$1) => $42(
+                  const $82 = sepBy1(pattern)(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                  return more((v1$1) => $82(
                     state2,
                     more,
                     lift12,
                     $$throw2,
                     (state2$1, a$1) => more((v2$1) => {
-                      const $52 = delim(":");
-                      return more((v1$2) => $52(
+                      const $9 = delim(":");
+                      return more((v1$2) => $9(
                         state2$1,
                         more,
                         lift12,
@@ -41755,516 +41909,558 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
               );
             });
           })());
-          const $3 = delim("[");
-          const $4 = VarKey();
-          const $5 = context("dict")((() => {
-            const $52 = delim("{");
-            return (state1, more, lift12, $$throw2, done) => more((v1) => $52(
-              state1,
-              more,
-              lift12,
-              $$throw2,
-              (state2, a) => more((v2) => {
-                const $62 = sepBy((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$1) => {
-                  const $63 = (state2$1, a$1) => more$1((v2$1) => {
-                    const $64 = lexeme(withErrorMessage(satisfy((v) => v === ":"))("':'"));
-                    return more$1((v1$2) => $64(
-                      state2$1,
-                      more$1,
-                      lift1$1,
-                      throw$1,
-                      (state2$2, a$2) => more$1((v2$2) => more$1((v1$3) => opTree$lazy()(
-                        state2$2,
-                        more$1,
-                        lift1$1,
-                        throw$1,
-                        (state2$3, a$3) => more$1((v2$3) => done$1(state2$3, $Tuple(a$1, a$3)))
-                      )))
-                    ));
-                  });
-                  const $72 = state1$1._1;
-                  const $82 = state1$1._2;
-                  return more$1((v3) => {
-                    const $9 = (v4, $92) => {
-                      const $10 = v4._3;
-                      return more$1((v5) => {
-                        if ($10) {
-                          return throw$1(v4, $92);
-                        }
-                        return more$1((v1$2) => variable(state1$1, more$1, lift1$1, throw$1, (state2$1, a$1) => more$1((v2$1) => $63(state2$1, $4(a$1)))));
-                      });
-                    };
-                    return more$1((v1$2) => $3(
-                      $ParseState($72, $82, false),
-                      more$1,
-                      lift1$1,
-                      $9,
-                      (state2$1, a$1) => more$1((v2$1) => more$1((v1$3) => opTree$lazy()(
+          const $7 = delim("[");
+          const $8 = (() => {
+            const $82 = VarKey();
+            const $9 = context("dict")((() => {
+              const $92 = delim("{");
+              return (state1, more, lift12, $$throw2, done) => more((v1) => $92(
+                state1,
+                more,
+                lift12,
+                $$throw2,
+                (state2, a) => more((v2) => {
+                  const $102 = sepBy((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$1) => {
+                    const $103 = (state2$1, a$1) => more$1((v2$1) => {
+                      const $104 = lexeme(withErrorMessage(satisfy((v) => v === ":"))("':'"));
+                      return more$1((v1$2) => $104(
                         state2$1,
                         more$1,
                         lift1$1,
-                        $9,
-                        (state2$2, a$2) => more$1((v2$2) => {
-                          const $10 = delim("]");
-                          return more$1((v1$4) => $10(state2$2, more$1, lift1$1, $9, (state2$3, a$3) => more$1((v2$3) => $63(state2$3, $DictEntry("ExprKey", a$2)))));
-                        })
-                      )))
-                    ));
-                  });
-                }))(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
-                return more((v1$1) => $62(
-                  state2,
-                  more,
-                  lift12,
-                  $$throw2,
-                  (state2$1, a$1) => more((v2$1) => more((v1$2) => whitespace(
-                    state2$1,
+                        throw$1,
+                        (state2$2, a$2) => more$1((v2$2) => more$1((v1$3) => expr$lazy()(
+                          state2$2,
+                          more$1,
+                          lift1$1,
+                          throw$1,
+                          (state2$3, a$3) => more$1((v2$3) => done$1(state2$3, $Tuple(a$1, a$3)))
+                        )))
+                      ));
+                    });
+                    const $112 = state1$1._1;
+                    const $12 = state1$1._2;
+                    return more$1((v3) => {
+                      const $13 = (v4, $132) => {
+                        const $14 = v4._3;
+                        return more$1((v5) => {
+                          if ($14) {
+                            return throw$1(v4, $132);
+                          }
+                          return more$1((v1$2) => variable(state1$1, more$1, lift1$1, throw$1, (state2$1, a$1) => more$1((v2$1) => $103(state2$1, $82(a$1)))));
+                        });
+                      };
+                      return more$1((v1$2) => $7(
+                        $ParseState($112, $12, false),
+                        more$1,
+                        lift1$1,
+                        $13,
+                        (state2$1, a$1) => more$1((v2$1) => more$1((v1$3) => opTree$lazy()(
+                          state2$1,
+                          more$1,
+                          lift1$1,
+                          $13,
+                          (state2$2, a$2) => more$1((v2$2) => {
+                            const $14 = delim("]");
+                            return more$1((v1$4) => $14(state2$2, more$1, lift1$1, $13, (state2$3, a$3) => more$1((v2$3) => $103(state2$3, $DictEntry("ExprKey", a$2)))));
+                          })
+                        )))
+                      ));
+                    });
+                  }))(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                  return more((v1$1) => $102(
+                    state2,
                     more,
                     lift12,
                     $$throw2,
-                    (state2$2, a$2) => more((v2$2) => {
-                      const $72 = delim("}");
-                      return more((v1$3) => $72(state2$2, more, lift12, $$throw2, (state2$3, a$3) => more((v2$3) => done(state2$3, $Expr2("Dictionary", void 0, a$1)))));
-                    })
-                  )))
-                ));
-              })
-            ));
-          })());
-          const $6 = Float();
-          const $7 = Int();
-          const $8 = (() => {
-            const $82 = some(alternativeParserT)(lazyParserT)(satisfy((c) => c !== '"' && c !== "$" && !isSpace(toCharCode(c))));
-            const $9 = (() => {
-              const $92 = delim("$");
-              const $10 = (() => {
-                const $102 = Str();
-                const $11 = context("pair")((() => {
-                  const $112 = delim("(");
-                  return (state1, more, lift12, $$throw2, done) => more((v1) => {
-                    const $122 = state1._3;
-                    return more((v1$1) => $112(
-                      state1,
-                      more,
-                      lift12,
-                      (v2, $132) => $$throw2($ParseState(v2._1, v2._2, $122), $132),
-                      (state2, a) => more((v2) => more((v1$2) => opTree$lazy()(
-                        state2,
-                        more,
-                        lift12,
-                        (v2$1, $132) => $$throw2($ParseState(v2$1._1, v2$1._2, $122), $132),
-                        (state2$1, a$1) => more((v2$1) => {
-                          const $132 = delim(",");
-                          return more((v1$3) => $132(
-                            state2$1,
-                            more,
-                            lift12,
-                            (v2$2, $14) => $$throw2($ParseState(v2$2._1, v2$2._2, $122), $14),
-                            (state2$2, a$2) => more((v2$2) => more((v2$3) => more((v1$4) => opTree$lazy()(
-                              state2$2,
-                              more,
-                              lift12,
-                              $$throw2,
-                              (state2$3, a$3) => more((v2$4) => {
-                                const $14 = delim(")");
-                                return more((v1$5) => $14(
-                                  state2$3,
-                                  more,
-                                  lift12,
-                                  $$throw2,
-                                  (state2$4, a$4) => more((v2$5) => done(
-                                    state2$4,
-                                    $Expr2("Constr", void 0, "Pair", $List("Cons", a$1, $List("Cons", a$3, Nil)))
-                                  ))
-                                ));
-                              })
-                            ))))
-                          ));
-                        })
-                      )))
-                    ));
-                  });
-                })());
-                const args = (e) => {
-                  const $122 = delim("(");
-                  return (state1, more, lift12, $$throw2, done) => more((v1) => {
-                    const $132 = state1._3;
-                    return more((v1$1) => $122(
-                      state1,
-                      more,
-                      lift12,
-                      (v2, $14) => $$throw2($ParseState(v2._1, v2._2, $132), $14),
-                      (state2, a) => more((v2) => sameLine(
-                        state2,
-                        more,
-                        lift12,
-                        (v2$1, $14) => $$throw2($ParseState(v2$1._1, v2$1._2, $132), $14),
-                        (state2$1, a$1) => more((v2$1) => {
-                          const $14 = sepBy(opTree$lazy())(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
-                          return more((v1$2) => $14(
-                            state2$1,
-                            more,
-                            lift12,
-                            $$throw2,
-                            (state2$2, a$2) => more((v2$2) => {
-                              const $15 = delim(")");
-                              return more((v1$3) => $15(
-                                state2$2,
-                                more,
-                                lift12,
-                                $$throw2,
-                                (state2$3, a$3) => more((v2$3) => {
-                                  if (e.tag === "Constr") {
-                                    return app($Expr2(
-                                      "Constr",
-                                      e._1,
-                                      e._2,
-                                      foldableList.foldr(Cons)(foldableList.foldr(Cons)(Nil)(a$2))(e._3)
-                                    ))(state2$3, more, lift12, $$throw2, done);
-                                  }
-                                  return app((() => {
-                                    const go = (go$a0$copy) => (go$a1$copy) => {
-                                      let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-                                      while (go$c) {
-                                        const b = go$a0, v = go$a1;
-                                        if (v.tag === "Nil") {
-                                          go$c = false;
-                                          go$r = b;
-                                          continue;
-                                        }
-                                        if (v.tag === "Cons") {
-                                          go$a0 = $Expr2("App", b, v._1);
-                                          go$a1 = v._2;
-                                          continue;
-                                        }
-                                        fail();
-                                      }
-                                      return go$r;
-                                    };
-                                    return go(e)(a$2);
-                                  })())(state2$3, more, lift12, $$throw2, done);
-                                })
-                              ));
-                            })
-                          ));
-                        })
-                      ))
-                    ));
-                  });
-                };
-                const app = (e) => {
-                  const $122 = args(e);
-                  return (v2, $132, $14, $15, $16) => {
-                    const $17 = v2._1;
-                    const $18 = v2._2;
-                    return $132((v3) => {
-                      const $19 = (v4, $192) => {
-                        const $20 = v4._3;
-                        return $132((v5) => {
-                          if ($20) {
-                            return $15(v4, $192);
-                          }
-                          return $16(v2, e);
-                        });
-                      };
-                      return $132((v2$1) => $132((v1) => sameLine(
-                        $ParseState($17, $18, false),
-                        $132,
-                        $14,
-                        $19,
-                        (state2, a) => $132((v2$2) => $132((v3$1) => $122(state2, $132, $14, $19, (state3, a$1) => $132((v4) => $16(state3, a$1)))))
-                      )));
-                    });
-                  };
-                };
-                const $12 = context("app chain")(withPos((() => {
-                  const $122 = Constr2();
-                  const $132 = context("parens op")((() => {
-                    const $133 = delim("(");
-                    return (state1, more, lift12, $$throw2, done) => more((v1) => $133(
-                      state1,
+                    (state2$1, a$1) => more((v2$1) => more((v1$2) => whitespace(
+                      state2$1,
                       more,
                       lift12,
                       $$throw2,
-                      (state2, a) => more((v2) => more((v1$1) => operator2(
-                        state2,
-                        more,
-                        lift12,
-                        $$throw2,
-                        (state2$1, a$1) => more((v2$1) => {
-                          const $14 = delim(")");
-                          return more((v1$2) => $14(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("Op", a$1)))));
-                        })
-                      )))
-                    ));
-                  })());
-                  return (state1, more, lift12, $$throw2, done) => more((v1) => {
-                    const $14 = state1._1;
-                    const $15 = state1._2;
-                    return more((v3) => more((v1$1) => variable(
-                      $ParseState($14, $15, false),
-                      more,
-                      lift12,
-                      (v4, $16) => {
-                        const $17 = v4._3;
-                        return more((v5) => {
-                          if ($17) {
-                            return $$throw2(v4, $16);
-                          }
-                          const $18 = state1._1;
-                          const $19 = state1._2;
-                          return more((v3$1) => more((v1$2) => constructor(
-                            $ParseState($18, $19, false),
-                            more,
-                            lift12,
-                            (v4$1, $20) => {
-                              const $21 = v4$1._3;
-                              return more((v5$1) => {
-                                if ($21) {
-                                  return $$throw2(v4$1, $20);
-                                }
-                                const $22 = state1._1;
-                                const $23 = state1._2;
-                                return more((v3$2) => parensExpr(
-                                  $ParseState($22, $23, false),
-                                  more,
-                                  lift12,
-                                  (v2, $24) => more((v5$2) => {
-                                    const $25 = state1._3;
-                                    return $132(
-                                      state1,
-                                      more,
-                                      lift12,
-                                      (v2$1, $26) => $$throw2($ParseState(v2$1._1, v2$1._2, $25), $26),
-                                      (state2, a) => more((v2$1) => app(a)(state2, more, lift12, $$throw2, done))
-                                    );
-                                  }),
-                                  (state2, a) => more((v2) => app(a)(state2, more, lift12, $$throw2, done))
-                                ));
-                              });
-                            },
-                            (state2, a) => more((v2) => {
-                              const $20 = $122(a)(Nil);
-                              return more((v2$1) => app($20)(state2, more, lift12, $$throw2, done));
-                            })
-                          )));
-                        });
-                      },
-                      (state2, a) => more((v2) => more((v2$1) => app($Expr2("Var", a))(state2, more, lift12, $$throw2, done)))
-                    )));
-                  });
-                })()));
+                      (state2$2, a$2) => more((v2$2) => {
+                        const $112 = delim("}");
+                        return more((v1$3) => $112(state2$2, more, lift12, $$throw2, (state2$3, a$3) => more((v2$3) => done(state2$3, $Expr2("Dictionary", void 0, a$1)))));
+                      })
+                    )))
+                  ));
+                })
+              ));
+            })());
+            const $10 = Float();
+            const $11 = (() => {
+              const $112 = Int();
+              const $12 = (() => {
+                const $122 = some(alternativeParserT)(lazyParserT)(satisfy((c) => c !== '"' && c !== "$" && !isSpace(toCharCode(c))));
                 const $13 = (() => {
-                  const $132 = withErrorMessage(context("doc expr")((state1, more, lift12, $$throw2, done) => more((v1) => {
-                    const $133 = state1._3;
-                    return lexeme(string3("@doc"))(
-                      state1,
-                      more,
-                      lift12,
-                      (v2, $14) => $$throw2($ParseState(v2._1, v2._2, $133), $14),
-                      (state2, a) => more((v2) => {
-                        const $14 = delim("(");
-                        return more((v1$1) => $14(
-                          state2,
+                  const $132 = delim("$");
+                  const $14 = (() => {
+                    const $142 = Str();
+                    const $15 = context("pair")((() => {
+                      const $152 = delim("(");
+                      return (state1, more, lift12, $$throw2, done) => more((v1) => {
+                        const $162 = state1._3;
+                        return more((v1$1) => $152(
+                          state1,
                           more,
                           lift12,
-                          $$throw2,
-                          (state2$1, a$1) => more((v2$1) => more((v1$2) => opTree$lazy()(
-                            state2$1,
+                          (v2, $172) => $$throw2($ParseState(v2._1, v2._2, $162), $172),
+                          (state2, a) => more((v2) => more((v1$2) => opTree$lazy()(
+                            state2,
                             more,
                             lift12,
-                            $$throw2,
-                            (state2$2, a$2) => more((v2$2) => {
-                              const $15 = delim(")");
-                              return more((v1$3) => $15(
-                                state2$2,
+                            (v2$1, $172) => $$throw2($ParseState(v2$1._1, v2$1._2, $162), $172),
+                            (state2$1, a$1) => more((v2$1) => {
+                              const $172 = delim(",");
+                              return more((v1$3) => $172(
+                                state2$1,
                                 more,
                                 lift12,
-                                $$throw2,
-                                (state2$3, a$3) => more((v2$3) => more((v1$4) => opTree$lazy()(
-                                  state2$3,
+                                (v2$2, $18) => $$throw2($ParseState(v2$2._1, v2$2._2, $162), $18),
+                                (state2$2, a$2) => more((v2$2) => more((v2$3) => more((v1$4) => opTree$lazy()(
+                                  state2$2,
                                   more,
                                   lift12,
                                   $$throw2,
-                                  (state2$4, a$4) => more((v2$4) => done(state2$4, $Expr2("DocExpr", a$2, a$4)))
-                                )))
+                                  (state2$3, a$3) => more((v2$4) => {
+                                    const $18 = delim(")");
+                                    return more((v1$5) => $18(
+                                      state2$3,
+                                      more,
+                                      lift12,
+                                      $$throw2,
+                                      (state2$4, a$4) => more((v2$5) => done(
+                                        state2$4,
+                                        $Expr2("Constr", void 0, "Pair", $List("Cons", a$1, $List("Cons", a$3, Nil)))
+                                      ))
+                                    ));
+                                  })
+                                ))))
                               ));
                             })
                           )))
                         ));
-                      })
-                    );
-                  })))("simple expression");
-                  return (v2, $14, $15, $16, $17) => {
-                    const $18 = v2._1;
-                    const $19 = v2._2;
-                    return $14((v3) => $14((v3$1) => $14((v1) => $$float(
-                      $ParseState($18, $19, false),
-                      $14,
-                      $15,
-                      (v2$1, $20) => $14((v5) => $14((v1$1) => integer(
-                        $ParseState($18, $19, false),
-                        $14,
-                        $15,
-                        (v4, $21) => {
-                          const $22 = v4._3;
-                          return $14((v5$1) => {
-                            if ($22) {
-                              return $16(v4, $21);
-                            }
-                            const $23 = v2._1;
-                            const $24 = v2._2;
-                            return $14((v3$2) => {
-                              const $25 = (v4$1, $252) => {
-                                const $26 = v4$1._3;
-                                return $14((v5$2) => {
-                                  if ($26) {
-                                    return $16(v4$1, $252);
-                                  }
-                                  const $27 = v2._1;
-                                  const $28 = v2._2;
-                                  return $14((v3$3) => $14((v1$2) => stringLiteral(
-                                    $ParseState($27, $28, false),
-                                    $14,
-                                    $15,
-                                    (v4$2, $29) => {
-                                      const $30 = v4$2._3;
-                                      return $14((v5$3) => {
-                                        if ($30) {
-                                          return $16(v4$2, $29);
-                                        }
-                                        const $31 = v2._1;
-                                        const $32 = v2._2;
-                                        return $14((v3$4) => $11(
-                                          $ParseState($31, $32, false),
-                                          $14,
-                                          $15,
-                                          (v4$3, $33) => {
-                                            const $34 = v4$3._3;
-                                            return $14((v5$4) => {
-                                              if ($34) {
-                                                return $16(v4$3, $33);
-                                              }
-                                              const $35 = v2._1;
-                                              const $36 = v2._2;
-                                              return $14((v3$5) => $12(
-                                                $ParseState($35, $36, false),
-                                                $14,
-                                                $15,
-                                                (v4$4, $37) => {
-                                                  const $38 = v4$4._3;
-                                                  return $14((v5$5) => {
-                                                    if ($38) {
-                                                      return $16(v4$4, $37);
-                                                    }
-                                                    const $39 = v2._1;
-                                                    const $40 = v2._2;
-                                                    return $14((v3$6) => parensExpr(
-                                                      $ParseState($39, $40, false),
-                                                      $14,
-                                                      $15,
-                                                      (v4$5, $41) => {
-                                                        const $42 = v4$5._3;
-                                                        return $14((v5$6) => {
-                                                          if ($42) {
-                                                            return $16(v4$5, $41);
-                                                          }
-                                                          return $132(v2, $14, $15, $16, $17);
-                                                        });
-                                                      },
-                                                      $17
-                                                    ));
-                                                  });
-                                                },
-                                                $17
-                                              ));
-                                            });
-                                          },
-                                          $17
-                                        ));
-                                      });
-                                    },
-                                    (state2, a) => $14((v2$2) => $17(state2, $102(a)))
-                                  )));
-                                });
-                              };
-                              return $14((v1$2) => lexeme(string3('"""'))(
-                                $ParseState($23, $24, false),
-                                $14,
-                                $15,
-                                (v2$2, $26) => $25($ParseState(v2$2._1, v2$2._2, false), $26),
-                                (state2, a) => $14((v2$2) => {
-                                  const $26 = manyRec2(lexeme((v2$3, $262, $27, $28, $29) => {
-                                    const $30 = v2$3._1;
-                                    const $31 = v2$3._2;
-                                    return $262((v3$3) => $262((v1$3) => $82(
-                                      $ParseState($30, $31, false),
-                                      $262,
-                                      $27,
-                                      (v4$1, $32) => {
-                                        const $33 = v4$1._3;
-                                        return $262((v5$2) => {
-                                          if ($33) {
-                                            return $28(v4$1, $32);
+                      });
+                    })());
+                    const args = (e) => {
+                      const $162 = delim("(");
+                      return (state1, more, lift12, $$throw2, done) => more((v1) => {
+                        const $172 = state1._3;
+                        return more((v1$1) => $162(
+                          state1,
+                          more,
+                          lift12,
+                          (v2, $18) => $$throw2($ParseState(v2._1, v2._2, $172), $18),
+                          (state2, a) => more((v2) => sameLine(
+                            state2,
+                            more,
+                            lift12,
+                            (v2$1, $18) => $$throw2($ParseState(v2$1._1, v2$1._2, $172), $18),
+                            (state2$1, a$1) => more((v2$1) => {
+                              const $18 = sepBy(opTree$lazy())(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                              return more((v1$2) => $18(
+                                state2$1,
+                                more,
+                                lift12,
+                                $$throw2,
+                                (state2$2, a$2) => more((v2$2) => {
+                                  const $19 = delim(")");
+                                  return more((v1$3) => $19(
+                                    state2$2,
+                                    more,
+                                    lift12,
+                                    $$throw2,
+                                    (state2$3, a$3) => more((v2$3) => {
+                                      if (e.tag === "Constr") {
+                                        return app($Expr2(
+                                          "Constr",
+                                          e._1,
+                                          e._2,
+                                          foldableList.foldr(Cons)(foldableList.foldr(Cons)(Nil)(a$2))(e._3)
+                                        ))(state2$3, more, lift12, $$throw2, done);
+                                      }
+                                      return app((() => {
+                                        const go = (go$a0$copy) => (go$a1$copy) => {
+                                          let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
+                                          while (go$c) {
+                                            const b = go$a0, v = go$a1;
+                                            if (v.tag === "Nil") {
+                                              go$c = false;
+                                              go$r = b;
+                                              continue;
+                                            }
+                                            if (v.tag === "Cons") {
+                                              go$a0 = $Expr2("App", b, v._1);
+                                              go$a1 = v._2;
+                                              continue;
+                                            }
+                                            fail();
                                           }
-                                          return $262((v1$4) => $92(
-                                            v2$3,
-                                            $262,
-                                            $27,
-                                            $28,
-                                            (state2$1, a$1) => $262((v2$4) => {
-                                              const $34 = delim("{");
-                                              return $262((v1$5) => $34(
-                                                state2$1,
-                                                $262,
-                                                $27,
-                                                $28,
-                                                (state2$2, a$2) => $262((v2$5) => $262((v1$6) => opTree$lazy()(
-                                                  state2$2,
-                                                  $262,
-                                                  $27,
-                                                  $28,
-                                                  (state2$3, a$3) => $262((v2$6) => {
-                                                    const $35 = delim("}");
-                                                    return $262((v1$7) => $35(
-                                                      state2$3,
-                                                      $262,
-                                                      $27,
-                                                      $28,
-                                                      (state2$4, a$4) => $262((v2$7) => $29(state2$4, $ParagraphElem("Unquote", a$3)))
-                                                    ));
-                                                  })
-                                                )))
-                                              ));
-                                            })
-                                          ));
-                                        });
-                                      },
-                                      (state2$1, a$1) => $262((v2$4) => $29(state2$1, $ParagraphElem("Token", fromCharArray(a$1))))
-                                    )));
-                                  }));
-                                  return $14((v1$3) => $26(
-                                    state2,
-                                    $14,
-                                    $15,
-                                    $25,
-                                    (state2$1, a$1) => $14((v2$3) => $14((v1$4) => lexeme(string3('"""'))(
-                                      state2$1,
-                                      $14,
-                                      $15,
-                                      $25,
-                                      (state2$2, a$2) => $14((v2$4) => $17(state2$2, $Expr2("Paragraph", a$1)))
-                                    )))
+                                          return go$r;
+                                        };
+                                        return go(e)(a$2);
+                                      })())(state2$3, more, lift12, $$throw2, done);
+                                    })
                                   ));
                                 })
                               ));
+                            })
+                          ))
+                        ));
+                      });
+                    };
+                    const app = (e) => {
+                      const $162 = args(e);
+                      return (v2, $172, $18, $19, $20) => {
+                        const $21 = v2._1;
+                        const $22 = v2._2;
+                        return $172((v3) => {
+                          const $23 = (v4, $232) => {
+                            const $24 = v4._3;
+                            return $172((v5) => {
+                              if ($24) {
+                                return $19(v4, $232);
+                              }
+                              return $20(v2, e);
                             });
+                          };
+                          return $172((v2$1) => $172((v1) => sameLine(
+                            $ParseState($21, $22, false),
+                            $172,
+                            $18,
+                            $23,
+                            (state2, a) => $172((v2$2) => $172((v3$1) => $162(state2, $172, $18, $23, (state3, a$1) => $172((v4) => $20(state3, a$1)))))
+                          )));
+                        });
+                      };
+                    };
+                    const $16 = context("app chain")(withPos((() => {
+                      const $162 = Constr2();
+                      const $172 = context("parens op")((() => {
+                        const $173 = delim("(");
+                        return (state1, more, lift12, $$throw2, done) => more((v1) => $173(
+                          state1,
+                          more,
+                          lift12,
+                          $$throw2,
+                          (state2, a) => more((v2) => more((v1$1) => operator2(
+                            state2,
+                            more,
+                            lift12,
+                            $$throw2,
+                            (state2$1, a$1) => more((v2$1) => {
+                              const $18 = delim(")");
+                              return more((v1$2) => $18(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("Op", a$1)))));
+                            })
+                          )))
+                        ));
+                      })());
+                      return (state1, more, lift12, $$throw2, done) => more((v1) => {
+                        const $18 = state1._1;
+                        const $19 = state1._2;
+                        return more((v3) => more((v1$1) => variable(
+                          $ParseState($18, $19, false),
+                          more,
+                          lift12,
+                          (v4, $20) => {
+                            const $21 = v4._3;
+                            return more((v5) => {
+                              if ($21) {
+                                return $$throw2(v4, $20);
+                              }
+                              const $22 = state1._1;
+                              const $23 = state1._2;
+                              return more((v3$1) => more((v1$2) => constructor(
+                                $ParseState($22, $23, false),
+                                more,
+                                lift12,
+                                (v4$1, $24) => {
+                                  const $25 = v4$1._3;
+                                  return more((v5$1) => {
+                                    if ($25) {
+                                      return $$throw2(v4$1, $24);
+                                    }
+                                    const $26 = state1._1;
+                                    const $27 = state1._2;
+                                    return more((v3$2) => parensExpr(
+                                      $ParseState($26, $27, false),
+                                      more,
+                                      lift12,
+                                      (v2, $28) => more((v5$2) => {
+                                        const $29 = state1._3;
+                                        return $172(
+                                          state1,
+                                          more,
+                                          lift12,
+                                          (v2$1, $30) => $$throw2($ParseState(v2$1._1, v2$1._2, $29), $30),
+                                          (state2, a) => more((v2$1) => app(a)(state2, more, lift12, $$throw2, done))
+                                        );
+                                      }),
+                                      (state2, a) => more((v2) => app(a)(state2, more, lift12, $$throw2, done))
+                                    ));
+                                  });
+                                },
+                                (state2, a) => more((v2) => {
+                                  const $24 = $162(a)(Nil);
+                                  return more((v2$1) => app($24)(state2, more, lift12, $$throw2, done));
+                                })
+                              )));
+                            });
+                          },
+                          (state2, a) => more((v2) => more((v2$1) => app($Expr2("Var", a))(state2, more, lift12, $$throw2, done)))
+                        )));
+                      });
+                    })()));
+                    const $17 = (() => {
+                      const $172 = withErrorMessage(context("doc expr")((state1, more, lift12, $$throw2, done) => more((v1) => {
+                        const $173 = state1._3;
+                        return lexeme(string3("@doc"))(
+                          state1,
+                          more,
+                          lift12,
+                          (v2, $18) => $$throw2($ParseState(v2._1, v2._2, $173), $18),
+                          (state2, a) => more((v2) => {
+                            const $18 = delim("(");
+                            return more((v1$1) => $18(
+                              state2,
+                              more,
+                              lift12,
+                              $$throw2,
+                              (state2$1, a$1) => more((v2$1) => more((v1$2) => opTree$lazy()(
+                                state2$1,
+                                more,
+                                lift12,
+                                $$throw2,
+                                (state2$2, a$2) => more((v2$2) => {
+                                  const $19 = delim(")");
+                                  return more((v1$3) => $19(
+                                    state2$2,
+                                    more,
+                                    lift12,
+                                    $$throw2,
+                                    (state2$3, a$3) => more((v2$3) => more((v1$4) => opTree$lazy()(
+                                      state2$3,
+                                      more,
+                                      lift12,
+                                      $$throw2,
+                                      (state2$4, a$4) => more((v2$4) => done(state2$4, $Expr2("DocExpr", a$2, a$4)))
+                                    )))
+                                  ));
+                                })
+                              )))
+                            ));
+                          })
+                        );
+                      })))("simple expression");
+                      return (v2, $18, $19, $20, $21) => {
+                        const $22 = v2._1;
+                        const $23 = v2._2;
+                        return $18((v3) => $18((v3$1) => $18((v1) => $$float(
+                          $ParseState($22, $23, false),
+                          $18,
+                          $19,
+                          (v2$1, $24) => $18((v5) => $18((v1$1) => integer(
+                            $ParseState($22, $23, false),
+                            $18,
+                            $19,
+                            (v4, $25) => {
+                              const $26 = v4._3;
+                              return $18((v5$1) => {
+                                if ($26) {
+                                  return $20(v4, $25);
+                                }
+                                const $27 = v2._1;
+                                const $28 = v2._2;
+                                return $18((v3$2) => {
+                                  const $29 = (v4$1, $292) => {
+                                    const $30 = v4$1._3;
+                                    return $18((v5$2) => {
+                                      if ($30) {
+                                        return $20(v4$1, $292);
+                                      }
+                                      const $31 = v2._1;
+                                      const $32 = v2._2;
+                                      return $18((v3$3) => $18((v1$2) => stringLiteral(
+                                        $ParseState($31, $32, false),
+                                        $18,
+                                        $19,
+                                        (v4$2, $33) => {
+                                          const $34 = v4$2._3;
+                                          return $18((v5$3) => {
+                                            if ($34) {
+                                              return $20(v4$2, $33);
+                                            }
+                                            const $35 = v2._1;
+                                            const $36 = v2._2;
+                                            return $18((v3$4) => $15(
+                                              $ParseState($35, $36, false),
+                                              $18,
+                                              $19,
+                                              (v4$3, $37) => {
+                                                const $38 = v4$3._3;
+                                                return $18((v5$4) => {
+                                                  if ($38) {
+                                                    return $20(v4$3, $37);
+                                                  }
+                                                  const $39 = v2._1;
+                                                  const $40 = v2._2;
+                                                  return $18((v3$5) => $16(
+                                                    $ParseState($39, $40, false),
+                                                    $18,
+                                                    $19,
+                                                    (v4$4, $41) => {
+                                                      const $42 = v4$4._3;
+                                                      return $18((v5$5) => {
+                                                        if ($42) {
+                                                          return $20(v4$4, $41);
+                                                        }
+                                                        const $43 = v2._1;
+                                                        const $44 = v2._2;
+                                                        return $18((v3$6) => parensExpr(
+                                                          $ParseState($43, $44, false),
+                                                          $18,
+                                                          $19,
+                                                          (v4$5, $45) => {
+                                                            const $46 = v4$5._3;
+                                                            return $18((v5$6) => {
+                                                              if ($46) {
+                                                                return $20(v4$5, $45);
+                                                              }
+                                                              return $172(v2, $18, $19, $20, $21);
+                                                            });
+                                                          },
+                                                          $21
+                                                        ));
+                                                      });
+                                                    },
+                                                    $21
+                                                  ));
+                                                });
+                                              },
+                                              $21
+                                            ));
+                                          });
+                                        },
+                                        (state2, a) => $18((v2$2) => $21(state2, $142(a)))
+                                      )));
+                                    });
+                                  };
+                                  return $18((v1$2) => lexeme(string3('"""'))(
+                                    $ParseState($27, $28, false),
+                                    $18,
+                                    $19,
+                                    (v2$2, $30) => $29($ParseState(v2$2._1, v2$2._2, false), $30),
+                                    (state2, a) => $18((v2$2) => {
+                                      const $30 = manyRec2(lexeme((v2$3, $302, $31, $32, $33) => {
+                                        const $34 = v2$3._1;
+                                        const $35 = v2$3._2;
+                                        return $302((v3$3) => $302((v1$3) => $122(
+                                          $ParseState($34, $35, false),
+                                          $302,
+                                          $31,
+                                          (v4$1, $36) => {
+                                            const $37 = v4$1._3;
+                                            return $302((v5$2) => {
+                                              if ($37) {
+                                                return $32(v4$1, $36);
+                                              }
+                                              return $302((v1$4) => $132(
+                                                v2$3,
+                                                $302,
+                                                $31,
+                                                $32,
+                                                (state2$1, a$1) => $302((v2$4) => {
+                                                  const $38 = delim("{");
+                                                  return $302((v1$5) => $38(
+                                                    state2$1,
+                                                    $302,
+                                                    $31,
+                                                    $32,
+                                                    (state2$2, a$2) => $302((v2$5) => $302((v1$6) => opTree$lazy()(
+                                                      state2$2,
+                                                      $302,
+                                                      $31,
+                                                      $32,
+                                                      (state2$3, a$3) => $302((v2$6) => {
+                                                        const $39 = delim("}");
+                                                        return $302((v1$7) => $39(
+                                                          state2$3,
+                                                          $302,
+                                                          $31,
+                                                          $32,
+                                                          (state2$4, a$4) => $302((v2$7) => $33(state2$4, $ParagraphElem("Unquote", a$3)))
+                                                        ));
+                                                      })
+                                                    )))
+                                                  ));
+                                                })
+                                              ));
+                                            });
+                                          },
+                                          (state2$1, a$1) => $302((v2$4) => $33(state2$1, $ParagraphElem("Token", fromCharArray(a$1))))
+                                        )));
+                                      }));
+                                      return $18((v1$3) => $30(
+                                        state2,
+                                        $18,
+                                        $19,
+                                        $29,
+                                        (state2$1, a$1) => $18((v2$3) => $18((v1$4) => lexeme(string3('"""'))(
+                                          state2$1,
+                                          $18,
+                                          $19,
+                                          $29,
+                                          (state2$2, a$2) => $18((v2$4) => $21(state2$2, $Expr2("Paragraph", a$1)))
+                                        )))
+                                      ));
+                                    })
+                                  ));
+                                });
+                              });
+                            },
+                            (state2, a) => $18((v2$2) => $21(state2, $112(a)))
+                          ))),
+                          (state2, a) => $18((v2$1) => $21(state2, $10(a)))
+                        ))));
+                      };
+                    })();
+                    return (v2, $18, $19, $20, $21) => {
+                      const $22 = v2._1;
+                      const $23 = v2._2;
+                      return $18((v3) => $9(
+                        $ParseState($22, $23, false),
+                        $18,
+                        $19,
+                        (v4, $24) => {
+                          const $25 = v4._3;
+                          return $18((v5) => {
+                            if ($25) {
+                              return $20(v4, $24);
+                            }
+                            return $17(v2, $18, $19, $20, $21);
                           });
                         },
-                        (state2, a) => $14((v2$2) => $17(state2, $7(a)))
-                      ))),
-                      (state2, a) => $14((v2$1) => $17(state2, $6(a)))
-                    ))));
+                        $21
+                      ));
+                    };
+                  })();
+                  return (v2, $15, $16, $17, $18) => {
+                    const $19 = v2._1;
+                    const $20 = v2._2;
+                    return $15((v3) => $6(
+                      $ParseState($19, $20, false),
+                      $15,
+                      $16,
+                      (v4, $21) => {
+                        const $22 = v4._3;
+                        return $15((v5) => {
+                          if ($22) {
+                            return $17(v4, $21);
+                          }
+                          return $14(v2, $15, $16, $17, $18);
+                        });
+                      },
+                      $18
+                    ));
                   };
                 })();
                 return (v2, $14, $15, $16, $17) => {
@@ -42287,50 +42483,50 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
                   ));
                 };
               })();
-              return (v2, $11, $12, $13, $14) => {
-                const $15 = v2._1;
-                const $16 = v2._2;
-                return $11((v3) => $2(
-                  $ParseState($15, $16, false),
-                  $11,
-                  $12,
-                  (v4, $17) => {
-                    const $18 = v4._3;
-                    return $11((v5) => {
-                      if ($18) {
-                        return $13(v4, $17);
+              return (v2, $13, $14, $15, $16) => {
+                const $17 = v2._1;
+                const $18 = v2._2;
+                return $13((v3) => $4(
+                  $ParseState($17, $18, false),
+                  $13,
+                  $14,
+                  (v4, $19) => {
+                    const $20 = v4._3;
+                    return $13((v5) => {
+                      if ($20) {
+                        return $15(v4, $19);
                       }
-                      return $10(v2, $11, $12, $13, $14);
+                      return $12(v2, $13, $14, $15, $16);
                     });
                   },
-                  $14
+                  $16
                 ));
               };
             })();
-            return (v2, $10, $11, $12, $13) => {
-              const $14 = v2._1;
-              const $15 = v2._2;
-              return $10((v3) => $1(
-                $ParseState($14, $15, false),
-                $10,
-                $11,
-                (v4, $16) => {
-                  const $17 = v4._3;
-                  return $10((v5) => {
-                    if ($17) {
-                      return $12(v4, $16);
+            return (v2, $12, $13, $14, $15) => {
+              const $16 = v2._1;
+              const $17 = v2._2;
+              return $12((v3) => $3(
+                $ParseState($16, $17, false),
+                $12,
+                $13,
+                (v4, $18) => {
+                  const $19 = v4._3;
+                  return $12((v5) => {
+                    if ($19) {
+                      return $14(v4, $18);
                     }
-                    return $9(v2, $10, $11, $12, $13);
+                    return $11(v2, $12, $13, $14, $15);
                   });
                 },
-                $13
+                $15
               ));
             };
           })();
           return (v2, $9, $10, $11, $12) => {
             const $13 = v2._1;
             const $14 = v2._2;
-            return $9((v3) => $03(
+            return $9((v3) => $1(
               $ParseState($13, $14, false),
               $9,
               $10,
@@ -42374,7 +42570,7 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
           lift12,
           $$throw2,
           (state2$1, a$1) => more((v2$1) => {
-            const $22 = block(expr$lazy());
+            const $22 = block2(expr$lazy());
             return more((v1$2) => $22(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Tuple(a$1, a$2)))));
           })
         )))
@@ -42383,7 +42579,7 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
     const $1 = reserved("match");
     const $2 = reserved("if");
     const $3 = context("def")((() => {
-      const $32 = context("funDef")((state1, more, lift12, $$throw2, done) => more((v1) => {
+      const $32 = context("funDef")(withPos((state1, more, lift12, $$throw2, done) => more((v1) => {
         const $33 = state1._3;
         return recDefs$lazy()(
           state1,
@@ -42398,8 +42594,8 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
             (state2$1, a$1) => more((v2$1) => done(state2$1, $Expr2("LetRec", a, a$1)))
           )))
         );
-      }));
-      const $42 = context("valDef")((state1, more, lift12, $$throw2, done) => more((v1) => {
+      })));
+      const $42 = context("valDef")(withPos((state1, more, lift12, $$throw2, done) => more((v1) => {
         const $43 = state1._3;
         return varDefs$lazy()(
           state1,
@@ -42414,7 +42610,7 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
             (state2$1, a$1) => more((v2$1) => done(state2$1, $Expr2("Let", a, a$1)))
           )))
         );
-      }));
+      })));
       return (v2, $5, $6, $7, $8) => {
         const $9 = v2._1;
         const $10 = v2._2;
@@ -42471,7 +42667,7 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
                   $6,
                   $15,
                   (state2$1, a$1) => $5((v2$2) => {
-                    const $16 = block(expr$lazy());
+                    const $16 = block2(expr$lazy());
                     return $5((v1$2) => $16(
                       state2$1,
                       $5,
@@ -42485,7 +42681,7 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
                           $6,
                           $15,
                           (state2$3, a$3) => $5((v2$4) => {
-                            const $18 = block(expr$lazy());
+                            const $18 = block2(expr$lazy());
                             return $5((v1$4) => $18(state2$3, $5, $6, $15, (state2$4, a$4) => $5((v2$5) => $8(state2$4, $Expr2("IfElse", a$1, a$2, a$4)))));
                           })
                         ));
@@ -42508,7 +42704,7 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
             $6,
             $11,
             (state2$1, a$1) => $5((v2$2) => {
-              const $12 = block((state1, more, lift12, $$throw2, done) => more((v1$2) => branch(
+              const $12 = block2((state1, more, lift12, $$throw2, done) => more((v1$2) => branch(
                 state1,
                 more,
                 lift12,
@@ -42537,9 +42733,9 @@ var expr$lazy = /* @__PURE__ */ binding(() => {
 });
 var varDefs = /* @__PURE__ */ varDefs$lazy();
 var recDefs = /* @__PURE__ */ recDefs$lazy();
-var expr = /* @__PURE__ */ expr$lazy();
+var expr2 = /* @__PURE__ */ expr$lazy();
 var parsePy$p = (input) => {
-  const $0 = runParserT2(input)(withImports(expr))(initialPos)._1;
+  const $0 = runParserT2(input)(withImports(expr2))(initialPos)._1;
   if ($0.tag === "Left") {
     return $Either("Left", prettyParseError($0._1));
   }
@@ -43839,8 +44035,8 @@ var selectionResult = (v) => {
     fail();
   })();
   return {
-    v: spyWhen(false)("Mediating outputs")((x2) => renderWithIndent(0)(prettyVal(highlightableUnit).pretty(functorVal.map((v$1) => {
-    })(x2))))(applyVal.apply(functorVal.map((v4) => (v5) => {
+    v: spyWhen(false)("Mediating outputs")((x2) => renderWithIndent(Stmt)(0)(0)(prettyVal(highlightableUnit).pretty(functorVal.map((v$1) => {
+    })(x2)))._1)(applyVal.apply(functorVal.map((v4) => (v5) => {
       if (v4.tag === "Inert") {
         return Inert;
       }
@@ -43852,11 +44048,11 @@ var selectionResult = (v) => {
       }
       fail();
     })(v2._2._1))(v3._2._1)),
-    "\u03B3": spyWhen(false)("Mediating inputs")((x2) => renderWithIndent(0)(prettyEnv(highlightableUnit).pretty(_fmapObject(
+    "\u03B3": spyWhen(false)("Mediating inputs")((x2) => renderWithIndent(Stmt)(0)(0)(prettyEnv(highlightableUnit).pretty(_fmapObject(
       x2,
       functorVal.map((v$1) => {
       })
-    ))))(intersectionWith_Object(apply)(_fmapObject(
+    )))._1)(intersectionWith_Object(apply)(_fmapObject(
       _fmapObject(
         v2._1,
         functorVal.map((v4) => (v5) => {
