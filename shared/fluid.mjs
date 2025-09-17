@@ -211,8 +211,8 @@ var showStringImpl = function(s) {
           return "\\v";
       }
       var k = i + 1;
-      var empty3 = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
-      return "\\" + c.charCodeAt(0).toString(10) + empty3;
+      var empty2 = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
+      return "\\" + c.charCodeAt(0).toString(10) + empty2;
     }
   ) + '"';
 };
@@ -223,16 +223,6 @@ var showArrayImpl = function(f) {
       ss[i] = f(xs[i]);
     }
     return "[" + ss.join(",") + "]";
-  };
-};
-var cons = function(head) {
-  return function(tail4) {
-    return [head].concat(tail4);
-  };
-};
-var intercalate = function(separator) {
-  return function(xs) {
-    return xs.join(separator);
   };
 };
 
@@ -832,10 +822,10 @@ var fromFoldableImpl = /* @__PURE__ */ (function() {
     };
   };
 })();
-var unconsImpl = function(empty3) {
+var unconsImpl = function(empty2) {
   return function(next) {
     return function(xs) {
-      return xs.length === 0 ? empty3({}) : next(xs[0])(xs.slice(1));
+      return xs.length === 0 ? empty2({}) : next(xs[0])(xs.slice(1));
     };
   };
 };
@@ -1145,13 +1135,6 @@ var indexOf = /* @__PURE__ */ _indexOf(Just)(Nothing);
 var charAt2 = /* @__PURE__ */ _charAt(Just)(Nothing);
 
 // output-es/Data.String.Common/foreign.js
-var replaceAll = function(s1) {
-  return function(s2) {
-    return function(s3) {
-      return s3.replace(new RegExp(s1.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), "g"), s2);
-    };
-  };
-};
 var split = function(sep) {
   return function(s) {
     return s.split(sep);
@@ -2752,7 +2735,6 @@ var bindNonEmptyList = {
   },
   Apply0: () => applyNonEmptyList
 };
-var applicativeList = { pure: (a) => $List("Cons", a, Nil), Apply0: () => applyList };
 
 // output-es/Data.List/index.js
 var identity7 = (x) => x;
@@ -4062,11 +4044,11 @@ var pop = (dictOrd) => (k) => {
             down$r = $Maybe("Just", $Tuple(m._3, up(ctx)(Leaf2)));
             continue;
           }
-          const max4 = maxNode(m._1);
+          const max3 = maxNode(m._1);
           down$c = false;
           down$r = $Maybe(
             "Just",
-            $Tuple(m._3, removeMaxNode($List("Cons", $TreeContext("TwoLeft", max4.key, max4.value, m._4), ctx))(m._1))
+            $Tuple(m._3, removeMaxNode($List("Cons", $TreeContext("TwoLeft", max3.key, max3.value, m._4), ctx))(m._1))
           );
           continue;
         }
@@ -4108,20 +4090,20 @@ var pop = (dictOrd) => (k) => {
           continue;
         }
         if (v3 === "EQ") {
-          const max4 = maxNode(m._1);
+          const max3 = maxNode(m._1);
           down$c = false;
           down$r = $Maybe(
             "Just",
-            $Tuple(m._3, removeMaxNode($List("Cons", $TreeContext("ThreeLeft", max4.key, max4.value, m._4, m._5, m._6, m._7), ctx))(m._1))
+            $Tuple(m._3, removeMaxNode($List("Cons", $TreeContext("ThreeLeft", max3.key, max3.value, m._4, m._5, m._6, m._7), ctx))(m._1))
           );
           continue;
         }
         if (v === "EQ") {
-          const max4 = maxNode(m._4);
+          const max3 = maxNode(m._4);
           down$c = false;
           down$r = $Maybe(
             "Just",
-            $Tuple(m._6, removeMaxNode($List("Cons", $TreeContext("ThreeMiddle", m._1, m._2, m._3, max4.key, max4.value, m._7), ctx))(m._4))
+            $Tuple(m._6, removeMaxNode($List("Cons", $TreeContext("ThreeMiddle", m._1, m._2, m._3, max3.key, max3.value, m._7), ctx))(m._4))
           );
           continue;
         }
@@ -4283,10 +4265,10 @@ var eqMap = (dictEq) => (dictEq1) => {
 };
 var fromFoldable = (dictOrd) => (dictFoldable) => dictFoldable.foldl((m) => (v) => insert(dictOrd)(v._1)(v._2)(m))(Leaf2);
 var filterWithKey = (dictOrd) => {
-  const fromFoldable111 = fromFoldable(dictOrd)(foldableList2);
+  const fromFoldable112 = fromFoldable(dictOrd)(foldableList2);
   return (predicate) => {
     const $0 = filter2((v) => predicate(v._1)(v._2));
-    return (x) => fromFoldable111($0(toUnfoldable3(unfoldableList2)(x)));
+    return (x) => fromFoldable112($0(toUnfoldable3(unfoldableList2)(x)));
   };
 };
 var $$delete = (dictOrd) => (k) => (m) => {
@@ -4477,9 +4459,9 @@ var fromStringAsImpl = function(just) {
       } else {
         digits = "[0-9a-" + String.fromCharCode(86 + radix) + "]";
       }
-      var pattern2 = new RegExp("^[\\+\\-]?" + digits + "+$", "i");
+      var pattern3 = new RegExp("^[\\+\\-]?" + digits + "+$", "i");
       return function(s) {
-        if (pattern2.test(s)) {
+        if (pattern3.test(s)) {
           var i = parseInt(s, radix);
           return (i | 0) === i ? just(i) : nothing;
         } else {
@@ -9722,10 +9704,10 @@ var insert2 = (k) => (v) => mutate(($0) => () => {
 var functorObject = { map: (f) => (m) => _fmapObject(m, f) };
 var functorWithIndexObject = { mapWithIndex: mapWithKey, Functor0: () => functorObject };
 var fromFoldable2 = (dictFoldable) => {
-  const fromFoldable111 = fromFoldableImpl(dictFoldable.foldr);
+  const fromFoldable112 = fromFoldableImpl(dictFoldable.foldr);
   return (l) => {
     const s = {};
-    for (const v of fromFoldable111(l)) {
+    for (const v of fromFoldable112(l)) {
       s[v._1] = v._2;
     }
     return s;
@@ -9916,27 +9898,6 @@ var now = (function() {
 })();
 
 // output-es/Util/index.js
-var intercalate2 = (sep) => (xs) => {
-  const go = (go$a0$copy) => (go$a1$copy) => {
-    let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-    while (go$c) {
-      const b = go$a0, v = go$a1;
-      if (v.tag === "Nil") {
-        go$c = false;
-        go$r = b;
-        continue;
-      }
-      if (v.tag === "Cons") {
-        go$a0 = b.init ? { init: false, acc: v._1 } : { init: false, acc: foldableList.foldr(Cons)(foldableList.foldr(Cons)(v._1)(sep))(b.acc) };
-        go$a1 = v._2;
-        continue;
-      }
-      fail();
-    }
-    return go$r;
-  };
-  return go({ init: true, acc: Nil })(xs).acc;
-};
 var identity13 = (x) => x;
 var isEmptySet = { isEmpty };
 var isEmptyObject = { isEmpty: isEmpty2 };
@@ -10125,9 +10086,9 @@ var mapFObjectString = {
   mapWithKey
 };
 var asMaplet = (dictMap) => {
-  const toUnfoldable16 = dictMap.toUnfoldable(unfoldableList);
+  const toUnfoldable15 = dictMap.toUnfoldable(unfoldableList);
   return (m) => assertWith("")(dictMap.Set0().size(m) === 1)(definitely("singleton map")((() => {
-    const $0 = toUnfoldable16(m);
+    const $0 = toUnfoldable15(m);
     if ($0.tag === "Nil") {
       return Nothing;
     }
@@ -11577,7 +11538,7 @@ var assertPresent = (v) => (v1) => {
         }
         fail();
       })();
-      return assertWhen(false)($0 + " is an existing vertex")((v2) => present)(() => $Step("Loop", $1))();
+      return assertWhen(true)($0 + " is an existing vertex")((v2) => present)(() => $Step("Loop", $1))();
     };
   }
   fail();
@@ -11806,7 +11767,7 @@ var runWithGraphT = (dictMonad) => {
     const freezeGraph2 = freezeGraph1(dictGraph);
     return (m) => (\u03B1s) => dictMonad.Bind1().bind(freezeGraph2(m)(\u03B1s))((v) => {
       const $0 = v._1;
-      return assertWhen(false)("edgeListGC")((v1) => dictGraph.Eq0().eq($0)(dictGraph.fromEdgeList(Leaf2)(toEdgeList(dictGraph)($0))))(dictMonad.Applicative0().pure($Tuple(
+      return assertWhen(true)("edgeListGC")((v1) => dictGraph.Eq0().eq($0)(dictGraph.fromEdgeList(Leaf2)(toEdgeList(dictGraph)($0))))(dictMonad.Applicative0().pure($Tuple(
         $0,
         v._2
       )));
@@ -11883,7 +11844,7 @@ var fwdSlice = (dictGraph) => {
         return pure($Step("Loop", { pending: insert(ordVertex)(v1.es._1._1)(\u03B2s)(v1.pending), es: v1.es._2 }));
       }
       fail();
-    })({ pending: Leaf2, es: inEdges(dictGraph)($0)($1) }))(assertWhen(false)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(dictGraph.sinks($0)).tag === "Leaf")(map(ordDVertex$p)((\u03B1) => $Tuple(
+    })({ pending: Leaf2, es: inEdges(dictGraph)($0)($1) }))(assertWhen(true)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(dictGraph.sinks($0)).tag === "Leaf")(map(ordDVertex$p)((\u03B1) => $Tuple(
       \u03B1,
       dictGraph.vertexData($0)(\u03B1)
     ))($1)))._1;
@@ -11927,7 +11888,7 @@ var bwdSlice = (dictGraph) => {
       fail();
     })({
       visited: Leaf2,
-      "\u03B1s": fromFoldable8(assertWhen(false)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(addresses2($0)).tag === "Leaf")($1)),
+      "\u03B1s": fromFoldable8(assertWhen(true)("inputs are sinks")((v$1) => difference2(ordVertex)($1)(addresses2($0)).tag === "Leaf")($1)),
       pending: Nil
     }))(Leaf2)._1;
   };
@@ -11963,240 +11924,8 @@ var choiceFn = /* @__PURE__ */ (() => ({
   Profunctor0: () => profunctorFn
 }))();
 
-// output-es/Data.Semiring/foreign.js
-var intAdd = function(x) {
-  return function(y) {
-    return x + y | 0;
-  };
-};
-var intMul = function(x) {
-  return function(y) {
-    return x * y | 0;
-  };
-};
-var numAdd = function(n1) {
-  return function(n2) {
-    return n1 + n2;
-  };
-};
-var numMul = function(n1) {
-  return function(n2) {
-    return n1 * n2;
-  };
-};
-
-// output-es/Data.Ring/foreign.js
-var intSub = function(x) {
-  return function(y) {
-    return x - y | 0;
-  };
-};
-var numSub = function(n1) {
-  return function(n2) {
-    return n1 - n2;
-  };
-};
-
-// output-es/Data.EuclideanRing/foreign.js
-var intDiv2 = function(x) {
-  return function(y) {
-    if (y === 0) return 0;
-    return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
-  };
-};
-var intMod = function(x) {
-  return function(y) {
-    if (y === 0) return 0;
-    var yy = Math.abs(y);
-    return (x % yy + yy) % yy;
-  };
-};
-var numDiv = function(n1) {
-  return function(n2) {
-    return n1 / n2;
-  };
-};
-
-// output-es/Data.String.CodePoints/foreign.js
-var hasArrayFrom = typeof Array.from === "function";
-var hasStringIterator = typeof Symbol !== "undefined" && Symbol != null && typeof Symbol.iterator !== "undefined" && typeof String.prototype[Symbol.iterator] === "function";
-var hasFromCodePoint = typeof String.prototype.fromCodePoint === "function";
-var hasCodePointAt = typeof String.prototype.codePointAt === "function";
-var _unsafeCodePointAt0 = function(fallback) {
-  return hasCodePointAt ? function(str) {
-    return str.codePointAt(0);
-  } : fallback;
-};
-var _codePointAt = function(fallback) {
-  return function(Just2) {
-    return function(Nothing2) {
-      return function(unsafeCodePointAt02) {
-        return function(index3) {
-          return function(str) {
-            var length4 = str.length;
-            if (index3 < 0 || index3 >= length4) return Nothing2;
-            if (hasStringIterator) {
-              var iter = str[Symbol.iterator]();
-              for (var i = index3; ; --i) {
-                var o = iter.next();
-                if (o.done) return Nothing2;
-                if (i === 0) return Just2(unsafeCodePointAt02(o.value));
-              }
-            }
-            return fallback(index3)(str);
-          };
-        };
-      };
-    };
-  };
-};
-var _fromCodePointArray = function(singleton7) {
-  return hasFromCodePoint ? function(cps) {
-    if (cps.length < 1e4) {
-      return String.fromCodePoint.apply(String, cps);
-    }
-    return cps.map(singleton7).join("");
-  } : function(cps) {
-    return cps.map(singleton7).join("");
-  };
-};
-var _singleton = function(fallback) {
-  return hasFromCodePoint ? String.fromCodePoint : fallback;
-};
-var _take = function(fallback) {
-  return function(n) {
-    if (hasStringIterator) {
-      return function(str) {
-        var accum = "";
-        var iter = str[Symbol.iterator]();
-        for (var i = 0; i < n; ++i) {
-          var o = iter.next();
-          if (o.done) return accum;
-          accum += o.value;
-        }
-        return accum;
-      };
-    }
-    return fallback(n);
-  };
-};
-var _toCodePointArray = function(fallback) {
-  return function(unsafeCodePointAt02) {
-    if (hasArrayFrom) {
-      return function(str) {
-        return Array.from(str, unsafeCodePointAt02);
-      };
-    }
-    return fallback;
-  };
-};
-
-// output-es/Data.String.CodePoints/index.js
-var uncons5 = (s) => {
-  const v = length2(s);
-  if (v === 0) {
-    return Nothing;
-  }
-  if (v === 1) {
-    return $Maybe("Just", { head: toCharCode(charAt(0)(s)), tail: "" });
-  }
-  const cu1 = toCharCode(charAt(1)(s));
-  const cu0 = toCharCode(charAt(0)(s));
-  if (55296 <= cu0 && cu0 <= 56319 && 56320 <= cu1 && cu1 <= 57343) {
-    return $Maybe("Just", { head: (((cu0 - 55296 | 0) * 1024 | 0) + (cu1 - 56320 | 0) | 0) + 65536 | 0, tail: drop2(2)(s) });
-  }
-  return $Maybe("Just", { head: cu0, tail: drop2(1)(s) });
-};
-var unconsButWithTuple = (s) => {
-  const $0 = uncons5(s);
-  if ($0.tag === "Just") {
-    return $Maybe("Just", $Tuple($0._1.head, $0._1.tail));
-  }
-  return Nothing;
-};
-var toCodePointArrayFallback = (s) => unfoldableArray.unfoldr(unconsButWithTuple)(s);
-var unsafeCodePointAt0Fallback = (s) => {
-  const cu0 = toCharCode(charAt(0)(s));
-  if (55296 <= cu0 && cu0 <= 56319 && length2(s) > 1) {
-    const cu1 = toCharCode(charAt(1)(s));
-    if (56320 <= cu1 && cu1 <= 57343) {
-      return (((cu0 - 55296 | 0) * 1024 | 0) + (cu1 - 56320 | 0) | 0) + 65536 | 0;
-    }
-  }
-  return cu0;
-};
-var unsafeCodePointAt0 = /* @__PURE__ */ _unsafeCodePointAt0(unsafeCodePointAt0Fallback);
-var toCodePointArray = /* @__PURE__ */ _toCodePointArray(toCodePointArrayFallback)(unsafeCodePointAt0);
-var indexOf2 = (p) => (s) => {
-  const $0 = indexOf(p)(s);
-  if ($0.tag === "Just") {
-    return $Maybe("Just", toCodePointArray(take($0._1)(s)).length);
-  }
-  return Nothing;
-};
-var fromCharCode2 = (x) => singleton((() => {
-  if (x >= -2147483648 && x <= 2147483647) {
-    return fromCharCode(x);
-  }
-  if (x < 0) {
-    return "\0";
-  }
-  return "\uFFFF";
-})());
-var singletonFallback = (v) => {
-  if (v <= 65535) {
-    return fromCharCode2(v);
-  }
-  return fromCharCode2(intDiv(v - 65536 | 0, 1024) + 55296 | 0) + fromCharCode2(intMod(v - 65536 | 0)(1024) + 56320 | 0);
-};
-var fromCodePointArray = /* @__PURE__ */ _fromCodePointArray(singletonFallback);
-var singleton6 = /* @__PURE__ */ _singleton(singletonFallback);
-var takeFallback = (v) => (v1) => {
-  if (v < 1) {
-    return "";
-  }
-  const v2 = uncons5(v1);
-  if (v2.tag === "Just") {
-    return singleton6(v2._1.head) + takeFallback(v - 1 | 0)(v2._1.tail);
-  }
-  return v1;
-};
-var take3 = /* @__PURE__ */ _take(takeFallback);
-var codePointAtFallback = (codePointAtFallback$a0$copy) => (codePointAtFallback$a1$copy) => {
-  let codePointAtFallback$a0 = codePointAtFallback$a0$copy, codePointAtFallback$a1 = codePointAtFallback$a1$copy, codePointAtFallback$c = true, codePointAtFallback$r;
-  while (codePointAtFallback$c) {
-    const n = codePointAtFallback$a0, s = codePointAtFallback$a1;
-    const v = uncons5(s);
-    if (v.tag === "Just") {
-      if (n === 0) {
-        codePointAtFallback$c = false;
-        codePointAtFallback$r = $Maybe("Just", v._1.head);
-        continue;
-      }
-      codePointAtFallback$a0 = n - 1 | 0;
-      codePointAtFallback$a1 = v._1.tail;
-      continue;
-    }
-    codePointAtFallback$c = false;
-    codePointAtFallback$r = Nothing;
-  }
-  return codePointAtFallback$r;
-};
-var codePointAt = (v) => (v1) => {
-  if (v < 0) {
-    return Nothing;
-  }
-  if (v === 0) {
-    if (v1 === "") {
-      return Nothing;
-    }
-    return $Maybe("Just", unsafeCodePointAt0(v1));
-  }
-  return _codePointAt(codePointAtFallback)(Just)(Nothing)(unsafeCodePointAt0)(v)(v1);
-};
-
 // output-es/Data.Show.Generic/foreign.js
-var intercalate3 = function(separator) {
+var intercalate2 = function(separator) {
   return function(xs) {
     return xs.join(separator);
   };
@@ -12212,7 +11941,7 @@ var genericShowConstructor = (dictGenericShowArgs) => (dictIsSymbol) => ({
     if (v1.length === 0) {
       return ctor;
     }
-    return "(" + intercalate3(" ")([ctor, ...v1]) + ")";
+    return "(" + intercalate2(" ")([ctor, ...v1]) + ")";
   }
 });
 
@@ -12228,23 +11957,6 @@ var lazyParserT = {
     return (state1, more, lift12, $$throw2, done) => force(m)(state1, more, lift12, $$throw2, done);
   }
 };
-var genericShow = /* @__PURE__ */ (() => {
-  const $0 = genericShowConstructor({
-    genericShowArgs: (v) => [
-      (() => {
-        const v$1 = cons(intercalate(": ")(["column", showIntImpl(v.column)]))(cons(intercalate(": ")([
-          "index",
-          showIntImpl(v.index)
-        ]))(cons(intercalate(": ")(["line", showIntImpl(v.line)]))([])));
-        if (v$1.length === 0) {
-          return "{}";
-        }
-        return intercalate(" ")(["{", intercalate(", ")(v$1), "}"]);
-      })()
-    ]
-  })({ reflectSymbol: () => "Position" });
-  return (x) => $0["genericShow'"](x);
-})();
 var functorParserT = { map: (f) => (v) => (state1, more, lift12, $$throw2, done) => more((v1) => v(state1, more, lift12, $$throw2, (state2, a) => more((v2) => done(state2, f(a))))) };
 var applyParserT = {
   apply: (v) => (v1) => (state1, more, lift12, $$throw2, done) => more((v2) => v(
@@ -12308,7 +12020,6 @@ var altParserT = {
   },
   Functor0: () => functorParserT
 };
-var showParseError = { show: (v) => "(ParseError " + showStringImpl(v._1) + " " + genericShow(v._2) + ")" };
 var runParserT$p = (dictMonadRec) => {
   const Monad0 = dictMonadRec.Monad0();
   return (state1) => (v) => {
@@ -12360,6 +12071,7 @@ var fail2 = (message2) => (state1, more, lift12, $$throw2, done) => more((v1) =>
 ));
 var plusParserT = { empty: /* @__PURE__ */ fail2("No alternative"), Alt0: () => altParserT };
 var alternativeParserT = { Applicative0: () => applicativeParserT, Plus1: () => plusParserT };
+var consume = (state1, v, v1, v2, done) => done($ParseState(state1._1, state1._2, true), void 0);
 
 // output-es/Parsing.Combinators/index.js
 var manyRec2 = /* @__PURE__ */ manyRec(monadRecParserT)(alternativeParserT);
@@ -12543,6 +12255,16 @@ var notFollowedBy = (p) => (v1, $0, $1, $2, $3) => {
       (state2, a) => $0((v2$1) => $0((v3$1) => fail2("Negated parser succeeded")(state2, $0, $1, $7, (state3, a$1) => $0((v4) => $3(state3, a$1)))))
     )));
   });
+};
+var many1 = (p) => {
+  const $0 = manyRec2(p);
+  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => p(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2$1) => more((v3) => $0(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, $NonEmpty(a, a$1))))))
+  )));
 };
 var choice = (dictFoldable) => {
   const $0 = dictFoldable.foldr((p1) => (v) => {
@@ -13204,7 +12926,8 @@ var PListNext = (value0) => (value1) => $ListRestPattern("PListNext", value0, va
 var PConstr = (value0) => (value1) => $Pattern("PConstr", value0, value1);
 var PListEmpty = /* @__PURE__ */ $Pattern("PListEmpty");
 var PListNonEmpty = (value0) => (value1) => $Pattern("PListNonEmpty", value0, value1);
-var Clause = (x) => x;
+var Int = (value0) => (value1) => $Expr2("Int", value0, value1);
+var Float = (value0) => (value1) => $Expr2("Float", value0, value1);
 var Str = (value0) => (value1) => $Expr2("Str", value0, value1);
 var Constr2 = (value0) => (value1) => (value2) => $Expr2("Constr", value0, value1, value2);
 var Dictionary2 = (value0) => (value1) => $Expr2("Dictionary", value0, value1);
@@ -15578,37 +15301,34 @@ var paragraphElemsFwd = (dictBoundedLattice) => {
   const bot = dictBoundedLattice.BoundedJoinSemilattice0().bot;
   return (dictMonadError) => {
     const Monad0 = dictMonadError.MonadThrow0().Monad0();
-    const $0 = Monad0.Bind1();
-    const $1 = Monad0.Applicative0();
-    return foldableList.foldr((v) => (v1) => {
-      if (v.tag === "Token") {
-        const $2 = v._1;
-        return $0.bind(v1)((acc) => $1.pure($Expr(
-          "Constr",
-          bot,
-          ":",
-          $List(
-            "Cons",
-            $Expr("Constr", bot, "Text", $List("Cons", $Expr("Str", bot, $2), Nil)),
-            $List("Cons", acc, Nil)
-          )
-        )));
+    const $0 = Monad0.Applicative0();
+    const $1 = Monad0.Bind1();
+    return (v) => {
+      if (v.tag === "Nil") {
+        return $0.pure($Expr("Constr", bot, "Nil", Nil));
       }
-      if (v.tag === "Unquote") {
-        const $2 = v._1;
-        return $0.bind(v1)((acc) => $0.bind(exprFwd(dictBoundedLattice)(dictMonadError)(dictBoundedLattice.BoundedJoinSemilattice0().JoinSemilattice0())($2))((e$p) => $1.pure($Expr(
-          "Constr",
-          bot,
-          ":",
-          $List(
-            "Cons",
-            $Expr("Constr", bot, "Text", $List("Cons", e$p, Nil)),
-            $List("Cons", acc, Nil)
-          )
-        ))));
+      if (v.tag === "Cons") {
+        if (v._1.tag === "Token") {
+          const $2 = v._1._1;
+          return $1.bind(paragraphElemsFwd(dictBoundedLattice)(dictMonadError)(v._2))((e$p) => $0.pure($Expr(
+            "Constr",
+            bot,
+            ":",
+            $List("Cons", $Expr("Str", bot, $2), $List("Cons", e$p, Nil))
+          )));
+        }
+        if (v._1.tag === "Unquote") {
+          const $2 = v._2;
+          return $1.bind(exprFwd(dictBoundedLattice)(dictMonadError)(dictBoundedLattice.BoundedJoinSemilattice0().JoinSemilattice0())(v._1._1))((e) => $1.bind(paragraphElemsFwd(dictBoundedLattice)(dictMonadError)($2))((e$p) => $0.pure($Expr(
+            "Constr",
+            bot,
+            ":",
+            $List("Cons", e, $List("Cons", e$p, Nil))
+          ))));
+        }
       }
       fail();
-    })($1.pure($Expr("Constr", bot, "Nil", Nil)));
+    };
   };
 };
 var paragraphElemsBwd = (dictBoundedJoinSemilattice) => (v) => (v1) => {
@@ -15620,24 +15340,16 @@ var paragraphElemsBwd = (dictBoundedJoinSemilattice) => (v) => (v1) => {
       return throwException(error("absurd"))();
     }
     if (v._3.tag === "Cons" && v._3._2.tag === "Cons" && v._3._2._2.tag === "Nil" && v1.tag === "Cons" && v._2 === ":") {
-      return $List(
-        "Cons",
-        (() => {
-          if (v._3._1.tag === "Constr" && v._3._1._3.tag === "Cons" && v._3._1._3._2.tag === "Nil") {
-            if (v._3._1._3._1.tag === "Str" && v1._1.tag === "Token") {
-              if (v._3._1._2 === "Text") {
-                return $ParagraphElem("Token", v._3._1._3._1._2);
-              }
-              return throwException(error("absurd"))();
-            }
-            if (v1._1.tag === "Unquote" && v._3._1._2 === "Text") {
-              return $ParagraphElem("Unquote", exprBwd(dictBoundedJoinSemilattice)(v._3._1._3._1)(v1._1._1));
-            }
-          }
-          return throwException(error("absurd"))();
-        })(),
-        paragraphElemsBwd(dictBoundedJoinSemilattice)(v._3._2._1)(v1._2)
-      );
+      if (v._3._1.tag === "Str" && v1._1.tag === "Token") {
+        return $List("Cons", $ParagraphElem("Token", v._3._1._2), paragraphElemsBwd(dictBoundedJoinSemilattice)(v._3._2._1)(v1._2));
+      }
+      if (v1._1.tag === "Unquote") {
+        return $List(
+          "Cons",
+          $ParagraphElem("Unquote", exprBwd(dictBoundedJoinSemilattice)(v._3._1)(v1._1._1)),
+          paragraphElemsBwd(dictBoundedJoinSemilattice)(v._3._2._1)(v1._2)
+        );
+      }
     }
   }
   return throwException(error("absurd"))();
@@ -16293,88 +16005,438 @@ var moduleFwd = (dictMonadError) => {
   };
 };
 
-// output-es/Util.Pretty/index.js
-var intercalate4 = (sep) => (xs) => foldlArray((v) => (v1) => {
-  if (v.init) {
-    return { init: false, acc: v1 };
-  }
-  return { init: false, acc: v.acc + sep + v1 };
-})({ init: true, acc: "" })(xs).acc;
-var max2 = (x) => (y) => {
-  const v = ordInt.compare(x)(y);
-  if (v === "LT") {
-    return y;
-  }
-  if (v === "EQ") {
-    return x;
-  }
-  if (v === "GT") {
-    return x;
-  }
-  fail();
+// output-es/Data.Semiring/foreign.js
+var intAdd = function(x) {
+  return function(y) {
+    return x + y | 0;
+  };
 };
-var lastLine = (v) => {
-  const $0 = index(v.lines)(v.lines.length - 1 | 0);
-  if ($0.tag === "Just") {
-    return $0._1;
-  }
-  if ($0.tag === "Nothing") {
-    return "";
-  }
-  fail();
+var intMul = function(x) {
+  return function(y) {
+    return x * y | 0;
+  };
 };
-var firstLine = (v) => {
-  const $0 = index(v.lines)(0);
-  if ($0.tag === "Just") {
-    return $0._1;
-  }
-  if ($0.tag === "Nothing") {
-    return "";
-  }
-  fail();
+var numAdd = function(n1) {
+  return function(n2) {
+    return n1 + n2;
+  };
 };
-var empty2 = { width: 0, height: 1, lines: [""] };
-var checkOneLine = (xs) => {
-  const v = uncons(xs);
-  if (v.tag === "Just") {
-    if (v._1.tail.length === 0) {
-      return { width: toCodePointArray(v._1.head).length, height: 1, lines: [v._1.head] };
-    }
-    return throwException(error("absurd"))();
-  }
-  if (v.tag === "Nothing") {
-    return throwException(error("absurd"))();
-  }
-  fail();
+var numMul = function(n1) {
+  return function(n2) {
+    return n1 * n2;
+  };
 };
-var text = (s) => checkOneLine(split("\n")(" " + s));
-var atop = (v) => (v1) => ({ width: max2(v.width)(v1.width), height: v.height + v1.height | 0, lines: [...v.lines, ...v1.lines] });
-var allButLast = (v) => {
-  const $0 = v.lines.length - 1 | 0;
-  if ($0 < 1) {
-    return [];
-  }
-  return slice(0)($0)(v.lines);
-};
-var indentedExpression = (v) => (v1) => zipWith(concatString)(replicate(slice(1)(v1.lines.length)(v1.lines).length)(foldlArray(concatString)("")(replicate(toCodePointArray(lastLine(v)).length)(" "))))(slice(1)(v1.lines.length)(v1.lines));
-var beside = (v) => (v1) => ({ width: v.width + v1.width | 0, height: v.height + v1.height | 0, lines: [...allButLast(v), lastLine(v) + "" + firstLine(v1), ...indentedExpression(v)(v1)] });
-var semigroupColumns = { append: (v) => (v1) => beside(v)(v1) };
-var monoidColumns = { mempty: empty2, Semigroup0: () => semigroupColumns };
 
-// output-es/Pretty/index.js
-var hcat = /* @__PURE__ */ (() => foldableList.foldMap(monoidColumns)(unsafeCoerce))();
-var hcat1 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidColumns)(unsafeCoerce))();
-var toUnfoldable8 = /* @__PURE__ */ toUnfoldable4(unfoldableList);
-var toUnfoldable13 = /* @__PURE__ */ toAscUnfoldable(unfoldableList);
-var rootOpExpr = {
+// output-es/Data.Semiring/index.js
+var semiringNumber = { add: numAdd, zero: 0, mul: numMul, one: 1 };
+var semiringInt = { add: intAdd, zero: 0, mul: intMul, one: 1 };
+
+// output-es/Data.Ring/foreign.js
+var intSub = function(x) {
+  return function(y) {
+    return x - y | 0;
+  };
+};
+var numSub = function(n1) {
+  return function(n2) {
+    return n1 - n2;
+  };
+};
+
+// output-es/Data.Ring/index.js
+var ringNumber = { sub: numSub, Semiring0: () => semiringNumber };
+var ringInt = { sub: intSub, Semiring0: () => semiringInt };
+
+// output-es/Data.EuclideanRing/foreign.js
+var intDiv2 = function(x) {
+  return function(y) {
+    if (y === 0) return 0;
+    return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
+  };
+};
+var intMod = function(x) {
+  return function(y) {
+    if (y === 0) return 0;
+    var yy = Math.abs(y);
+    return (x % yy + yy) % yy;
+  };
+};
+var numDiv = function(n1) {
+  return function(n2) {
+    return n1 / n2;
+  };
+};
+
+// output-es/Data.String.CodePoints/foreign.js
+var hasArrayFrom = typeof Array.from === "function";
+var hasStringIterator = typeof Symbol !== "undefined" && Symbol != null && typeof Symbol.iterator !== "undefined" && typeof String.prototype[Symbol.iterator] === "function";
+var hasFromCodePoint = typeof String.prototype.fromCodePoint === "function";
+var hasCodePointAt = typeof String.prototype.codePointAt === "function";
+var _unsafeCodePointAt0 = function(fallback) {
+  return hasCodePointAt ? function(str) {
+    return str.codePointAt(0);
+  } : fallback;
+};
+var _codePointAt = function(fallback) {
+  return function(Just2) {
+    return function(Nothing2) {
+      return function(unsafeCodePointAt02) {
+        return function(index3) {
+          return function(str) {
+            var length4 = str.length;
+            if (index3 < 0 || index3 >= length4) return Nothing2;
+            if (hasStringIterator) {
+              var iter = str[Symbol.iterator]();
+              for (var i = index3; ; --i) {
+                var o = iter.next();
+                if (o.done) return Nothing2;
+                if (i === 0) return Just2(unsafeCodePointAt02(o.value));
+              }
+            }
+            return fallback(index3)(str);
+          };
+        };
+      };
+    };
+  };
+};
+var _fromCodePointArray = function(singleton7) {
+  return hasFromCodePoint ? function(cps) {
+    if (cps.length < 1e4) {
+      return String.fromCodePoint.apply(String, cps);
+    }
+    return cps.map(singleton7).join("");
+  } : function(cps) {
+    return cps.map(singleton7).join("");
+  };
+};
+var _toCodePointArray = function(fallback) {
+  return function(unsafeCodePointAt02) {
+    if (hasArrayFrom) {
+      return function(str) {
+        return Array.from(str, unsafeCodePointAt02);
+      };
+    }
+    return fallback;
+  };
+};
+
+// output-es/Data.String.CodePoints/index.js
+var uncons5 = (s) => {
+  const v = length2(s);
+  if (v === 0) {
+    return Nothing;
+  }
+  if (v === 1) {
+    return $Maybe("Just", { head: toCharCode(charAt(0)(s)), tail: "" });
+  }
+  const cu1 = toCharCode(charAt(1)(s));
+  const cu0 = toCharCode(charAt(0)(s));
+  if (55296 <= cu0 && cu0 <= 56319 && 56320 <= cu1 && cu1 <= 57343) {
+    return $Maybe("Just", { head: (((cu0 - 55296 | 0) * 1024 | 0) + (cu1 - 56320 | 0) | 0) + 65536 | 0, tail: drop2(2)(s) });
+  }
+  return $Maybe("Just", { head: cu0, tail: drop2(1)(s) });
+};
+var unconsButWithTuple = (s) => {
+  const $0 = uncons5(s);
+  if ($0.tag === "Just") {
+    return $Maybe("Just", $Tuple($0._1.head, $0._1.tail));
+  }
+  return Nothing;
+};
+var toCodePointArrayFallback = (s) => unfoldableArray.unfoldr(unconsButWithTuple)(s);
+var unsafeCodePointAt0Fallback = (s) => {
+  const cu0 = toCharCode(charAt(0)(s));
+  if (55296 <= cu0 && cu0 <= 56319 && length2(s) > 1) {
+    const cu1 = toCharCode(charAt(1)(s));
+    if (56320 <= cu1 && cu1 <= 57343) {
+      return (((cu0 - 55296 | 0) * 1024 | 0) + (cu1 - 56320 | 0) | 0) + 65536 | 0;
+    }
+  }
+  return cu0;
+};
+var unsafeCodePointAt0 = /* @__PURE__ */ _unsafeCodePointAt0(unsafeCodePointAt0Fallback);
+var toCodePointArray = /* @__PURE__ */ _toCodePointArray(toCodePointArrayFallback)(unsafeCodePointAt0);
+var indexOf2 = (p) => (s) => {
+  const $0 = indexOf(p)(s);
+  if ($0.tag === "Just") {
+    return $Maybe("Just", toCodePointArray(take($0._1)(s)).length);
+  }
+  return Nothing;
+};
+var fromCharCode2 = (x) => singleton((() => {
+  if (x >= -2147483648 && x <= 2147483647) {
+    return fromCharCode(x);
+  }
+  if (x < 0) {
+    return "\0";
+  }
+  return "\uFFFF";
+})());
+var singletonFallback = (v) => {
+  if (v <= 65535) {
+    return fromCharCode2(v);
+  }
+  return fromCharCode2(intDiv(v - 65536 | 0, 1024) + 55296 | 0) + fromCharCode2(intMod(v - 65536 | 0)(1024) + 56320 | 0);
+};
+var fromCodePointArray = /* @__PURE__ */ _fromCodePointArray(singletonFallback);
+var codePointAtFallback = (codePointAtFallback$a0$copy) => (codePointAtFallback$a1$copy) => {
+  let codePointAtFallback$a0 = codePointAtFallback$a0$copy, codePointAtFallback$a1 = codePointAtFallback$a1$copy, codePointAtFallback$c = true, codePointAtFallback$r;
+  while (codePointAtFallback$c) {
+    const n = codePointAtFallback$a0, s = codePointAtFallback$a1;
+    const v = uncons5(s);
+    if (v.tag === "Just") {
+      if (n === 0) {
+        codePointAtFallback$c = false;
+        codePointAtFallback$r = $Maybe("Just", v._1.head);
+        continue;
+      }
+      codePointAtFallback$a0 = n - 1 | 0;
+      codePointAtFallback$a1 = v._1.tail;
+      continue;
+    }
+    codePointAtFallback$c = false;
+    codePointAtFallback$r = Nothing;
+  }
+  return codePointAtFallback$r;
+};
+var codePointAt = (v) => (v1) => {
+  if (v < 0) {
+    return Nothing;
+  }
+  if (v === 0) {
+    if (v1 === "") {
+      return Nothing;
+    }
+    return $Maybe("Just", unsafeCodePointAt0(v1));
+  }
+  return _codePointAt(codePointAtFallback)(Just)(Nothing)(unsafeCodePointAt0)(v)(v1);
+};
+
+// output-es/Temp.Pretty.Doc/index.js
+var $Collection = (tag) => tag;
+var $Doc = (tag, _1, _2) => ({ tag, _1, _2 });
+var $Format = (tag) => tag;
+var Inline = /* @__PURE__ */ $Format("Inline");
+var Multiline = /* @__PURE__ */ $Format("Multiline");
+var Squash = /* @__PURE__ */ $Format("Squash");
+var Record = /* @__PURE__ */ $Collection("Record");
+var Empty = /* @__PURE__ */ $Doc("Empty");
+var Line = /* @__PURE__ */ $Doc("Line");
+var Collection = (value0) => (value1) => $Doc("Collection", value0, value1);
+var intercalate3 = (sep) => (xs) => {
+  const go = (go$a0$copy) => (go$a1$copy) => {
+    let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
+    while (go$c) {
+      const b = go$a0, v = go$a1;
+      if (v.tag === "Nil") {
+        go$c = false;
+        go$r = b;
+        continue;
+      }
+      if (v.tag === "Cons") {
+        go$a0 = b.init ? { init: false, acc: v._1 } : { init: false, acc: $Doc("Concat", b.acc, $Doc("Concat", sep, v._1)) };
+        go$a1 = v._2;
+        continue;
+      }
+      fail();
+    }
+    return go$r;
+  };
+  return go({ init: true, acc: Empty })(xs).acc;
+};
+var widthList = (v) => {
+  if (v.tag === "Nil") {
+    return 0;
+  }
+  if (v.tag === "Cons") {
+    if (v._2.tag === "Nil") {
+      return width(v._1);
+    }
+    return (width(v._1) + 2 | 0) + widthList(v._2) | 0;
+  }
+  fail();
+};
+var width = (v) => {
+  if (v.tag === "Empty") {
+    return 0;
+  }
+  if (v.tag === "Line") {
+    return 0;
+  }
+  if (v.tag === "Text") {
+    return toCodePointArray(v._1).length;
+  }
+  if (v.tag === "Indent") {
+    return width(v._1);
+  }
+  if (v.tag === "Concat") {
+    return width(v._1) + width(v._2) | 0;
+  }
+  if (v.tag === "Block") {
+    return width(v._1);
+  }
+  if (v.tag === "Collection") {
+    return widthList(v._2);
+  }
+  fail();
+};
+var spaces = (n) => {
+  if (n <= 0) {
+    return "";
+  }
+  return " " + spaces(n - 1 | 0);
+};
+var record = /* @__PURE__ */ Collection(Record);
+var inlinable = (doc2) => {
+  if (doc2.tag === "Line") {
+    return false;
+  }
+  if (doc2.tag === "Indent") {
+    return false;
+  }
+  if (doc2.tag === "Concat") {
+    return inlinable(doc2._1) && inlinable(doc2._2);
+  }
+  return true;
+};
+var format = (doc2) => {
+  if (doc2.tag === "Block") {
+    if (doc2._1.tag === "Collection") {
+      return Inline;
+    }
+    if (inlinable(doc2._1) && width(doc2._1) < 20) {
+      return Inline;
+    }
+    return Multiline;
+  }
+  if (doc2.tag === "Collection") {
+    if (widthList(doc2._2) === 0) {
+      return Squash;
+    }
+    if (widthList(doc2._2) < 50) {
+      return Inline;
+    }
+    return Multiline;
+  }
+  return Inline;
+};
+var simplifyList = (ds) => (fmt) => {
+  if (fmt === "Squash") {
+    return Empty;
+  }
+  if (fmt === "Inline") {
+    return intercalate3($Doc("Text", ", "))(listMap((d) => simplify(d))(ds));
+  }
+  if (fmt === "Multiline") {
+    return $Doc("Concat", $Doc("Indent", intercalate3($Doc("Text", ","))(listMap((d) => $Doc("Concat", Line, simplify(d)))(ds))), Line);
+  }
+  fail();
+};
+var simplify = (doc2) => {
+  const fmt = format(doc2);
+  if (doc2.tag === "Block") {
+    if (fmt === "Squash") {
+      return $Doc("Concat", $Doc("Text", ": "), simplify(doc2._1));
+    }
+    if (fmt === "Inline") {
+      return $Doc("Concat", $Doc("Text", ": "), simplify(doc2._1));
+    }
+    if (fmt === "Multiline") {
+      return $Doc("Concat", $Doc("Text", ":"), $Doc("Indent", $Doc("Concat", Line, simplify(doc2._1))));
+    }
+    fail();
+  }
+  if (doc2.tag === "Collection") {
+    return (() => {
+      if (doc2._1 === "Record") {
+        if (fmt === "Squash") {
+          return (d) => $Doc("Concat", $Doc("Text", "{"), $Doc("Concat", d, $Doc("Text", "}")));
+        }
+        if (fmt === "Inline") {
+          return (d) => $Doc("Concat", $Doc("Text", "{ "), $Doc("Concat", d, $Doc("Text", " }")));
+        }
+        if (fmt === "Multiline") {
+          return (d) => $Doc("Concat", $Doc("Text", "{"), $Doc("Concat", d, $Doc("Text", "}")));
+        }
+        fail();
+      }
+      if (doc2._1 === "Array") {
+        return (d) => $Doc("Concat", $Doc("Text", "["), $Doc("Concat", d, $Doc("Text", "]")));
+      }
+      fail();
+    })()(simplifyList(doc2._2)(fmt));
+  }
+  return doc2;
+};
+var renderWithIndent = (n) => (doc2) => {
+  if (doc2.tag === "Empty") {
+    return "";
+  }
+  if (doc2.tag === "Line") {
+    const $0 = n * 2 | 0;
+    if ($0 <= 0) {
+      return "\n";
+    }
+    return "\n " + spaces($0 - 1 | 0);
+  }
+  if (doc2.tag === "Text") {
+    return doc2._1;
+  }
+  if (doc2.tag === "Indent") {
+    return renderWithIndent(n + 1 | 0)(doc2._1);
+  }
+  if (doc2.tag === "Concat") {
+    if (doc2._1.tag === "Line" && doc2._2.tag === "Empty") {
+      return "\n";
+    }
+    return renderWithIndent(n)(doc2._1) + renderWithIndent(n)(doc2._2);
+  }
+  return renderWithIndent(n)(simplify(doc2));
+};
+
+// output-es/Temp.Pretty.Helpers/index.js
+var vsep = (v) => {
+  if (v.tag === "Nil") {
+    return Empty;
+  }
+  if (v.tag === "Cons") {
+    if (v._2.tag === "Nil") {
+      return v._1;
+    }
+    return $Doc("Concat", v._1, $Doc("Concat", Line, vsep(v._2)));
+  }
+  fail();
+};
+var hsep = (v) => {
+  if (v.tag === "Nil") {
+    return Empty;
+  }
+  if (v.tag === "Cons") {
+    if (v._2.tag === "Nil") {
+      return v._1;
+    }
+    return $Doc("Concat", v._1, $Doc("Concat", $Doc("Text", " "), hsep(v._2)));
+  }
+  fail();
+};
+
+// output-es/Temp.Pretty/index.js
+var identity22 = (x) => x;
+var boundedLattice = { BoundedJoinSemilattice0: () => boundedJoinSemilatticeUni, BoundedMeetSemilattice1: () => boundedMeetSemilatticeUni };
+var lessThanOrEq = (a1) => (a2) => a1 <= a2;
+var lessThan = (a1) => (a2) => a1 < a2;
+var toUnfoldable8 = /* @__PURE__ */ toAscUnfoldable(unfoldableList);
+var fromFoldable10 = /* @__PURE__ */ foldrArray(Cons)(Nil);
+var rootOpPattern = {
   rootOp: (v) => {
-    if (v.tag === "Constr" && v._2 === ":") {
+    if (v.tag === "PConstr" && v._1 === ":") {
       return $Maybe("Just", ":");
     }
     return Nothing;
   }
 };
-var rootOpExpr1 = {
+var rootOpExpr1 = (dictAnn) => ({
   rootOp: (v) => {
     if (v.tag === "Constr") {
       if (v._2 === ":") {
@@ -16387,87 +16449,33 @@ var rootOpExpr1 = {
     }
     return Nothing;
   }
+});
+var highlightableVertex = {
+  highlightIf: (v) => (doc2) => $Doc(
+    "Concat",
+    doc2,
+    $Doc("Concat", $Doc("Text", "_"), $Doc("Text", "\u27E8" + v + "\u27E9"))
+  )
 };
-var isSimpleExpr = {
-  isSimple: (v) => {
-    if (v.tag === "Var") {
-      return true;
-    }
-    if (v.tag === "Op") {
-      return true;
-    }
-    if (v.tag === "Int") {
-      return true;
-    }
-    if (v.tag === "Float") {
-      return true;
-    }
-    if (v.tag === "Str") {
-      return true;
-    }
-    if (v.tag === "Constr") {
-      return v._3.tag === "Nil";
-    }
-    return v.tag === "Dictionary" || v.tag === "Matrix" || v.tag === "Project" || v.tag === "DProject";
+var highlightableUnit = { highlightIf: (v) => identity22 };
+var annUnit = { Highlightable0: () => highlightableUnit, BoundedLattice1: () => boundedLattice };
+var vcommas = (v) => {
+  if (v.tag === "Nil") {
+    return Empty;
   }
-};
-var isSimpleExpr1 = {
-  isSimple: (v) => {
-    if (v.tag === "Var") {
-      return true;
+  if (v.tag === "Cons") {
+    if (v._2.tag === "Nil") {
+      return v._1;
     }
-    if (v.tag === "Op") {
-      return true;
-    }
-    if (v.tag === "Int") {
-      return true;
-    }
-    if (v.tag === "Float") {
-      return true;
-    }
-    if (v.tag === "Str") {
-      return true;
-    }
-    if (v.tag === "Constr") {
-      return v._3.tag === "Nil";
-    }
-    return v.tag === "Dictionary" || v.tag === "Matrix" || v.tag === "Project" || v.tag === "DProject" || v.tag === "Paragraph" || v.tag === "ListEmpty" || v.tag === "ListNonEmpty" || v.tag === "ListEnum" || v.tag === "ListComp";
+    return $Doc(
+      "Concat",
+      v._1,
+      $Doc("Concat", $Doc("Text", ","), $Doc("Concat", Line, vcommas(v._2)))
+    );
   }
+  fail();
 };
-var isSimpleBaseVal = {
-  isSimple: (v) => {
-    if (v.tag === "Constr") {
-      return v._2.tag !== "Cons";
-    }
-    if (v.tag === "Fun" && v._1.tag === "PartialConstr") {
-      return v._1._2.tag !== "Cons";
-    }
-    return true;
-  }
-};
-var vert = (dictFoldable) => {
-  const fromFoldable27 = dictFoldable.foldr(Cons)(Nil);
-  return (delim) => {
-    const vert$p = (v) => {
-      if (v.tag === "Nil") {
-        return empty2;
-      }
-      if (v.tag === "Cons") {
-        if (v._2.tag === "Nil") {
-          return v._1;
-        }
-        if (v._2.tag === "Cons") {
-          return atop(beside(v._1)(delim))(vert$p($List("Cons", v._2._1, v._2._2)));
-        }
-      }
-      fail();
-    };
-    return (x) => vert$p(fromFoldable27(x));
-  };
-};
-var vert1 = /* @__PURE__ */ vert(foldableArray);
-var semi = /* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" ;"));
-var rootOpVal = {
+var rootOpVal = (dictHighlightable) => ({
   rootOp: (v) => {
     if (v._2.tag === "Nothing") {
       if (v._3.tag === "Constr" && v._3._1 === ":") {
@@ -16480,65 +16488,7 @@ var rootOpVal = {
     }
     fail();
   }
-};
-var replacement = [
-  /* @__PURE__ */ $Tuple("( ", "("),
-  /* @__PURE__ */ $Tuple(" )", ")"),
-  /* @__PURE__ */ $Tuple("[ ", "["),
-  /* @__PURE__ */ $Tuple(" ]", "]"),
-  /* @__PURE__ */ $Tuple("{ ", "{"),
-  /* @__PURE__ */ $Tuple(" }", "}"),
-  /* @__PURE__ */ $Tuple(". ", "."),
-  /* @__PURE__ */ $Tuple(" .", "."),
-  /* @__PURE__ */ $Tuple(". ", "."),
-  /* @__PURE__ */ $Tuple(" ,", ","),
-  /* @__PURE__ */ $Tuple(" ;", ";"),
-  /* @__PURE__ */ $Tuple("| ", "|"),
-  /* @__PURE__ */ $Tuple(" |", "|"),
-  /* @__PURE__ */ $Tuple("\u2E28 ", "\u2E28"),
-  /* @__PURE__ */ $Tuple(" \u2E29", "\u2E29"),
-  /* @__PURE__ */ $Tuple(" @", "@")
-];
-var pattRepPairs = /* @__PURE__ */ arrayMap((v) => $Tuple(v._1, v._2))(replacement);
-var removeDocWS = (v) => ({
-  width: v.width,
-  height: v.height,
-  lines: arrayMap((x) => foldlArray((curr) => (v$1) => replaceAll(v$1._1)(v$1._2)(curr))(drop2(length2(take3(1)(x)))(x))(pattRepPairs))(v.lines)
 });
-var nil2 = /* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" []"));
-var isSimpleVal = {
-  isSimple: (v) => {
-    if (v._2.tag === "Nothing") {
-      if (v._3.tag === "Constr") {
-        return v._3._2.tag !== "Cons";
-      }
-      if (v._3.tag === "Fun" && v._3._1.tag === "PartialConstr") {
-        return v._3._1._2.tag !== "Cons";
-      }
-      return true;
-    }
-    if (v._2.tag === "Just") {
-      return false;
-    }
-    fail();
-  }
-};
-var intersperse$p = (v) => (v1) => {
-  if (v.tag === "Cons") {
-    if (v._2.tag === "Nil") {
-      return v._1;
-    }
-    return atop(beside(v._1)(v1))(intersperse$p(v._2)(v1));
-  }
-  if (v.tag === "Nil") {
-    return empty2;
-  }
-  fail();
-};
-var helperMatch = (pss) => $NonEmpty(
-  $Tuple($NonEmpty(pss._1._1, Nil), pss._1._2),
-  listMap((v) => $Tuple($NonEmpty(v._1, Nil), v._2))(pss._2)
-);
 var getPrec = (x) => {
   const v = lookup2(ordString)(x)(opDefs);
   if (v.tag === "Just") {
@@ -16549,110 +16499,126 @@ var getPrec = (x) => {
   }
   fail();
 };
-var comma = /* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" ,"));
-var hcomma = (dictFoldable) => {
-  const $0 = dictFoldable.foldr(Cons)(Nil);
-  return (x) => hcat(intercalate2($List("Cons", comma, Nil))(listMap(applicativeList.pure)($0(x))));
-};
-var hcomma1 = /* @__PURE__ */ hcomma(foldableList);
-var hcomma2 = /* @__PURE__ */ hcomma(foldableArray);
-var hcomma3 = /* @__PURE__ */ hcomma(foldableDict);
-var between2 = (l) => (r) => (doc2) => beside(beside(l)(doc2))(r);
-var brackets = /* @__PURE__ */ between2(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" [")))(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" ]")));
-var curlyBraces = /* @__PURE__ */ between2(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" {")))(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" }")));
-var prettyDict = (dictPretty) => (prettyKey) => (xvs) => curlyBraces(hcomma1(listMap((v) => hcat1([
-  beside(v._1)(checkOneLine(split("\n")(" :"))),
-  dictPretty.pretty(v._2)
-]))(listMap((v) => $Tuple(prettyKey(v._1), v._2))(xvs))));
-var keyBracks = /* @__PURE__ */ between2(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" [")))(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" ]")));
-var parentheses = /* @__PURE__ */ between2(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" (")))(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" )")));
-var prettyConsArg = (dictRootOp) => (dictPretty) => (e) => {
+var prettyConsArg = (dictRootOp) => (dictPretty) => (e) => (lhs) => {
   const v = dictRootOp.rootOp(e);
   if (v.tag === "Nothing") {
     return dictPretty.pretty(e);
   }
   if (v.tag === "Just") {
-    if (getPrec(v._1) <= getPrec(":")) {
-      return parentheses(dictPretty.pretty(e));
+    if ((lhs ? lessThanOrEq : lessThan)(getPrec(v._1))(getPrec(":"))) {
+      return $Doc("Concat", $Doc("Text", "("), $Doc("Concat", dictPretty.pretty(e), $Doc("Text", ")")));
     }
     return dictPretty.pretty(e);
   }
   fail();
 };
-var prettySimple = (dictIsSimple) => (dictPretty) => (s) => {
-  if (dictIsSimple.isSimple(s)) {
-    return dictPretty.pretty(s);
+var commas = (v) => {
+  if (v.tag === "Nil") {
+    return Empty;
   }
-  return parentheses(dictPretty.pretty(s));
+  if (v.tag === "Cons") {
+    if (v._2.tag === "Nil") {
+      return v._1;
+    }
+    return $Doc(
+      "Concat",
+      v._1,
+      $Doc("Concat", $Doc("Text", ","), $Doc("Concat", $Doc("Text", " "), commas(v._2)))
+    );
+  }
+  fail();
 };
-var prettyConstr = (dictRootOp) => (dictIsSimple) => (dictPretty) => (v) => (v1) => {
-  const $0 = (c, es) => hcat($List(
-    "Cons",
-    checkOneLine(split("\n")(" " + showCtr(c))),
-    listMap(prettySimple(dictIsSimple)(dictPretty))(es)
-  ));
-  if (v1.tag === "Cons" && v1._2.tag === "Cons") {
-    if (v === "Pair") {
-      return assertWith("")(v1._2._2.tag === "Nil")(parentheses(hcomma2([dictPretty.pretty(v1._1), dictPretty.pretty(v1._2._1)])));
+var prettyList = (dictFoldable) => {
+  const fromFoldable112 = dictFoldable.foldr(Cons)(Nil);
+  return (dictPretty) => {
+    const pretty4 = dictPretty.pretty;
+    return (xs) => commas(listMap(pretty4)(fromFoldable112(xs)));
+  };
+};
+var prettyList1 = /* @__PURE__ */ prettyList(foldableList);
+var prettyList2 = /* @__PURE__ */ prettyList(foldableArray);
+var prettyConstr = (dictRootOp) => (dictPretty) => {
+  const prettyList6 = prettyList1(dictPretty);
+  return (v) => (v1) => {
+    if (v1.tag === "Nil") {
+      if (v === "Nil") {
+        return $Doc("Concat", $Doc("Text", "["), $Doc("Text", "]"));
+      }
+      return $Doc("Text", v);
     }
-    if (v === "Nil") {
-      return assertWith("")(v1.tag === "Nil")(nil2);
+    if (v1.tag === "Cons" && v1._2.tag === "Cons" && v1._2._2.tag === "Nil") {
+      if (v === "Pair") {
+        return $Doc(
+          "Concat",
+          $Doc("Text", "("),
+          $Doc(
+            "Concat",
+            $Doc(
+              "Concat",
+              dictPretty.pretty(v1._1),
+              $Doc(
+                "Concat",
+                $Doc("Text", ","),
+                $Doc("Concat", $Doc("Text", " "), dictPretty.pretty(v1._2._1))
+              )
+            ),
+            $Doc("Text", ")")
+          )
+        );
+      }
+      if (v === ":") {
+        return $Doc(
+          "Concat",
+          prettyConsArg(dictRootOp)(dictPretty)(v1._1)(true),
+          $Doc(
+            "Concat",
+            $Doc("Text", " "),
+            $Doc(
+              "Concat",
+              $Doc("Text", ":|"),
+              $Doc("Concat", $Doc("Text", " "), prettyConsArg(dictRootOp)(dictPretty)(v1._2._1)(false))
+            )
+          )
+        );
+      }
     }
-    if (v === ":") {
-      return assertWith("")(v1._2._2.tag === "Nil")(hcat1([
-        prettyConsArg(dictRootOp)(dictPretty)(v1._1),
-        checkOneLine(split("\n")(" :")),
-        prettyConsArg(dictRootOp)(dictPretty)(v1._2._1)
-      ]));
-    }
-    return $0(v, v1);
-  }
-  if (v === "Nil") {
-    return assertWith("")(v1.tag === "Nil")(nil2);
-  }
-  return $0(v, v1);
+    return $Doc(
+      "Concat",
+      $Doc("Text", v),
+      $Doc("Concat", $Doc("Text", "("), $Doc("Concat", prettyList6(v1), $Doc("Text", ")")))
+    );
+  };
+};
+var prettyString$x215Pattern = {
+  pretty: (v) => $Doc(
+    "Concat",
+    $Doc("Text", v._1),
+    $Doc("Concat", $Doc("Text", ":"), $Doc("Concat", $Doc("Text", " "), prettyPattern.pretty(v._2)))
+  )
 };
 var prettyPattern = {
   pretty: (v) => {
     if (v.tag === "PVar") {
-      return checkOneLine(split("\n")(" " + v._1));
+      return $Doc("Text", v._1);
     }
     if (v.tag === "PRecord") {
-      return curlyBraces(prettyListBindPattern.pretty(v._1));
+      return record(listMap(prettyString$x215Pattern.pretty)(v._1));
     }
     if (v.tag === "PConstr") {
       if (v._2.tag === "Nil") {
-        return parentheses((() => {
-          if (v._1 === "Pair") {
-            return prettyPattConstr(checkOneLine(split("\n")(" ,")))(v._2);
-          }
-          if (v._1 === ":") {
-            return prettyPattConstr(checkOneLine(split("\n")(" :")))(v._2);
-          }
-          return beside(checkOneLine(split("\n")(" " + v._1)))(prettyPattConstr(empty2)(v._2));
-        })());
+        return $Doc("Text", v._1);
       }
-      if (v._2.tag === "Cons") {
-        if (v._2._2.tag === "Nil") {
-          return beside(checkOneLine(split("\n")(" " + v._1)))(prettyPattern.pretty(v._2._1));
-        }
-        return parentheses((() => {
-          if (v._1 === "Pair") {
-            return prettyPattConstr(checkOneLine(split("\n")(" ,")))(v._2);
-          }
-          if (v._1 === ":") {
-            return prettyPattConstr(checkOneLine(split("\n")(" :")))(v._2);
-          }
-          return beside(checkOneLine(split("\n")(" " + v._1)))(prettyPattConstr(empty2)(v._2));
-        })());
-      }
-      fail();
+      return prettyConstr(rootOpPattern)(prettyPattern)(v._1)(v._2);
     }
     if (v.tag === "PListEmpty") {
-      return brackets(empty2);
+      return $Doc("Concat", $Doc("Text", "["), $Doc("Text", "]"));
     }
     if (v.tag === "PListNonEmpty") {
-      return beside(beside(checkOneLine(split("\n")(" [")))(prettyPattern.pretty(v._1)))(prettyListRestPattern.pretty(v._2));
+      return $Doc(
+        "Concat",
+        $Doc("Text", "["),
+        $Doc("Concat", $Doc("Concat", prettyPattern.pretty(v._1), prettyListRestPattern.pretty(v._2)), $Doc("Text", "]"))
+      );
     }
     fail();
   }
@@ -16660,450 +16626,679 @@ var prettyPattern = {
 var prettyListRestPattern = {
   pretty: (v) => {
     if (v.tag === "PListVar") {
-      return checkOneLine(split("\n")(" " + v._1));
+      return $Doc("Text", v._1);
     }
     if (v.tag === "PListNext") {
-      return beside(beside(checkOneLine(split("\n")(" ,")))(prettyPattern.pretty(v._1)))(prettyListRestPattern.pretty(v._2));
+      return $Doc(
+        "Concat",
+        $Doc("Text", ","),
+        $Doc("Concat", $Doc("Text", " "), $Doc("Concat", prettyPattern.pretty(v._1), prettyListRestPattern.pretty(v._2)))
+      );
     }
     if (v.tag === "PListEnd") {
-      return checkOneLine(split("\n")(" ]"));
+      return Empty;
     }
     fail();
   }
 };
-var prettyListBindPattern = {
-  pretty: (v) => {
-    if (v.tag === "Cons") {
-      if (v._2.tag === "Nil") {
-        return beside(beside(checkOneLine(split("\n")(" " + v._1._1)))(checkOneLine(split("\n")(" :"))))(prettyPattern.pretty(v._1._2));
-      }
-      return atop(beside(beside(beside(checkOneLine(split("\n")(" " + v._1._1)))(checkOneLine(split("\n")(" :"))))(prettyPattern.pretty(v._1._2)))(checkOneLine(split("\n")(" ,"))))(prettyListBindPattern.pretty(v._2));
-    }
-    if (v.tag === "Nil") {
-      return empty2;
-    }
-    fail();
-  }
-};
-var prettyPattConstr = (v) => (v1) => {
-  if (v1.tag === "Nil") {
-    return empty2;
-  }
-  if (v1.tag === "Cons") {
-    if (v1._2.tag === "Nil") {
-      return prettyPattern.pretty(v1._1);
-    }
-    return beside(beside(prettyPattern.pretty(v1._1))(v))(prettyPattConstr(v)(v1._2));
-  }
-  fail();
-};
-var arrayBrackets = /* @__PURE__ */ between2(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" [|")))(/* @__PURE__ */ checkOneLine(/* @__PURE__ */ split("\n")(" |]")));
-var prettyExpr = (dictHighlightable) => ({
-  pretty: (v) => {
-    if (v.tag === "Var") {
-      return checkOneLine(split("\n")(" " + v._1));
-    }
-    if (v.tag === "Int") {
-      return dictHighlightable.highlightIf(v._1)(checkOneLine(split("\n")(" " + showIntImpl(v._2))));
-    }
-    if (v.tag === "Float") {
-      return dictHighlightable.highlightIf(v._1)(checkOneLine(split("\n")(" " + showNumberImpl(v._2))));
-    }
-    if (v.tag === "Str") {
-      return dictHighlightable.highlightIf(v._1)(checkOneLine(split("\n")(" " + showStringImpl(v._2))));
-    }
-    if (v.tag === "Dictionary") {
-      return dictHighlightable.highlightIf(v._1)(prettyDict(prettyExpr(dictHighlightable))((x) => keyBracks(prettyExpr(dictHighlightable).pretty(x)))(listMap(toTuple)(v._2)));
-    }
-    if (v.tag === "Constr") {
-      return dictHighlightable.highlightIf(v._1)(prettyConstr(rootOpExpr)(isSimpleExpr)(prettyExpr(dictHighlightable))(v._2)(v._3));
-    }
-    if (v.tag === "Matrix") {
-      return dictHighlightable.highlightIf(v._1)(prettyMatrix(dictHighlightable)(v._2)(v._3._1)(v._3._2)(v._4));
-    }
-    if (v.tag === "Lambda") {
-      return hcat1([dictHighlightable.highlightIf(v._1)(checkOneLine(split("\n")(" fun"))), prettyElim(dictHighlightable).pretty(v._2)]);
-    }
-    if (v.tag === "Op") {
-      return parentheses(checkOneLine(split("\n")(" " + v._1)));
-    }
-    if (v.tag === "Let") {
-      return atop(hcat1([
-        checkOneLine(split("\n")(" let")),
-        prettyElim(dictHighlightable).pretty(v._1._1),
-        checkOneLine(split("\n")(" =")),
-        prettyExpr(dictHighlightable).pretty(v._1._2),
-        checkOneLine(split("\n")(" in"))
-      ]))(prettyExpr(dictHighlightable).pretty(v._2));
-    }
-    if (v.tag === "LetRec") {
-      return atop(hcat1([
-        checkOneLine(split("\n")(" let")),
-        prettyDictElim(dictHighlightable).pretty(v._1._2),
-        checkOneLine(split("\n")(" in"))
-      ]))(prettyExpr(dictHighlightable).pretty(v._2));
-    }
-    if (v.tag === "Project") {
-      return beside(beside(prettyExpr(dictHighlightable).pretty(v._1))(checkOneLine(split("\n")(" ."))))(checkOneLine(split("\n")(" " + v._2)));
-    }
-    if (v.tag === "DProject") {
-      return beside(beside(beside(beside(prettyExpr(dictHighlightable).pretty(v._1))(checkOneLine(split("\n")(" ."))))(checkOneLine(split("\n")(" ["))))(prettyExpr(dictHighlightable).pretty(v._2)))(checkOneLine(split("\n")(" ]")));
-    }
-    if (v.tag === "App") {
-      return hcat1([prettyExpr(dictHighlightable).pretty(v._1), prettyExpr(dictHighlightable).pretty(v._2)]);
-    }
-    if (v.tag === "DocExpr") {
-      return beside(beside(checkOneLine(split("\n")(" @doc")))(parentheses(prettyExpr(dictHighlightable).pretty(v._1))))(prettyExpr(dictHighlightable).pretty(v._2));
-    }
-    fail();
-  }
+var prettyList5 = /* @__PURE__ */ prettyList1(prettyPattern);
+var prettyVar$x215$x215Val = (dictHighlightable) => ({
+  pretty: (v) => $Doc(
+    "Concat",
+    dictHighlightable.highlightIf(v._2._1)($Doc("Text", v._1)),
+    $Doc(
+      "Concat",
+      $Doc("Text", ":"),
+      $Doc("Concat", $Doc("Text", " "), prettyVal(dictHighlightable).pretty(v._2._2))
+    )
+  )
 });
-var prettyElim = (dictHighlightable) => ({
-  pretty: (v) => {
-    if (v.tag === "ElimVar") {
-      return hcat1([
-        checkOneLine(split("\n")(" " + v._1)),
-        checkOneLine(split("\n")(" ->")),
-        prettyCont(dictHighlightable).pretty(v._2)
-      ]);
-    }
-    if (v.tag === "ElimConstr") {
-      return hcomma3(_fmapObject(v._1, prettyCont(dictHighlightable).pretty));
-    }
-    if (v.tag === "ElimDict") {
-      return hcat1([
-        curlyBraces(hcomma1(listMap(text)(toUnfoldable8(v._1)))),
-        checkOneLine(split("\n")(" ->")),
-        curlyBraces(prettyCont(dictHighlightable).pretty(v._2))
-      ]);
-    }
-    fail();
-  }
-});
-var prettyDictElim = (dictHighlightable) => ({
-  pretty: (\u03C1) => {
-    const go = (v) => {
-      if (v.tag === "Nil") {
-        return empty2;
-      }
-      if (v.tag === "Cons") {
-        if (v._2.tag === "Nil") {
-          return prettyBindElim(dictHighlightable).pretty(v._1);
-        }
-        return atop(beside(go(v._2))(semi))(prettyBindElim(dictHighlightable).pretty(v._1));
-      }
-      fail();
-    };
-    return go(toUnfoldable13(\u03C1));
-  }
-});
-var prettyCont = (dictHighlightable) => ({
-  pretty: (v) => {
-    if (v.tag === "ContExpr") {
-      return prettyExpr(dictHighlightable).pretty(v._1);
-    }
-    if (v.tag === "ContElim") {
-      return prettyElim(dictHighlightable).pretty(v._1);
-    }
-    fail();
-  }
-});
-var prettyBindElim = (dictHighlightable) => ({
-  pretty: (v) => hcat1([
-    checkOneLine(split("\n")(" " + v._1)),
-    checkOneLine(split("\n")(" =")),
-    prettyElim(dictHighlightable).pretty(v._2)
-  ])
-});
-var prettyMatrix = (dictHighlightable) => (e1) => (i) => (j) => (e2) => arrayBrackets(beside(beside(beside(beside(prettyExpr(dictHighlightable).pretty(e1))(checkOneLine(split("\n")(" <-"))))(checkOneLine(split("\n")(" " + i + "\xD7" + j))))(checkOneLine(split("\n")(" in"))))(prettyExpr(dictHighlightable).pretty(e2)));
 var prettyVal = (dictHighlightable) => ({
   pretty: (v) => {
     if (v._2.tag === "Nothing") {
       return dictHighlightable.highlightIf(v._1)(prettyBaseVal(dictHighlightable).pretty(v._3));
     }
     if (v._2.tag === "Just") {
-      return beside(prettyDoc(dictHighlightable)(v._2._1))(dictHighlightable.highlightIf(v._1)(prettySimple(isSimpleBaseVal)(prettyBaseVal(dictHighlightable))(v._3)));
+      return $Doc(
+        "Concat",
+        $Doc("Text", "@doc"),
+        $Doc(
+          "Concat",
+          $Doc(
+            "Concat",
+            $Doc("Text", "("),
+            $Doc("Concat", prettyVal(dictHighlightable).pretty(v._2._1), $Doc("Text", ")"))
+          ),
+          $Doc("Concat", $Doc("Text", " "), dictHighlightable.highlightIf(v._1)(prettyBaseVal(dictHighlightable).pretty(v._3)))
+        )
+      );
     }
     fail();
   }
 });
-var prettyFun = (dictHighlightable) => ({
-  pretty: (v) => {
-    if (v.tag === "Closure") {
-      return beside(checkOneLine(split("\n")(" cl")))(parentheses(beside(beside(beside(beside(prettyEnv(dictHighlightable).pretty(v._1))(checkOneLine(split("\n")(" ,"))))(prettyDictElim(dictHighlightable).pretty(v._2)))(checkOneLine(split("\n")(" ,"))))(prettyElim(dictHighlightable).pretty(v._3))));
-    }
-    if (v.tag === "Foreign") {
-      return checkOneLine(split("\n")(" " + v._1._1));
-    }
-    if (v.tag === "PartialConstr") {
-      return prettyConstr(rootOpVal)(isSimpleVal)(prettyVal(dictHighlightable))(v._1)(v._2);
-    }
-    fail();
-  }
-});
-var prettyEnv = (dictHighlightable) => ({
-  pretty: (v) => {
-    const go = (v1) => {
-      if (v1.tag === "Nil") {
-        return empty2;
+var prettyFun = (dictHighlightable) => {
+  const prettyConstr2 = prettyConstr(rootOpVal(dictHighlightable));
+  return {
+    pretty: (v) => {
+      if (v.tag === "Closure") {
+        return $Doc("Text", "cl");
       }
-      if (v1.tag === "Cons") {
-        return atop(beside(beside(beside(checkOneLine(split("\n")(" " + v1._1._1)))(checkOneLine(split("\n")(" ->"))))(prettyVal(dictHighlightable).pretty(v1._1._2)))(checkOneLine(split("\n")(" ,"))))(go(v1._2));
+      if (v.tag === "Foreign") {
+        return $Doc("Text", v._1._1);
+      }
+      if (v.tag === "PartialConstr") {
+        return prettyConstr2(prettyVal(dictHighlightable))(v._1)(v._2);
       }
       fail();
-    };
-    return brackets(go(toUnfoldable13(v)));
-  }
-});
-var prettyBaseVal = (dictHighlightable) => ({
-  pretty: (v) => {
-    if (v.tag === "Int") {
-      return checkOneLine(split("\n")(" " + showIntImpl(v._1)));
     }
-    if (v.tag === "Float") {
-      return checkOneLine(split("\n")(" " + showNumberImpl(v._1)));
+  };
+};
+var prettyBaseVal = (dictHighlightable) => {
+  const prettyConstr2 = prettyConstr(rootOpVal(dictHighlightable));
+  return {
+    pretty: (v) => {
+      if (v.tag === "Int") {
+        return $Doc("Text", showIntImpl(v._1));
+      }
+      if (v.tag === "Float") {
+        return $Doc("Text", showNumberImpl(v._1));
+      }
+      if (v.tag === "Str") {
+        return $Doc(
+          "Concat",
+          $Doc("Text", '"'),
+          $Doc("Concat", $Doc("Text", v._1), $Doc("Text", '"'))
+        );
+      }
+      if (v.tag === "Dictionary") {
+        return record(listMap(prettyVar$x215$x215Val(dictHighlightable).pretty)(toUnfoldable8(v._1)));
+      }
+      if (v.tag === "Constr") {
+        return prettyConstr2(prettyVal(dictHighlightable))(v._1)(v._2);
+      }
+      if (v.tag === "Matrix") {
+        return vcommas(fromFoldable10(arrayMap(prettyList2(prettyVal(dictHighlightable)))(v._1._1)));
+      }
+      if (v.tag === "Fun") {
+        return prettyFun(dictHighlightable).pretty(v._1);
+      }
+      fail();
     }
-    if (v.tag === "Str") {
-      return checkOneLine(split("\n")(" " + showStringImpl(v._1)));
-    }
-    if (v.tag === "Dictionary") {
-      return prettyDict(prettyVal(dictHighlightable))((v1) => dictHighlightable.highlightIf(v1._2)(checkOneLine(split("\n")(" " + v1._1))))(listMap((v1) => $Tuple(
-        $Tuple(v1._1, v1._2._1),
-        v1._2._2
-      ))(toUnfoldable13(v._1)));
-    }
-    if (v.tag === "Constr") {
-      return prettyConstr(rootOpVal)(isSimpleVal)(prettyVal(dictHighlightable))(v._1)(v._2);
-    }
-    if (v.tag === "Matrix") {
-      return vert1(comma)(arrayMap((() => {
-        const $0 = arrayMap(prettyVal(dictHighlightable).pretty);
-        return (x) => hcomma2($0(x));
-      })())(v._1._1));
-    }
-    if (v.tag === "Fun") {
-      return prettyFun(dictHighlightable).pretty(v._1);
-    }
-    fail();
-  }
-});
-var prettyDoc = (dictHighlightable) => (v) => beside(checkOneLine(split("\n")(" @doc")))(parentheses(prettyVal(dictHighlightable).pretty(v)));
+  };
+};
 var prettyVarDefs = (dictAnn) => ({
-  pretty: (ds) => intersperse$p((() => {
+  pretty: (ds) => vsep((() => {
     const $0 = prettyVarDef(dictAnn);
     return $List("Cons", $0.pretty(ds._1), listMap($0.pretty)(ds._2));
-  })())(checkOneLine(split("\n")(" ;")))
+  })())
 });
 var prettyVarDef = (dictAnn) => ({
-  pretty: (v) => beside(beside(prettyPattern.pretty(v._1))(checkOneLine(split("\n")(" ="))))(prettyExpr1(dictAnn).pretty(v._2))
+  pretty: (v) => $Doc(
+    "Concat",
+    $Doc("Text", "def"),
+    $Doc(
+      "Concat",
+      $Doc("Text", " "),
+      $Doc("Concat", prettyPattern.pretty(v._1), $Doc("Block", prettyExpr1(dictAnn).pretty(v._2)))
+    )
+  )
+});
+var prettyRecDefs = (dictAnn) => ({
+  pretty: (bs) => vsep((() => {
+    const $0 = prettyBranch(dictAnn);
+    return $List("Cons", $0.pretty(bs._1), listMap($0.pretty)(bs._2));
+  })())
+});
+var prettyPattern$x215Expr = (dictAnn) => ({
+  pretty: (v) => $Doc(
+    "Concat",
+    $Doc("Text", "case"),
+    $Doc(
+      "Concat",
+      $Doc("Text", " "),
+      $Doc("Concat", prettyPattern.pretty(v._1), $Doc("Block", prettyExpr1(dictAnn).pretty(v._2)))
+    )
+  )
 });
 var prettyParagraphElem = (dictAnn) => ({
   pretty: (v) => {
     if (v.tag === "Token") {
-      return checkOneLine(split("\n")(" " + v._1));
+      return $Doc("Text", v._1);
     }
     if (v.tag === "Unquote") {
-      return beside(beside(checkOneLine(split("\n")(" ${")))(prettyExpr1(dictAnn).pretty(v._1)))(checkOneLine(split("\n")(" }")));
+      return $Doc(
+        "Concat",
+        $Doc("Text", "${"),
+        $Doc("Concat", prettyExpr1(dictAnn).pretty(v._1), $Doc("Text", "}"))
+      );
     }
     fail();
   }
 });
 var prettyNonEmptyListPattern = (dictAnn) => ({
-  pretty: (pss) => intersperse$p(listMap(prettyClause(dictAnn)(checkOneLine(split("\n")(" ->"))))(listMap(Clause)((() => {
-    const $0 = helperMatch(pss);
-    return $List("Cons", $0._1, $0._2);
-  })())))(checkOneLine(split("\n")(" ;")))
+  pretty: (cs) => vsep((() => {
+    const $0 = prettyPattern$x215Expr(dictAnn);
+    return $List("Cons", $0.pretty(cs._1), listMap($0.pretty)(cs._2));
+  })())
 });
-var prettyNonEmptyListNonEmpt = (dictAnn) => ({
-  pretty: (hs) => intersperse$p((() => {
-    const $0 = prettyNonEmptyListBranch(dictAnn);
-    return $List("Cons", $0.pretty(hs._1), listMap($0.pretty)(hs._2));
-  })())(checkOneLine(split("\n")(" ;")))
-});
-var prettyNonEmptyListBranch = (dictAnn) => ({
-  pretty: (h) => intersperse$p((() => {
-    const $0 = prettyBranch(dictAnn);
-    return $List("Cons", $0.pretty(h._1), listMap($0.pretty)(h._2));
-  })())(checkOneLine(split("\n")(" ;")))
-});
-var prettyListRest = (dictAnn) => {
-  const $0 = dictAnn.Highlightable0();
-  return {
-    pretty: (v) => {
-      if (v.tag === "Next") {
-        if (v._2.tag === "Dictionary") {
-          return atop(beside($0.highlightIf(v._1)(checkOneLine(split("\n")(" ,"))))($0.highlightIf(v._1)(curlyBraces(prettyDictEntries(dictAnn)(beside)(v._2._2)))))(prettyListRest(dictAnn).pretty(v._3));
-        }
-        return beside(beside($0.highlightIf(v._1)(checkOneLine(split("\n")(" ,"))))(prettyExpr1(dictAnn).pretty(v._2)))(prettyListRest(dictAnn).pretty(v._3));
-      }
-      if (v.tag === "End") {
-        return $0.highlightIf(v._1)(checkOneLine(split("\n")(" ]")));
-      }
-      fail();
-    }
-  };
-};
 var prettyListQualifier = (dictAnn) => ({
   pretty: (v) => {
-    const $0 = (q, qs) => beside(beside(prettyListQualifier(dictAnn).pretty($List("Cons", q, Nil)))(checkOneLine(split("\n")(" ,"))))(prettyListQualifier(dictAnn).pretty(qs));
+    const $0 = (q, qs) => $Doc(
+      "Concat",
+      prettyListQualifier(dictAnn).pretty($List("Cons", q, Nil)),
+      $Doc("Concat", $Doc("Text", " "), prettyListQualifier(dictAnn).pretty(qs))
+    );
     if (v.tag === "Cons") {
       if (v._2.tag === "Nil") {
-        if (v._1.tag === "ListCompGuard") {
-          return prettyExpr1(dictAnn).pretty(v._1._1);
-        }
         if (v._1.tag === "ListCompDecl") {
-          return beside(checkOneLine(split("\n")(" let")))(prettyVarDef(dictAnn).pretty(v._1._1));
+          return $Doc(
+            "Concat",
+            $Doc("Text", "for"),
+            $Doc(
+              "Concat",
+              $Doc("Text", " "),
+              $Doc(
+                "Concat",
+                prettyPattern.pretty(v._1._1._1),
+                $Doc(
+                  "Concat",
+                  $Doc("Text", " "),
+                  $Doc(
+                    "Concat",
+                    $Doc("Text", "in"),
+                    $Doc(
+                      "Concat",
+                      $Doc("Text", " "),
+                      $Doc(
+                        "Concat",
+                        $Doc("Text", "["),
+                        $Doc("Concat", prettyExpr1(dictAnn).pretty(v._1._1._2), $Doc("Text", "]"))
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          );
+        }
+        if (v._1.tag === "ListCompGuard") {
+          return $Doc(
+            "Concat",
+            $Doc("Text", "if"),
+            $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(v._1._1))
+          );
         }
         if (v._1.tag === "ListCompGen") {
-          return beside(beside(prettyPattern.pretty(v._1._1))(checkOneLine(split("\n")(" <-"))))(prettyExpr1(dictAnn).pretty(v._1._2));
+          return $Doc(
+            "Concat",
+            $Doc("Text", "for"),
+            $Doc(
+              "Concat",
+              $Doc("Text", " "),
+              $Doc(
+                "Concat",
+                prettyPattern.pretty(v._1._1),
+                $Doc(
+                  "Concat",
+                  $Doc("Text", " "),
+                  $Doc(
+                    "Concat",
+                    $Doc("Text", "in"),
+                    $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(v._1._2))
+                  )
+                )
+              )
+            )
+          );
         }
       }
       return $0(v._1, v._2);
     }
     if (v.tag === "Nil") {
-      return empty2;
+      return Empty;
     }
     fail();
   }
 });
 var prettyListParagraphElem = (dictAnn) => ({
-  pretty: (xs) => beside(beside(checkOneLine(split("\n")(' """')))(hcat(listMap(prettyParagraphElem(dictAnn).pretty)(xs))))(checkOneLine(split("\n")(' """')))
+  pretty: (xs) => $Doc(
+    "Concat",
+    $Doc("Text", '"""'),
+    $Doc("Concat", hsep(listMap(prettyParagraphElem(dictAnn).pretty)(xs)), $Doc("Text", '"""'))
+  )
 });
-var prettyFirstGroup = (dictAnn) => ({ pretty: (v) => prettyNonEmptyListNonEmpt(dictAnn).pretty(wrappedOperation("groupBy")(groupBy2((p) => (q) => p._1 === q._1))(v)) });
 var prettyExpr1 = (dictAnn) => {
   const $0 = dictAnn.Highlightable0();
+  const prettyConstr2 = prettyConstr(rootOpExpr1(dictAnn));
   return {
     pretty: (v) => {
       if (v.tag === "Var") {
-        return checkOneLine(split("\n")(" " + v._1));
+        return $Doc("Text", v._1);
       }
       if (v.tag === "Op") {
-        return parentheses(checkOneLine(split("\n")(" " + v._1)));
+        return $Doc(
+          "Concat",
+          $Doc("Text", "("),
+          $Doc("Concat", $Doc("Text", v._1), $Doc("Text", ")"))
+        );
       }
       if (v.tag === "Int") {
-        return $0.highlightIf(v._1)(checkOneLine(split("\n")(" " + showIntImpl(v._2))));
+        return $0.highlightIf(v._1)($Doc("Text", showIntImpl(v._2)));
       }
       if (v.tag === "Float") {
-        return $0.highlightIf(v._1)(checkOneLine(split("\n")(" " + showNumberImpl(v._2))));
+        return $0.highlightIf(v._1)($Doc("Text", showNumberImpl(v._2)));
       }
       if (v.tag === "Str") {
-        return $0.highlightIf(v._1)(checkOneLine(split("\n")(' "' + v._2 + '"')));
+        return $0.highlightIf(v._1)($Doc(
+          "Concat",
+          $Doc("Text", '"'),
+          $Doc("Concat", $Doc("Text", v._2), $Doc("Text", '"'))
+        ));
       }
       if (v.tag === "Constr") {
-        return $0.highlightIf(v._1)(prettyConstr(rootOpExpr1)(isSimpleExpr1)(prettyExpr1(dictAnn))(v._2)(v._3));
+        if (v._3.tag === "Nil") {
+          return $0.highlightIf(v._1)($Doc("Text", v._2));
+        }
+        return $0.highlightIf(v._1)(prettyConstr2(prettyExpr1(dictAnn))(v._2)(v._3));
       }
       if (v.tag === "Dictionary") {
-        return $0.highlightIf(v._1)(curlyBraces(prettyDictEntries(dictAnn)(atop)(v._2)));
+        return $0.highlightIf(v._1)(record(listMap(prettyDictEntry$x215Expr(dictAnn).pretty)(v._2)));
       }
       if (v.tag === "Matrix") {
-        return $0.highlightIf(v._1)(arrayBrackets(beside(beside(beside(beside(prettyExpr1(dictAnn).pretty(v._2))(checkOneLine(split("\n")(" |"))))(parentheses(beside(beside(checkOneLine(split("\n")(" " + v._3._1)))(checkOneLine(split("\n")(" ,"))))(checkOneLine(split("\n")(" " + v._3._2))))))(checkOneLine(split("\n")(" in"))))(prettyExpr1(dictAnn).pretty(v._4))));
+        return $0.highlightIf(v._1)($Doc(
+          "Concat",
+          $Doc("Text", "[|"),
+          $Doc(
+            "Concat",
+            $Doc("Text", " "),
+            $Doc(
+              "Concat",
+              $Doc(
+                "Concat",
+                prettyExpr1(dictAnn).pretty(v._2),
+                $Doc(
+                  "Concat",
+                  $Doc("Text", " "),
+                  $Doc(
+                    "Concat",
+                    $Doc("Text", "for"),
+                    $Doc(
+                      "Concat",
+                      $Doc("Text", " "),
+                      $Doc(
+                        "Concat",
+                        $Doc(
+                          "Concat",
+                          $Doc("Text", "("),
+                          $Doc(
+                            "Concat",
+                            $Doc(
+                              "Concat",
+                              $Doc("Text", v._3._1),
+                              $Doc(
+                                "Concat",
+                                $Doc("Text", ","),
+                                $Doc("Concat", $Doc("Text", " "), $Doc("Text", v._3._2))
+                              )
+                            ),
+                            $Doc("Text", ")")
+                          )
+                        ),
+                        $Doc(
+                          "Concat",
+                          $Doc("Text", " "),
+                          $Doc(
+                            "Concat",
+                            $Doc("Text", "in"),
+                            $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(v._4))
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              ),
+              $Doc("Concat", $Doc("Text", " "), $Doc("Text", "|]"))
+            )
+          )
+        ));
       }
       if (v.tag === "Lambda") {
-        return beside(checkOneLine(split("\n")(" fun")))(prettyClauses(dictAnn).pretty(v._1));
+        return $Doc(
+          "Concat",
+          $Doc("Text", "("),
+          $Doc("Concat", prettyClauses(dictAnn).pretty(v._1), $Doc("Text", ")"))
+        );
       }
       if (v.tag === "Project") {
-        return beside(beside(prettySimple(isSimpleExpr1)(prettyExpr1(dictAnn))(v._1))(checkOneLine(split("\n")(" ."))))(checkOneLine(split("\n")(" " + v._2)));
+        return $Doc(
+          "Concat",
+          prettyExpr1(dictAnn).pretty(v._1),
+          $Doc("Concat", $Doc("Text", "."), $Doc("Text", v._2))
+        );
       }
       if (v.tag === "DProject") {
-        return beside(beside(beside(beside(prettySimple(isSimpleExpr1)(prettyExpr1(dictAnn))(v._1))(checkOneLine(split("\n")(" ."))))(checkOneLine(split("\n")(" ["))))(prettySimple(isSimpleExpr1)(prettyExpr1(dictAnn))(v._2)))(checkOneLine(split("\n")(" ]")));
+        return $Doc(
+          "Concat",
+          prettyExpr1(dictAnn).pretty(v._1),
+          $Doc(
+            "Concat",
+            $Doc("Text", "["),
+            $Doc("Concat", prettyExpr1(dictAnn).pretty(v._2), $Doc("Text", "]"))
+          )
+        );
       }
       if (v.tag === "App") {
-        return prettyAppChain(dictAnn)($Expr2("App", v._1, v._2));
+        return prettyAppChain(dictAnn)($Expr2("App", v._1, v._2))(Nil);
       }
       if (v.tag === "BinaryApp") {
-        return prettyBinApp(dictAnn)(0)($Expr2("BinaryApp", v._1, v._2, v._3));
+        return binaryApp(dictAnn)(0)($Expr2("BinaryApp", v._1, v._2, v._3));
       }
       if (v.tag === "MatchAs") {
-        return atop(beside(beside(checkOneLine(split("\n")(" match")))(prettyExpr1(dictAnn).pretty(v._1)))(checkOneLine(split("\n")(" as"))))(curlyBraces(prettyNonEmptyListPattern(dictAnn).pretty(v._2)));
+        return $Doc(
+          "Concat",
+          $Doc("Text", "match"),
+          $Doc(
+            "Concat",
+            $Doc("Text", " "),
+            $Doc("Concat", prettyExpr1(dictAnn).pretty(v._1), $Doc("Block", prettyNonEmptyListPattern(dictAnn).pretty(v._2)))
+          )
+        );
       }
       if (v.tag === "IfElse") {
-        return beside(beside(beside(beside(beside(checkOneLine(split("\n")(" if")))(prettyExpr1(dictAnn).pretty(v._1)))(checkOneLine(split("\n")(" then"))))(prettyExpr1(dictAnn).pretty(v._2)))(checkOneLine(split("\n")(" else"))))(prettyExpr1(dictAnn).pretty(v._3));
+        return $Doc(
+          "Concat",
+          $Doc("Text", "if"),
+          $Doc(
+            "Concat",
+            $Doc("Text", " "),
+            $Doc(
+              "Concat",
+              prettyExpr1(dictAnn).pretty(v._1),
+              $Doc(
+                "Concat",
+                $Doc("Block", prettyExpr1(dictAnn).pretty(v._2)),
+                $Doc(
+                  "Concat",
+                  Line,
+                  $Doc("Concat", $Doc("Text", "else"), $Doc("Block", prettyExpr1(dictAnn).pretty(v._3)))
+                )
+              )
+            )
+          )
+        );
       }
       if (v.tag === "ListEmpty") {
-        return $0.highlightIf(v._1)(brackets(empty2));
+        return $0.highlightIf(v._1)($Doc("Concat", $Doc("Text", "["), $Doc("Text", "]")));
       }
       if (v.tag === "ListNonEmpty") {
-        if (v._2.tag === "Dictionary") {
-          return atop(beside($0.highlightIf(v._1)(checkOneLine(split("\n")(" ["))))($0.highlightIf(v._1)(curlyBraces(prettyDictEntries(dictAnn)(beside)(v._2._2)))))(prettyListRest(dictAnn).pretty(v._3));
-        }
-        return beside(beside($0.highlightIf(v._1)(checkOneLine(split("\n")(" ["))))(prettyExpr1(dictAnn).pretty(v._2)))(prettyListRest(dictAnn).pretty(v._3));
+        const collect = (v1) => {
+          if (v1.tag === "Next") {
+            return $Doc(
+              "Concat",
+              $0.highlightIf(v1._1)($Doc("Text", ",")),
+              $Doc("Concat", $Doc("Text", " "), $Doc("Concat", prettyExpr1(dictAnn).pretty(v1._2), collect(v1._3)))
+            );
+          }
+          if (v1.tag === "End") {
+            return $0.highlightIf(v1._1)($Doc("Text", "]"));
+          }
+          fail();
+        };
+        return $Doc(
+          "Concat",
+          $0.highlightIf(v._1)($Doc("Text", "[")),
+          $Doc("Concat", prettyExpr1(dictAnn).pretty(v._2), collect(v._3))
+        );
       }
       if (v.tag === "ListEnum") {
-        return brackets(beside(beside(prettyExpr1(dictAnn).pretty(v._1))(checkOneLine(split("\n")(" .."))))(prettyExpr1(dictAnn).pretty(v._2)));
+        return $Doc(
+          "Concat",
+          $Doc("Text", "["),
+          $Doc(
+            "Concat",
+            $Doc(
+              "Concat",
+              prettyExpr1(dictAnn).pretty(v._1),
+              $Doc(
+                "Concat",
+                $Doc("Text", " "),
+                $Doc(
+                  "Concat",
+                  $Doc("Text", ".."),
+                  $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(v._2))
+                )
+              )
+            ),
+            $Doc("Text", "]")
+          )
+        );
       }
       if (v.tag === "ListComp") {
-        return $0.highlightIf(v._1)(brackets(beside(beside(prettyExpr1(dictAnn).pretty(v._2))(checkOneLine(split("\n")(" |"))))(prettyListQualifier(dictAnn).pretty(v._3))));
+        return $0.highlightIf(v._1)($Doc(
+          "Concat",
+          $Doc("Text", "["),
+          $Doc(
+            "Concat",
+            $Doc(
+              "Concat",
+              prettyExpr1(dictAnn).pretty(v._2),
+              $Doc("Concat", $Doc("Text", " "), prettyListQualifier(dictAnn).pretty(v._3))
+            ),
+            $Doc("Text", "]")
+          )
+        ));
       }
       if (v.tag === "Let") {
-        return atop(beside(beside(checkOneLine(split("\n")(" let")))(prettyVarDefs(dictAnn).pretty(v._1)))(checkOneLine(split("\n")(" in"))))(prettyExpr1(dictAnn).pretty(v._2));
+        return $Doc(
+          "Concat",
+          prettyVarDefs(dictAnn).pretty(v._1),
+          $Doc(
+            "Concat",
+            $Doc("Text", ";"),
+            $Doc(
+              "Concat",
+              $Doc("Concat", Line, Empty),
+              $Doc("Concat", Line, prettyExpr1(dictAnn).pretty(v._2))
+            )
+          )
+        );
       }
       if (v.tag === "LetRec") {
-        return atop(beside(beside(checkOneLine(split("\n")(" let")))(prettyFirstGroup(dictAnn).pretty(v._1)))(checkOneLine(split("\n")(" in"))))(prettyExpr1(dictAnn).pretty(v._2));
+        return $Doc(
+          "Concat",
+          prettyRecDefs(dictAnn).pretty(v._1),
+          $Doc(
+            "Concat",
+            $Doc("Text", ";"),
+            $Doc(
+              "Concat",
+              $Doc("Concat", Line, Empty),
+              $Doc("Concat", Line, prettyExpr1(dictAnn).pretty(v._2))
+            )
+          )
+        );
       }
       if (v.tag === "Paragraph") {
         return prettyListParagraphElem(dictAnn).pretty(v._1);
       }
       if (v.tag === "DocExpr") {
-        return beside(beside(checkOneLine(split("\n")(" @doc")))(parentheses(prettyExpr1(dictAnn).pretty(v._1))))(prettyExpr1(dictAnn).pretty(v._2));
+        return $Doc(
+          "Concat",
+          $Doc("Text", "@doc"),
+          $Doc(
+            "Concat",
+            $Doc(
+              "Concat",
+              $Doc("Text", "("),
+              $Doc("Concat", prettyExpr1(dictAnn).pretty(v._1), $Doc("Text", ")"))
+            ),
+            $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(v._2))
+          )
+        );
       }
       fail();
     }
   };
 };
+var prettyDictEntry$x215Expr = (dictAnn) => ({
+  pretty: (v) => $Doc(
+    "Concat",
+    prettyDictEntry(dictAnn).pretty(v._1),
+    $Doc(
+      "Concat",
+      $Doc("Text", ":"),
+      $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(v._2))
+    )
+  )
+});
 var prettyDictEntry = (dictAnn) => ({
   pretty: (v) => {
     if (v.tag === "ExprKey") {
-      return beside(beside(checkOneLine(split("\n")(" [")))(prettyExpr1(dictAnn).pretty(v._1)))(checkOneLine(split("\n")(" ]")));
+      return $Doc(
+        "Concat",
+        $Doc("Text", "["),
+        $Doc("Concat", prettyExpr1(dictAnn).pretty(v._1), $Doc("Text", "]"))
+      );
     }
     if (v.tag === "VarKey") {
-      return dictAnn.Highlightable0().highlightIf(v._1)(checkOneLine(split("\n")(" " + v._2)));
+      return dictAnn.Highlightable0().highlightIf(v._1)($Doc("Text", v._2));
     }
     fail();
   }
 });
-var prettyClauses = (dictAnn) => ({
-  pretty: (v) => intersperse$p((() => {
-    const $0 = prettyClause(dictAnn)(checkOneLine(split("\n")(" =")));
-    return $List("Cons", $0(v._1), listMap($0)(v._2));
-  })())(checkOneLine(split("\n")(" ;")))
-});
+var prettyClauses = (dictAnn) => ({ pretty: (v) => prettyClause(dictAnn).pretty(v._1) });
+var prettyClause = (dictAnn) => ({ pretty: (v) => lambda(dictAnn)($List("Cons", v._1._1, v._1._2))(v._2) });
 var prettyBranch = (dictAnn) => ({
-  pretty: (v) => beside(checkOneLine(split("\n")(" " + v._1)))(prettyClause(dictAnn)(checkOneLine(split("\n")(" =")))($Tuple(
-    v._2._1,
-    v._2._2
-  )))
+  pretty: (v) => $Doc(
+    "Concat",
+    $Doc("Text", "def"),
+    $Doc(
+      "Concat",
+      $Doc("Text", " "),
+      $Doc(
+        "Concat",
+        $Doc("Text", v._1),
+        $Doc(
+          "Concat",
+          $Doc(
+            "Concat",
+            $Doc("Text", "("),
+            $Doc("Concat", prettyList5($List("Cons", v._2._1._1, v._2._1._2)), $Doc("Text", ")"))
+          ),
+          $Doc("Block", prettyExpr1(dictAnn).pretty(v._2._2))
+        )
+      )
+    )
+  )
 });
-var prettyDictEntries = (dictAnn) => (v) => (v1) => {
-  if (v1.tag === "Nil") {
-    return empty2;
-  }
-  if (v1.tag === "Cons") {
-    if (v1._2.tag === "Nil") {
-      return beside(beside(prettyDictEntry(dictAnn).pretty(v1._1._1))(checkOneLine(split("\n")(" :"))))(prettyExpr1(dictAnn).pretty(v1._1._2));
-    }
-    return v(beside(prettyDictEntries(dictAnn)(v)($List("Cons", $Tuple(v1._1._1, v1._1._2), Nil)))(checkOneLine(split("\n")(" ,"))))(prettyDictEntries(dictAnn)(v)(v1._2));
-  }
-  fail();
-};
-var prettyClause = (dictAnn) => (sep) => (v) => beside(beside(prettyPattConstr(empty2)($List("Cons", v._1._1, v._1._2)))(sep))(prettyExpr1(dictAnn).pretty(v._2));
-var prettyBinApp = (dictAnn) => (v) => (v1) => {
-  if (v1.tag === "BinaryApp") {
-    const prec$p = getPrec(v1._2);
-    if (getPrec(v1._2) === -1) {
-      return beside(beside(prettyBinApp(dictAnn)(prec$p)(v1._1))(checkOneLine(split("\n")(" `" + v1._2 + "`"))))(prettyBinApp(dictAnn)(prec$p)(v1._3));
-    }
-    if (prec$p <= v) {
-      return parentheses(beside(beside(prettyBinApp(dictAnn)(prec$p)(v1._1))(checkOneLine(split("\n")(" " + v1._2))))(prettyBinApp(dictAnn)(prec$p)(v1._3)));
-    }
-    return beside(beside(prettyBinApp(dictAnn)(prec$p)(v1._1))(checkOneLine(split("\n")(" " + v1._2))))(prettyBinApp(dictAnn)(prec$p)(v1._3));
-  }
-  return prettyAppChain(dictAnn)(v1);
-};
-var prettyAppChain = (dictAnn) => (v) => {
+var prettyAppChain = (dictAnn) => (v) => (v1) => {
   if (v.tag === "App") {
-    return beside(prettyAppChain(dictAnn)(v._1))(prettySimple(isSimpleExpr1)(prettyExpr1(dictAnn))(v._2));
+    return prettyAppChain(dictAnn)(v._1)($List("Cons", v._2, v1));
   }
-  return prettySimple(isSimpleExpr1)(prettyExpr1(dictAnn))(v);
+  return $Doc(
+    "Concat",
+    prettyExpr1(dictAnn).pretty(v),
+    $Doc(
+      "Concat",
+      $Doc("Text", "("),
+      $Doc("Concat", prettyList1(prettyExpr1(dictAnn))(v1), $Doc("Text", ")"))
+    )
+  );
+};
+var lambda = (dictAnn) => (ps) => (e) => $Doc(
+  "Concat",
+  $Doc("Text", "lambda"),
+  $Doc(
+    "Concat",
+    $Doc("Text", " "),
+    $Doc(
+      "Concat",
+      prettyList5(ps),
+      $Doc("Concat", $Doc("Text", ":"), $Doc("Concat", $Doc("Text", " "), prettyExpr1(dictAnn).pretty(e)))
+    )
+  )
+);
+var binaryApp = (dictAnn) => (v) => (v1) => {
+  if (v1.tag === "BinaryApp") {
+    const v2 = getPrec(v1._2);
+    if (v2 === -1) {
+      return $Doc(
+        "Concat",
+        binaryApp(dictAnn)(0)(v1._1),
+        $Doc(
+          "Concat",
+          $Doc("Text", " "),
+          $Doc(
+            "Concat",
+            $Doc("Text", "|"),
+            $Doc(
+              "Concat",
+              $Doc("Text", v1._2),
+              $Doc(
+                "Concat",
+                $Doc("Text", "|"),
+                $Doc("Concat", $Doc("Text", " "), binaryApp(dictAnn)(0)(v1._3))
+              )
+            )
+          )
+        )
+      );
+    }
+    if (v2 <= v) {
+      return $Doc(
+        "Concat",
+        $Doc("Text", "("),
+        $Doc(
+          "Concat",
+          $Doc(
+            "Concat",
+            binaryApp(dictAnn)(v2)(v1._1),
+            $Doc(
+              "Concat",
+              $Doc("Text", " "),
+              $Doc(
+                "Concat",
+                $Doc("Text", v1._2),
+                $Doc("Concat", $Doc("Text", " "), binaryApp(dictAnn)(v2)(v1._3))
+              )
+            )
+          ),
+          $Doc("Text", ")")
+        )
+      );
+    }
+    return $Doc(
+      "Concat",
+      binaryApp(dictAnn)(v2)(v1._1),
+      $Doc(
+        "Concat",
+        $Doc("Text", " "),
+        $Doc(
+          "Concat",
+          $Doc("Text", v1._2),
+          $Doc("Concat", $Doc("Text", " "), binaryApp(dictAnn)(v2)(v1._3))
+        )
+      )
+    );
+  }
+  if (v1.tag === "Constr") {
+    if (v1._2 === ":") {
+      return $Doc(
+        "Concat",
+        $Doc("Text", "("),
+        $Doc("Concat", prettyExpr1(dictAnn).pretty(v1), $Doc("Text", ")"))
+      );
+    }
+    return prettyExpr1(dictAnn).pretty(v1);
+  }
+  if (v1.tag === "Let") {
+    return $Doc("Text", "undefined");
+  }
+  if (v1.tag === "LetRec") {
+    return $Doc("Text", "undefined");
+  }
+  return prettyExpr1(dictAnn).pretty(v1);
 };
 
 // output-es/Val/index.js
@@ -17137,16 +17332,15 @@ var unions13 = /* @__PURE__ */ (() => {
   return go(Leaf2);
 })();
 var foldMap2 = /* @__PURE__ */ foldMap({ mempty: Leaf2, Semigroup0: () => ({ append: union(ordDVertex$p) }) });
-var identity22 = (x) => x;
-var boundedLattice = { BoundedJoinSemilattice0: () => boundedJoinSemilatticeUni, BoundedMeetSemilattice1: () => boundedMeetSemilatticeUni };
+var identity23 = (x) => x;
 var setSet1 = /* @__PURE__ */ setSet(ordString);
-var toUnfoldable14 = /* @__PURE__ */ toUnfoldable4(unfoldableList);
+var toUnfoldable13 = /* @__PURE__ */ toUnfoldable4(unfoldableList);
 var intersection2 = /* @__PURE__ */ intersection(ordString);
-var fromFoldable10 = /* @__PURE__ */ (() => foldableSet.foldl((m) => (a) => insert(ordString)(a)()(m))(Leaf2))();
+var fromFoldable11 = /* @__PURE__ */ (() => foldableSet.foldl((m) => (a) => insert(ordString)(a)()(m))(Leaf2))();
 var MatrixRep = (x) => x;
 var Val = (value0) => (value1) => (value2) => $Val(value0, value1, value2);
-var Int = (value0) => $BaseVal("Int", value0);
-var Float = (value0) => $BaseVal("Float", value0);
+var Int2 = (value0) => $BaseVal("Int", value0);
+var Float2 = (value0) => $BaseVal("Float", value0);
 var Str2 = (value0) => $BaseVal("Str", value0);
 var Dictionary3 = (value0) => $BaseVal("Dictionary", value0);
 var DictRep = (x) => x;
@@ -17260,10 +17454,6 @@ var mapEnvStringVal = {
   toUnfoldable: (dictUnfoldable) => toAscUnfoldable(dictUnfoldable),
   Set0: () => setEnvString
 };
-var highlightableVertex = {
-  highlightIf: (v) => (doc2) => beside(beside(doc2)(checkOneLine(split("\n")(" _"))))(checkOneLine(split("\n")(" \u27E8" + v + "\u27E9")))
-};
-var highlightableUnit = { highlightIf: (v) => identity22 };
 var functorMatrixDim = { map: (f) => (m) => $Tuple(m._1, f(m._2)) };
 var functorVal = {
   map: (f) => (m) => $Val(
@@ -17329,7 +17519,7 @@ var functorBaseVal = {
 var foldableMatrixDim = { foldl: (f) => (z) => (m) => f(z)(m._2), foldr: (f) => (z) => (m) => f(m._2)(z), foldMap: (dictMonoid) => (f) => (m) => f(m._2) };
 var traversableMatrixDim = {
   traverse: (dictApplicative) => (f) => (m) => dictApplicative.Apply0().Functor0().map((v1) => v1)(traversableTuple.traverse(dictApplicative)(f)(m)),
-  sequence: (dictApplicative) => (v) => traversableMatrixDim.traverse(dictApplicative)(identity22)(v),
+  sequence: (dictApplicative) => (v) => traversableMatrixDim.traverse(dictApplicative)(identity23)(v),
   Functor0: () => functorMatrixDim,
   Foldable1: () => foldableMatrixDim
 };
@@ -17576,7 +17766,7 @@ var traversableVal = {
     const Apply0 = dictApplicative.Apply0();
     return (f) => (m) => Apply0.apply(Apply0.apply(Apply0.Functor0().map((v3) => (v4) => (v5) => $Val(v3, v4, v5))(f(m._1)))(traversableMaybe.traverse(dictApplicative)(traversableVal.traverse(dictApplicative)(f))(m._2)))(traversableBaseVal.traverse(dictApplicative)(f)(m._3));
   },
-  sequence: (dictApplicative) => (v) => traversableVal.traverse(dictApplicative)(identity22)(v),
+  sequence: (dictApplicative) => (v) => traversableVal.traverse(dictApplicative)(identity23)(v),
   Functor0: () => functorVal,
   Foldable1: () => foldableVal
 };
@@ -17612,7 +17802,7 @@ var traversableFun = {
       fail();
     };
   },
-  sequence: (dictApplicative) => (v) => traversableFun.traverse(dictApplicative)(identity22)(v),
+  sequence: (dictApplicative) => (v) => traversableFun.traverse(dictApplicative)(identity23)(v),
   Functor0: () => functorFun,
   Foldable1: () => foldableFun
 };
@@ -17621,7 +17811,7 @@ var traversableEnv = {
     const traverse9 = traversableDict.traverse(dictApplicative);
     return (f) => (m) => dictApplicative.Apply0().Functor0().map((v1) => v1)(traverse9(traversableVal.traverse(dictApplicative)(f))(m));
   },
-  sequence: (dictApplicative) => (v) => traversableEnv.traverse(dictApplicative)(identity22)(v),
+  sequence: (dictApplicative) => (v) => traversableEnv.traverse(dictApplicative)(identity23)(v),
   Functor0: () => functorEnv,
   Foldable1: () => foldableEnv
 };
@@ -17665,11 +17855,10 @@ var traversableBaseVal = {
       fail();
     };
   },
-  sequence: (dictApplicative) => (v) => traversableBaseVal.traverse(dictApplicative)(identity22)(v),
+  sequence: (dictApplicative) => (v) => traversableBaseVal.traverse(dictApplicative)(identity23)(v),
   Functor0: () => functorBaseVal,
   Foldable1: () => foldableBaseVal
 };
-var annUnit = { Highlightable0: () => highlightableUnit, BoundedLattice1: () => boundedLattice };
 var reaches = (\u03C1) => (xs) => {
   const dom_\u03C1 = mapObjectString.keys(\u03C1);
   const go = (go$a0$copy) => (go$a1$copy) => {
@@ -17687,7 +17876,7 @@ var reaches = (\u03C1) => (xs) => {
           go$a1 = v1;
           continue;
         }
-        go$a0 = foldableList.foldr(Cons)(v._2)(toUnfoldable14(intersection2(fVElim.fv($$get(showString)(mapDictString)(v._1)(\u03C1)))(dom_\u03C1)));
+        go$a0 = foldableList.foldr(Cons)(v._2)(toUnfoldable13(intersection2(fVElim.fv($$get(showString)(mapDictString)(v._1)(\u03C1)))(dom_\u03C1)));
         go$a1 = setSet1.union($$$Map("Two", Leaf2, v._1, void 0, Leaf2))(v1);
         continue;
       }
@@ -17695,7 +17884,7 @@ var reaches = (\u03C1) => (xs) => {
     }
     return go$r;
   };
-  return go(toUnfoldable14(xs))(setSet1.empty);
+  return go(toUnfoldable13(xs))(setSet1.empty);
 };
 var matrixPut = (i) => (j) => (\u03B4v) => (v) => {
   const vs_i = definitely("index within bounds")(index(v._1)(i - 1 | 0));
@@ -17715,7 +17904,7 @@ var matrixGet = (i) => (j) => (v) => definitely("index out of bounds!")((() => {
   fail();
 })());
 var forDefs = (\u03C1) => (\u03C3) => {
-  const $0 = reaches(\u03C1)(intersection2(fVElim.fv(\u03C3))(fromFoldable10(mapObjectString.keys(\u03C1))));
+  const $0 = reaches(\u03C1)(intersection2(fVElim.fv(\u03C3))(fromFoldable11(mapObjectString.keys(\u03C1))));
   return filterWithKey2((x) => {
     const $1 = setSet(ordString).member(x)($0);
     return (v) => $1;
@@ -17759,8 +17948,8 @@ var unary = (dictBoundedJoinSemilattice) => {
     )
   );
 };
-var typeError = (v) => (typeName2) => throwException(error(typeName2 + " expected; got " + intercalate4("\n")(removeDocWS(prettyBaseVal(highlightableUnit).pretty(functorBaseVal.map((v$1) => {
-})(v))).lines)))();
+var typeError = (v) => (typeName2) => throwException(error(typeName2 + " expected; got " + renderWithIndent(0)(prettyBaseVal(highlightableUnit).pretty(functorBaseVal.map((v$1) => {
+})(v)))))();
 var string = {
   pack: Str2,
   unpack: (v) => {
@@ -17771,7 +17960,7 @@ var string = {
   }
 };
 var number = {
-  pack: Float,
+  pack: Float2,
   unpack: (v) => {
     if (v.tag === "Float") {
       return v._1;
@@ -17828,7 +18017,7 @@ var intOrNumber = {
   }
 };
 var $$int = {
-  pack: Int,
+  pack: Int2,
   unpack: (v) => {
     if (v.tag === "Int") {
       return v._1;
@@ -17992,12 +18181,12 @@ var unionStr = (dictAs) => (dictAs1) => union6(dictAs)(dictAs)(dictAs1)(dictAs1)
 // output-es/EvalGraph/index.js
 var setSet4 = /* @__PURE__ */ setSet(ordVertex);
 var disjointUnion2 = /* @__PURE__ */ disjointUnion(mapEnvStringVal);
-var fromFoldable11 = /* @__PURE__ */ (() => foldableSet.foldl((m) => (a) => insert(ordString)(a)()(m))(Leaf2))();
+var fromFoldable17 = /* @__PURE__ */ (() => foldableSet.foldl((m) => (a) => insert(ordString)(a)()(m))(Leaf2))();
 var show22 = /* @__PURE__ */ (() => showSet(showString).show)();
 var toUnfoldable9 = /* @__PURE__ */ toUnfoldable4(unfoldableList);
 var union1 = /* @__PURE__ */ (() => setSet(ordString).union)();
 var fv = /* @__PURE__ */ (() => fVDict(fVElim).fv)();
-var fromFoldable17 = /* @__PURE__ */ fromFoldable2(foldableList);
+var fromFoldable18 = /* @__PURE__ */ fromFoldable2(foldableList);
 var greaterThanOrEq = /* @__PURE__ */ (() => {
   const $0 = ordTuple(ordInt)(ordInt);
   return (a1) => (a2) => $0.compare(a1)(a2) !== "LT";
@@ -18093,7 +18282,7 @@ var match = (dictMonadWithGraphAlloc) => {
           $Tuple(v2._2._1, insert(ordVertex)($4)()(v2._2._2))
         )))));
       }
-      return Bind1.bind(dataTypeForSetCtr.dataTypeFor(MonadThrow0)(mapObjectString.keys(v1._1)))((d) => MonadThrow0.throwError(error("Pattern mismatch: found " + intercalate4("\n")(removeDocWS(prettyVal(highlightableVertex).pretty(v)).lines) + ", expected " + d._1)));
+      return Bind1.bind(dataTypeForSetCtr.dataTypeFor(MonadThrow0)(mapObjectString.keys(v1._1)))((d) => MonadThrow0.throwError(error("Pattern mismatch: found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected " + d._1)));
     }
     if (v1.tag === "ElimDict") {
       if (v._3.tag === "Dictionary") {
@@ -18101,12 +18290,12 @@ var match = (dictMonadWithGraphAlloc) => {
         const $2 = v._3._1;
         const $3 = v._1;
         const $4 = v1._2;
-        return Bind1.bind(check(MonadThrow0)(difference2(ordString)($1)(fromFoldable11(mapObjectString.keys($2))).tag === "Leaf")("Pattern mismatch: found " + show22(mapObjectString.keys($2)) + ", expected " + show22($1)))(() => Bind1.bind(matchMany(dictMonadWithGraphAlloc)(listMap((k) => $$get(showString)(mapObjectString)(k)($2)._2)(toUnfoldable9($1)))($4))((v2) => $0.pure($Tuple(
+        return Bind1.bind(check(MonadThrow0)(difference2(ordString)($1)(fromFoldable17(mapObjectString.keys($2))).tag === "Leaf")("Pattern mismatch: found " + show22(mapObjectString.keys($2)) + ", expected " + show22($1)))(() => Bind1.bind(matchMany(dictMonadWithGraphAlloc)(listMap((k) => $$get(showString)(mapObjectString)(k)($2)._2)(toUnfoldable9($1)))($4))((v2) => $0.pure($Tuple(
           v2._1,
           $Tuple(v2._2._1, insert(ordVertex)($3)()(v2._2._2))
         ))));
       }
-      return MonadThrow0.throwError(error("Pattern mismatch: found " + intercalate4("\n")(removeDocWS(prettyVal(highlightableVertex).pretty(v)).lines) + ", expected " + show22(v1._1)));
+      return MonadThrow0.throwError(error("Pattern mismatch: found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected " + show22(v1._1)));
     }
     fail();
   };
@@ -18134,37 +18323,27 @@ var closeDefs = (dictMonadWithGraphAlloc) => {
     ));
   })(\u03C1));
 };
-var $$eval = (dictMonadWithGraphAlloc) => {
+var evalVal = (dictMonadWithGraphAlloc) => {
   const MonadError1 = dictMonadWithGraphAlloc.MonadError1();
-  const withMsg2 = withMsg(MonadError1);
-  const MonadThrow0 = MonadError1.MonadThrow0();
-  const $$new = dictMonadWithGraphAlloc.new(typeNameVal);
   const checkArity2 = checkArity(MonadError1);
-  const match1 = match(dictMonadWithGraphAlloc);
-  const closeDefs1 = closeDefs(dictMonadWithGraphAlloc);
+  const check2 = check(MonadError1.MonadThrow0());
   return (dictMonadReader) => (dictMonadAff) => {
     const Monad0 = dictMonadAff.MonadEffect0().Monad0();
+    const Applicative0 = Monad0.Applicative0();
     const Bind1 = Monad0.Bind1();
     const $0 = Bind1.Apply0().Functor0();
-    const Applicative0 = Monad0.Applicative0();
     const traverse3 = traversableList.traverse(Applicative0);
     const traverse4 = traversablePair.traverse(Applicative0);
     const sequence1 = traversableArray.traverse(Applicative0)(identity4);
     return (dictLoadFile) => (v) => (v1) => (v2) => {
-      if (v1.tag === "Var") {
-        return withMsg2("Variable lookup")(lookup$p(MonadThrow0)(showString)(mapEnvStringVal)(v1._1)(v));
-      }
-      if (v1.tag === "Op") {
-        return withMsg2("Variable lookup")(lookup$p(MonadThrow0)(showString)(mapEnvStringVal)(v1._1)(v));
-      }
       if (v1.tag === "Int") {
-        return $$new((a) => Val(a)(Nothing))(insert(ordVertex)(v1._1)()(v2))($BaseVal("Int", v1._2));
+        return Applicative0.pure($Maybe("Just", $Tuple(v1._1, $BaseVal("Int", v1._2))));
       }
       if (v1.tag === "Float") {
-        return $$new((a) => Val(a)(Nothing))(insert(ordVertex)(v1._1)()(v2))($BaseVal("Float", v1._2));
+        return Applicative0.pure($Maybe("Just", $Tuple(v1._1, $BaseVal("Float", v1._2))));
       }
       if (v1.tag === "Str") {
-        return $$new((a) => Val(a)(Nothing))(insert(ordVertex)(v1._1)()(v2))($BaseVal("Str", v1._2));
+        return Applicative0.pure($Maybe("Just", $Tuple(v1._1, $BaseVal("Str", v1._2))));
       }
       if (v1.tag === "Dictionary") {
         const $1 = v1._1;
@@ -18173,9 +18352,9 @@ var $$eval = (dictMonadWithGraphAlloc) => {
           return (a) => $2(a)(v2);
         })()))(v1._2)))((v3) => {
           const v4 = unzip(listMap((v$1) => $Tuple(v$1._3.tag === "Str" ? v$1._3._1 : typeError(v$1._3)("Str"), v$1._1))(v3._1));
-          return $$new((a) => Val(a)(Nothing))(insert(ordVertex)($1)()(v2))($BaseVal(
-            "Dictionary",
-            fromFoldable17(zipWith2(Tuple)(v4._1)(zipWith2(Tuple)(v4._2)(v3._2)))
+          return Applicative0.pure($Maybe(
+            "Just",
+            $Tuple($1, $BaseVal("Dictionary", fromFoldable18(zipWith2(Tuple)(v4._1)(zipWith2(Tuple)(v4._2)(v3._2)))))
           ));
         });
       }
@@ -18206,7 +18385,7 @@ var $$eval = (dictMonadWithGraphAlloc) => {
         })()))(() => Bind1.bind(traverse3((() => {
           const $4 = $$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v);
           return (a) => $4(a)(v2);
-        })())($2))((vs) => $$new((a) => Val(a)(Nothing))(insert(ordVertex)($3)()(v2))($BaseVal("Constr", $1, vs))));
+        })())($2))((vs) => Applicative0.pure($Maybe("Just", $Tuple($3, $BaseVal("Constr", $1, vs))))));
       }
       if (v1.tag === "Matrix") {
         const $1 = v1._2;
@@ -18219,10 +18398,10 @@ var $$eval = (dictMonadWithGraphAlloc) => {
           const $6 = v5._2._1;
           const $7 = v5._1._2;
           const $8 = v5._2._2;
-          return Bind1.bind(check(MonadThrow0)(greaterThanOrEq($Tuple($5, $6))($Tuple(1, 1)))("array must be at least (" + show3($Tuple(
-            1,
-            1
-          )) + "); got (" + show3($Tuple($5, $6)) + ")"))(() => Bind1.bind(sequence1(arrayBind(range(1)($5))((i) => [
+          return Bind1.bind(check2(greaterThanOrEq($Tuple($5, $6))($Tuple(1, 1)))("array must be at least (" + show3($Tuple(1, 1)) + "); got (" + show3($Tuple(
+            $5,
+            $6
+          )) + ")"))(() => Bind1.bind(sequence1(arrayBind(range(1)($5))((i) => [
             sequence1(arrayBind(range(1)($6))((j) => [
               $$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(unionWith2((v$1) => identity14)(v)(disjointUnion2((() => {
                 const $9 = {};
@@ -18234,90 +18413,134 @@ var $$eval = (dictMonadWithGraphAlloc) => {
                 return $9;
               })())))($1)(v2)
             ]))
-          ])))((vss) => $$new((a) => Val(a)(Nothing))(insert(ordVertex)($4)()(v2))($BaseVal(
-            "Matrix",
-            $Tuple(vss, $Tuple($Tuple($5, $7), $Tuple($6, $8)))
+          ])))((vss) => Applicative0.pure($Maybe(
+            "Just",
+            $Tuple($4, $BaseVal("Matrix", $Tuple(vss, $Tuple($Tuple($5, $7), $Tuple($6, $8)))))
           ))));
         });
       }
       if (v1.tag === "Lambda") {
-        return $$new((a) => Val(a)(Nothing))(insert(ordVertex)(v1._1)()(v2))($BaseVal(
-          "Fun",
-          $Fun(
-            "Closure",
-            (() => {
-              const $1 = fVElim.fv(v1._2);
-              return filterWithKey2((x) => {
-                const $2 = setSet(ordString).member(x)($1);
-                return (v$1) => $2;
-              })(v);
-            })(),
-            empty,
-            v1._2
+        return Applicative0.pure($Maybe(
+          "Just",
+          $Tuple(
+            v1._1,
+            $BaseVal(
+              "Fun",
+              $Fun(
+                "Closure",
+                (() => {
+                  const $1 = fVElim.fv(v1._2);
+                  return filterWithKey2((x) => {
+                    const $2 = setSet(ordString).member(x)($1);
+                    return (v$1) => $2;
+                  })(v);
+                })(),
+                empty,
+                v1._2
+              )
+            )
           )
         ));
       }
-      if (v1.tag === "Project") {
-        const $1 = v1._2;
-        return Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)(v1._1)(v2))((v3) => {
-          if (v3._3.tag === "Dictionary") {
-            return withMsg2("Dict lookup")(orElse(MonadThrow0)('Key "' + $1 + '" not found')((() => {
-              const $2 = _lookup(Nothing, Just, $1, v3._3._1);
-              if ($2.tag === "Just") {
-                return $Maybe("Just", $2._1._2);
-              }
-              return Nothing;
-            })()));
-          }
-          return MonadThrow0.throwError(error("Found " + intercalate4("\n")(removeDocWS(prettyVal(highlightableVertex).pretty(v3)).lines) + ", expected dictionary"));
-        });
+      return Applicative0.pure(Nothing);
+    };
+  };
+};
+var $$eval = (dictMonadWithGraphAlloc) => {
+  const $$new = dictMonadWithGraphAlloc.new(typeNameVal);
+  const MonadError1 = dictMonadWithGraphAlloc.MonadError1();
+  const withMsg2 = withMsg(MonadError1);
+  const MonadThrow0 = MonadError1.MonadThrow0();
+  const match1 = match(dictMonadWithGraphAlloc);
+  const closeDefs1 = closeDefs(dictMonadWithGraphAlloc);
+  return (dictMonadReader) => (dictMonadAff) => {
+    const Monad0 = dictMonadAff.MonadEffect0().Monad0();
+    const $0 = Monad0.Bind1();
+    return (dictLoadFile) => (\u03B3) => (e0) => (\u03B1s) => $0.bind(evalVal(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)(e0)(\u03B1s))((\u03B1u_opt) => {
+      if (\u03B1u_opt.tag === "Just") {
+        return $$new((a) => Val(a)(Nothing))(insert(ordVertex)(\u03B1u_opt._1._1)()(\u03B1s))(\u03B1u_opt._1._2);
       }
-      if (v1.tag === "DProject") {
-        const $1 = v1._2;
-        return Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)(v1._1)(v2))((v3) => Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)($1)(v2))((v$p) => {
-          if (v3._3.tag === "Dictionary") {
-            if (v$p._3.tag === "Str") {
-              return withMsg2("Dict lookup")(orElse(MonadThrow0)('Key "' + v$p._3._1 + '" not found')((() => {
-                const $2 = _lookup(Nothing, Just, v$p._3._1, v3._3._1);
+      if (\u03B1u_opt.tag === "Nothing") {
+        if (e0.tag === "Var") {
+          return withMsg2("Variable lookup")(lookup$p(MonadThrow0)(showString)(mapEnvStringVal)(e0._1)(\u03B3));
+        }
+        if (e0.tag === "Op") {
+          return withMsg2("Variable lookup")(lookup$p(MonadThrow0)(showString)(mapEnvStringVal)(e0._1)(\u03B3));
+        }
+        if (e0.tag === "Project") {
+          const $1 = e0._2;
+          return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)(e0._1)(\u03B1s))((v) => {
+            if (v._3.tag === "Dictionary") {
+              return withMsg2("Dict lookup")(orElse(MonadThrow0)('Key "' + $1 + '" not found')((() => {
+                const $2 = _lookup(Nothing, Just, $1, v._3._1);
                 if ($2.tag === "Just") {
                   return $Maybe("Just", $2._1._2);
                 }
                 return Nothing;
               })()));
             }
-            return MonadThrow0.throwError(error("Found " + intercalate4("\n")(removeDocWS(prettyVal(highlightableVertex).pretty(v$p)).lines) + ", expected string"));
-          }
-          return MonadThrow0.throwError(error("Found " + intercalate4("\n")(removeDocWS(prettyVal(highlightableVertex).pretty(v3)).lines) + ", expected dict"));
-        }));
-      }
-      if (v1.tag === "App") {
-        const $1 = v1._2;
-        return Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)(v1._1)(v2))((v3) => Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)($1)(v2))((v$p) => apply2(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v3)(v$p)));
-      }
-      if (v1.tag === "Let") {
-        const $1 = v1._2;
-        const $2 = v1._1._1;
-        return Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)(v1._1._2)(v2))((v3) => Bind1.bind(match1(v3)($2))((v4) => $$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(unionWith2((v$1) => identity14)(v)(v4._1))($1)(v4._2._2)));
-      }
-      if (v1.tag === "LetRec") {
-        const $1 = v1._2;
-        const $2 = v1._1._1;
-        return Bind1.bind(closeDefs1(v)(v1._1._2)(insert(ordVertex)($2)()(v2)))((\u03B3$p) => $$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(unionWith2((v$1) => identity14)(v)(\u03B3$p))($1)(insert(ordVertex)($2)()(v2)));
-      }
-      if (v1.tag === "DocExpr") {
-        const $1 = v1._1;
-        return Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)(v1._2)(v2))((v3) => {
-          const $2 = v3._3;
-          const $3 = v3._1;
-          return Bind1.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(unionWith2((v$1) => identity14)(v)((() => {
-            const $4 = {};
-            $4.this = $Val($3, Nothing, $2);
-            return $4;
-          })()))($1)(v2))((v4) => Applicative0.pure($Val($3, $Maybe("Just", v4), $2)));
-        });
+            return MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected dictionary"));
+          });
+        }
+        if (e0.tag === "DProject") {
+          const $1 = e0._2;
+          return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)(e0._1)(\u03B1s))((v) => $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)($1)(\u03B1s))((v$p) => {
+            if (v._3.tag === "Dictionary") {
+              if (v$p._3.tag === "Str") {
+                return withMsg2("Dict lookup")(orElse(MonadThrow0)('Key "' + v$p._3._1 + '" not found')((() => {
+                  const $2 = _lookup(Nothing, Just, v$p._3._1, v._3._1);
+                  if ($2.tag === "Just") {
+                    return $Maybe("Just", $2._1._2);
+                  }
+                  return Nothing;
+                })()));
+              }
+              return MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v$p)) + ", expected string"));
+            }
+            return MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v)) + ", expected dict"));
+          }));
+        }
+        if (e0.tag === "App") {
+          const $1 = e0._2;
+          return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)(e0._1)(\u03B1s))((v) => $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)($1)(\u03B1s))((v$p) => apply2(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(v)(v$p)));
+        }
+        if (e0.tag === "Let") {
+          const $1 = e0._2;
+          const $2 = e0._1._1;
+          return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)(e0._1._2)(\u03B1s))((v) => $0.bind(match1(v)($2))((v1) => $$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(unionWith2((v$1) => identity14)(\u03B3)(v1._1))($1)(v1._2._2)));
+        }
+        if (e0.tag === "LetRec") {
+          const $1 = e0._2;
+          const $2 = e0._1._1;
+          return $0.bind(closeDefs1(\u03B3)(e0._1._2)(insert(ordVertex)($2)()(\u03B1s)))((\u03B3$p) => $$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(unionWith2((v) => identity14)(\u03B3)(\u03B3$p))($1)(insert(ordVertex)($2)()(\u03B1s)));
+        }
+        if (e0.tag === "DocExpr") {
+          const $1 = e0._1;
+          const $2 = e0._2;
+          return $0.bind(evalVal(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)($2)(\u03B1s))((\u03B1u_opt$p) => {
+            if (\u03B1u_opt$p.tag === "Just") {
+              const $3 = \u03B1u_opt$p._1._2;
+              const $4 = \u03B1u_opt$p._1._1;
+              return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)($1)(\u03B1s))((v) => $$new((a) => Val(a)($Maybe("Just", v)))(insert(ordVertex)($4)()(\u03B1s))($3));
+            }
+            if (\u03B1u_opt$p.tag === "Nothing") {
+              return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)($2)(\u03B1s))((v) => {
+                const $3 = v._3;
+                const $4 = v._1;
+                return $0.bind($$eval(dictMonadWithGraphAlloc)(dictMonadReader)(dictMonadAff)(dictLoadFile)(\u03B3)($1)(\u03B1s))((v1) => Monad0.Applicative0().pure($Val(
+                  $4,
+                  $Maybe("Just", v1),
+                  $3
+                )));
+              });
+            }
+            fail();
+          });
+        }
+        return throwException(error("absurd"))();
       }
       fail();
-    };
+    });
   };
 };
 var apply2 = (dictMonadWithGraphAlloc) => {
@@ -18329,7 +18552,7 @@ var apply2 = (dictMonadWithGraphAlloc) => {
   return (dictMonadReader) => (dictMonadAff) => {
     const Bind1 = dictMonadAff.MonadEffect0().Monad0().Bind1();
     return (dictLoadFile) => (v) => (v1) => {
-      const $0 = (v2) => MonadThrow0.throwError(error("Found " + intercalate4("\n")(removeDocWS(prettyVal(highlightableVertex).pretty(v2)).lines) + ", expected function"));
+      const $0 = (v2) => MonadThrow0.throwError(error("Found " + renderWithIndent(0)(prettyVal(highlightableVertex).pretty(v2)) + ", expected function"));
       if (v._3.tag === "Fun") {
         if (v._3._1.tag === "Closure") {
           const $1 = v._1;
@@ -18472,7 +18695,7 @@ var eval_module = (dictMonadWithGraphAlloc) => {
     };
   };
 };
-var eval_progCxt = (dictMonadWithGraphAlloc) => {
+var eval_primitives = (dictMonadWithGraphAlloc) => {
   const eval_module1 = eval_module(dictMonadWithGraphAlloc);
   return (dictMonadReader) => {
     const eval_module2 = eval_module1(dictMonadReader);
@@ -18483,32 +18706,31 @@ var eval_progCxt = (dictMonadWithGraphAlloc) => {
       const $1 = Monad0.Applicative0();
       return (dictLoadFile) => {
         const eval_module4 = eval_module3(dictLoadFile);
-        return (v) => (v1) => {
-          const $2 = v1.graph;
-          const $3 = v1.modules;
-          const $4 = v.primitives;
-          const $5 = v1.roots;
+        return (primitives2) => (v) => {
+          const $2 = v.graph;
+          const $3 = v.modules;
+          const $4 = v.roots;
           return $0.bind(foldM2(Monad0)((\u03B3s) => (name2) => {
-            const v2 = definitely("deps evaluated")((() => {
-              const $6 = lookup2(ordString)(name2)($2);
-              if ($6.tag === "Just") {
-                const $7 = traverse2((dep) => lookup2(ordString)(dep)(\u03B3s))($6._1);
-                if ($7.tag === "Just") {
-                  const $8 = lookup2(ordString)(name2)($3);
-                  if ($8.tag === "Just") {
-                    return $Maybe("Just", $Tuple($8._1, $7._1));
+            const v1 = definitely("deps evaluated")((() => {
+              const $5 = lookup2(ordString)(name2)($2);
+              if ($5.tag === "Just") {
+                const $6 = traverse2((dep) => lookup2(ordString)(dep)(\u03B3s))($5._1);
+                if ($6.tag === "Just") {
+                  const $7 = lookup2(ordString)(name2)($3);
+                  if ($7.tag === "Just") {
+                    return $Maybe("Just", $Tuple($7._1, $6._1));
                   }
-                  if ($8.tag === "Nothing") {
+                  if ($7.tag === "Nothing") {
                     return Nothing;
                   }
                   fail();
                 }
-                if ($7.tag === "Nothing") {
+                if ($6.tag === "Nothing") {
                   return Nothing;
                 }
                 fail();
               }
-              if ($6.tag === "Nothing") {
+              if ($5.tag === "Nothing") {
                 return Nothing;
               }
               fail();
@@ -18532,9 +18754,9 @@ var eval_progCxt = (dictMonadWithGraphAlloc) => {
                 }
                 return go$r;
               };
-              return go($4)(v2._2);
-            })())(v2._1)(setSet4.empty))((\u03B3$p) => $1.pure(insert(ordString)(name2)(\u03B3$p)(\u03B3s)));
-          })(Leaf2)(v1.topsorted))((\u03B3s) => $1.pure((() => {
+              return go(primitives2)(v1._2);
+            })())(v1._1)(setSet4.empty))((\u03B3$p) => $1.pure(insert(ordString)(name2)(\u03B3$p)(\u03B3s)));
+          })(Leaf2)(v.topsorted))((\u03B3s) => $1.pure((() => {
             const go = (go$a0$copy) => (go$a1$copy) => {
               let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
               while (go$c) {
@@ -18553,7 +18775,7 @@ var eval_progCxt = (dictMonadWithGraphAlloc) => {
               }
               return go$r;
             };
-            return go($4)(listMap((dep) => definitely("has env")(lookup2(ordString)(dep)(\u03B3s)))($5));
+            return go(primitives2)(listMap((dep) => definitely("has env")(lookup2(ordString)(dep)(\u03B3s)))($4));
           })()));
         };
       };
@@ -18574,7 +18796,6 @@ var graphEval = (dictMonadAff) => {
   const monadAffState1 = monadAffState(monadAffState2);
   const $1 = monadAffState2.MonadEffect0().Monad0();
   const $2 = dictMonadAff.MonadEffect0().Monad0();
-  const applicativeStateT2 = applicativeStateT(Monad0);
   return (dictMonadReader) => {
     const monadReaderStateT2 = monadReaderStateT(monadReaderStateT(dictMonadReader));
     return (dictLoadFile) => (dictMonadError) => {
@@ -18590,6 +18811,7 @@ var graphEval = (dictMonadAff) => {
           }
         };
       })());
+      const check2 = check(monadThrowStateT(dictMonadError.MonadThrow0()));
       return (v) => (e) => {
         const $3 = v["\u03B3"];
         const $4 = spyFunWhen(false)("fwdSlice")((x) => $Tuple(showVertices(x._1), showEdgeList(toEdgeList(graphGraphImpl)(x._2))))(showGraph(graphGraphImpl))(fwdSlice2);
@@ -18600,7 +18822,10 @@ var graphEval = (dictMonadAff) => {
         ))))((v1) => {
           const $6 = v1._1;
           const $7 = v1._2;
-          return bindStateT2.bind(applicativeStateT2.pure())(() => applicativeStateT2.pure($Tuple($6, $Tuple($EnvExpr($3, e\u03B1), $7))));
+          return bindStateT2.bind(check2(difference2(ordDVertex$p)(verticesValVertex.vertices($7))(verticesGraphImpl.vertices($6)).tag === "Leaf")("outputs in graph"))(() => applicativeStateT(Monad0).pure($Tuple(
+            $6,
+            $Tuple($EnvExpr($3, e\u03B1), $7)
+          )));
         })))(v.n))((v1) => Monad0.Applicative0().pure({
           g: v1._2._2._1,
           graph_fwd: (a) => (b) => $4($Tuple(a, b)),
@@ -19528,6 +19753,7 @@ var isOctDigit = (c) => {
   const diff = c - 48 | 0;
   return diff <= 7 && diff >= 0;
 };
+var isLower = (x) => checkAttr([4096])(x);
 var isDecDigit = (c) => {
   const diff = c - 48 | 0;
   return diff <= 9 && diff >= 0;
@@ -19689,10 +19915,6180 @@ var upper2 = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isUpper)
 var oneOf = (ss) => withLazyErrorMessage(satisfy((a) => elem(eqChar)(a)(ss)))((v) => "one of " + show1(ss));
 var octDigit = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isOctDigit))("oct digit");
 var noneOf = (ss) => withLazyErrorMessage(satisfy((a) => notElem(eqChar)(a)(ss)))((v) => "none of " + show1(ss));
+var lower2 = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isLower))("lowercase letter");
 var letter = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isAlpha))("letter");
 var hexDigit = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isHexDigit))("hex digit");
 var digit = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isDecDigit))("digit");
 var alphaNum = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ satisfyCP(isAlphaNum))("letter or digit");
+
+// output-es/Parsing.Indent/index.js
+var lift = (m) => (state1, v, lift$p, v1, done) => lift$p(bindStateT(monadIdentity).Apply0().Functor0().map((a) => (v2) => done(state1, a))(m));
+var monadStateStateT2 = /* @__PURE__ */ monadStateStateT(monadIdentity);
+var put$p = (p) => lift(monadStateStateT2.state((v) => $Tuple(void 0, p)));
+var get$p = /* @__PURE__ */ (() => {
+  const $0 = lift(monadStateStateT2.state((s) => $Tuple(s, s)));
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a) => more((v2) => done(state2, a))));
+})();
+var indented = (state1, more, lift12, $$throw2, done) => more((v1) => position(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => get$p(
+    state2,
+    more,
+    lift12,
+    $$throw2,
+    (state2$1, a$1) => more((v2$1) => {
+      if (a.column <= a$1.column) {
+        return fail2("not indented")(state2$1, more, lift12, $$throw2, done);
+      }
+      return put$p({ index: 0, line: a.line, column: a$1.column })(state2$1, more, lift12, $$throw2, done);
+    })
+  )))
+));
+var sameLine = (state1, more, lift12, $$throw2, done) => more((v1) => position(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => get$p(
+    state2,
+    more,
+    lift12,
+    $$throw2,
+    (state2$1, a$1) => more((v2$1) => {
+      if (a.line === a$1.line) {
+        return done(state2$1, void 0);
+      }
+      return fail2("over one line")(state2$1, more, lift12, $$throw2, done);
+    })
+  )))
+));
+var sameOrIndented = (v2, $0, $1, $2, $3) => {
+  const $4 = v2._1;
+  const $5 = v2._2;
+  return $0((v3) => sameLine(
+    $ParseState($4, $5, false),
+    $0,
+    $1,
+    (v4, $6) => {
+      const $7 = v4._3;
+      return $0((v5) => {
+        if ($7) {
+          return $2(v4, $6);
+        }
+        return indented(v2, $0, $1, $2, $3);
+      });
+    },
+    $3
+  ));
+};
+var withPos = (x) => (state1, more, lift12, $$throw2, done) => more((v1) => get$p(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => position(
+    state2,
+    more,
+    lift12,
+    $$throw2,
+    (state2$1, a$1) => more((v2$1) => more((v1$2) => more((v2$2) => more((v1$3) => put$p(a$1)(
+      state2$1,
+      more,
+      lift12,
+      $$throw2,
+      (state2$2, a$2) => more((v2$3) => more((v3) => x(
+        state2$2,
+        more,
+        lift12,
+        $$throw2,
+        (state3, a$3) => more((v4) => more((v2$4) => more((v2$5) => more((v1$4) => put$p(a)(
+          state3,
+          more,
+          lift12,
+          $$throw2,
+          (state2$3, a$4) => more((v2$6) => more((v3$1) => more((v4$1) => done(state2$3, a$3))))
+        )))))
+      )))
+    )))))
+  )))
+));
+var checkIndent = (state1, more, lift12, $$throw2, done) => more((v1) => position(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => get$p(
+    state2,
+    more,
+    lift12,
+    $$throw2,
+    (state2$1, a$1) => more((v2$1) => {
+      if (a.column === a$1.column) {
+        return done(state2$1, void 0);
+      }
+      return fail2("indentation doesn't match")(state2$1, more, lift12, $$throw2, done);
+    })
+  )))
+));
+
+// output-es/Parsing.Combinators.Array/index.js
+var fromFoldable19 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
+var many3 = (p) => (state1, more, lift12, $$throw2, done) => more((v1) => {
+  const loop = (state2, arg, gas) => {
+    const $0 = (state3, step) => {
+      if (step.tag === "Loop") {
+        if (gas === 0) {
+          return more((v1$1) => loop(state3, step._1, 30));
+        }
+        return loop(state3, step._1, gas - 1 | 0);
+      }
+      if (step.tag === "Done") {
+        const $02 = step._1;
+        return more((v2) => done(state3, reverse(fromFoldable19($02))));
+      }
+      fail();
+    };
+    const $1 = state2._1;
+    const $2 = state2._2;
+    return more((v3) => more((v1$1) => p(
+      $ParseState($1, $2, false),
+      more,
+      lift12,
+      (v2, $3) => more((v5) => $0(state2, $Step("Done", arg))),
+      (state2$1, a) => more((v2) => $0(state2$1, $Step("Loop", $List("Cons", a, arg))))
+    )));
+  };
+  return loop(state1, Nil, 30);
+});
+
+// output-es/Temp.Parse.Constants/index.js
+var opChars = [":", "!", "#", "$", "%", "&", "*", "+", ".", "/", "<", "=", ">", "?", "@", "\\", "^", "|", "-", "~"];
+
+// output-es/Temp.Parse.Parser/index.js
+var whitespace = /* @__PURE__ */ skipMany(/* @__PURE__ */ (() => {
+  const $0 = oneOf([" ", "	", "\n"]);
+  const $1 = withErrorMessage(satisfy((v) => v === "#"))("'#'");
+  const $2 = skipMany(satisfy((v) => v !== "\n"));
+  return (v2, $3, $4, $5, $6) => {
+    const $7 = v2._1;
+    const $8 = v2._2;
+    return $3((v3) => $3((v1) => $0(
+      $ParseState($7, $8, false),
+      $3,
+      $4,
+      (v4, $9) => {
+        const $10 = v4._3;
+        return $3((v5) => {
+          if ($10) {
+            return $5(v4, $9);
+          }
+          return $3((v2$1) => $3((v1$1) => $1(v2, $3, $4, $5, (state2, a) => $3((v2$2) => $3((v3$1) => $2(state2, $3, $4, $5, (state3, a$1) => $3((v4$1) => $6(state3, a$1))))))));
+        });
+      },
+      (state2, a) => $3((v2$1) => $6(state2, void 0))
+    )));
+  };
+})());
+var stringLetter = /* @__PURE__ */ satisfy((c) => c !== '"' && c !== "\\" && c > "");
+var stringChar = /* @__PURE__ */ withErrorMessage((state1, more, lift12, $$throw2, done) => more((v1) => stringLetter(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => done(state2, $Maybe("Just", a)))
+)))("string character");
+var operator = /* @__PURE__ */ (() => {
+  const $0 = some(alternativeParserT)(lazyParserT)(oneOf(opChars));
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a) => more((v2) => done(state2, fromCharArray(a)))));
+})();
+var lexeme = (p) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => p(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2$1) => more((v3) => whitespace(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a)))))
+)));
+var stringLiteral = /* @__PURE__ */ lexeme(/* @__PURE__ */ withErrorMessage(/* @__PURE__ */ (() => {
+  const $0 = between(withErrorMessage(satisfy((v) => v === '"'))(`'"'`))(withErrorMessage(withErrorMessage(satisfy((v) => v === '"'))(`'"'`))("end of string"))(many3(stringChar));
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => done(
+      state2,
+      fromCharArray(foldrArray((v) => (v1$1) => {
+        if (v.tag === "Nothing") {
+          return v1$1;
+        }
+        if (v.tag === "Just") {
+          return [v._1, ...v1$1];
+        }
+        fail();
+      })([])(a))
+    ))
+  ));
+})())("literal string"));
+var keywords = ["def", "if", "else", "lambda", "match", "case", "for", "in"];
+var unreserved = (p) => (state1, more, lift12, $$throw2, done) => more((v1) => p(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => {
+    if (elem(eqString)(a)(keywords)) {
+      return fail2("Reserved identifier: " + a)(state2, more, lift12, $$throw2, done);
+    }
+    return done(state2, a);
+  })
+));
+var identifier = (start) => (letter2) => lexeme((state1, more, lift12, $$throw2, done) => more((v1) => start(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => {
+    const $0 = many(alternativeParserT)(lazyParserT)(letter2);
+    return more((v1$1) => $0(
+      state2,
+      more,
+      lift12,
+      $$throw2,
+      (state2$1, a$1) => more((v2$1) => done(state2$1, singleton(a) + fromCharArray(a$1)))
+    ));
+  })
+)));
+var reserved = (expected) => {
+  const $0 = identifier((() => {
+    const $02 = withErrorMessage(satisfy((v) => v === "_"))("'_'");
+    return (v2, $1, $2, $3, $4) => {
+      const $5 = v2._1;
+      const $6 = v2._2;
+      return $1((v3) => letter(
+        $ParseState($5, $6, false),
+        $1,
+        $2,
+        (v4, $7) => {
+          const $8 = v4._3;
+          return $1((v5) => {
+            if ($8) {
+              return $3(v4, $7);
+            }
+            return $02(v2, $1, $2, $3, $4);
+          });
+        },
+        $4
+      ));
+    };
+  })())((() => {
+    const $02 = oneOf(["_", "'"]);
+    return (v2, $1, $2, $3, $4) => {
+      const $5 = v2._1;
+      const $6 = v2._2;
+      return $1((v3) => alphaNum(
+        $ParseState($5, $6, false),
+        $1,
+        $2,
+        (v4, $7) => {
+          const $8 = v4._3;
+          return $1((v5) => {
+            if ($8) {
+              return $3(v4, $7);
+            }
+            return $02(v2, $1, $2, $3, $4);
+          });
+        },
+        $4
+      ));
+    };
+  })());
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => {
+      if (expected !== a) {
+        return fail2("Expected `" + expected + "`, received `" + a + "`")(state2, more, lift12, $$throw2, done);
+      }
+      return done(state2, void 0);
+    })
+  ));
+};
+var variable = /* @__PURE__ */ unreserved(/* @__PURE__ */ identifier(/* @__PURE__ */ (() => {
+  const $0 = withErrorMessage(satisfy((v) => v === "_"))("'_'");
+  return (v2, $1, $2, $3, $4) => {
+    const $5 = v2._1;
+    const $6 = v2._2;
+    return $1((v3) => lower2(
+      $ParseState($5, $6, false),
+      $1,
+      $2,
+      (v4, $7) => {
+        const $8 = v4._3;
+        return $1((v5) => {
+          if ($8) {
+            return $3(v4, $7);
+          }
+          return $0(v2, $1, $2, $3, $4);
+        });
+      },
+      $4
+    ));
+  };
+})())(/* @__PURE__ */ (() => {
+  const $0 = oneOf(["_", "'"]);
+  return (v2, $1, $2, $3, $4) => {
+    const $5 = v2._1;
+    const $6 = v2._2;
+    return $1((v3) => alphaNum(
+      $ParseState($5, $6, false),
+      $1,
+      $2,
+      (v4, $7) => {
+        const $8 = v4._3;
+        return $1((v5) => {
+          if ($8) {
+            return $3(v4, $7);
+          }
+          return $0(v2, $1, $2, $3, $4);
+        });
+      },
+      $4
+    ));
+  };
+})()));
+var delim = (c) => {
+  const $0 = lexeme(withErrorMessage(satisfy((v) => v === c))(showCharImpl(c)));
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a) => more((v2) => done(state2, void 0))));
+};
+var context = (s) => (p) => (state1, more, lift12, $$throw2, done) => more((v1) => position(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => p(
+    state2,
+    more,
+    lift12,
+    (state2$1, err) => $$throw2(
+      state2$1,
+      $ParseError(
+        take(200)(err._1 + "\n " + s + " on line " + showIntImpl(a.line) + ", column " + showIntImpl(a.column)),
+        err._2
+      )
+    ),
+    done
+  )))
+));
+var constructor = /* @__PURE__ */ unreserved(/* @__PURE__ */ identifier(upper2)(/* @__PURE__ */ (() => {
+  const $0 = oneOf(["_", "'"]);
+  return (v2, $1, $2, $3, $4) => {
+    const $5 = v2._1;
+    const $6 = v2._2;
+    return $1((v3) => alphaNum(
+      $ParseState($5, $6, false),
+      $1,
+      $2,
+      (v4, $7) => {
+        const $8 = v4._3;
+        return $1((v5) => {
+          if ($8) {
+            return $3(v4, $7);
+          }
+          return $0(v2, $1, $2, $3, $4);
+        });
+      },
+      $4
+    ));
+  };
+})()));
+var brackets = (e) => {
+  const $0 = delim("[");
+  const $1 = delim("]");
+  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2$2) => more((v3) => e(
+      state2,
+      more,
+      lift12,
+      $$throw2,
+      (state3, a$1) => more((v4) => more((v2$3) => more((v3$1) => $1(state3, more, lift12, $$throw2, (state3$1, a$2) => more((v4$1) => done(state3$1, a$1))))))
+    )))
+  )))));
+};
+var block = (e) => {
+  const $0 = delim(":");
+  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2$2) => more((v3) => sameOrIndented(
+      state2,
+      more,
+      lift12,
+      $$throw2,
+      (state3, a$1) => more((v4) => more((v2$3) => more((v3$1) => withPos(e)(state3, more, lift12, $$throw2, (state3$1, a$2) => more((v4$1) => done(state3$1, a$2))))))
+    )))
+  )))));
+};
+var align = (p) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => whitespace(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2$2) => more((v3) => checkIndent(
+    state2,
+    more,
+    lift12,
+    $$throw2,
+    (state3, a$1) => more((v4) => more((v2$3) => more((v3$1) => p(state3, more, lift12, $$throw2, (state3$1, a$2) => more((v4$1) => done(state3$1, a$2))))))
+  )))
+)))));
+
+// output-es/Temp.Parse.Number/index.js
+var identity25 = (x) => x;
+var sign2 = (dictRing) => {
+  const $0 = withErrorMessage(satisfy((v) => v === "-"))("'-'");
+  const zero = dictRing.Semiring0().zero;
+  const $1 = withErrorMessage(satisfy((v) => v === "+"))("'+'");
+  return (v2, $2, $3, $4, $5) => {
+    const $6 = v2._1;
+    const $7 = v2._2;
+    return $2((v3) => $2((v1) => $0(
+      $ParseState($6, $7, false),
+      $2,
+      $3,
+      (v4, $8) => {
+        const $9 = v4._3;
+        return $2((v5) => {
+          if ($9) {
+            return $4(v4, $8);
+          }
+          const $10 = v2._1;
+          const $11 = v2._2;
+          return $2((v3$1) => $2((v1$1) => $1(
+            $ParseState($10, $11, false),
+            $2,
+            $3,
+            (v4$1, $12) => {
+              const $13 = v4$1._3;
+              return $2((v5$1) => {
+                if ($13) {
+                  return $4(v4$1, $12);
+                }
+                return $5(v2, identity25);
+              });
+            },
+            (state2, a) => $2((v2$1) => $5(state2, identity25))
+          )));
+        });
+      },
+      (state2, a) => $2((v2$1) => $5(state2, (a$1) => dictRing.sub(zero)(a$1)))
+    )));
+  };
+};
+var sign1 = /* @__PURE__ */ sign2(ringInt);
+var number2 = (base) => (baseDigit) => {
+  const $0 = some(alternativeParserT)(lazyParserT)(baseDigit);
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => {
+      const $1 = foldlArray((v) => (v1$1) => {
+        if (v.tag === "Nothing") {
+          return Nothing;
+        }
+        if (v.tag === "Just") {
+          const $12 = hexDigitToInt(toCharCode(v1$1));
+          if ($12.tag === "Just") {
+            return $Maybe("Just", (base * v._1 | 0) + $12._1 | 0);
+          }
+          return Nothing;
+        }
+        fail();
+      })($Maybe("Just", 0))(a);
+      if ($1.tag === "Nothing") {
+        return fail2("not digits")(state2, more, lift12, $$throw2, done);
+      }
+      if ($1.tag === "Just") {
+        return done(state2, $1._1);
+      }
+      fail();
+    })
+  ));
+};
+var octal = /* @__PURE__ */ (() => {
+  const $0 = oneOf(["o", "O"]);
+  const $1 = number2(8)(octDigit);
+  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2$1) => more((v3) => $1(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a$1)))))
+  )));
+})();
+var hexadecimal = /* @__PURE__ */ (() => {
+  const $0 = oneOf(["x", "X"]);
+  const $1 = number2(16)(hexDigit);
+  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2$1) => more((v3) => $1(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a$1)))))
+  )));
+})();
+var fraction = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ (() => {
+  const $0 = withErrorMessage(satisfy((v) => v === "."))("'.'");
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => {
+      const $1 = withErrorMessage(some(alternativeParserT)(lazyParserT)(digit))("fraction");
+      return more((v1$1) => $1(
+        state2,
+        more,
+        lift12,
+        $$throw2,
+        (state2$1, a$1) => more((v2$1) => {
+          const $2 = foldrArray((v) => (v1$2) => {
+            if (v1$2.tag === "Nothing") {
+              return Nothing;
+            }
+            if (v1$2.tag === "Just") {
+              const $22 = hexDigitToInt(toCharCode(v));
+              if ($22.tag === "Just") {
+                return $Maybe("Just", (v1$2._1 + toNumber($22._1)) / 10);
+              }
+              if ($22.tag === "Nothing") {
+                return Nothing;
+              }
+            }
+            fail();
+          })($Maybe("Just", 0))(a$1);
+          if ($2.tag === "Nothing") {
+            return fail2("not digit")(state2$1, more, lift12, $$throw2, done);
+          }
+          if ($2.tag === "Just") {
+            return done(state2$1, $2._1);
+          }
+          fail();
+        })
+      ));
+    })
+  ));
+})())("fraction");
+var decimal = /* @__PURE__ */ number2(10)(digit);
+var exponent$p = /* @__PURE__ */ (() => {
+  const power = (e) => {
+    if (e < 0) {
+      return 1 / power(-e);
+    }
+    return pow(10)(toNumber(e));
+  };
+  const $0 = oneOf(["e", "E"]);
+  return withErrorMessage((state1, more, lift12, $$throw2, done) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => more((v1$1) => sign1(
+      state2,
+      more,
+      lift12,
+      $$throw2,
+      (state2$1, a$1) => more((v2$1) => {
+        const $1 = withErrorMessage(decimal)("exponent");
+        return more((v1$2) => $1(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, power(a$1(a$2))))));
+      })
+    )))
+  )))("exponent");
+})();
+var fractExponent = (n) => (v2, $0, $1, $2, $3) => {
+  const $4 = v2._1;
+  const $5 = v2._2;
+  return $0((v3) => {
+    const $6 = (v4, $62) => {
+      const $7 = v4._3;
+      return $0((v5) => {
+        if ($7) {
+          return $2(v4, $62);
+        }
+        return $0((v1) => exponent$p(v2, $0, $1, $2, (state2, a) => $0((v2$1) => $3(state2, toNumber(n) * a))));
+      });
+    };
+    return $0((v1) => fraction(
+      $ParseState($4, $5, false),
+      $0,
+      $1,
+      $6,
+      (state2, a) => $0((v2$1) => $0((v1$1) => {
+        const $7 = (state2$1, a$1) => $0((v2$2) => $3(state2$1, (toNumber(n) + a) * a$1));
+        const $8 = state2._1;
+        const $9 = state2._2;
+        return $0((v3$1) => exponent$p(
+          $ParseState($8, $9, false),
+          $0,
+          $1,
+          (v4, $10) => {
+            const $11 = v4._3;
+            return $0((v5) => {
+              if ($11) {
+                return $6(v4, $10);
+              }
+              return $7(state2, 1);
+            });
+          },
+          $7
+        ));
+      }))
+    ));
+  });
+};
+var floating = /* @__PURE__ */ (() => {
+  const $0 = optionMaybe(sign2(ringNumber));
+  return (state1, more, lift12, $$throw2, done) => more((v1) => more((v1$1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => {
+      const $1 = (() => {
+        if (a.tag === "Nothing") {
+          return identity25;
+        }
+        if (a.tag === "Just") {
+          return a._1;
+        }
+        fail();
+      })();
+      return more((v2$1) => more((v1$2) => more((v1$3) => decimal(
+        state2,
+        more,
+        lift12,
+        $$throw2,
+        (state2$1, a$1) => more((v2$2) => fractExponent(a$1)(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$3) => done(state2$2, $1(a$2)))))
+      ))));
+    })
+  )));
+})();
+var $$float = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ lexeme(floating))("float");
+var zeroNumber = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ (() => {
+  const $0 = withErrorMessage(satisfy((v) => v === "0"))("'0'");
+  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $0(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2$1) => more((v3) => {
+      const $1 = state2._1;
+      const $2 = state2._2;
+      return more((v3$1) => hexadecimal(
+        $ParseState($1, $2, false),
+        more,
+        lift12,
+        (v4, $3) => {
+          const $4 = v4._3;
+          return more((v5) => {
+            if ($4) {
+              return $$throw2(v4, $3);
+            }
+            const $5 = state2._1;
+            const $6 = state2._2;
+            return more((v3$2) => octal(
+              $ParseState($5, $6, false),
+              more,
+              lift12,
+              (v4$1, $7) => {
+                const $8 = v4$1._3;
+                return more((v5$1) => {
+                  if ($8) {
+                    return $$throw2(v4$1, $7);
+                  }
+                  const $9 = state2._1;
+                  const $10 = state2._2;
+                  return more((v3$3) => decimal(
+                    $ParseState($9, $10, false),
+                    more,
+                    lift12,
+                    (v4$2, $11) => {
+                      const $12 = v4$2._3;
+                      return more((v5$2) => {
+                        if ($12) {
+                          return $$throw2(v4$2, $11);
+                        }
+                        return more((v4$3) => done(state2, 0));
+                      });
+                    },
+                    (state3, a$1) => more((v4$2) => done(state3, a$1))
+                  ));
+                });
+              },
+              (state3, a$1) => more((v4$1) => done(state3, a$1))
+            ));
+          });
+        },
+        (state3, a$1) => more((v4) => done(state3, a$1))
+      ));
+    }))
+  )));
+})())("");
+var nat = (v2, $0, $1, $2, $3) => {
+  const $4 = v2._1;
+  const $5 = v2._2;
+  return $0((v3) => zeroNumber(
+    $ParseState($4, $5, false),
+    $0,
+    $1,
+    (v4, $6) => {
+      const $7 = v4._3;
+      return $0((v5) => {
+        if ($7) {
+          return $2(v4, $6);
+        }
+        return decimal(v2, $0, $1, $2, $3);
+      });
+    },
+    $3
+  ));
+};
+var $$int2 = (state1, more, lift12, $$throw2, done) => more((v1) => lexeme(sign1)(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => nat(state2, more, lift12, $$throw2, (state2$1, a$1) => more((v2$1) => done(state2$1, a(a$1))))))
+));
+var integer = /* @__PURE__ */ withErrorMessage(/* @__PURE__ */ lexeme($$int2))("integer");
+
+// output-es/Temp.Util.Error/index.js
+var prettyParseError = (v) => "ParseError on line " + showIntImpl(v._2.line) + ", column " + showIntImpl(v._2.column) + ":\n" + v._1;
+
+// output-es/Temp.Parse/index.js
+var onlyIf = (b) => (a) => {
+  const $0 = b ? ((state1, v, v1, v2, done) => done(state1, void 0)) : fail2("No alternative");
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a$1) => more((v2) => done(state2, a))));
+};
+var runParserT2 = /* @__PURE__ */ runParserT(/* @__PURE__ */ monadRecStateT(monadRecIdentity));
+var topLevel = (p) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => whitespace(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2$2) => more((v3) => withPos(p)(
+    state2,
+    more,
+    lift12,
+    $$throw2,
+    (state3, a$1) => more((v4) => more((v2$3) => more((v3$1) => eof(state3, more, lift12, $$throw2, (state3$1, a$2) => more((v4$1) => done(state3$1, a$1))))))
+  )))
+)))));
+var pConsOp = (v1, $0, $1, $2, $3) => {
+  const $4 = v1._3;
+  return $0((v1$1) => lexeme(operator)(
+    v1,
+    $0,
+    $1,
+    (v2, $5) => $2($ParseState(v2._1, v2._2, $4), $5),
+    (state2, a) => $0((v2) => onlyIf(a === ":|")((e) => (e$p) => $Pattern(
+      "PConstr",
+      ":",
+      $List("Cons", e, $List("Cons", e$p, Nil))
+    ))(state2, $0, $1, (v2$1, $5) => $2($ParseState(v2$1._1, v2$1._2, $4), $5), $3))
+  ));
+};
+var popdefs = [[/* @__PURE__ */ $Operator("Infix", pConsOp, AssocRight)]];
+var simplePattern$lazy = /* @__PURE__ */ binding(() => {
+  const $0 = brackets(whitespace);
+  const pListRest$lazy = binding(() => {
+    const $12 = delim("]");
+    const $22 = delim(",");
+    return (v2, $32, $42, $5, $6) => {
+      const $7 = v2._1;
+      const $8 = v2._2;
+      return $32((v3) => $32((v1) => $12(
+        $ParseState($7, $8, false),
+        $32,
+        $42,
+        (v4, $9) => {
+          const $10 = v4._3;
+          return $32((v5) => {
+            if ($10) {
+              return $5(v4, $9);
+            }
+            return $32((v1$1) => $22(
+              v2,
+              $32,
+              $42,
+              $5,
+              (state2, a) => $32((v2$1) => $32((v1$2) => pattern$lazy()(
+                state2,
+                $32,
+                $42,
+                $5,
+                (state2$1, a$1) => $32((v2$2) => $32((v1$3) => pListRest$lazy()(
+                  state2$1,
+                  $32,
+                  $42,
+                  $5,
+                  (state2$2, a$2) => $32((v2$3) => $6(state2$2, $ListRestPattern("PListNext", a$1, a$2)))
+                )))
+              )))
+            ));
+          });
+        },
+        (state2, a) => $32((v2$1) => $6(state2, PListEnd))
+      )));
+    };
+  });
+  const pListRest = pListRest$lazy();
+  const $1 = delim("[");
+  const $2 = delim("{");
+  const args = (v) => {
+    if (v.tag === "PConstr") {
+      const $32 = v._1;
+      const $42 = v._2;
+      const $5 = delim("(");
+      return (state1, more, lift12, $$throw2, done) => more((v1) => $5(
+        state1,
+        more,
+        lift12,
+        $$throw2,
+        (state2, a) => more((v2) => {
+          const $6 = sepBy(simplePattern$lazy())(lexeme(withErrorMessage(satisfy((v$1) => v$1 === ","))("','")));
+          return more((v1$1) => $6(
+            state2,
+            more,
+            lift12,
+            $$throw2,
+            (state2$1, a$1) => more((v2$1) => {
+              const $7 = delim(")");
+              return more((v1$2) => $7(
+                state2$1,
+                more,
+                lift12,
+                $$throw2,
+                (state2$2, a$2) => more((v2$2) => app($Pattern("PConstr", $32, foldableList.foldr(Cons)(a$1)($42)))(
+                  state2$2,
+                  more,
+                  lift12,
+                  $$throw2,
+                  done
+                ))
+              ));
+            })
+          ));
+        })
+      ));
+    }
+    return (state1, v$1, v1, v2, done) => done(state1, v);
+  };
+  const app = (e) => {
+    const $32 = args(e);
+    return (v2, $42, $5, $6, $7) => {
+      const $8 = v2._1;
+      const $9 = v2._2;
+      return $42((v3) => $32(
+        $ParseState($8, $9, false),
+        $42,
+        $5,
+        (v4, $10) => {
+          const $11 = v4._3;
+          return $42((v5) => {
+            if ($11) {
+              return $6(v4, $10);
+            }
+            return $7(v2, e);
+          });
+        },
+        $7
+      ));
+    };
+  };
+  const $3 = delim("(");
+  const $4 = delim("(");
+  return (v2, $5, $6, $7, $8) => {
+    const $9 = v2._1;
+    const $10 = v2._2;
+    return $5((v3) => $5((v1) => $0(
+      $ParseState($9, $10, false),
+      $5,
+      $6,
+      (v2$1, $11) => $5((v5) => {
+        const $12 = v2._1;
+        const $13 = v2._2;
+        return $5((v3$1) => {
+          const $14 = (v4, $142) => {
+            const $15 = v4._3;
+            return $5((v5$1) => {
+              if ($15) {
+                return $7(v4, $142);
+              }
+              const $16 = v2._1;
+              const $17 = v2._2;
+              return $5((v3$2) => {
+                const $18 = (v4$1, $182) => {
+                  const $19 = v4$1._3;
+                  return $5((v5$2) => {
+                    if ($19) {
+                      return $7(v4$1, $182);
+                    }
+                    const $20 = v2._1;
+                    const $21 = v2._2;
+                    return $5((v3$3) => $5((v1$1) => variable(
+                      $ParseState($20, $21, false),
+                      $5,
+                      $6,
+                      (v2$2, $22) => $5((v5$3) => {
+                        const $23 = v2._1;
+                        const $24 = v2._2;
+                        return $5((v3$4) => {
+                          const $25 = (v4$2, $252) => {
+                            const $26 = v4$2._3;
+                            return $5((v5$4) => {
+                              if ($26) {
+                                return $7(v4$2, $252);
+                              }
+                              const $27 = v2._1;
+                              const $28 = v2._2;
+                              return $5((v3$5) => {
+                                const $29 = (v4$3, $292) => {
+                                  const $30 = v4$3._3;
+                                  return $5((v5$5) => {
+                                    if ($30) {
+                                      return $7(v4$3, $292);
+                                    }
+                                    return $5((v1$2) => $4(
+                                      v2,
+                                      $5,
+                                      $6,
+                                      $7,
+                                      (state2, a) => $5((v2$3) => $5((v1$3) => pattern$lazy()(
+                                        state2,
+                                        $5,
+                                        $6,
+                                        $7,
+                                        (state2$1, a$1) => $5((v2$4) => {
+                                          const $31 = delim(",");
+                                          return $5((v1$4) => $31(
+                                            state2$1,
+                                            $5,
+                                            $6,
+                                            $7,
+                                            (state2$2, a$2) => $5((v2$5) => $5((v1$5) => pattern$lazy()(
+                                              state2$2,
+                                              $5,
+                                              $6,
+                                              $7,
+                                              (state2$3, a$3) => $5((v2$6) => {
+                                                const $32 = delim(")");
+                                                return $5((v1$6) => $32(
+                                                  state2$3,
+                                                  $5,
+                                                  $6,
+                                                  $7,
+                                                  (state2$4, a$4) => $5((v2$7) => $8(
+                                                    state2$4,
+                                                    $Pattern(
+                                                      "PConstr",
+                                                      "Pair",
+                                                      $List("Cons", a$1, $List("Cons", a$3, Nil))
+                                                    )
+                                                  ))
+                                                ));
+                                              })
+                                            )))
+                                          ));
+                                        })
+                                      )))
+                                    ));
+                                  });
+                                };
+                                return $5((v1$2) => $3(
+                                  $ParseState($27, $28, false),
+                                  $5,
+                                  $6,
+                                  (v2$3, $30) => $29($ParseState(v2$3._1, v2$3._2, false), $30),
+                                  (state2, a) => $5((v2$3) => $5((v1$3) => pattern$lazy()(
+                                    state2,
+                                    $5,
+                                    $6,
+                                    (v2$4, $30) => $29($ParseState(v2$4._1, v2$4._2, false), $30),
+                                    (state2$1, a$1) => $5((v2$4) => {
+                                      const $30 = delim(")");
+                                      return $5((v1$4) => $30(
+                                        state2$1,
+                                        $5,
+                                        $6,
+                                        (v2$5, $31) => $29($ParseState(v2$5._1, v2$5._2, false), $31),
+                                        (state2$2, a$2) => $5((v2$5) => $8(state2$2, a$1))
+                                      ));
+                                    })
+                                  )))
+                                ));
+                              });
+                            });
+                          };
+                          return $5((v1$2) => $5((v1$3) => $5((v1$4) => constructor(
+                            $ParseState($23, $24, false),
+                            $5,
+                            $6,
+                            (v2$3, $26) => $25($ParseState(v2$3._1, v2$3._2, false), $26),
+                            (state2, a) => $5((v2$3) => {
+                              const $26 = PConstr(a);
+                              return $5((v2$4) => {
+                                const $27 = $26(Nil);
+                                return $5((v2$5) => app($27)(state2, $5, $6, (v2$6, $28) => $25($ParseState(v2$6._1, v2$6._2, false), $28), $8));
+                              });
+                            })
+                          ))));
+                        });
+                      }),
+                      (state2, a) => $5((v2$2) => $8(state2, $Pattern("PVar", a)))
+                    )));
+                  });
+                };
+                return $5((v1$1) => $2(
+                  $ParseState($16, $17, false),
+                  $5,
+                  $6,
+                  (v2$2, $19) => $18($ParseState(v2$2._1, v2$2._2, false), $19),
+                  (state2, a) => $5((v2$2) => {
+                    const $19 = sepBy((state1, more, lift12, $$throw2, done) => more((v1$2) => variable(
+                      state1,
+                      more,
+                      lift12,
+                      $$throw2,
+                      (state2$1, a$1) => more((v2$3) => {
+                        const $192 = delim(":");
+                        return more((v1$3) => $192(
+                          state2$1,
+                          more,
+                          lift12,
+                          $$throw2,
+                          (state2$2, a$2) => more((v2$4) => more((v1$4) => pattern$lazy()(
+                            state2$2,
+                            more,
+                            lift12,
+                            $$throw2,
+                            (state2$3, a$3) => more((v2$5) => done(state2$3, $Tuple(a$1, a$3)))
+                          )))
+                        ));
+                      })
+                    )))(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                    return $5((v1$2) => $19(
+                      state2,
+                      $5,
+                      $6,
+                      (v2$3, $20) => $18($ParseState(v2$3._1, v2$3._2, false), $20),
+                      (state2$1, a$1) => $5((v2$3) => {
+                        const $20 = delim("}");
+                        return $5((v1$3) => $20(
+                          state2$1,
+                          $5,
+                          $6,
+                          (v2$4, $21) => $18($ParseState(v2$4._1, v2$4._2, false), $21),
+                          (state2$2, a$2) => $5((v2$4) => $8(state2$2, $Pattern("PRecord", a$1)))
+                        ));
+                      })
+                    ));
+                  })
+                ));
+              });
+            });
+          };
+          return $5((v1$1) => $1(
+            $ParseState($12, $13, false),
+            $5,
+            $6,
+            $14,
+            (state2, a) => $5((v2$2) => $5((v1$2) => pattern$lazy()(
+              state2,
+              $5,
+              $6,
+              $14,
+              (state2$1, a$1) => $5((v2$3) => $5((v1$3) => pListRest(state2$1, $5, $6, $14, (state2$2, a$2) => $5((v2$4) => $8(state2$2, $Pattern("PListNonEmpty", a$1, a$2))))))
+            )))
+          ));
+        });
+      }),
+      (state2, a) => $5((v2$1) => $8(state2, PListEmpty))
+    )));
+  };
+});
+var pattern$lazy = /* @__PURE__ */ binding(() => lazyParserT.defer((v) => foldlArray(makeParser)(simplePattern$lazy())(popdefs)));
+var pattern = /* @__PURE__ */ pattern$lazy();
+var infixFn = /* @__PURE__ */ (() => {
+  const $0 = delim("|");
+  const $1 = delim("|");
+  return (v1, $2, $3, $4, $5) => {
+    const $6 = v1._3;
+    return $2((v1$1) => $2((v2) => $2((v1$2) => $2((v2$1) => $2((v1$3) => $0(
+      v1,
+      $2,
+      $3,
+      (v2$2, $7) => $4($ParseState(v2$2._1, v2$2._2, $6), $7),
+      (state2, a) => $2((v2$2) => $2((v3) => variable(
+        state2,
+        $2,
+        $3,
+        (v2$3, $7) => $4($ParseState(v2$3._1, v2$3._2, $6), $7),
+        (state3, a$1) => $2((v4) => $2((v2$3) => $2((v3$1) => $1(
+          state3,
+          $2,
+          $3,
+          (v2$4, $7) => $4($ParseState(v2$4._1, v2$4._2, $6), $7),
+          (state3$1, a$2) => $2((v4$1) => $2((v2$4) => $5(state3$1, (e) => (e$p) => $Expr2("BinaryApp", e, a$1, e$p))))
+        ))))
+      )))
+    ))))));
+  };
+})();
+var imports_ = /* @__PURE__ */ manyRec2(/* @__PURE__ */ (() => {
+  const $0 = reserved("import");
+  const $1 = joinWith("/");
+  const $2 = fromFoldableImpl(foldableNonEmptyList.foldr);
+  const $3 = sepBy1(variable)(delim("."));
+  return (v1, $4, $5, $6, $7) => {
+    const $8 = v1._3;
+    return $4((v2) => $4((v1$1) => $0(
+      v1,
+      $4,
+      $5,
+      (v2$1, $9) => $6($ParseState(v2$1._1, v2$1._2, $8), $9),
+      (state2, a) => $4((v2$1) => $4((v3) => $4((v1$2) => $3(
+        state2,
+        $4,
+        $5,
+        (v2$2, $9) => $6($ParseState(v2$2._1, v2$2._2, $8), $9),
+        (state2$1, a$1) => $4((v2$2) => {
+          const $9 = $1($2(a$1));
+          return $4((v4) => $7(state2$1, $9));
+        })
+      ))))
+    )));
+  };
+})());
+var withImports = (p) => topLevel((state1, more, lift12, $$throw2, done) => more((v1) => imports_(
+  state1,
+  more,
+  lift12,
+  $$throw2,
+  (state2, a) => more((v2) => more((v1$1) => p(state2, more, lift12, $$throw2, (state2$1, a$1) => more((v2$1) => done(state2$1, $Tuple(a$1, a))))))
+)));
+var consOp = (v1, $0, $1, $2, $3) => {
+  const $4 = v1._3;
+  return $0((v1$1) => lexeme(operator)(
+    v1,
+    $0,
+    $1,
+    (v2, $5) => $2($ParseState(v2._1, v2._2, $4), $5),
+    (state2, a) => $0((v2) => onlyIf(a === ":|")((e) => (e$p) => $Expr2(
+      "Constr",
+      void 0,
+      ":",
+      $List("Cons", e, $List("Cons", e$p, Nil))
+    ))(state2, $0, $1, (v2$1, $5) => $2($ParseState(v2$1._1, v2$1._2, $4), $5), $3))
+  ));
+};
+var binaryOp = (op) => (v1, $0, $1, $2, $3) => {
+  const $4 = v1._3;
+  return $0((v1$1) => lexeme(operator)(
+    v1,
+    $0,
+    $1,
+    (v2, $5) => $2($ParseState(v2._1, v2._2, $4), $5),
+    (state2, a) => $0((v2) => onlyIf(op === a)((e) => (e$p) => $Expr2("BinaryApp", e, op, e$p))(state2, $0, $1, (v2$1, $5) => $2($ParseState(v2$1._1, v2$1._2, $4), $5), $3))
+  ));
+};
+var opdefs = [
+  [
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("!"), AssocLeft),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("**"), AssocRight)
+  ],
+  [
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("*"), AssocLeft),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("/"), AssocLeft)
+  ],
+  [
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("+"), AssocLeft),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("-"), AssocLeft)
+  ],
+  [/* @__PURE__ */ $Operator("Infix", consOp, AssocRight)],
+  [/* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("++"), AssocRight)],
+  [
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("=="), AssocNone),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("/="), AssocNone),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("<"), AssocLeft),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp(">"), AssocLeft),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp("<="), AssocLeft),
+    /* @__PURE__ */ $Operator("Infix", /* @__PURE__ */ binaryOp(">="), AssocLeft)
+  ],
+  [/* @__PURE__ */ $Operator("Infix", infixFn, AssocLeft)]
+];
+var varDefs$lazy = /* @__PURE__ */ binding(() => {
+  const $0 = reserved("def");
+  const varDef = (v1, $1, $2, $3, $4) => {
+    const $5 = v1._3;
+    return $1((v1$1) => $0(
+      v1,
+      $1,
+      $2,
+      (v2, $6) => $3($ParseState(v2._1, v2._2, $5), $6),
+      (state2, a) => $1((v2) => $1((v1$2) => pattern(
+        state2,
+        $1,
+        $2,
+        (v2$1, $6) => $3($ParseState(v2$1._1, v2$1._2, $5), $6),
+        (state2$1, a$1) => $1((v2$1) => {
+          const $6 = block(expr$lazy());
+          return $1((v1$3) => $6(
+            state2$1,
+            $1,
+            $2,
+            (v2$2, $7) => $3($ParseState(v2$2._1, v2$2._2, $5), $7),
+            (state2$2, a$2) => $1((v2$2) => $4(state2$2, $VarDef2(a$1, a$2)))
+          ));
+        })
+      )))
+    ));
+  };
+  return (state1, more, lift12, $$throw2, done) => more((v1) => varDef(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => {
+      const $1 = manyRec2(varDef);
+      return more((v1$1) => $1(
+        state2,
+        more,
+        lift12,
+        $$throw2,
+        (state2$1, a$1) => more((v2$1) => {
+          const $2 = delim(";");
+          return more((v1$2) => {
+            const $3 = state2$1._1;
+            const $4 = state2$1._2;
+            return more((v3) => more((v1$3) => $2(
+              $ParseState($3, $4, false),
+              more,
+              lift12,
+              (v4, $5) => {
+                const $6 = v4._3;
+                return more((v5) => {
+                  if ($6) {
+                    return $$throw2(v4, $5);
+                  }
+                  return more((v2$2) => done(state2$1, nonEmptyListNonEmptyList.nonEmpty($List("Cons", a, a$1))));
+                });
+              },
+              (state2$2, a$2) => more((v2$2) => more((v2$3) => done(state2$2, nonEmptyListNonEmptyList.nonEmpty($List("Cons", a, a$1)))))
+            )));
+          });
+        })
+      ));
+    })
+  ));
+});
+var recDefs$lazy = /* @__PURE__ */ binding(() => {
+  const $0 = reserved("def");
+  const recDef = (v1, $1, $2, $3, $4) => {
+    const $5 = v1._3;
+    return $1((v1$1) => $0(
+      v1,
+      $1,
+      $2,
+      (v2, $6) => $3($ParseState(v2._1, v2._2, $5), $6),
+      (state2, a) => $1((v2) => $1((v1$2) => variable(
+        state2,
+        $1,
+        $2,
+        (v2$1, $6) => $3($ParseState(v2$1._1, v2$1._2, $5), $6),
+        (state2$1, a$1) => $1((v2$1) => {
+          const $6 = delim("(");
+          return $1((v1$3) => $6(
+            state2$1,
+            $1,
+            $2,
+            (v2$2, $7) => $3($ParseState(v2$2._1, v2$2._2, $5), $7),
+            (state2$2, a$2) => $1((v2$2) => {
+              const $7 = sepBy1(pattern)(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+              return $1((v1$4) => $7(
+                state2$2,
+                $1,
+                $2,
+                (v2$3, $8) => $3($ParseState(v2$3._1, v2$3._2, $5), $8),
+                (state2$3, a$3) => $1((v2$3) => {
+                  const $8 = delim(")");
+                  return $1((v1$5) => $8(
+                    state2$3,
+                    $1,
+                    $2,
+                    (v2$4, $9) => $3($ParseState(v2$4._1, v2$4._2, $5), $9),
+                    (state2$4, a$4) => $1((v2$4) => {
+                      const $9 = block(expr$lazy());
+                      return $1((v1$6) => $9(
+                        state2$4,
+                        $1,
+                        $2,
+                        (v2$5, $10) => $3($ParseState(v2$5._1, v2$5._2, $5), $10),
+                        (state2$5, a$5) => $1((v2$5) => $4(state2$5, $Tuple(a$1, $Tuple(a$3, a$5))))
+                      ));
+                    })
+                  ));
+                })
+              ));
+            })
+          ));
+        })
+      )))
+    ));
+  };
+  return (state1, more, lift12, $$throw2, done) => more((v1) => recDef(
+    state1,
+    more,
+    lift12,
+    $$throw2,
+    (state2, a) => more((v2) => {
+      const $1 = manyRec2(recDef);
+      return more((v1$1) => $1(
+        state2,
+        more,
+        lift12,
+        $$throw2,
+        (state2$1, a$1) => more((v2$1) => {
+          const $2 = delim(";");
+          return more((v1$2) => {
+            const $3 = state2$1._1;
+            const $4 = state2$1._2;
+            return more((v3) => more((v1$3) => $2(
+              $ParseState($3, $4, false),
+              more,
+              lift12,
+              (v4, $5) => {
+                const $6 = v4._3;
+                return more((v5) => {
+                  if ($6) {
+                    return $$throw2(v4, $5);
+                  }
+                  return more((v2$2) => done(state2$1, nonEmptyListNonEmptyList.nonEmpty($List("Cons", a, a$1))));
+                });
+              },
+              (state2$2, a$2) => more((v2$2) => more((v2$3) => done(state2$2, nonEmptyListNonEmptyList.nonEmpty($List("Cons", a, a$1)))))
+            )));
+          });
+        })
+      ));
+    })
+  ));
+});
+var expr$lazy = /* @__PURE__ */ binding(() => {
+  const opTree$lazy = binding(() => {
+    const $0 = context("opTree")((() => {
+      const projection = (e) => {
+        const $02 = delim("[");
+        const $1 = delim(".");
+        return (v2, $2, $3, $4, $5) => {
+          const $6 = v2._1;
+          const $7 = v2._2;
+          return $2((v3) => {
+            const $8 = (v4, $82) => {
+              const $9 = v4._3;
+              return $2((v5) => {
+                if ($9) {
+                  return $4(v4, $82);
+                }
+                const $10 = v2._1;
+                const $11 = v2._2;
+                return $2((v3$1) => {
+                  const $12 = (v4$1, $122) => {
+                    const $13 = v4$1._3;
+                    return $2((v5$1) => {
+                      if ($13) {
+                        return $4(v4$1, $122);
+                      }
+                      return $5(v2, e);
+                    });
+                  };
+                  return $2((v1) => $1(
+                    $ParseState($10, $11, false),
+                    $2,
+                    $3,
+                    (v2$1, $13) => $12($ParseState(v2$1._1, v2$1._2, false), $13),
+                    (state2, a) => $2((v2$1) => $2((v1$1) => variable(
+                      state2,
+                      $2,
+                      $3,
+                      (v2$2, $13) => $12($ParseState(v2$2._1, v2$2._2, false), $13),
+                      (state2$1, a$1) => $2((v2$2) => projection($Expr2("Project", e, a$1))(
+                        state2$1,
+                        $2,
+                        $3,
+                        (v2$3, $13) => $12($ParseState(v2$3._1, v2$3._2, false), $13),
+                        $5
+                      ))
+                    )))
+                  ));
+                });
+              });
+            };
+            return $2((v1) => $02(
+              $ParseState($6, $7, false),
+              $2,
+              $3,
+              (v2$1, $9) => $8($ParseState(v2$1._1, v2$1._2, false), $9),
+              (state2, a) => $2((v2$1) => $2((v1$1) => opTree$lazy()(
+                state2,
+                $2,
+                $3,
+                (v2$2, $9) => $8($ParseState(v2$2._1, v2$2._2, false), $9),
+                (state2$1, a$1) => $2((v2$2) => {
+                  const $9 = delim("]");
+                  return $2((v1$2) => $9(
+                    state2$1,
+                    $2,
+                    $3,
+                    (v2$3, $10) => $8($ParseState(v2$3._1, v2$3._2, false), $10),
+                    (state2$2, a$2) => $2((v2$3) => projection($Expr2("DProject", e, a$1))(
+                      state2$2,
+                      $2,
+                      $3,
+                      (v2$4, $10) => $8($ParseState(v2$4._1, v2$4._2, false), $10),
+                      $5
+                    ))
+                  ));
+                })
+              )))
+            ));
+          });
+        };
+      };
+      const parensExpr = context("parens expr")((() => {
+        const $02 = delim("(");
+        return (state1, more, lift12, $$throw2, done) => more((v1) => $02(
+          state1,
+          more,
+          lift12,
+          $$throw2,
+          (state2, a) => more((v2) => more((v1$1) => opTree$lazy()(
+            state2,
+            more,
+            lift12,
+            $$throw2,
+            (state2$1, a$1) => more((v2$1) => {
+              const $1 = delim(")");
+              return more((v1$2) => $1(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, a$1))));
+            })
+          )))
+        ));
+      })());
+      return foldlArray(makeParser)((() => {
+        const $02 = context("simple")((() => {
+          const $03 = context("matrix")((state1, more, lift12, $$throw2, done) => more((v1) => {
+            const $04 = state1._3;
+            return lexeme(string2("[|"))(
+              state1,
+              more,
+              lift12,
+              (v2, $12) => $$throw2($ParseState(v2._1, v2._2, $04), $12),
+              (state2, a) => more((v2) => more((v1$1) => opTree$lazy()(
+                state2,
+                more,
+                lift12,
+                $$throw2,
+                (state2$1, a$1) => more((v2$1) => {
+                  const $12 = reserved("for");
+                  return more((v1$2) => $12(
+                    state2$1,
+                    more,
+                    lift12,
+                    $$throw2,
+                    (state2$2, a$2) => more((v2$2) => {
+                      const $22 = delim("(");
+                      return more((v1$3) => $22(
+                        state2$2,
+                        more,
+                        lift12,
+                        $$throw2,
+                        (state2$3, a$3) => more((v2$3) => more((v1$4) => variable(
+                          state2$3,
+                          more,
+                          lift12,
+                          $$throw2,
+                          (state2$4, a$4) => more((v2$4) => {
+                            const $32 = delim(",");
+                            return more((v1$5) => $32(
+                              state2$4,
+                              more,
+                              lift12,
+                              $$throw2,
+                              (state2$5, a$5) => more((v2$5) => more((v1$6) => variable(
+                                state2$5,
+                                more,
+                                lift12,
+                                $$throw2,
+                                (state2$6, a$6) => more((v2$6) => {
+                                  const $42 = delim(")");
+                                  return more((v1$7) => $42(
+                                    state2$6,
+                                    more,
+                                    lift12,
+                                    $$throw2,
+                                    (state2$7, a$7) => more((v2$7) => {
+                                      const $52 = reserved("in");
+                                      return more((v1$8) => $52(
+                                        state2$7,
+                                        more,
+                                        lift12,
+                                        $$throw2,
+                                        (state2$8, a$8) => more((v2$8) => more((v1$9) => opTree$lazy()(
+                                          state2$8,
+                                          more,
+                                          lift12,
+                                          $$throw2,
+                                          (state2$9, a$9) => more((v2$9) => more((v1$10) => lexeme(string2("|]"))(
+                                            state2$9,
+                                            more,
+                                            lift12,
+                                            $$throw2,
+                                            (state2$10, a$10) => more((v2$10) => done(state2$10, $Expr2("Matrix", void 0, a$1, $Tuple(a$4, a$6), a$9)))
+                                          )))
+                                        )))
+                                      ));
+                                    })
+                                  ));
+                                })
+                              )))
+                            ));
+                          })
+                        )))
+                      ));
+                    })
+                  ));
+                })
+              )))
+            );
+          }));
+          const $1 = context("listExpr")((() => {
+            const $12 = delim("[");
+            return (state1, more, lift12, $$throw2, done) => more((v1) => $12(
+              state1,
+              more,
+              lift12,
+              $$throw2,
+              (state2, a) => more((v2) => {
+                const $22 = optionMaybe((v1$1, $23, $32, $42, $52) => {
+                  const $62 = v1$1._3;
+                  return opTree$lazy()(v1$1, $23, $32, (v2$1, $72) => $42($ParseState(v2$1._1, v2$1._2, $62), $72), $52);
+                });
+                return more((v1$1) => $22(
+                  state2,
+                  more,
+                  lift12,
+                  $$throw2,
+                  (state2$1, a$1) => more((v2$1) => {
+                    if (a$1.tag === "Nothing") {
+                      const $32 = delim("]");
+                      return more((v1$2) => $32(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("ListEmpty", void 0)))));
+                    }
+                    if (a$1.tag === "Just") {
+                      const $32 = a$1._1;
+                      const $42 = context("listEnum")((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$2) => {
+                        const $43 = state1$1._3;
+                        return lexeme(string2(".."))(
+                          state1$1,
+                          more$1,
+                          lift1$1,
+                          (v2$2, $53) => throw$1($ParseState(v2$2._1, v2$2._2, $43), $53),
+                          (state2$2, a$2) => more$1((v2$2) => more$1((v1$3) => opTree$lazy()(
+                            state2$2,
+                            more$1,
+                            lift1$1,
+                            throw$1,
+                            (state2$3, a$3) => more$1((v2$3) => {
+                              const $53 = delim("]");
+                              return more$1((v1$4) => $53(state2$3, more$1, lift1$1, throw$1, (state2$4, a$4) => more$1((v2$4) => done$1(state2$4, $Expr2("ListEnum", $32, a$3)))));
+                            })
+                          )))
+                        );
+                      }));
+                      const $52 = context("listComp")((() => {
+                        const $53 = many1((() => {
+                          const $54 = reserved("if");
+                          const $63 = reserved("for");
+                          return (v2$2, $73, $82, $9, $10) => {
+                            const $11 = v2$2._1;
+                            const $122 = v2$2._2;
+                            return $73((v3) => {
+                              const $13 = (v4, $132) => {
+                                const $14 = v4._3;
+                                return $73((v5) => {
+                                  if ($14) {
+                                    return $9(v4, $132);
+                                  }
+                                  return $73((v1$2) => {
+                                    const $15 = v2$2._3;
+                                    return $63(
+                                      v2$2,
+                                      $73,
+                                      $82,
+                                      (v2$3, $16) => $9($ParseState(v2$3._1, v2$3._2, $15), $16),
+                                      (state2$2, a$2) => $73((v2$3) => $73((v1$3) => pattern(
+                                        state2$2,
+                                        $73,
+                                        $82,
+                                        $9,
+                                        (state2$3, a$3) => $73((v2$4) => {
+                                          const $16 = reserved("in");
+                                          return $73((v1$4) => $16(
+                                            state2$3,
+                                            $73,
+                                            $82,
+                                            $9,
+                                            (state2$4, a$4) => $73((v2$5) => {
+                                              const $17 = brackets(opTree$lazy());
+                                              const $18 = state2$4._1;
+                                              const $19 = state2$4._2;
+                                              return $73((v3$1) => $73((v1$5) => $17(
+                                                $ParseState($18, $19, false),
+                                                $73,
+                                                $82,
+                                                (v2$6, $20) => $73((v5$1) => $73((v1$6) => opTree$lazy()(
+                                                  state2$4,
+                                                  $73,
+                                                  $82,
+                                                  $9,
+                                                  (state2$5, a$5) => $73((v2$7) => $10(state2$5, $Qualifier("ListCompGen", a$3, a$5)))
+                                                ))),
+                                                (state2$5, a$5) => $73((v2$6) => $10(state2$5, $Qualifier("ListCompDecl", $VarDef2(a$3, a$5))))
+                                              )));
+                                            })
+                                          ));
+                                        })
+                                      )))
+                                    );
+                                  });
+                                });
+                              };
+                              return $73((v1$2) => $54(
+                                $ParseState($11, $122, false),
+                                $73,
+                                $82,
+                                (v2$3, $14) => $13($ParseState(v2$3._1, v2$3._2, false), $14),
+                                (state2$2, a$2) => $73((v2$3) => $73((v1$3) => opTree$lazy()(
+                                  state2$2,
+                                  $73,
+                                  $82,
+                                  $13,
+                                  (state2$3, a$3) => $73((v2$4) => $10(state2$3, $Qualifier("ListCompGuard", a$3)))
+                                )))
+                              ));
+                            });
+                          };
+                        })());
+                        return (state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$2) => $53(
+                          state1$1,
+                          more$1,
+                          lift1$1,
+                          throw$1,
+                          (state2$2, a$2) => more$1((v2$2) => {
+                            const $63 = delim("]");
+                            return more$1((v1$3) => $63(
+                              state2$2,
+                              more$1,
+                              lift1$1,
+                              throw$1,
+                              (state2$3, a$3) => more$1((v2$3) => done$1(state2$3, $Expr2("ListComp", void 0, $32, $List("Cons", a$2._1, a$2._2))))
+                            ));
+                          })
+                        ));
+                      })());
+                      const listRest$lazy = binding(() => {
+                        const $63 = delim("]");
+                        const $73 = delim(",");
+                        return (v2$2, $82, $9, $10, $11) => {
+                          const $122 = v2$2._1;
+                          const $13 = v2$2._2;
+                          return $82((v3) => $82((v1$2) => $63(
+                            $ParseState($122, $13, false),
+                            $82,
+                            $9,
+                            (v4, $14) => {
+                              const $15 = v4._3;
+                              return $82((v5) => {
+                                if ($15) {
+                                  return $10(v4, $14);
+                                }
+                                return $82((v1$3) => $73(
+                                  v2$2,
+                                  $82,
+                                  $9,
+                                  $10,
+                                  (state2$2, a$2) => $82((v2$3) => $82((v1$4) => opTree$lazy()(
+                                    state2$2,
+                                    $82,
+                                    $9,
+                                    $10,
+                                    (state2$3, a$3) => $82((v2$4) => $82((v1$5) => listRest$lazy()(
+                                      state2$3,
+                                      $82,
+                                      $9,
+                                      $10,
+                                      (state2$4, a$4) => $82((v2$5) => $11(state2$4, $ListRest("Next", void 0, a$3, a$4)))
+                                    )))
+                                  )))
+                                ));
+                              });
+                            },
+                            (state2$2, a$2) => $82((v2$3) => $11(state2$2, $ListRest("End", void 0)))
+                          )));
+                        };
+                      });
+                      const listRest = listRest$lazy();
+                      const $62 = state2$1._1;
+                      const $72 = state2$1._2;
+                      return more((v3) => $42(
+                        $ParseState($62, $72, false),
+                        more,
+                        lift12,
+                        (v4, $82) => {
+                          const $9 = v4._3;
+                          return more((v5) => {
+                            if ($9) {
+                              return $$throw2(v4, $82);
+                            }
+                            const $10 = state2$1._1;
+                            const $11 = state2$1._2;
+                            return more((v3$1) => $52(
+                              $ParseState($10, $11, false),
+                              more,
+                              lift12,
+                              (v4$1, $122) => {
+                                const $13 = v4$1._3;
+                                return more((v5$1) => {
+                                  if ($13) {
+                                    return $$throw2(v4$1, $122);
+                                  }
+                                  return more((v1$2) => listRest(
+                                    state2$1,
+                                    more,
+                                    lift12,
+                                    $$throw2,
+                                    (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("ListNonEmpty", void 0, $32, a$2)))
+                                  ));
+                                });
+                              },
+                              done
+                            ));
+                          });
+                        },
+                        done
+                      ));
+                    }
+                    fail();
+                  })
+                ));
+              })
+            ));
+          })());
+          const $2 = context("lambda")((() => {
+            const $22 = reserved("lambda");
+            return (state1, more, lift12, $$throw2, done) => more((v1) => {
+              const $32 = state1._3;
+              return $22(
+                state1,
+                more,
+                lift12,
+                (v2, $42) => $$throw2($ParseState(v2._1, v2._2, $32), $42),
+                (state2, a) => more((v2) => {
+                  const $42 = sepBy1(pattern)(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                  return more((v1$1) => $42(
+                    state2,
+                    more,
+                    lift12,
+                    $$throw2,
+                    (state2$1, a$1) => more((v2$1) => {
+                      const $52 = delim(":");
+                      return more((v1$2) => $52(
+                        state2$1,
+                        more,
+                        lift12,
+                        $$throw2,
+                        (state2$2, a$2) => more((v2$2) => more((v1$3) => opTree$lazy()(
+                          state2$2,
+                          more,
+                          lift12,
+                          $$throw2,
+                          (state2$3, a$3) => more((v2$3) => done(
+                            state2$3,
+                            $Expr2("Lambda", nonEmptyListNonEmptyList.nonEmpty($List("Cons", $Tuple(a$1, a$3), Nil)))
+                          ))
+                        )))
+                      ));
+                    })
+                  ));
+                })
+              );
+            });
+          })());
+          const $3 = delim("[");
+          const $4 = VarKey();
+          const $5 = context("dict")((() => {
+            const $52 = delim("{");
+            return (state1, more, lift12, $$throw2, done) => more((v1) => $52(
+              state1,
+              more,
+              lift12,
+              $$throw2,
+              (state2, a) => more((v2) => {
+                const $62 = sepBy((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v1$1) => {
+                  const $63 = (state2$1, a$1) => more$1((v2$1) => {
+                    const $64 = lexeme(withErrorMessage(satisfy((v) => v === ":"))("':'"));
+                    return more$1((v1$2) => $64(
+                      state2$1,
+                      more$1,
+                      lift1$1,
+                      throw$1,
+                      (state2$2, a$2) => more$1((v2$2) => more$1((v1$3) => opTree$lazy()(
+                        state2$2,
+                        more$1,
+                        lift1$1,
+                        throw$1,
+                        (state2$3, a$3) => more$1((v2$3) => done$1(state2$3, $Tuple(a$1, a$3)))
+                      )))
+                    ));
+                  });
+                  const $72 = state1$1._1;
+                  const $82 = state1$1._2;
+                  return more$1((v3) => {
+                    const $9 = (v4, $92) => {
+                      const $10 = v4._3;
+                      return more$1((v5) => {
+                        if ($10) {
+                          return throw$1(v4, $92);
+                        }
+                        return more$1((v1$2) => variable(state1$1, more$1, lift1$1, throw$1, (state2$1, a$1) => more$1((v2$1) => $63(state2$1, $4(a$1)))));
+                      });
+                    };
+                    return more$1((v1$2) => $3(
+                      $ParseState($72, $82, false),
+                      more$1,
+                      lift1$1,
+                      $9,
+                      (state2$1, a$1) => more$1((v2$1) => more$1((v1$3) => opTree$lazy()(
+                        state2$1,
+                        more$1,
+                        lift1$1,
+                        $9,
+                        (state2$2, a$2) => more$1((v2$2) => {
+                          const $10 = delim("]");
+                          return more$1((v1$4) => $10(state2$2, more$1, lift1$1, $9, (state2$3, a$3) => more$1((v2$3) => $63(state2$3, $DictEntry("ExprKey", a$2)))));
+                        })
+                      )))
+                    ));
+                  });
+                }))(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                return more((v1$1) => $62(
+                  state2,
+                  more,
+                  lift12,
+                  $$throw2,
+                  (state2$1, a$1) => more((v2$1) => more((v1$2) => whitespace(
+                    state2$1,
+                    more,
+                    lift12,
+                    $$throw2,
+                    (state2$2, a$2) => more((v2$2) => {
+                      const $72 = delim("}");
+                      return more((v1$3) => $72(state2$2, more, lift12, $$throw2, (state2$3, a$3) => more((v2$3) => done(state2$3, $Expr2("Dictionary", void 0, a$1)))));
+                    })
+                  )))
+                ));
+              })
+            ));
+          })());
+          const $6 = Float();
+          const $7 = Int();
+          const $8 = (() => {
+            const $82 = some(alternativeParserT)(lazyParserT)(satisfy((c) => c !== '"' && c !== "$" && !isSpace(toCharCode(c))));
+            const $9 = (() => {
+              const $92 = delim("$");
+              const $10 = (() => {
+                const $102 = Str();
+                const $11 = context("pair")((() => {
+                  const $112 = delim("(");
+                  return (state1, more, lift12, $$throw2, done) => more((v1) => {
+                    const $122 = state1._3;
+                    return more((v1$1) => $112(
+                      state1,
+                      more,
+                      lift12,
+                      (v2, $132) => $$throw2($ParseState(v2._1, v2._2, $122), $132),
+                      (state2, a) => more((v2) => more((v1$2) => opTree$lazy()(
+                        state2,
+                        more,
+                        lift12,
+                        (v2$1, $132) => $$throw2($ParseState(v2$1._1, v2$1._2, $122), $132),
+                        (state2$1, a$1) => more((v2$1) => {
+                          const $132 = delim(",");
+                          return more((v1$3) => $132(
+                            state2$1,
+                            more,
+                            lift12,
+                            (v2$2, $14) => $$throw2($ParseState(v2$2._1, v2$2._2, $122), $14),
+                            (state2$2, a$2) => more((v2$2) => more((v2$3) => more((v1$4) => opTree$lazy()(
+                              state2$2,
+                              more,
+                              lift12,
+                              $$throw2,
+                              (state2$3, a$3) => more((v2$4) => {
+                                const $14 = delim(")");
+                                return more((v1$5) => $14(
+                                  state2$3,
+                                  more,
+                                  lift12,
+                                  $$throw2,
+                                  (state2$4, a$4) => more((v2$5) => done(
+                                    state2$4,
+                                    $Expr2("Constr", void 0, "Pair", $List("Cons", a$1, $List("Cons", a$3, Nil)))
+                                  ))
+                                ));
+                              })
+                            ))))
+                          ));
+                        })
+                      )))
+                    ));
+                  });
+                })());
+                const args = (e) => {
+                  const $122 = delim("(");
+                  return (state1, more, lift12, $$throw2, done) => more((v1) => {
+                    const $132 = state1._3;
+                    return more((v1$1) => $122(
+                      state1,
+                      more,
+                      lift12,
+                      (v2, $14) => $$throw2($ParseState(v2._1, v2._2, $132), $14),
+                      (state2, a) => more((v2) => sameLine(
+                        state2,
+                        more,
+                        lift12,
+                        (v2$1, $14) => $$throw2($ParseState(v2$1._1, v2$1._2, $132), $14),
+                        (state2$1, a$1) => more((v2$1) => {
+                          const $14 = sepBy(opTree$lazy())(lexeme(withErrorMessage(satisfy((v) => v === ","))("','")));
+                          return more((v1$2) => $14(
+                            state2$1,
+                            more,
+                            lift12,
+                            $$throw2,
+                            (state2$2, a$2) => more((v2$2) => {
+                              const $15 = delim(")");
+                              return more((v1$3) => $15(
+                                state2$2,
+                                more,
+                                lift12,
+                                $$throw2,
+                                (state2$3, a$3) => more((v2$3) => {
+                                  if (e.tag === "Constr") {
+                                    return app($Expr2(
+                                      "Constr",
+                                      e._1,
+                                      e._2,
+                                      foldableList.foldr(Cons)(foldableList.foldr(Cons)(Nil)(a$2))(e._3)
+                                    ))(state2$3, more, lift12, $$throw2, done);
+                                  }
+                                  return app((() => {
+                                    const go = (go$a0$copy) => (go$a1$copy) => {
+                                      let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
+                                      while (go$c) {
+                                        const b = go$a0, v = go$a1;
+                                        if (v.tag === "Nil") {
+                                          go$c = false;
+                                          go$r = b;
+                                          continue;
+                                        }
+                                        if (v.tag === "Cons") {
+                                          go$a0 = $Expr2("App", b, v._1);
+                                          go$a1 = v._2;
+                                          continue;
+                                        }
+                                        fail();
+                                      }
+                                      return go$r;
+                                    };
+                                    return go(e)(a$2);
+                                  })())(state2$3, more, lift12, $$throw2, done);
+                                })
+                              ));
+                            })
+                          ));
+                        })
+                      ))
+                    ));
+                  });
+                };
+                const app = (e) => {
+                  const $122 = args(e);
+                  return (v2, $132, $14, $15, $16) => {
+                    const $17 = v2._1;
+                    const $18 = v2._2;
+                    return $132((v3) => {
+                      const $19 = (v4, $192) => {
+                        const $20 = v4._3;
+                        return $132((v5) => {
+                          if ($20) {
+                            return $15(v4, $192);
+                          }
+                          return $16(v2, e);
+                        });
+                      };
+                      return $132((v2$1) => $132((v1) => sameLine(
+                        $ParseState($17, $18, false),
+                        $132,
+                        $14,
+                        $19,
+                        (state2, a) => $132((v2$2) => $132((v3$1) => $122(state2, $132, $14, $19, (state3, a$1) => $132((v4) => $16(state3, a$1)))))
+                      )));
+                    });
+                  };
+                };
+                const $12 = context("app chain")(withPos((() => {
+                  const $122 = Constr2();
+                  const $132 = context("parens op")((() => {
+                    const $133 = delim("(");
+                    return (state1, more, lift12, $$throw2, done) => more((v1) => $133(
+                      state1,
+                      more,
+                      lift12,
+                      $$throw2,
+                      (state2, a) => more((v2) => more((v1$1) => operator(
+                        state2,
+                        more,
+                        lift12,
+                        $$throw2,
+                        (state2$1, a$1) => more((v2$1) => {
+                          const $14 = delim(")");
+                          return more((v1$2) => $14(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Expr2("Op", a$1)))));
+                        })
+                      )))
+                    ));
+                  })());
+                  return (state1, more, lift12, $$throw2, done) => more((v1) => {
+                    const $14 = state1._1;
+                    const $15 = state1._2;
+                    return more((v3) => more((v1$1) => variable(
+                      $ParseState($14, $15, false),
+                      more,
+                      lift12,
+                      (v4, $16) => {
+                        const $17 = v4._3;
+                        return more((v5) => {
+                          if ($17) {
+                            return $$throw2(v4, $16);
+                          }
+                          const $18 = state1._1;
+                          const $19 = state1._2;
+                          return more((v3$1) => more((v1$2) => constructor(
+                            $ParseState($18, $19, false),
+                            more,
+                            lift12,
+                            (v4$1, $20) => {
+                              const $21 = v4$1._3;
+                              return more((v5$1) => {
+                                if ($21) {
+                                  return $$throw2(v4$1, $20);
+                                }
+                                const $22 = state1._1;
+                                const $23 = state1._2;
+                                return more((v3$2) => parensExpr(
+                                  $ParseState($22, $23, false),
+                                  more,
+                                  lift12,
+                                  (v2, $24) => more((v5$2) => {
+                                    const $25 = state1._3;
+                                    return $132(
+                                      state1,
+                                      more,
+                                      lift12,
+                                      (v2$1, $26) => $$throw2($ParseState(v2$1._1, v2$1._2, $25), $26),
+                                      (state2, a) => more((v2$1) => app(a)(state2, more, lift12, $$throw2, done))
+                                    );
+                                  }),
+                                  (state2, a) => more((v2) => app(a)(state2, more, lift12, $$throw2, done))
+                                ));
+                              });
+                            },
+                            (state2, a) => more((v2) => {
+                              const $20 = $122(a)(Nil);
+                              return more((v2$1) => app($20)(state2, more, lift12, $$throw2, done));
+                            })
+                          )));
+                        });
+                      },
+                      (state2, a) => more((v2) => more((v2$1) => app($Expr2("Var", a))(state2, more, lift12, $$throw2, done)))
+                    )));
+                  });
+                })()));
+                const $13 = (() => {
+                  const $132 = withErrorMessage(context("doc expr")((state1, more, lift12, $$throw2, done) => more((v1) => {
+                    const $133 = state1._3;
+                    return lexeme(string2("@doc"))(
+                      state1,
+                      more,
+                      lift12,
+                      (v2, $14) => $$throw2($ParseState(v2._1, v2._2, $133), $14),
+                      (state2, a) => more((v2) => {
+                        const $14 = delim("(");
+                        return more((v1$1) => $14(
+                          state2,
+                          more,
+                          lift12,
+                          $$throw2,
+                          (state2$1, a$1) => more((v2$1) => more((v1$2) => opTree$lazy()(
+                            state2$1,
+                            more,
+                            lift12,
+                            $$throw2,
+                            (state2$2, a$2) => more((v2$2) => {
+                              const $15 = delim(")");
+                              return more((v1$3) => $15(
+                                state2$2,
+                                more,
+                                lift12,
+                                $$throw2,
+                                (state2$3, a$3) => more((v2$3) => more((v1$4) => opTree$lazy()(
+                                  state2$3,
+                                  more,
+                                  lift12,
+                                  $$throw2,
+                                  (state2$4, a$4) => more((v2$4) => done(state2$4, $Expr2("DocExpr", a$2, a$4)))
+                                )))
+                              ));
+                            })
+                          )))
+                        ));
+                      })
+                    );
+                  })))("simple expression");
+                  return (v2, $14, $15, $16, $17) => {
+                    const $18 = v2._1;
+                    const $19 = v2._2;
+                    return $14((v3) => $14((v3$1) => $14((v1) => $$float(
+                      $ParseState($18, $19, false),
+                      $14,
+                      $15,
+                      (v2$1, $20) => $14((v5) => $14((v1$1) => integer(
+                        $ParseState($18, $19, false),
+                        $14,
+                        $15,
+                        (v4, $21) => {
+                          const $22 = v4._3;
+                          return $14((v5$1) => {
+                            if ($22) {
+                              return $16(v4, $21);
+                            }
+                            const $23 = v2._1;
+                            const $24 = v2._2;
+                            return $14((v3$2) => {
+                              const $25 = (v4$1, $252) => {
+                                const $26 = v4$1._3;
+                                return $14((v5$2) => {
+                                  if ($26) {
+                                    return $16(v4$1, $252);
+                                  }
+                                  const $27 = v2._1;
+                                  const $28 = v2._2;
+                                  return $14((v3$3) => $14((v1$2) => stringLiteral(
+                                    $ParseState($27, $28, false),
+                                    $14,
+                                    $15,
+                                    (v4$2, $29) => {
+                                      const $30 = v4$2._3;
+                                      return $14((v5$3) => {
+                                        if ($30) {
+                                          return $16(v4$2, $29);
+                                        }
+                                        const $31 = v2._1;
+                                        const $32 = v2._2;
+                                        return $14((v3$4) => $11(
+                                          $ParseState($31, $32, false),
+                                          $14,
+                                          $15,
+                                          (v4$3, $33) => {
+                                            const $34 = v4$3._3;
+                                            return $14((v5$4) => {
+                                              if ($34) {
+                                                return $16(v4$3, $33);
+                                              }
+                                              const $35 = v2._1;
+                                              const $36 = v2._2;
+                                              return $14((v3$5) => $12(
+                                                $ParseState($35, $36, false),
+                                                $14,
+                                                $15,
+                                                (v4$4, $37) => {
+                                                  const $38 = v4$4._3;
+                                                  return $14((v5$5) => {
+                                                    if ($38) {
+                                                      return $16(v4$4, $37);
+                                                    }
+                                                    const $39 = v2._1;
+                                                    const $40 = v2._2;
+                                                    return $14((v3$6) => parensExpr(
+                                                      $ParseState($39, $40, false),
+                                                      $14,
+                                                      $15,
+                                                      (v4$5, $41) => {
+                                                        const $42 = v4$5._3;
+                                                        return $14((v5$6) => {
+                                                          if ($42) {
+                                                            return $16(v4$5, $41);
+                                                          }
+                                                          return $132(v2, $14, $15, $16, $17);
+                                                        });
+                                                      },
+                                                      $17
+                                                    ));
+                                                  });
+                                                },
+                                                $17
+                                              ));
+                                            });
+                                          },
+                                          $17
+                                        ));
+                                      });
+                                    },
+                                    (state2, a) => $14((v2$2) => $17(state2, $102(a)))
+                                  )));
+                                });
+                              };
+                              return $14((v1$2) => lexeme(string2('"""'))(
+                                $ParseState($23, $24, false),
+                                $14,
+                                $15,
+                                (v2$2, $26) => $25($ParseState(v2$2._1, v2$2._2, false), $26),
+                                (state2, a) => $14((v2$2) => {
+                                  const $26 = manyRec2(lexeme((v2$3, $262, $27, $28, $29) => {
+                                    const $30 = v2$3._1;
+                                    const $31 = v2$3._2;
+                                    return $262((v3$3) => $262((v1$3) => $82(
+                                      $ParseState($30, $31, false),
+                                      $262,
+                                      $27,
+                                      (v4$1, $32) => {
+                                        const $33 = v4$1._3;
+                                        return $262((v5$2) => {
+                                          if ($33) {
+                                            return $28(v4$1, $32);
+                                          }
+                                          return $262((v1$4) => $92(
+                                            v2$3,
+                                            $262,
+                                            $27,
+                                            $28,
+                                            (state2$1, a$1) => $262((v2$4) => {
+                                              const $34 = delim("{");
+                                              return $262((v1$5) => $34(
+                                                state2$1,
+                                                $262,
+                                                $27,
+                                                $28,
+                                                (state2$2, a$2) => $262((v2$5) => $262((v1$6) => opTree$lazy()(
+                                                  state2$2,
+                                                  $262,
+                                                  $27,
+                                                  $28,
+                                                  (state2$3, a$3) => $262((v2$6) => {
+                                                    const $35 = delim("}");
+                                                    return $262((v1$7) => $35(
+                                                      state2$3,
+                                                      $262,
+                                                      $27,
+                                                      $28,
+                                                      (state2$4, a$4) => $262((v2$7) => $29(state2$4, $ParagraphElem("Unquote", a$3)))
+                                                    ));
+                                                  })
+                                                )))
+                                              ));
+                                            })
+                                          ));
+                                        });
+                                      },
+                                      (state2$1, a$1) => $262((v2$4) => $29(state2$1, $ParagraphElem("Token", fromCharArray(a$1))))
+                                    )));
+                                  }));
+                                  return $14((v1$3) => $26(
+                                    state2,
+                                    $14,
+                                    $15,
+                                    $25,
+                                    (state2$1, a$1) => $14((v2$3) => $14((v1$4) => lexeme(string2('"""'))(
+                                      state2$1,
+                                      $14,
+                                      $15,
+                                      $25,
+                                      (state2$2, a$2) => $14((v2$4) => $17(state2$2, $Expr2("Paragraph", a$1)))
+                                    )))
+                                  ));
+                                })
+                              ));
+                            });
+                          });
+                        },
+                        (state2, a) => $14((v2$2) => $17(state2, $7(a)))
+                      ))),
+                      (state2, a) => $14((v2$1) => $17(state2, $6(a)))
+                    ))));
+                  };
+                })();
+                return (v2, $14, $15, $16, $17) => {
+                  const $18 = v2._1;
+                  const $19 = v2._2;
+                  return $14((v3) => $5(
+                    $ParseState($18, $19, false),
+                    $14,
+                    $15,
+                    (v4, $20) => {
+                      const $21 = v4._3;
+                      return $14((v5) => {
+                        if ($21) {
+                          return $16(v4, $20);
+                        }
+                        return $13(v2, $14, $15, $16, $17);
+                      });
+                    },
+                    $17
+                  ));
+                };
+              })();
+              return (v2, $11, $12, $13, $14) => {
+                const $15 = v2._1;
+                const $16 = v2._2;
+                return $11((v3) => $2(
+                  $ParseState($15, $16, false),
+                  $11,
+                  $12,
+                  (v4, $17) => {
+                    const $18 = v4._3;
+                    return $11((v5) => {
+                      if ($18) {
+                        return $13(v4, $17);
+                      }
+                      return $10(v2, $11, $12, $13, $14);
+                    });
+                  },
+                  $14
+                ));
+              };
+            })();
+            return (v2, $10, $11, $12, $13) => {
+              const $14 = v2._1;
+              const $15 = v2._2;
+              return $10((v3) => $1(
+                $ParseState($14, $15, false),
+                $10,
+                $11,
+                (v4, $16) => {
+                  const $17 = v4._3;
+                  return $10((v5) => {
+                    if ($17) {
+                      return $12(v4, $16);
+                    }
+                    return $9(v2, $10, $11, $12, $13);
+                  });
+                },
+                $13
+              ));
+            };
+          })();
+          return (v2, $9, $10, $11, $12) => {
+            const $13 = v2._1;
+            const $14 = v2._2;
+            return $9((v3) => $03(
+              $ParseState($13, $14, false),
+              $9,
+              $10,
+              (v4, $15) => {
+                const $16 = v4._3;
+                return $9((v5) => {
+                  if ($16) {
+                    return $11(v4, $15);
+                  }
+                  return $8(v2, $9, $10, $11, $12);
+                });
+              },
+              $12
+            ));
+          };
+        })());
+        return (state1, more, lift12, $$throw2, done) => more((v1) => $02(state1, more, lift12, $$throw2, (state2, a) => more((v2) => projection(a)(state2, more, lift12, $$throw2, done))));
+      })())(opdefs);
+    })());
+    return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $0(
+      state1,
+      more,
+      lift12,
+      $$throw2,
+      (state2, a) => more((v2$1) => more((v3) => consume(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a)))))
+    )));
+  });
+  const opTree = opTree$lazy();
+  return context("expr")((() => {
+    const $0 = reserved("case");
+    const branch = (state1, more, lift12, $$throw2, done) => more((v1) => {
+      const $12 = state1._3;
+      return $0(
+        state1,
+        more,
+        lift12,
+        (v2, $22) => $$throw2($ParseState(v2._1, v2._2, $12), $22),
+        (state2, a) => more((v2) => more((v1$1) => pattern(
+          state2,
+          more,
+          lift12,
+          $$throw2,
+          (state2$1, a$1) => more((v2$1) => {
+            const $22 = block(expr$lazy());
+            return more((v1$2) => $22(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, $Tuple(a$1, a$2)))));
+          })
+        )))
+      );
+    });
+    const $1 = reserved("match");
+    const $2 = reserved("if");
+    const $3 = context("def")((() => {
+      const $32 = context("funDef")((state1, more, lift12, $$throw2, done) => more((v1) => {
+        const $33 = state1._3;
+        return recDefs$lazy()(
+          state1,
+          more,
+          lift12,
+          (v2, $43) => $$throw2($ParseState(v2._1, v2._2, $33), $43),
+          (state2, a) => more((v2) => more((v1$1) => align(expr$lazy())(
+            state2,
+            more,
+            lift12,
+            $$throw2,
+            (state2$1, a$1) => more((v2$1) => done(state2$1, $Expr2("LetRec", a, a$1)))
+          )))
+        );
+      }));
+      const $42 = context("valDef")((state1, more, lift12, $$throw2, done) => more((v1) => {
+        const $43 = state1._3;
+        return varDefs$lazy()(
+          state1,
+          more,
+          lift12,
+          (v2, $5) => $$throw2($ParseState(v2._1, v2._2, $43), $5),
+          (state2, a) => more((v2) => more((v1$1) => align(expr$lazy())(
+            state2,
+            more,
+            lift12,
+            $$throw2,
+            (state2$1, a$1) => more((v2$1) => done(state2$1, $Expr2("Let", a, a$1)))
+          )))
+        );
+      }));
+      return (v2, $5, $6, $7, $8) => {
+        const $9 = v2._1;
+        const $10 = v2._2;
+        return $5((v3) => $32($ParseState($9, $10, false), $5, $6, (v2$1, $11) => $5((v5) => $42(v2, $5, $6, $7, $8)), $8));
+      };
+    })());
+    const $4 = withErrorMessage(opTree)("expression");
+    return (v2, $5, $6, $7, $8) => {
+      const $9 = v2._1;
+      const $10 = v2._2;
+      return $5((v3) => {
+        const $11 = (v4, $112) => {
+          const $12 = v4._3;
+          return $5((v5) => {
+            if ($12) {
+              return $7(v4, $112);
+            }
+            const $13 = v2._1;
+            const $14 = v2._2;
+            return $5((v3$1) => {
+              const $15 = (v4$1, $152) => {
+                const $16 = v4$1._3;
+                return $5((v5$1) => {
+                  if ($16) {
+                    return $7(v4$1, $152);
+                  }
+                  const $17 = v2._1;
+                  const $18 = v2._2;
+                  return $5((v3$2) => $3(
+                    $ParseState($17, $18, false),
+                    $5,
+                    $6,
+                    (v4$2, $19) => {
+                      const $20 = v4$2._3;
+                      return $5((v5$2) => {
+                        if ($20) {
+                          return $7(v4$2, $19);
+                        }
+                        return $4(v2, $5, $6, $7, $8);
+                      });
+                    },
+                    $8
+                  ));
+                });
+              };
+              return $5((v1) => $2(
+                $ParseState($13, $14, false),
+                $5,
+                $6,
+                (v2$1, $16) => $15($ParseState(v2$1._1, v2$1._2, false), $16),
+                (state2, a) => $5((v2$1) => $5((v1$1) => opTree(
+                  state2,
+                  $5,
+                  $6,
+                  $15,
+                  (state2$1, a$1) => $5((v2$2) => {
+                    const $16 = block(expr$lazy());
+                    return $5((v1$2) => $16(
+                      state2$1,
+                      $5,
+                      $6,
+                      $15,
+                      (state2$2, a$2) => $5((v2$3) => {
+                        const $17 = align(reserved("else"));
+                        return $5((v1$3) => $17(
+                          state2$2,
+                          $5,
+                          $6,
+                          $15,
+                          (state2$3, a$3) => $5((v2$4) => {
+                            const $18 = block(expr$lazy());
+                            return $5((v1$4) => $18(state2$3, $5, $6, $15, (state2$4, a$4) => $5((v2$5) => $8(state2$4, $Expr2("IfElse", a$1, a$2, a$4)))));
+                          })
+                        ));
+                      })
+                    ));
+                  })
+                )))
+              ));
+            });
+          });
+        };
+        return $5((v1) => $1(
+          $ParseState($9, $10, false),
+          $5,
+          $6,
+          (v2$1, $12) => $11($ParseState(v2$1._1, v2$1._2, false), $12),
+          (state2, a) => $5((v2$1) => $5((v1$1) => opTree(
+            state2,
+            $5,
+            $6,
+            $11,
+            (state2$1, a$1) => $5((v2$2) => {
+              const $12 = block((state1, more, lift12, $$throw2, done) => more((v1$2) => branch(
+                state1,
+                more,
+                lift12,
+                $$throw2,
+                (state2$2, a$2) => more((v2$3) => {
+                  const $122 = manyRec2((v1$3, $123, $13, $14, $15) => {
+                    const $16 = v1$3._3;
+                    return align(branch)(v1$3, $123, $13, (v2$4, $17) => $14($ParseState(v2$4._1, v2$4._2, $16), $17), $15);
+                  });
+                  return more((v1$3) => $122(
+                    state2$2,
+                    more,
+                    lift12,
+                    $$throw2,
+                    (state2$3, a$3) => more((v2$4) => done(state2$3, nonEmptyListNonEmptyList.nonEmpty($List("Cons", a$2, a$3))))
+                  ));
+                })
+              )));
+              return $5((v1$2) => $12(state2$1, $5, $6, $11, (state2$2, a$2) => $5((v2$3) => $8(state2$2, $Expr2("MatchAs", a$1, a$2)))));
+            })
+          )))
+        ));
+      });
+    };
+  })());
+});
+var varDefs = /* @__PURE__ */ varDefs$lazy();
+var recDefs = /* @__PURE__ */ recDefs$lazy();
+var expr = /* @__PURE__ */ expr$lazy();
+var parsePy$p = (input) => {
+  const $0 = runParserT2(input)(withImports(expr))(initialPos)._1;
+  if ($0.tag === "Left") {
+    return $Either("Left", prettyParseError($0._1));
+  }
+  if ($0.tag === "Right") {
+    return $Either("Right", $0._1);
+  }
+  fail();
+};
+var defs = /* @__PURE__ */ choose(altParserT)((v1, $0, $1, $2, $3) => {
+  const $4 = v1._3;
+  return varDefs(v1, $0, $1, (v2, $5) => $2($ParseState(v2._1, v2._2, $4), $5), $3);
+})(recDefs);
+var module_ = /* @__PURE__ */ (() => {
+  const $0 = manyRec2(defs);
+  return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a) => more((v2) => done(state2, $Module(a)))));
+})();
+var parsePyModule$p = (input) => {
+  const $0 = runParserT2(input)(withImports(module_))(initialPos)._1;
+  if ($0.tag === "Left") {
+    return $Either("Left", prettyParseError($0._1));
+  }
+  if ($0.tag === "Right") {
+    return $Either("Right", $0._1);
+  }
+  fail();
+};
+
+// output-es/Module/index.js
+var all3 = /* @__PURE__ */ (() => foldableList.foldMap(/* @__PURE__ */ (() => {
+  const semigroupConj1 = { append: (v) => (v1) => v && v1 };
+  return { mempty: true, Semigroup0: () => semigroupConj1 };
+})()))();
+var elem2 = /* @__PURE__ */ (() => {
+  const any1 = foldableList.foldMap(/* @__PURE__ */ (() => {
+    const semigroupDisj1 = { append: (v) => (v1) => v || v1 };
+    return { mempty: false, Semigroup0: () => semigroupDisj1 };
+  })());
+  return (x) => any1(($0) => x === $0);
+})();
+var fromFoldable20 = /* @__PURE__ */ (() => foldableSet.foldr(Cons)(Nil))();
+var boundedLattice2 = { BoundedJoinSemilattice0: () => boundedJoinSemilatticeUni, BoundedMeetSemilattice1: () => boundedMeetSemilatticeUni };
+var unions2 = /* @__PURE__ */ (() => {
+  const go = (go$a0$copy) => (go$a1$copy) => {
+    let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
+    while (go$c) {
+      const b = go$a0, v = go$a1;
+      if (v.tag === "Nil") {
+        go$c = false;
+        go$r = b;
+        continue;
+      }
+      if (v.tag === "Cons") {
+        go$a0 = unionWith(ordDVertex$p)($$const)(b)(v._1);
+        go$a1 = v._2;
+        continue;
+      }
+      fail();
+    }
+    return go$r;
+  };
+  return go(Leaf2);
+})();
+var union7 = /* @__PURE__ */ (() => setSet(ordDVertex$p).union)();
+var parseProgram$p = (dictMonadError) => {
+  const $0 = dictMonadError.MonadThrow0();
+  const $1 = $0.Monad0().Applicative0().pure;
+  return (src) => {
+    const $2 = parsePy$p(src);
+    if ($2.tag === "Left") {
+      return $0.throwError(error(showStringImpl($2._1)));
+    }
+    if ($2.tag === "Right") {
+      return $1($2._1);
+    }
+    fail();
+  };
+};
+var parseModule$p = (dictMonadError) => {
+  const $0 = dictMonadError.MonadThrow0();
+  const $1 = $0.Monad0().Applicative0().pure;
+  return (src) => {
+    const $2 = parsePyModule$p(src);
+    if ($2.tag === "Left") {
+      return $0.throwError(error(showStringImpl($2._1)));
+    }
+    if ($2.tag === "Right") {
+      return $1($2._1);
+    }
+    fail();
+  };
+};
+var loadModuleGraph = (dictMonadAff) => {
+  const Monad0 = dictMonadAff.MonadEffect0().Monad0();
+  const $0 = Monad0.Bind1();
+  const $1 = Monad0.Applicative0();
+  return (dictMonadError) => {
+    const withMsg2 = withMsg(dictMonadError);
+    const parseModule$p1 = parseModule$p(dictMonadError);
+    const desugarModuleFwd = moduleFwd(dictMonadError)(boundedLattice2);
+    return (dictMonadReader) => {
+      const ask = dictMonadReader.MonadAsk0().ask;
+      return (dictLoadFile) => {
+        const loadFile3 = loadFile(dictLoadFile)(Monad0)(dictMonadError)(dictMonadAff);
+        return (roots) => {
+          const collectModules = (visited) => (graph) => (modules) => (imports) => {
+            if (imports.tag === "Nil") {
+              return $1.pure($Tuple(graph, modules));
+            }
+            if (imports.tag === "Cons") {
+              if ((() => {
+                const $2 = lookup2(ordString)(imports._1)(visited);
+                if ($2.tag === "Nothing") {
+                  return false;
+                }
+                if ($2.tag === "Just") {
+                  return true;
+                }
+                fail();
+              })()) {
+                return collectModules(visited)(graph)(modules)(imports._2);
+              }
+              return $0.bind($0.bind(ask)((v) => $0.bind(loadFile3(v.fluidSrcPaths)(imports._1 + ".fld"))((src) => $0.bind(withMsg2("Loading module " + imports._1)(parseModule$p1(src)))((v1) => {
+                const $2 = v1._2;
+                return $0.bind(desugarModuleFwd(v1._1))((mod$p) => $1.pure($Tuple(
+                  mod$p,
+                  imports._1 === "lib/prelude" ? $2 : $List("Cons", "lib/prelude", $2)
+                )));
+              }))))((v) => collectModules(insert(ordString)(imports._1)()(visited))(insert(ordString)(imports._1)(v._2)(graph))(insert(ordString)(imports._1)(v._1)(modules))(foldableList.foldr(Cons)(imports._2)(v._2)));
+            }
+            fail();
+          };
+          return $0.bind(collectModules(Leaf2)(Leaf2)(Leaf2)(roots))((v) => {
+            const $2 = v._1;
+            return $1.pure({
+              roots,
+              topsorted: (() => {
+                const go = (go$a0$copy) => (go$a1$copy) => {
+                  let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
+                  while (go$c) {
+                    const v$1 = go$a0, v1 = go$a1;
+                    if (v$1.tag === "Nil") {
+                      go$c = false;
+                      go$r = reverse2(v1);
+                      continue;
+                    }
+                    const v2 = find(foldableList)((mod) => {
+                      const v22 = lookup2(ordString)(mod)($2);
+                      if (v22.tag === "Nothing") {
+                        return true;
+                      }
+                      if (v22.tag === "Just") {
+                        return all3((dep) => !elem2(dep)(v$1))(v22._1);
+                      }
+                      fail();
+                    })(v$1);
+                    if (v2.tag === "Nothing") {
+                      go$c = false;
+                      go$r = throwException(error("Modules contain circular imports"))();
+                      continue;
+                    }
+                    if (v2.tag === "Just") {
+                      go$a0 = deleteBy(eqStringImpl)(v2._1)(v$1);
+                      go$a1 = $List("Cons", v2._1, v1);
+                      continue;
+                    }
+                    fail();
+                  }
+                  return go$r;
+                };
+                return go(fromFoldable20(functorMap.map((v$1) => {
+                })($2)))(Nil);
+              })(),
+              graph: $2,
+              modules: v._2
+            });
+          });
+        };
+      };
+    };
+  };
+};
+var initialConfig = (dictMonadAff) => {
+  const Monad0 = dictMonadAff.MonadEffect0().Monad0();
+  const $0 = bindStateT(Monad0);
+  const $1 = monadAllocAllocT(Monad0);
+  const Applicative0 = $1.Monad0().Applicative0();
+  const fresh1 = $1.fresh;
+  const alloc1 = traversableEnv.traverse(Applicative0)((v) => fresh1);
+  const applicativeStateT2 = applicativeStateT(Monad0);
+  const traverse1 = traversableMap.traverse(applicativeStateT2);
+  const alloc2 = traversableModule.traverse(Applicative0)((v) => fresh1);
+  const runWithGraphT_spy2 = runWithGraphT_spy({
+    Applicative0: () => applicativeStateT(Monad0),
+    Bind1: () => bindStateT(Monad0)
+  })(graphGraphImpl);
+  const monadAffState2 = monadAffState(dictMonadAff);
+  const monadAffState1 = monadAffState(monadAffState2);
+  const $2 = monadAffState2.MonadEffect0().Monad0();
+  const $3 = dictMonadAff.MonadEffect0().Monad0();
+  return (dictMonadError) => {
+    const eval_primitives2 = eval_primitives(monadWithGraphAllocWithGr(dictMonadError));
+    return (dictMonadReader) => {
+      const eval_primitives1 = eval_primitives2(monadReaderStateT(monadReaderStateT(dictMonadReader)))(monadAffState1);
+      return (dictLoadFile) => {
+        const eval_primitives22 = eval_primitives1((() => {
+          const loadFileFromPath1 = dictLoadFile.loadFileFromPath(dictMonadError)(dictMonadAff);
+          return {
+            loadFileFromPath: (dictMonadError1) => (dictMonadAff1) => (x) => {
+              const $4 = loadFileFromPath1(x);
+              return (s) => $2.Bind1().bind((s$1) => $3.Bind1().bind($4)((x$1) => $3.Applicative0().pure($Tuple(x$1, s$1))))((x$1) => $2.Applicative0().pure($Tuple(
+                x$1,
+                s
+              )));
+            }
+          };
+        })());
+        return (dictFV) => (e) => (primitives2) => (moduleCxt) => Monad0.Bind1().bind(runAllocT(Monad0)($0.bind(alloc1(primitives2))((primitives$p) => $0.bind(traverse1(alloc2)(moduleCxt.modules))((modules$p) => $0.bind(runWithGraphT_spy2(eval_primitives22(primitives$p)({
+          modules: modules$p,
+          graph: moduleCxt.graph,
+          roots: moduleCxt.roots,
+          topsorted: moduleCxt.topsorted
+        }))(union7(unions13(listMap(verticesValVertex.vertices)(mapObjectString.values(primitives$p))))(unions2(listMap(verticesModuleVertex.vertices)(foldableMap.foldr(Cons)(Nil)(modules$p))))))((v) => applicativeStateT2.pure($Tuple(
+          primitives$p,
+          $Tuple(
+            modules$p,
+            (() => {
+              const $4 = dictFV.fv(e);
+              return filterWithKey2((x) => {
+                const $5 = setSet(ordString).member(x)($4);
+                return (v$1) => $5;
+              })(v._2);
+            })()
+          )
+        ))))))(0))((v) => Monad0.Applicative0().pure({ n: v._1, primitives: v._2._2._1, "\u03B3": v._2._2._2._2 }));
+      };
+    };
+  };
+};
+var prepConfig = (dictMonadAff) => {
+  const Monad0 = dictMonadAff.MonadEffect0().Monad0();
+  const $0 = Monad0.Bind1();
+  const loadModuleGraph1 = loadModuleGraph(dictMonadAff);
+  const initialConfig1 = initialConfig(dictMonadAff);
+  return (dictMonadError) => {
+    const parseProgram$p1 = parseProgram$p(dictMonadError);
+    const loadModuleGraph2 = loadModuleGraph1(dictMonadError);
+    const desug1 = exprFwd(boundedLattice2)(dictMonadError)(joinSemilatticeUnit);
+    const initialConfig2 = initialConfig1(dictMonadError);
+    return (dictMonadReader) => {
+      const loadModuleGraph3 = loadModuleGraph2(dictMonadReader);
+      const initialConfig3 = initialConfig2(dictMonadReader);
+      return (dictLoadFile) => {
+        const loadModuleGraph4 = loadModuleGraph3(dictLoadFile);
+        const initialConfig4 = initialConfig3(dictLoadFile)(fVExpr);
+        return (primitives2) => (fluidSrc) => $0.bind(parseProgram$p1(fluidSrc))((v) => {
+          const $1 = v._1;
+          return $0.bind(loadModuleGraph4($List("Cons", "lib/prelude", v._2)))((moduleCxt) => $0.bind(desug1($1))((e) => $0.bind(initialConfig4(e)(primitives2)(moduleCxt))((gconfig) => Monad0.Applicative0().pure({
+            s: $1,
+            e,
+            gconfig
+          }))));
+        });
+      };
+    };
+  };
+};
+
+// output-es/Node.Encoding/index.js
+var $Encoding = (tag) => tag;
+var UTF8 = /* @__PURE__ */ $Encoding("UTF8");
+
+// output-es/Node.FS.Constants/foreign.js
+import { constants } from "node:fs";
+var f_OK = constants.F_OK;
+var r_OK = constants.R_OK;
+var w_OK = constants.W_OK;
+var x_OK = constants.X_OK;
+var copyFile_EXCL = constants.COPYFILE_EXCL;
+var copyFile_FICLONE = constants.COPYFILE_FICLONE;
+var copyFile_FICLONE_FORCE = constants.COPYFILE_FICLONE_FORCE;
+
+// output-es/Node.FS.Async/foreign.js
+import {
+  access,
+  copyFile,
+  mkdtemp,
+  rename,
+  truncate,
+  chown,
+  chmod,
+  stat,
+  lstat,
+  link as link2,
+  symlink,
+  readlink,
+  realpath,
+  unlink,
+  rmdir,
+  rm,
+  mkdir,
+  readdir,
+  utimes,
+  readFile,
+  writeFile,
+  appendFile,
+  open,
+  read as read3,
+  write as write2,
+  close
+} from "node:fs";
+
+// output-es/Node.FS.Async/index.js
+var handleCallback = (cb) => (err, a) => {
+  const v = nullable(err, Nothing, Just);
+  if (v.tag === "Nothing") {
+    return cb($Either("Right", a))();
+  }
+  if (v.tag === "Just") {
+    return cb($Either("Left", v._1))();
+  }
+  fail();
+};
+var readTextFile = (encoding) => (file) => (cb) => {
+  const $0 = {
+    encoding: (() => {
+      if (encoding === "ASCII") {
+        return "ASCII";
+      }
+      if (encoding === "UTF8") {
+        return "UTF8";
+      }
+      if (encoding === "UTF16LE") {
+        return "UTF16LE";
+      }
+      if (encoding === "UCS2") {
+        return "UCS2";
+      }
+      if (encoding === "Base64") {
+        return "Base64";
+      }
+      if (encoding === "Latin1") {
+        return "Latin1";
+      }
+      if (encoding === "Binary") {
+        return "Binary";
+      }
+      if (encoding === "Hex") {
+        return "Hex";
+      }
+      fail();
+    })()
+  };
+  return () => readFile(file, $0, handleCallback(cb));
+};
+var stat2 = (file) => (cb) => () => stat(file, handleCallback(cb));
+
+// output-es/Node.FS.Aff/index.js
+var toAff1 = (f) => (a) => {
+  const $0 = f(a);
+  return makeAff((k) => {
+    const $1 = $0(k);
+    return () => {
+      $1();
+      return nonCanceler;
+    };
+  });
+};
+var toAff2 = (f) => (a) => (b) => {
+  const $0 = f(a)(b);
+  return makeAff((k) => {
+    const $1 = $0(k);
+    return () => {
+      $1();
+      return nonCanceler;
+    };
+  });
+};
+
+// output-es/Node.FS.Stats/foreign.js
+var isFileImpl = (s) => s.isFile();
+
+// output-es/Module.Node/index.js
+var $$try3 = /* @__PURE__ */ $$try(monadErrorAff);
+var loadFileNodeT = (dictMonad) => {
+  const Bind1 = dictMonad.Bind1();
+  const $0 = Bind1.Apply0().Functor0();
+  const $1 = dictMonad.Applicative0();
+  return {
+    loadFileFromPath: (dictMonadError) => (dictMonadAff) => (v) => bindReaderT(Bind1).bind(dictMonadAff.liftAff($$try3(toAff1(stat2)(v))))((stats) => {
+      if (stats.tag === "Right" && isFileImpl(stats._1)) {
+        const $22 = $0.map(Just);
+        const $3 = dictMonadAff.liftAff(toAff2(readTextFile)(UTF8)(v));
+        return (x) => $22($3(x));
+      }
+      const $2 = $1.pure(Nothing);
+      return (v$1) => $2;
+    })
+  };
+};
+
+// output-es/Options.Applicative.Internal.Utils/index.js
+var whitespaceRegex = /* @__PURE__ */ (() => {
+  const v = regex("\\s+")(noFlags);
+  if (v.tag === "Left") {
+    return _crashWith("whitespaceRegex: `\\s+` seems to be invlaid, err: " + v._1);
+  }
+  if (v.tag === "Right") {
+    return v._1;
+  }
+  fail();
+})();
+var startsWith = (p) => (s) => {
+  const $0 = indexOf2(p)(s);
+  if ($0.tag === "Nothing") {
+    return false;
+  }
+  return $0.tag === "Just" && $0._1 === 0;
+};
+var apApplyFlipped = (dictApply) => (a) => (b) => dictApply.apply(dictApply.Functor0().map(applyFlipped)(a))(b);
+
+// output-es/Text.PrettyPrint.Leijen/index.js
+var $Doc2 = (tag, _1, _2) => ({ tag, _1, _2 });
+var $Docs = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
+var $LazySimpleDoc = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
+var $SimpleDoc = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
+var max2 = (x) => (y) => {
+  const v = ordInt.compare(x)(y);
+  if (v === "LT") {
+    return y;
+  }
+  if (v === "EQ") {
+    return x;
+  }
+  if (v === "GT") {
+    return x;
+  }
+  fail();
+};
+var min2 = (x) => (y) => {
+  const v = ordInt.compare(x)(y);
+  if (v === "LT") {
+    return x;
+  }
+  if (v === "EQ") {
+    return x;
+  }
+  if (v === "GT") {
+    return y;
+  }
+  fail();
+};
+var SFail = /* @__PURE__ */ $SimpleDoc("SFail");
+var SEmpty = /* @__PURE__ */ $SimpleDoc("SEmpty");
+var SFail$p = /* @__PURE__ */ $LazySimpleDoc("SFail'");
+var SEmpty$p = /* @__PURE__ */ $LazySimpleDoc("SEmpty'");
+var Fail = /* @__PURE__ */ $Doc2("Fail");
+var Empty2 = /* @__PURE__ */ $Doc2("Empty");
+var Line2 = /* @__PURE__ */ $Doc2("Line");
+var Nil3 = /* @__PURE__ */ $Docs("Nil");
+var text = (v) => {
+  if (v === "") {
+    return Empty2;
+  }
+  return $Doc2("Text", toCodePointArray(v).length, v);
+};
+var forceSimpleDoc = (v) => {
+  if (v.tag === "SFail'") {
+    return SFail;
+  }
+  if (v.tag === "SEmpty'") {
+    return SEmpty;
+  }
+  if (v.tag === "SChar'") {
+    return $SimpleDoc("SChar", v._1, forceSimpleDoc(force(v._2)));
+  }
+  if (v.tag === "SText'") {
+    return $SimpleDoc("SText", v._1, v._2, forceSimpleDoc(force(v._3)));
+  }
+  if (v.tag === "SLine'") {
+    return $SimpleDoc("SLine", v._1, forceSimpleDoc(force(v._2)));
+  }
+  fail();
+};
+var renderFits = (fits) => (rfrac) => (w) => (headNode) => {
+  const r = max2(0)(min2(w)(unsafeClamp(round(toNumber(w) * rfrac))));
+  const nicest$p = (n) => (k) => (i) => (ds) => (x) => (y) => {
+    const x$p = best(n)(k)($Docs("Cons", i, x, ds));
+    if (fits(w)(min2(n)(k))(min2(w - k | 0)((r - k | 0) + n | 0))(x$p)) {
+      return x$p;
+    }
+    return best(n)(k)($Docs("Cons", i, y, ds));
+  };
+  const best = (v) => (v1) => (v2) => {
+    if (v2.tag === "Nil") {
+      return SEmpty$p;
+    }
+    if (v2.tag === "Cons") {
+      if (v2._2.tag === "Fail") {
+        return SFail$p;
+      }
+      if (v2._2.tag === "Empty") {
+        return best(v)(v1)(v2._3);
+      }
+      if (v2._2.tag === "Char") {
+        const k$p = v1 + 1 | 0;
+        return $LazySimpleDoc("SChar'", v2._2._1, defer((v3) => best(v)(k$p)(v2._3)));
+      }
+      if (v2._2.tag === "Text") {
+        const k$p = v1 + v2._2._1 | 0;
+        return $LazySimpleDoc("SText'", v2._2._1, v2._2._2, defer((v3) => best(v)(k$p)(v2._3)));
+      }
+      if (v2._2.tag === "Line") {
+        return $LazySimpleDoc("SLine'", v2._1, defer((v3) => best(v2._1)(v2._1)(v2._3)));
+      }
+      if (v2._2.tag === "FlatAlt") {
+        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1, v2._3));
+      }
+      if (v2._2.tag === "Cat") {
+        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1, $Docs("Cons", v2._1, v2._2._2, v2._3)));
+      }
+      if (v2._2.tag === "Nest") {
+        return best(v)(v1)($Docs("Cons", v2._1 + v2._2._1 | 0, v2._2._2, v2._3));
+      }
+      if (v2._2.tag === "Union") {
+        return nicest$p(v)(v1)(v2._1)(v2._3)(v2._2._1)(v2._2._2);
+      }
+      if (v2._2.tag === "Column") {
+        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1(v1), v2._3));
+      }
+      if (v2._2.tag === "Columns") {
+        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1($Maybe("Just", w)), v2._3));
+      }
+      if (v2._2.tag === "Nesting") {
+        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1(v2._1), v2._3));
+      }
+    }
+    fail();
+  };
+  return forceSimpleDoc(best(0)(0)($Docs("Cons", 0, headNode, Nil3)));
+};
+var foldr1 = (dictMonoid) => {
+  const mempty = dictMonoid.mempty;
+  return (f) => (x) => {
+    const $0 = unsnoc(x);
+    if ($0.tag === "Nothing") {
+      return mempty;
+    }
+    if ($0.tag === "Just") {
+      return foldrArray(f)($0._1.last)($0._1.init);
+    }
+    fail();
+  };
+};
+var flatten = (v) => {
+  if (v.tag === "FlatAlt") {
+    return v._2;
+  }
+  if (v.tag === "Cat") {
+    return $Doc2("Cat", flatten(v._1), flatten(v._2));
+  }
+  if (v.tag === "Nest") {
+    return $Doc2("Nest", v._1, flatten(v._2));
+  }
+  if (v.tag === "Line") {
+    return Fail;
+  }
+  if (v.tag === "Union") {
+    return flatten(v._1);
+  }
+  if (v.tag === "Column") {
+    return $Doc2("Column", (x) => flatten(v._1(x)));
+  }
+  if (v.tag === "Columns") {
+    return $Doc2("Columns", (x) => flatten(v._1(x)));
+  }
+  if (v.tag === "Nesting") {
+    return $Doc2("Nesting", (x) => flatten(v._1(x)));
+  }
+  return v;
+};
+var softline = /* @__PURE__ */ $Doc2(
+  "Union",
+  /* @__PURE__ */ flatten(/* @__PURE__ */ $Doc2("FlatAlt", Line2, /* @__PURE__ */ $Doc2("Char", " "))),
+  /* @__PURE__ */ $Doc2("FlatAlt", Line2, /* @__PURE__ */ $Doc2("Char", " "))
+);
+var fits1 = (fits1$a0$copy) => (fits1$a1$copy) => (fits1$a2$copy) => (fits1$a3$copy) => {
+  let fits1$a0 = fits1$a0$copy, fits1$a1 = fits1$a1$copy, fits1$a2 = fits1$a2$copy, fits1$a3 = fits1$a3$copy, fits1$c = true, fits1$r;
+  while (fits1$c) {
+    const v = fits1$a0, v1 = fits1$a1, v2 = fits1$a2, v3 = fits1$a3;
+    if (v2 < 0) {
+      fits1$c = false;
+      fits1$r = false;
+      continue;
+    }
+    if (v3.tag === "SFail'") {
+      fits1$c = false;
+      fits1$r = false;
+      continue;
+    }
+    if (v3.tag === "SEmpty'") {
+      fits1$c = false;
+      fits1$r = true;
+      continue;
+    }
+    if (v3.tag === "SChar'") {
+      fits1$a0 = v;
+      fits1$a1 = v1;
+      fits1$a2 = v2 - 1 | 0;
+      fits1$a3 = force(v3._2);
+      continue;
+    }
+    if (v3.tag === "SText'") {
+      fits1$a0 = v;
+      fits1$a1 = v1;
+      fits1$a2 = v2 - v3._1 | 0;
+      fits1$a3 = force(v3._3);
+      continue;
+    }
+    if (v3.tag === "SLine'") {
+      fits1$c = false;
+      fits1$r = true;
+      continue;
+    }
+    fail();
+  }
+  return fits1$r;
+};
+var displayS = (v) => {
+  if (v.tag === "SFail") {
+    return _crashWith("@SFail@ can not appear uncaught in a rendered @SimpleDoc@");
+  }
+  if (v.tag === "SEmpty") {
+    return "";
+  }
+  if (v.tag === "SChar") {
+    return fromCharArray([v._1]) + displayS(v._2);
+  }
+  if (v.tag === "SText") {
+    return v._2 + displayS(v._3);
+  }
+  if (v.tag === "SLine") {
+    return (v._1 <= 0 ? "\n" : "\n" + fromCharArray(replicate(v._1)(" "))) + displayS(v._2);
+  }
+  fail();
+};
+var beside2 = (x) => (y) => $Doc2("Cat", x, y);
+var docSemigroup = { append: beside2 };
+var docMonoid = { mempty: Empty2, Semigroup0: () => docSemigroup };
+var foldr11 = /* @__PURE__ */ foldr1(docMonoid);
+var string3 = /* @__PURE__ */ (() => {
+  const $0 = arrayMap(text);
+  const $1 = split("\n");
+  return (x) => foldlArray((v) => (v1) => {
+    if (v.init) {
+      return { init: false, acc: v1 };
+    }
+    return { init: false, acc: $Doc2("Cat", v.acc, $Doc2("Cat", $Doc2("FlatAlt", Line2, $Doc2("Char", " ")), v1)) };
+  })({ init: true, acc: Empty2 })($0($1(x))).acc;
+})();
+var fillBreak = (f) => (x) => $Doc2(
+  "Column",
+  (k1) => $Doc2(
+    "Cat",
+    x,
+    $Doc2(
+      "Column",
+      (k2) => {
+        const $0 = k2 - k1 | 0;
+        if ($0 > f) {
+          return $Doc2("Nest", f, $Doc2("FlatAlt", Line2, Empty2));
+        }
+        const $1 = f - $0 | 0;
+        const $2 = $1 <= 0 ? "" : fromCharArray(replicate($1)(" "));
+        if ($2 === "") {
+          return Empty2;
+        }
+        return $Doc2("Text", toCodePointArray($2).length, $2);
+      }
+    )
+  )
+);
+var appendWithSpace = (x) => (y) => $Doc2("Cat", x, $Doc2("Cat", $Doc2("Char", " "), y));
+var hsep2 = /* @__PURE__ */ foldr11(appendWithSpace);
+var appendWithLinebreak = (x) => (y) => $Doc2("Cat", x, $Doc2("Cat", $Doc2("FlatAlt", Line2, Empty2), y));
+var vcat = /* @__PURE__ */ foldr11(appendWithLinebreak);
+var appendWithLine = (x) => (y) => $Doc2("Cat", x, $Doc2("Cat", $Doc2("FlatAlt", Line2, $Doc2("Char", " ")), y));
+var indent = (i) => (d) => {
+  const $0 = i <= 0 ? "" : fromCharArray(replicate(i)(" "));
+  return $Doc2(
+    "Column",
+    (k) => $Doc2(
+      "Nesting",
+      (i$1) => $Doc2("Nest", k - i$1 | 0, $Doc2("Nest", i, $Doc2("Cat", $0 === "" ? Empty2 : $Doc2("Text", toCodePointArray($0).length, $0), d)))
+    )
+  );
+};
+
+// output-es/Options.Applicative.Help.Chunk/index.js
+var chunkMonoid = (dictSemigroup) => {
+  const chunkSemigroup1 = {
+    append: (v1) => (v2) => {
+      if (v1.tag === "Nothing") {
+        return v2;
+      }
+      if (v2.tag === "Nothing") {
+        return v1;
+      }
+      if (v1.tag === "Just" && v2.tag === "Just") {
+        return $Maybe("Just", dictSemigroup.append(v1._1)(v2._1));
+      }
+      fail();
+    }
+  };
+  return { mempty: Nothing, Semigroup0: () => chunkSemigroup1 };
+};
+var mempty1 = /* @__PURE__ */ (() => chunkMonoid(docSemigroup).mempty)();
+var vcatChunks = /* @__PURE__ */ foldrArray((v1) => (v2) => {
+  if (v1.tag === "Nothing") {
+    return v2;
+  }
+  if (v2.tag === "Nothing") {
+    return v1;
+  }
+  if (v1.tag === "Just" && v2.tag === "Just") {
+    return $Maybe(
+      "Just",
+      $Doc2(
+        "Cat",
+        v1._1,
+        $Doc2("Cat", $Doc2("FlatAlt", Line2, $Doc2("Char", " ")), v2._1)
+      )
+    );
+  }
+  fail();
+})(mempty1);
+var vsepChunks = /* @__PURE__ */ foldrArray((v1) => (v2) => {
+  if (v1.tag === "Nothing") {
+    return v2;
+  }
+  if (v2.tag === "Nothing") {
+    return v1;
+  }
+  if (v1.tag === "Just" && v2.tag === "Just") {
+    return $Maybe(
+      "Just",
+      $Doc2(
+        "Cat",
+        v1._1,
+        $Doc2(
+          "Cat",
+          $Doc2("FlatAlt", Line2, $Doc2("Char", " ")),
+          $Doc2(
+            "Cat",
+            Empty2,
+            $Doc2("Cat", $Doc2("FlatAlt", Line2, $Doc2("Char", " ")), v2._1)
+          )
+        )
+      )
+    );
+  }
+  fail();
+})(mempty1);
+var chunkBesideOrBelow = (v1) => (v2) => {
+  if (v1.tag === "Nothing") {
+    return v2;
+  }
+  if (v2.tag === "Nothing") {
+    return v1;
+  }
+  if (v1.tag === "Just" && v2.tag === "Just") {
+    return $Maybe("Just", $Doc2("Cat", v1._1, $Doc2("Cat", softline, v2._1)));
+  }
+  fail();
+};
+var listToChunk = (dictMonoid) => {
+  const mempty23 = chunkMonoid(dictMonoid.Semigroup0()).mempty;
+  const fold12 = foldableArray.foldMap(dictMonoid)(identity3);
+  return (v) => {
+    if (v.length === 0) {
+      return mempty23;
+    }
+    return $Maybe("Just", fold12(v));
+  };
+};
+var stringChunk = (v) => {
+  if (v === "") {
+    return mempty1;
+  }
+  return $Maybe("Just", v === "" ? Empty2 : $Doc2("Text", toCodePointArray(v).length, v));
+};
+var paragraph = /* @__PURE__ */ (() => {
+  const $0 = foldrArray((x) => {
+    const $02 = stringChunk(x);
+    return (v2) => {
+      if ($02.tag === "Nothing") {
+        return v2;
+      }
+      if (v2.tag === "Nothing") {
+        return $02;
+      }
+      if ($02.tag === "Just" && v2.tag === "Just") {
+        return $Maybe("Just", $Doc2("Cat", $02._1, $Doc2("Cat", softline, v2._1)));
+      }
+      fail();
+    };
+  })(mempty1);
+  return (x) => $0(x === "" ? [] : split2(whitespaceRegex)(x));
+})();
+var tabulate$p = (v) => (v1) => {
+  if (v1.length === 0) {
+    return mempty1;
+  }
+  return $Maybe(
+    "Just",
+    vcat(arrayMap((v2) => indent(2)($Doc2(
+      "Cat",
+      fillBreak(v)(v2._1),
+      $Doc2("Cat", $Doc2("Char", " "), v2._2)
+    )))(v1))
+  );
+};
+
+// output-es/Control.Monad.Free/index.js
+var $Free = (_1, _2) => ({ tag: "Free", _1, _2 });
+var $FreeView = (tag, _1, _2) => ({ tag, _1, _2 });
+var toView = (toView$a0$copy) => {
+  let toView$a0 = toView$a0$copy, toView$c = true, toView$r;
+  while (toView$c) {
+    const v = toView$a0;
+    if (v._1.tag === "Return") {
+      const v2 = uncons4(v._2);
+      if (v2.tag === "Nothing") {
+        toView$c = false;
+        toView$r = $FreeView("Return", v._1._1);
+        continue;
+      }
+      if (v2.tag === "Just") {
+        toView$a0 = (() => {
+          const $0 = v2._1._1(v._1._1);
+          return $Free(
+            $0._1,
+            (() => {
+              if ($0._2.tag === "CatNil") {
+                return v2._1._2;
+              }
+              if (v2._1._2.tag === "CatNil") {
+                return $0._2;
+              }
+              if ($0._2.tag === "CatCons") {
+                return $CatList("CatCons", $0._2._1, $CatQueue($0._2._2._1, $List("Cons", v2._1._2, $0._2._2._2)));
+              }
+              fail();
+            })()
+          );
+        })();
+        continue;
+      }
+      fail();
+    }
+    if (v._1.tag === "Bind") {
+      toView$c = false;
+      toView$r = $FreeView(
+        "Bind",
+        v._1._1,
+        (a) => {
+          const $0 = v._1._2(a);
+          return $Free(
+            $0._1,
+            (() => {
+              if ($0._2.tag === "CatNil") {
+                return v._2;
+              }
+              if (v._2.tag === "CatNil") {
+                return $0._2;
+              }
+              if ($0._2.tag === "CatCons") {
+                return $CatList("CatCons", $0._2._1, $CatQueue($0._2._2._1, $List("Cons", v._2, $0._2._2._2)));
+              }
+              fail();
+            })()
+          );
+        }
+      );
+      continue;
+    }
+    fail();
+  }
+  return toView$r;
+};
+var resume$p = (k) => (j) => (f) => {
+  const v = toView(f);
+  if (v.tag === "Return") {
+    return j(v._1);
+  }
+  if (v.tag === "Bind") {
+    return k(v._1)(v._2);
+  }
+  fail();
+};
+var freeMonad = { Applicative0: () => freeApplicative, Bind1: () => freeBind };
+var freeFunctor = { map: (k) => (f) => freeBind.bind(f)((x) => freeApplicative.pure(k(x))) };
+var freeBind = { bind: (v) => (k) => $Free(v._1, snoc2(v._2)(k)), Apply0: () => freeApply };
+var freeApply = {
+  apply: (f) => (a) => $Free(f._1, snoc2(f._2)((f$p) => $Free(a._1, snoc2(a._2)((a$p) => freeApplicative.pure(f$p(a$p)))))),
+  Functor0: () => freeFunctor
+};
+var freeApplicative = { pure: (x) => $Free($FreeView("Return", x), CatNil), Apply0: () => freeApply };
+var freeMonadRec = {
+  tailRecM: (k) => (a) => {
+    const $0 = k(a);
+    return $Free(
+      $0._1,
+      snoc2($0._2)((v) => {
+        if (v.tag === "Loop") {
+          return freeMonadRec.tailRecM(k)(v._1);
+        }
+        if (v.tag === "Done") {
+          return $Free($FreeView("Return", v._1), CatNil);
+        }
+        fail();
+      })
+    );
+  },
+  Monad0: () => freeMonad
+};
+
+// output-es/Options.Applicative.Types/index.js
+var $ArgPolicy = (tag) => tag;
+var $Backtracking = (tag) => tag;
+var $Context = (_1, _2) => ({ tag: "Context", _1, _2 });
+var $IsCmdStart = (tag) => tag;
+var $MultPE = (_1, _2) => ({ tag: "MultPE", _1, _2 });
+var $OptName = (tag, _1) => ({ tag, _1 });
+var $OptReader = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
+var $OptTree = (tag, _1) => ({ tag, _1 });
+var $OptVisibility = (tag) => tag;
+var $ParseError2 = (tag, _1, _2) => ({ tag, _1, _2 });
+var $Parser = (tag, _1, _2) => ({ tag, _1, _2 });
+var $ParserResult = (tag, _1) => ({ tag, _1 });
+var $SomeParser = (_1) => ({ tag: "SomeParser", _1 });
+var apply3 = /* @__PURE__ */ (() => {
+  const $0 = applyExceptT(monadIdentity);
+  return (v) => (v1) => (r) => $0.apply(v(r))(v1(r));
+})();
+var bind = /* @__PURE__ */ (() => bindReaderT(bindExceptT(monadIdentity)).bind)();
+var Internal = /* @__PURE__ */ $OptVisibility("Internal");
+var Hidden = /* @__PURE__ */ $OptVisibility("Hidden");
+var Visible = /* @__PURE__ */ $OptVisibility("Visible");
+var CmdStart = /* @__PURE__ */ $IsCmdStart("CmdStart");
+var CmdCont = /* @__PURE__ */ $IsCmdStart("CmdCont");
+var Backtrack = /* @__PURE__ */ $Backtracking("Backtrack");
+var Intersperse = /* @__PURE__ */ $ArgPolicy("Intersperse");
+var NoIntersperse = /* @__PURE__ */ $ArgPolicy("NoIntersperse");
+var AllPositionals = /* @__PURE__ */ $ArgPolicy("AllPositionals");
+var NilP = (value0) => $Parser("NilP", value0);
+var ShowHelpText = /* @__PURE__ */ $ParseError2("ShowHelpText");
+var ExpectsArgError = (value0) => $ParseError2("ExpectsArgError", value0);
+var readerAsk = /* @__PURE__ */ (() => applicativeExceptT(monadIdentity).pure)();
+var readMFunctor = {
+  map: (f) => (v) => (x) => {
+    const $0 = v(x);
+    if ($0.tag === "Left") {
+      return $Either("Left", $0._1);
+    }
+    if ($0.tag === "Right") {
+      return $Either("Right", f($0._1));
+    }
+    fail();
+  }
+};
+var readMApply = { apply: (v) => (v1) => apply3(v)(v1), Functor0: () => readMFunctor };
+var readMApplicative = {
+  pure: /* @__PURE__ */ (() => {
+    const $0 = applicativeExceptT(monadIdentity);
+    return (x) => {
+      const $1 = $0.pure(x);
+      return (v) => $1;
+    };
+  })(),
+  Apply0: () => readMApply
+};
+var parseErrorSemigroup = { append: (v) => (m) => m };
+var optVisibilityEq = {
+  eq: (x) => (y) => {
+    if (x === "Internal") {
+      return y === "Internal";
+    }
+    if (x === "Hidden") {
+      return y === "Hidden";
+    }
+    return x === "Visible" && y === "Visible";
+  }
+};
+var optVisibilityOrd = {
+  compare: (x) => (y) => {
+    if (x === "Internal") {
+      if (y === "Internal") {
+        return EQ;
+      }
+      return LT;
+    }
+    if (y === "Internal") {
+      return GT;
+    }
+    if (x === "Hidden") {
+      if (y === "Hidden") {
+        return EQ;
+      }
+      return LT;
+    }
+    if (y === "Hidden") {
+      return GT;
+    }
+    if (x === "Visible" && y === "Visible") {
+      return EQ;
+    }
+    fail();
+  },
+  Eq0: () => optVisibilityEq
+};
+var optNameEq = {
+  eq: (x) => (y) => {
+    if (x.tag === "OptShort") {
+      return y.tag === "OptShort" && x._1 === y._1;
+    }
+    return x.tag === "OptLong" && y.tag === "OptLong" && x._1 === y._1;
+  }
+};
+var optNameOrd = {
+  compare: (x) => (y) => {
+    if (x.tag === "OptShort") {
+      if (y.tag === "OptShort") {
+        return ordChar.compare(x._1)(y._1);
+      }
+      return LT;
+    }
+    if (y.tag === "OptShort") {
+      return GT;
+    }
+    if (x.tag === "OptLong" && y.tag === "OptLong") {
+      return ordString.compare(x._1)(y._1);
+    }
+    fail();
+  },
+  Eq0: () => optNameEq
+};
+var completerSemigroup = {
+  append: (v) => (v1) => (s) => {
+    const $0 = v(s);
+    const $1 = v1(s);
+    return () => {
+      const a$p = $0();
+      const a$p$1 = $1();
+      return [...a$p, ...a$p$1];
+    };
+  }
+};
+var completerMonoid = { mempty: (v) => () => [], Semigroup0: () => completerSemigroup };
+var parserInfoFunctor = {
+  map: (f) => (i) => ({
+    infoParser: parserFunctor.map(f)(i.infoParser),
+    infoFailureCode: i.infoFailureCode,
+    infoFooter: i.infoFooter,
+    infoFullDesc: i.infoFullDesc,
+    infoHeader: i.infoHeader,
+    infoPolicy: i.infoPolicy,
+    infoProgDesc: i.infoProgDesc
+  })
+};
+var parserFunctor = {
+  map: (v) => (v1) => {
+    if (v1.tag === "NilP") {
+      return $Parser("NilP", v(v1._1));
+    }
+    if (v1.tag === "OptP") {
+      return $Parser("OptP", optionFunctor.map(v)(v1._1));
+    }
+    if (v1.tag === "MultP") {
+      return $Parser("MultP", $MultPE(parserFunctor.map((v3) => (x) => v(v3(x)))(v1._1._1), v1._1._2));
+    }
+    if (v1.tag === "AltP") {
+      return $Parser("AltP", parserFunctor.map(v)(v1._1), parserFunctor.map(v)(v1._2));
+    }
+    if (v1.tag === "BindP") {
+      return $Parser(
+        "BindP",
+        $Free(v1._1._1, snoc2(v1._1._2)((x) => $Free($FreeView("Return", v(x)), CatNil)))
+      );
+    }
+    fail();
+  }
+};
+var optionFunctor = { map: (f) => (o) => ({ optMain: optReaderFunctor.map(f)(o.optMain), optProps: o.optProps }) };
+var optReaderFunctor = {
+  map: (v) => (v1) => {
+    if (v1.tag === "OptReader") {
+      const $0 = v1._2;
+      return $OptReader(
+        "OptReader",
+        v1._1,
+        {
+          crReader: (x) => {
+            const $1 = $0.crReader(x);
+            if ($1.tag === "Left") {
+              return $Either("Left", $1._1);
+            }
+            if ($1.tag === "Right") {
+              return $Either("Right", v($1._1));
+            }
+            fail();
+          },
+          crCompleter: $0.crCompleter
+        },
+        v1._3
+      );
+    }
+    if (v1.tag === "FlagReader") {
+      return $OptReader("FlagReader", v1._1, v(v1._2));
+    }
+    if (v1.tag === "ArgReader") {
+      const $0 = v1._1;
+      return $OptReader(
+        "ArgReader",
+        {
+          crReader: (x) => {
+            const $1 = $0.crReader(x);
+            if ($1.tag === "Left") {
+              return $Either("Left", $1._1);
+            }
+            if ($1.tag === "Right") {
+              return $Either("Right", v($1._1));
+            }
+            fail();
+          },
+          crCompleter: $0.crCompleter
+        }
+      );
+    }
+    if (v1.tag === "CmdReader") {
+      return $OptReader(
+        "CmdReader",
+        v1._1,
+        v1._2,
+        (x) => {
+          const $0 = v1._3(x);
+          if ($0.tag === "Just") {
+            return $Maybe("Just", parserInfoFunctor.map(v)($0._1));
+          }
+          return Nothing;
+        }
+      );
+    }
+    fail();
+  }
+};
+var parserApply = { apply: (a) => (b) => $Parser("MultP", $MultPE(a, b)), Functor0: () => parserFunctor };
+var manyM = (p) => freeMonadRec.tailRecM((acc) => $Free(
+  $FreeView(
+    "Bind",
+    $Parser("AltP", parserFunctor.map(Loop)(p), $Parser("NilP", $Step("Done", void 0))),
+    (x) => $Free($FreeView("Return", x), CatNil)
+  ),
+  snoc2(CatNil)((aa) => $Free(
+    $FreeView(
+      "Return",
+      (() => {
+        if (aa.tag === "Loop") {
+          return $Step("Loop", $List("Cons", aa._1, acc));
+        }
+        if (aa.tag === "Done") {
+          return $Step("Done", reverse2(acc));
+        }
+        fail();
+      })()
+    ),
+    CatNil
+  ))
+))(Nil);
+
+// output-es/Options.Applicative.Builder.Internal/index.js
+var $DefaultProp = (_1, _2) => ({ tag: "DefaultProp", _1, _2 });
+var $Mod = (_1, _2, _3) => ({ tag: "Mod", _1, _2, _3 });
+var lookup4 = /* @__PURE__ */ lookup(foldableArray)(eqString);
+var identity26 = (x) => x;
+var Mod = (value0) => (value1) => (value2) => $Mod(value0, value1, value2);
+var optionFieldsHasName = { name: (n) => (fields) => ({ optNames: [n, ...fields.optNames], optCompleter: fields.optCompleter, optNoArgError: fields.optNoArgError }) };
+var mkCommand = (m) => {
+  const v = m._1({ cmdCommands: [], cmdGroup: Nothing });
+  const $0 = v.cmdCommands;
+  return $Tuple(v.cmdGroup, $Tuple(arrayMap(fst)($0), $Tuple((v1) => lookup4(v1)($0), void 0)));
+};
+var modSemigroup = {
+  append: (v) => (v1) => $Mod((x) => v1._1(v._1(x)), $DefaultProp(v1._2._1.tag === "Nothing" ? v._2._1 : v1._2._1, v1._2._2.tag === "Nothing" ? v._2._2 : v1._2._2), (x) => v1._3(v._3(x)))
+};
+var modMonoid = { mempty: /* @__PURE__ */ $Mod(identity26, /* @__PURE__ */ $DefaultProp(Nothing, Nothing), identity26), Semigroup0: () => modSemigroup };
+var optionMod = /* @__PURE__ */ Mod(identity26)(/* @__PURE__ */ $DefaultProp(Nothing, Nothing));
+var internal = /* @__PURE__ */ optionMod((p) => ({ propVisibility: Internal, propDescMod: p.propDescMod, propHelp: p.propHelp, propMetaVar: p.propMetaVar, propShowDefault: p.propShowDefault }));
+var baseProps = /* @__PURE__ */ (() => ({
+  propMetaVar: "",
+  propVisibility: Visible,
+  propHelp: chunkMonoid(docSemigroup).mempty,
+  propShowDefault: Nothing,
+  propDescMod: Nothing
+}))();
+var mkProps = (v) => (g) => {
+  const $0 = g(baseProps);
+  return {
+    propShowDefault: applyMaybe.apply(v._2)(v._1),
+    propDescMod: $0.propDescMod,
+    propHelp: $0.propHelp,
+    propMetaVar: $0.propMetaVar,
+    propVisibility: $0.propVisibility
+  };
+};
+var mkParser = (v) => (g) => (rdr) => {
+  const o = $Parser("OptP", { optMain: rdr, optProps: mkProps(v)(g) });
+  if (v._1.tag === "Nothing") {
+    return o;
+  }
+  if (v._1.tag === "Just") {
+    return $Parser("AltP", o, $Parser("NilP", v._1._1));
+  }
+  fail();
+};
+
+// output-es/Options.Applicative.Builder/index.js
+var identity27 = (x) => x;
+var mempty12 = /* @__PURE__ */ (() => chunkMonoid(docSemigroup).mempty)();
+var min3 = (x) => (y) => {
+  const v = optVisibilityOrd.compare(x)(y);
+  if (v === "LT") {
+    return x;
+  }
+  if (v === "EQ") {
+    return x;
+  }
+  if (v === "GT") {
+    return y;
+  }
+  fail();
+};
+var fold3 = /* @__PURE__ */ (() => foldableArray.foldMap(modMonoid)(identity3))();
+var progDesc = (s) => (i) => ({
+  infoProgDesc: paragraph(s),
+  infoFailureCode: i.infoFailureCode,
+  infoFooter: i.infoFooter,
+  infoFullDesc: i.infoFullDesc,
+  infoHeader: i.infoHeader,
+  infoParser: i.infoParser,
+  infoPolicy: i.infoPolicy
+});
+var option = (r) => (m) => {
+  const $0 = optionMod((p) => ({ propMetaVar: "ARG", propDescMod: p.propDescMod, propHelp: p.propHelp, propShowDefault: p.propShowDefault, propVisibility: p.propVisibility }));
+  const $1 = m._1($0._1({ optNames: [], optCompleter: completerMonoid.mempty, optNoArgError: ExpectsArgError }));
+  return mkParser($DefaultProp(
+    m._2._1.tag === "Nothing" ? $0._2._1 : m._2._1,
+    m._2._2.tag === "Nothing" ? $0._2._2 : m._2._2
+  ))((x) => m._3($0._3(x)))($OptReader("OptReader", $1.optNames, { crCompleter: $1.optCompleter, crReader: r }, $1.optNoArgError));
+};
+var subparser = (m) => {
+  const $0 = optionMod((p) => ({ propMetaVar: "COMMAND", propDescMod: p.propDescMod, propHelp: p.propHelp, propShowDefault: p.propShowDefault, propVisibility: p.propVisibility }));
+  const v1 = mkCommand(m);
+  return mkParser($DefaultProp(
+    m._2._1.tag === "Nothing" ? $0._2._1 : m._2._1,
+    m._2._2.tag === "Nothing" ? $0._2._2 : m._2._2
+  ))((x) => m._3($0._3(x)))($OptReader("CmdReader", v1._1, v1._2._1, v1._2._2._1));
+};
+var hidden = /* @__PURE__ */ optionMod((p) => ({
+  propVisibility: min3(Hidden)(p.propVisibility),
+  propDescMod: p.propDescMod,
+  propHelp: p.propHelp,
+  propMetaVar: p.propMetaVar,
+  propShowDefault: p.propShowDefault
+}));
+var help = (s) => optionMod((p) => ({
+  propHelp: paragraph(s),
+  propDescMod: p.propDescMod,
+  propMetaVar: p.propMetaVar,
+  propShowDefault: p.propShowDefault,
+  propVisibility: p.propVisibility
+}));
+var header = (s) => (i) => ({
+  infoHeader: paragraph(s),
+  infoFailureCode: i.infoFailureCode,
+  infoFooter: i.infoFooter,
+  infoFullDesc: i.infoFullDesc,
+  infoParser: i.infoParser,
+  infoPolicy: i.infoPolicy,
+  infoProgDesc: i.infoProgDesc
+});
+var flag$p = (actv) => (v) => mkParser(v._2)(v._3)((() => {
+  const $0 = v._1({ flagNames: [], flagActive: actv });
+  return $OptReader("FlagReader", $0.flagNames, $0.flagActive);
+})());
+var eitherReader = (f) => bind(readerAsk)((x) => {
+  const $0 = f(x);
+  if ($0.tag === "Left") {
+    const $1 = monadThrowExceptT(monadIdentity).throwError($ParseError2("ErrorMsg", $0._1));
+    return (v) => $1;
+  }
+  if ($0.tag === "Right") {
+    return readMApplicative.pure($0._1);
+  }
+  fail();
+});
+var $$int3 = /* @__PURE__ */ eitherReader((s) => {
+  const v = fromString(s);
+  if (v.tag === "Nothing") {
+    return $Either("Left", "Can't parse as Int: `" + showStringImpl(s) + "`");
+  }
+  if (v.tag === "Just") {
+    return $Either("Right", v._1);
+  }
+  fail();
+});
+var defaultPrefs = {
+  prefMultiSuffix: "",
+  prefDisambiguate: false,
+  prefShowHelpOnError: false,
+  prefShowHelpOnEmpty: false,
+  prefBacktrack: Backtrack,
+  prefColumns: 80
+};
+var command = (cmd) => (pinfo) => $Mod(
+  (p) => ({ cmdCommands: [$Tuple(cmd, pinfo), ...p.cmdCommands], cmdGroup: p.cmdGroup }),
+  $DefaultProp(Nothing, Nothing),
+  identity26
+);
+var abortOption = (err) => (m) => {
+  const $0 = fold3([
+    $Mod(
+      (p) => ({ optNoArgError: (v) => err, optCompleter: p.optCompleter, optNames: p.optNames }),
+      $DefaultProp(Nothing, Nothing),
+      identity26
+    ),
+    $Mod(
+      identity27,
+      $DefaultProp($Maybe("Just", identity27), Nothing),
+      identity27
+    ),
+    optionMod((p) => ({ propMetaVar: "", propDescMod: p.propDescMod, propHelp: p.propHelp, propShowDefault: p.propShowDefault, propVisibility: p.propVisibility }))
+  ]);
+  return option((() => {
+    const $1 = monadThrowExceptT(monadIdentity).throwError(err);
+    return (v) => $1;
+  })())($Mod(
+    (x) => m._1($0._1(x)),
+    $DefaultProp(m._2._1.tag === "Nothing" ? $0._2._1 : m._2._1, m._2._2.tag === "Nothing" ? $0._2._2 : m._2._2),
+    (x) => m._3($0._3(x))
+  ));
+};
+
+// output-es/Node.Process/foreign.js
+import process from "process";
+function exit(code) {
+  return () => {
+    process.exit(code);
+  };
+}
+function copyArray(xs) {
+  return () => xs.slice();
+}
+
+// output-es/Node.Process/index.js
+var argv = /* @__PURE__ */ (() => copyArray(process.argv))();
+
+// output-es/Node.Stream/foreign.js
+function writeStringImpl(w) {
+  return (enc) => (s) => (done) => () => w.write(s, enc, done);
+}
+
+// output-es/Node.Stream/index.js
+var writeString = (w) => (enc) => (s) => (cb) => writeStringImpl(w)((() => {
+  if (enc === "ASCII") {
+    return "ASCII";
+  }
+  if (enc === "UTF8") {
+    return "UTF8";
+  }
+  if (enc === "UTF16LE") {
+    return "UTF16LE";
+  }
+  if (enc === "UCS2") {
+    return "UCS2";
+  }
+  if (enc === "Base64") {
+    return "Base64";
+  }
+  if (enc === "Latin1") {
+    return "Latin1";
+  }
+  if (enc === "Binary") {
+    return "Binary";
+  }
+  if (enc === "Hex") {
+    return "Hex";
+  }
+  fail();
+})())(s)((x) => cb(nullable(x, Nothing, Just))());
+
+// output-es/Options.Applicative.Internal/index.js
+var $ComplResult = (tag, _1, _2) => ({ tag, _1, _2 });
+var $TStep = (tag, _1, _2) => ({ tag, _1, _2 });
+var monadReaderT2 = /* @__PURE__ */ monadReaderT(monadIdentity);
+var monadStateT = { Applicative0: () => applicativeStateT(monadReaderT2), Bind1: () => bindStateT(monadReaderT2) };
+var apply4 = /* @__PURE__ */ (() => applyExceptT(monadStateT).apply)();
+var bind2 = /* @__PURE__ */ (() => bindExceptT(monadStateT).bind)();
+var pure2 = /* @__PURE__ */ (() => applicativeExceptT(monadStateT).pure)();
+var alt = /* @__PURE__ */ (() => altExceptT(parseErrorSemigroup)(monadStateT).alt)();
+var lift1 = (m) => bindStateT(monadReaderT2).bind(m)((a) => applicativeStateT(monadReaderT2).pure($Either(
+  "Right",
+  a
+)));
+var modify_ = /* @__PURE__ */ (() => {
+  const $0 = monadStateStateT(monadReaderT2);
+  return (f) => $0.state((s) => $Tuple(void 0, f(s)));
+})();
+var throwError = /* @__PURE__ */ (() => monadThrowExceptT(monadStateT).throwError)();
+var identity28 = (x) => x;
+var TNil = /* @__PURE__ */ $TStep("TNil");
+var ComplResult = (value0) => $ComplResult("ComplResult", value0);
+var runListT = (dictMonad) => (xs) => dictMonad.Bind1().bind(xs)((s) => {
+  if (s.tag === "TNil") {
+    return dictMonad.Applicative0().pure(Nil);
+  }
+  if (s.tag === "TCons") {
+    const $0 = Cons(s._1);
+    return dictMonad.Bind1().bind(runListT(dictMonad)(s._2))((a$p) => dictMonad.Applicative0().pure($0(a$p)));
+  }
+  fail();
+});
+var runCompletion = (v) => (prefs) => {
+  const v1 = v(prefs);
+  if (v1.tag === "ComplResult") {
+    return Nothing;
+  }
+  if (v1.tag === "ComplParser") {
+    return $Maybe("Just", $Either("Left", $Tuple(v1._1, v1._2)));
+  }
+  if (v1.tag === "ComplOption") {
+    return $Maybe("Just", $Either("Right", v1._1));
+  }
+  fail();
+};
+var pFunctor = {
+  map: (f) => (v) => (s) => {
+    const $0 = v(s);
+    return (x) => {
+      const $1 = $0(x);
+      return $Tuple(
+        (() => {
+          if ($1._1.tag === "Left") {
+            return $Either("Left", $1._1._1);
+          }
+          if ($1._1.tag === "Right") {
+            return $Either("Right", f($1._1._1));
+          }
+          fail();
+        })(),
+        $1._2
+      );
+    };
+  }
+};
+var pApply = { apply: (v) => (v1) => apply4(v)(v1), Functor0: () => pFunctor };
+var pBind = { bind: (v) => (k) => bind2(v)((a) => k(a)), Apply0: () => pApply };
+var pApplicative = { pure: (a) => pure2(a), Apply0: () => pApply };
+var pMonad = { Applicative0: () => pApplicative, Bind1: () => pBind };
+var pAlt = { alt: (v) => (v1) => alt(v)(v1), Functor0: () => pFunctor };
+var pMonadP$lazy = /* @__PURE__ */ binding(() => ({
+  enterContext: (name2) => (pinfo) => lift1(modify_(cons2($Context(name2, pinfo)))),
+  exitContext: lift1(modify_(drop(1))),
+  getPrefs: lift1((s) => monadReaderT2.Bind1().bind(Identity)((x) => monadReaderT2.Applicative0().pure($Tuple(x, s)))),
+  missingArgP: (e) => (v) => pMonadP$lazy().errorP(e),
+  exitP: (i) => (v) => (p) => {
+    const $0 = throwError($ParseError2("MissingError", i, $SomeParser(p)));
+    return (x) => {
+      if (x.tag === "Nothing") {
+        return $0;
+      }
+      if (x.tag === "Just") {
+        return pure2(x._1);
+      }
+      fail();
+    };
+  },
+  errorP: (x) => throwError(x),
+  Monad0: () => pMonad,
+  Alt1: () => pAlt
+}));
+var pMonadP = /* @__PURE__ */ pMonadP$lazy();
+var complResultMonad = { Applicative0: () => complResultApplicative, Bind1: () => complResultBind };
+var complResultFunctor = { map: (f) => (a) => complResultBind.bind(a)((a$p) => complResultApplicative.pure(f(a$p))) };
+var complResultBind = {
+  bind: (m) => (f) => {
+    if (m.tag === "ComplResult") {
+      return f(m._1);
+    }
+    if (m.tag === "ComplParser") {
+      return $ComplResult("ComplParser", m._1, m._2);
+    }
+    if (m.tag === "ComplOption") {
+      return $ComplResult("ComplOption", m._1);
+    }
+    fail();
+  },
+  Apply0: () => complResultApply
+};
+var complResultApply = {
+  apply: (f) => (a) => {
+    if (f.tag === "ComplResult") {
+      if (a.tag === "ComplResult") {
+        return complResultApplicative.pure(f._1(a._1));
+      }
+      if (a.tag === "ComplParser") {
+        return $ComplResult("ComplParser", a._1, a._2);
+      }
+      if (a.tag === "ComplOption") {
+        return $ComplResult("ComplOption", a._1);
+      }
+      fail();
+    }
+    if (f.tag === "ComplParser") {
+      return $ComplResult("ComplParser", f._1, f._2);
+    }
+    if (f.tag === "ComplOption") {
+      return $ComplResult("ComplOption", f._1);
+    }
+    fail();
+  },
+  Functor0: () => complResultFunctor
+};
+var complResultApplicative = { pure: ComplResult, Apply0: () => complResultApply };
+var monadReaderT1 = /* @__PURE__ */ monadReaderT(complResultMonad);
+var alt1 = /* @__PURE__ */ (() => altExceptT(parseErrorSemigroup)(monadReaderT1).alt)();
+var apply1 = /* @__PURE__ */ (() => applyExceptT(monadReaderT1).apply)();
+var pure22 = /* @__PURE__ */ (() => applicativeExceptT(monadReaderT1).pure)();
+var bind1 = /* @__PURE__ */ (() => bindExceptT(monadReaderT1).bind)();
+var lift3 = (m) => monadReaderT1.Bind1().bind(m)((a) => monadReaderT1.Applicative0().pure($Either("Right", a)));
+var completionFunctor = {
+  map: (f) => (v) => (x) => {
+    const $0 = v(x);
+    if ($0.tag === "ComplResult") {
+      return $ComplResult(
+        "ComplResult",
+        (() => {
+          if ($0._1.tag === "Left") {
+            return $Either("Left", $0._1._1);
+          }
+          if ($0._1.tag === "Right") {
+            return $Either("Right", f($0._1._1));
+          }
+          fail();
+        })()
+      );
+    }
+    if ($0.tag === "ComplParser") {
+      return $ComplResult("ComplParser", $0._1, $0._2);
+    }
+    if ($0.tag === "ComplOption") {
+      return $ComplResult("ComplOption", $0._1);
+    }
+    fail();
+  }
+};
+var completionAlt = { alt: (v) => (v1) => alt1(v)(v1), Functor0: () => completionFunctor };
+var completionApply = { apply: (v) => (v1) => apply1(v)(v1), Functor0: () => completionFunctor };
+var completionApplicative = { pure: (a) => pure22(a), Apply0: () => completionApply };
+var completionBind = { bind: (v) => (k) => bind1(v)((a) => k(a)), Apply0: () => completionApply };
+var completionMonad = { Applicative0: () => completionApplicative, Bind1: () => completionBind };
+var completionMonadP = {
+  enterContext: (v) => (v1) => pure22(),
+  exitContext: /* @__PURE__ */ pure22(),
+  getPrefs: /* @__PURE__ */ lift3(ComplResult),
+  missingArgP: (v) => (x) => lift3((v$1) => $ComplResult("ComplOption", x)),
+  exitP: (v) => (a) => (p) => (v1) => lift3((v$1) => $ComplResult("ComplParser", $SomeParser(p), a)),
+  errorP: (x) => monadThrowExceptT(monadReaderT1).throwError(x),
+  Monad0: () => completionMonad,
+  Alt1: () => completionAlt
+};
+var bimapTStep = (v) => (v1) => (v2) => {
+  if (v2.tag === "TNil") {
+    return TNil;
+  }
+  if (v2.tag === "TCons") {
+    return $TStep("TCons", v(v2._1), v1(v2._2));
+  }
+  fail();
+};
+var listTFunctor = (dictMonad) => ({
+  map: (f) => (v) => {
+    const $0 = bimapTStep(f)(listTFunctor(dictMonad).map(f));
+    return dictMonad.Bind1().bind(v)((a$p) => dictMonad.Applicative0().pure($0(a$p)));
+  }
+});
+var listTAlt = (dictMonad) => {
+  const listTFunctor1 = listTFunctor(dictMonad);
+  return {
+    alt: (xs) => (ys) => dictMonad.Bind1().bind(xs)((s) => {
+      if (s.tag === "TNil") {
+        return ys;
+      }
+      if (s.tag === "TCons") {
+        return dictMonad.Applicative0().pure($TStep("TCons", s._1, listTAlt(dictMonad).alt(s._2)(ys)));
+      }
+      fail();
+    }),
+    Functor0: () => listTFunctor1
+  };
+};
+var listTPlus = (dictMonad) => {
+  const listTAlt1 = listTAlt(dictMonad);
+  return { empty: dictMonad.Applicative0().pure(TNil), Alt0: () => listTAlt1 };
+};
+var hoistList = (dictMonad) => foldrArray((x) => (xt) => dictMonad.Applicative0().pure($TStep("TCons", x, xt)))(listTPlus(dictMonad).empty);
+var listTMonadTrans = {
+  lift: (dictMonad) => {
+    const empty2 = listTPlus(dictMonad).empty;
+    return (x) => dictMonad.Bind1().bind(x)((a$p) => dictMonad.Applicative0().pure($TStep("TCons", a$p, empty2)));
+  }
+};
+var cut = (dictMonad) => listTMonadTrans.lift({
+  Applicative0: () => applicativeStateT(dictMonad),
+  Bind1: () => bindStateT(dictMonad)
+})(monadStateStateT(dictMonad).state((v) => $Tuple(void 0, true)));
+var nondetTMonadTrans = {
+  lift: (dictMonad) => {
+    const $0 = listTMonadTrans.lift({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) });
+    return (x) => $0((s) => dictMonad.Bind1().bind(x)((x$1) => dictMonad.Applicative0().pure($Tuple(x$1, s))));
+  }
+};
+var listTBind = (dictMonad) => ({
+  bind: (xs) => (f) => dictMonad.Bind1().bind(xs)((s) => {
+    if (s.tag === "TNil") {
+      return dictMonad.Applicative0().pure(TNil);
+    }
+    if (s.tag === "TCons") {
+      return listTAlt(dictMonad).alt(f(s._1))(listTBind(dictMonad).bind(s._2)(f));
+    }
+    fail();
+  }),
+  Apply0: () => listTApply(dictMonad)
+});
+var listTApply = (dictMonad) => {
+  const listTFunctor1 = listTFunctor(dictMonad);
+  return {
+    apply: (() => {
+      const $0 = listTBind(dictMonad);
+      return (f) => (a) => $0.bind(f)((f$p) => $0.bind(a)((a$p) => listTApplicative(dictMonad).pure(f$p(a$p))));
+    })(),
+    Functor0: () => listTFunctor1
+  };
+};
+var listTApplicative = (dictMonad) => ({
+  pure: (() => {
+    const $0 = hoistList(dictMonad);
+    return (x) => $0([x]);
+  })(),
+  Apply0: () => listTApply(dictMonad)
+});
+var listTAlternative = (dictMonad) => {
+  const listTApplicative1 = listTApplicative(dictMonad);
+  const listTPlus1 = listTPlus(dictMonad);
+  return { Applicative0: () => listTApplicative1, Plus1: () => listTPlus1 };
+};
+var nondetTAltOp = (dictMonad) => {
+  const monadStateT1 = { Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) };
+  const listTBind1 = listTBind(monadStateT1);
+  const lift6 = listTMonadTrans.lift(monadStateT1);
+  const $$get3 = monadStateStateT(dictMonad).state((s) => $Tuple(s, s));
+  const $0 = listTAlternative(monadStateT1);
+  const empty2 = $0.Plus1().empty;
+  return (m1) => (m2) => listTAlt(monadStateT1).alt(m1)(listTBind1.bind(lift6($$get3))((s) => listTBind1.bind(!s ? $0.Applicative0().pure() : empty2)(() => m2)));
+};
+var nondetTFunctor = (dictMonad) => ({ map: (f) => listTFunctor({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).map(f) });
+var nondetTAlt = (dictMonad) => {
+  const nondetTFunctor1 = nondetTFunctor(dictMonad);
+  return {
+    alt: (v) => (v1) => listTAlt({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).alt(v)(v1),
+    Functor0: () => nondetTFunctor1
+  };
+};
+var nondetTPlus = (dictMonad) => {
+  const nondetTAlt1 = nondetTAlt(dictMonad);
+  return {
+    empty: listTPlus({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).empty,
+    Alt0: () => nondetTAlt1
+  };
+};
+var nondetTApply = (dictMonad) => {
+  const nondetTFunctor1 = nondetTFunctor(dictMonad);
+  return {
+    apply: (v) => (v1) => listTApply({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).apply(v)(v1),
+    Functor0: () => nondetTFunctor1
+  };
+};
+var nondetTApplicative = (dictMonad) => {
+  const nondetTApply1 = nondetTApply(dictMonad);
+  return {
+    pure: (x) => listTApplicative({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).pure(x),
+    Apply0: () => nondetTApply1
+  };
+};
+var nondetTBind = (dictMonad) => {
+  const nondetTApply1 = nondetTApply(dictMonad);
+  return {
+    bind: (v) => (f) => listTBind({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).bind(v)((x) => f(x)),
+    Apply0: () => nondetTApply1
+  };
+};
+var takeListT = (dictMonad) => {
+  const empty2 = listTPlus(dictMonad).empty;
+  return (v) => {
+    if (v === 0) {
+      return (v$1) => empty2;
+    }
+    const $0 = bimapTStep(identity28)(takeListT(dictMonad)(v - 1 | 0));
+    return (x) => dictMonad.Bind1().bind(x)((a$p) => dictMonad.Applicative0().pure($0(a$p)));
+  };
+};
+var disamb = (dictMonad) => {
+  const Bind1 = dictMonad.Bind1();
+  const evalStateT2 = evalStateT(Bind1.Apply0().Functor0());
+  const monadStateT1 = { Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) };
+  const takeListT1 = takeListT(monadStateT1);
+  return (allow_amb) => (xs) => Bind1.bind(evalStateT2(runListT(monadStateT1)(takeListT1(allow_amb ? 1 : 2)(xs)))(false))((xs$p) => dictMonad.Applicative0().pure(xs$p.tag === "Cons" && xs$p._2.tag === "Nil" ? $Maybe("Just", xs$p._1) : Nothing));
+};
+
+// output-es/Options.Applicative.Common/index.js
+var $OptWord = (_1, _2) => ({ tag: "OptWord", _1, _2 });
+var fromFoldable21 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
+var any2 = /* @__PURE__ */ (() => foldableArray.foldMap(/* @__PURE__ */ (() => {
+  const semigroupDisj1 = { append: (v) => (v1) => v || v1 };
+  return { mempty: false, Semigroup0: () => semigroupDisj1 };
+})()))();
+var elem3 = /* @__PURE__ */ (() => {
+  const any1 = foldableArray.foldMap(/* @__PURE__ */ (() => {
+    const semigroupDisj1 = { append: (v) => (v1) => v || v1 };
+    return { mempty: false, Semigroup0: () => semigroupDisj1 };
+  })());
+  return (x) => any1((y) => {
+    if (x.tag === "OptShort") {
+      return y.tag === "OptShort" && x._1 === y._1;
+    }
+    return x.tag === "OptLong" && y.tag === "OptLong" && x._1 === y._1;
+  });
+})();
+var simplify2 = (v) => {
+  if (v.tag === "Leaf") {
+    return $OptTree("Leaf", v._1);
+  }
+  if (v.tag === "MultNode") {
+    const v1 = arrayBind(v._1)((x) => {
+      const $0 = simplify2(x);
+      if ($0.tag === "MultNode") {
+        return $0._1;
+      }
+      return [$0];
+    });
+    if (v1.length === 1) {
+      return v1[0];
+    }
+    return $OptTree("MultNode", v1);
+  }
+  if (v.tag === "AltNode") {
+    const v1 = arrayBind(v._1)((x) => {
+      const $0 = simplify2(x);
+      if ($0.tag === "AltNode") {
+        return $0._1;
+      }
+      if ($0.tag === "MultNode" && $0._1.length === 0) {
+        return [];
+      }
+      return [$0];
+    });
+    if (v1.length === 0) {
+      return $OptTree("MultNode", []);
+    }
+    if (v1.length === 1) {
+      return v1[0];
+    }
+    return $OptTree("AltNode", v1);
+  }
+  fail();
+};
+var showOption = (v) => {
+  if (v.tag === "OptLong") {
+    return "--" + v._1;
+  }
+  if (v.tag === "OptShort") {
+    return fromCharArray(["-", v._1]);
+  }
+  fail();
+};
+var parseWord = /* @__PURE__ */ (() => {
+  const $0 = foldrArray(Cons)(Nil);
+  return (x) => {
+    const $1 = $0(toCharArray(x));
+    if ($1.tag === "Cons" && $1._1 === "-") {
+      if ($1._2.tag === "Cons" && $1._2._1 === "-") {
+        return $Maybe(
+          "Just",
+          (() => {
+            const v2 = span((v3) => v3 !== "=")($1._2._2);
+            if (v2.rest.tag === "Nil") {
+              return $OptWord($OptName("OptLong", fromCharArray(fromFoldable21($1._2._2))), Nothing);
+            }
+            if (v2.rest.tag === "Cons") {
+              return $OptWord(
+                $OptName("OptLong", fromCharArray(fromFoldable21(v2.init))),
+                $Maybe("Just", fromCharArray(fromFoldable21(v2.rest._2)))
+              );
+            }
+            fail();
+          })()
+        );
+      }
+      if ($1._2.tag === "Nil") {
+        return Nothing;
+      }
+      if ($1._2.tag === "Cons") {
+        return $Maybe(
+          "Just",
+          $OptWord(
+            $OptName("OptShort", $1._2._1),
+            $1._2._2.tag !== "Nil" ? $Maybe("Just", fromCharArray(fromFoldable21($1._2._2))) : Nothing
+          )
+        );
+      }
+      fail();
+    }
+    return Nothing;
+  };
+})();
+var isOptionPrefix = (v) => (v1) => {
+  if (v.tag === "OptShort") {
+    return v1.tag === "OptShort" && v._1 === v1._1;
+  }
+  return v.tag === "OptLong" && v1.tag === "OptLong" && startsWith(v._1)(v1._1);
+};
+var optMatches = (dictMonadP) => {
+  const Monad0 = dictMonadP.Monad0();
+  const bindStateT2 = bindStateT(Monad0);
+  const monadStateStateT3 = monadStateStateT(Monad0);
+  const $$get3 = monadStateStateT3.state((s) => $Tuple(s, s));
+  const $0 = applicativeStateT(Monad0);
+  const $1 = dictMonadP.Monad0().Applicative0().pure;
+  return (disambiguate) => (opt) => (v) => {
+    if (opt.tag === "OptReader") {
+      const $2 = (disambiguate ? any2(isOptionPrefix(v._1))(opt._1) : elem3(v._1)(opt._1)) ? $Maybe("Just", void 0) : Nothing;
+      if ($2.tag === "Just") {
+        return $Maybe(
+          "Just",
+          bindStateT2.bind($$get3)((args) => {
+            const missing_arg = dictMonadP.missingArgP(opt._3(showOption(v._1)))(opt._2.crCompleter);
+            return bindStateT2.bind((() => {
+              if (v._2.tag === "Nothing") {
+                if (args.tag === "Nil") {
+                  return (s) => Monad0.Bind1().bind(missing_arg)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
+                }
+                if (args.tag === "Cons") {
+                  return $0.pure($Tuple(args._1, args._2));
+                }
+                fail();
+              }
+              if (v._2.tag === "Just") {
+                return $0.pure($Tuple(v._2._1, args));
+              }
+              fail();
+            })())((v1) => {
+              const $3 = v1._1;
+              const $4 = v1._2;
+              return bindStateT2.bind(monadStateStateT3.state((v$1) => $Tuple(void 0, $4)))(() => {
+                const $5 = opt._2.crReader($3);
+                if ($5.tag === "Right") {
+                  const $6 = $1($5._1);
+                  return (s) => Monad0.Bind1().bind($6)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
+                }
+                if ($5.tag === "Left") {
+                  const $6 = dictMonadP.errorP($5._1.tag === "ErrorMsg" ? $ParseError2("ErrorMsg", "option " + showOption(v._1) + ": " + $5._1._1) : $5._1);
+                  return (s) => Monad0.Bind1().bind($6)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
+                }
+                fail();
+              });
+            });
+          })
+        );
+      }
+      if ($2.tag === "Nothing") {
+        return Nothing;
+      }
+      fail();
+    }
+    if (opt.tag === "FlagReader" && (disambiguate ? any2(isOptionPrefix(v._1))(opt._1) : elem3(v._1)(opt._1)) && ((() => {
+      if (v._1.tag === "OptShort") {
+        return true;
+      }
+      if (v._1.tag === "OptLong") {
+        return false;
+      }
+      fail();
+    })() || (() => {
+      if (v._2.tag === "Nothing") {
+        return true;
+      }
+      if (v._2.tag === "Just") {
+        return false;
+      }
+      fail();
+    })())) {
+      return $Maybe(
+        "Just",
+        bindStateT2.bind($$get3)((args) => bindStateT2.bind((() => {
+          if (v._2.tag === "Just") {
+            const $2 = $List("Cons", fromCharArray(["-", ...toCharArray(v._2._1)]), args);
+            return monadStateStateT3.state((v$1) => $Tuple(void 0, $2));
+          }
+          return monadStateStateT3.state((v$1) => $Tuple(void 0, args));
+        })())(() => $0.pure(opt._2)))
+      );
+    }
+    return Nothing;
+  };
+};
+var evalParser = (v) => {
+  if (v.tag === "NilP") {
+    return $Maybe("Just", v._1);
+  }
+  if (v.tag === "OptP") {
+    return Nothing;
+  }
+  if (v.tag === "MultP") {
+    return applyMaybe.apply(evalParser(v._1._1))(evalParser(v._1._2));
+  }
+  if (v.tag === "AltP") {
+    const $0 = evalParser(v._1);
+    const $1 = evalParser(v._2);
+    if ($0.tag === "Nothing") {
+      return $1;
+    }
+    return $0;
+  }
+  if (v.tag === "BindP") {
+    return resume$p((p) => (k) => {
+      const $0 = evalParser(p);
+      if ($0.tag === "Just") {
+        return evalParser($Parser("BindP", k($0._1)));
+      }
+      if ($0.tag === "Nothing") {
+        return Nothing;
+      }
+      fail();
+    })(Just)(v._1);
+  }
+  fail();
+};
+var searchParser = (dictMonad) => {
+  const nondetTPlus2 = nondetTPlus(dictMonad);
+  const empty2 = nondetTPlus2.empty;
+  const $0 = nondetTFunctor(dictMonad);
+  const nondetTAltOp2 = nondetTAltOp(dictMonad);
+  const oneOf1 = foldrArray(nondetTPlus2.Alt0().alt)(nondetTPlus2.empty);
+  return (v) => (v1) => {
+    if (v1.tag === "NilP") {
+      return empty2;
+    }
+    if (v1.tag === "OptP") {
+      return v(v1._1);
+    }
+    if (v1.tag === "MultP") {
+      const $1 = v1._1._1;
+      const $2 = v1._1._2;
+      return nondetTAltOp2($0.map((p1$p) => $Parser("MultP", $MultPE(p1$p, $2)))(searchParser(dictMonad)(v)($1)))($0.map((p2$p) => $Parser(
+        "MultP",
+        $MultPE($1, p2$p)
+      ))(searchParser(dictMonad)(v)($2)));
+    }
+    if (v1.tag === "AltP") {
+      return oneOf1([searchParser(dictMonad)(v)(v1._1), searchParser(dictMonad)(v)(v1._2)]);
+    }
+    if (v1.tag === "BindP") {
+      return resume$p((p) => (k) => oneOf1([
+        $0.map((p$p) => $Parser(
+          "BindP",
+          $Free(
+            $FreeView("Bind", p$p, (x) => $Free($FreeView("Return", x), CatNil)),
+            snoc2(CatNil)(k)
+          )
+        ))(searchParser(dictMonad)(v)(p)),
+        (() => {
+          const v2 = evalParser(p);
+          if (v2.tag === "Nothing") {
+            return empty2;
+          }
+          if (v2.tag === "Just") {
+            return searchParser(dictMonad)(v)($Parser("BindP", k(v2._1)));
+          }
+          fail();
+        })()
+      ]))((v$1) => empty2)(v1._1);
+    }
+    fail();
+  };
+};
+var searchOpt = (dictMonadP) => {
+  const $0 = dictMonadP.Monad0();
+  const monadStateT2 = { Applicative0: () => applicativeStateT($0), Bind1: () => bindStateT($0) };
+  const searchParser1 = searchParser(monadStateT2);
+  const optMatches1 = optMatches(dictMonadP);
+  const lift2 = nondetTMonadTrans.lift(monadStateT2);
+  const $1 = dictMonadP.Alt1().Functor0();
+  const empty2 = nondetTPlus(monadStateT2).empty;
+  return (pprefs) => (w) => searchParser1((opt) => {
+    const v = optMatches1(pprefs.prefDisambiguate && optVisibilityOrd.compare(opt.optProps.propVisibility)(Internal) === "GT")(opt.optMain)(w);
+    if (v.tag === "Just") {
+      return lift2((s) => $1.map((v1) => $Tuple($Parser("NilP", v1._1), v1._2))(v._1(s)));
+    }
+    if (v.tag === "Nothing") {
+      return empty2;
+    }
+    fail();
+  });
+};
+var stepParser = (dictMonadP) => {
+  const searchOpt1 = searchOpt(dictMonadP);
+  return (v) => (v1) => (v2) => (v3) => {
+    if (v1 === "AllPositionals") {
+      return searchArg(dictMonadP)(v)(v2)(v3);
+    }
+    if (v1 === "ForwardOptions") {
+      const v42 = parseWord(v2);
+      if (v42.tag === "Just") {
+        return nondetTAlt((() => {
+          const $0 = dictMonadP.Monad0();
+          return { Applicative0: () => applicativeStateT($0), Bind1: () => bindStateT($0) };
+        })()).alt(searchOpt1(v)(v42._1)(v3))(searchArg(dictMonadP)(v)(v2)(v3));
+      }
+      if (v42.tag === "Nothing") {
+        return searchArg(dictMonadP)(v)(v2)(v3);
+      }
+      fail();
+    }
+    const v4 = parseWord(v2);
+    if (v4.tag === "Just") {
+      return searchOpt1(v)(v4._1)(v3);
+    }
+    if (v4.tag === "Nothing") {
+      return searchArg(dictMonadP)(v)(v2)(v3);
+    }
+    fail();
+  };
+};
+var searchArg = (dictMonadP) => {
+  const Monad0 = dictMonadP.Monad0();
+  const monadStateT2 = { Applicative0: () => applicativeStateT(Monad0), Bind1: () => bindStateT(Monad0) };
+  const searchParser1 = searchParser(monadStateT2);
+  const $0 = nondetTApplicative(monadStateT2);
+  const cut2 = cut(monadStateT2);
+  const lift2 = nondetTMonadTrans.lift(monadStateT2);
+  const bindStateT2 = bindStateT(Monad0);
+  const $1 = applyStateT(Monad0);
+  const monadStateStateT3 = monadStateStateT(Monad0);
+  const $$get3 = monadStateStateT3.state((s) => $Tuple(s, s));
+  const $2 = dictMonadP.Alt1().Functor0();
+  const Apply0 = Monad0.Bind1().Apply0();
+  const exitContext = dictMonadP.exitContext;
+  const $3 = nondetTFunctor(monadStateT2);
+  const empty2 = nondetTPlus(monadStateT2).empty;
+  const $4 = dictMonadP.Monad0().Applicative0().pure;
+  return (prefs) => (arg) => searchParser1((opt) => nondetTBind(monadStateT2).bind(opt.optMain.tag === "ArgReader" ? cut2 : $0.pure())(() => {
+    if (opt.optMain.tag === "CmdReader") {
+      const $5 = opt.optMain._3(arg);
+      if ($5.tag === "Just") {
+        if (prefs.prefBacktrack === "NoBacktrack") {
+          const $6 = $5._1;
+          return lift2(bindStateT2.bind($1.apply($1.Functor0().map($$const)($$get3))(monadStateStateT3.state((v) => $Tuple(void 0, Nil))))((args) => {
+            const $7 = Apply0.apply(Apply0.Functor0().map($$const)(Apply0.apply(Apply0.Functor0().map((v) => identity)(dictMonadP.enterContext(arg)($6)))(runParserInfo(dictMonadP)($6)(args))))(exitContext);
+            return (s) => $2.map((v1) => $Tuple($Parser("NilP", v1._1), v1._2))(Monad0.Bind1().bind($7)((x) => Monad0.Applicative0().pure($Tuple(
+              x,
+              s
+            ))));
+          }));
+        }
+        if (prefs.prefBacktrack === "Backtrack") {
+          const $6 = $5._1;
+          return $3.map(NilP)(lift2((args) => Apply0.apply(Apply0.Functor0().map($$const)(Apply0.apply(Apply0.Functor0().map((v) => identity)(dictMonadP.enterContext(arg)($6)))(runParser(dictMonadP)($6.infoPolicy)(CmdStart)($6.infoParser)(args))))(exitContext)));
+        }
+        if (prefs.prefBacktrack === "SubparserInline") {
+          const $6 = $5._1;
+          return lift2(bindStateT2.bind((() => {
+            const $7 = dictMonadP.enterContext(arg)($6);
+            return (s) => Monad0.Bind1().bind($7)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
+          })())(() => applicativeStateT(Monad0).pure($6.infoParser)));
+        }
+        fail();
+      }
+      if ($5.tag === "Nothing") {
+        return empty2;
+      }
+      fail();
+    }
+    if (opt.optMain.tag === "ArgReader") {
+      const $5 = opt.optMain._1.crReader(arg);
+      const $6 = (() => {
+        if ($5.tag === "Left") {
+          return dictMonadP.errorP($5._1);
+        }
+        if ($5.tag === "Right") {
+          return $4($5._1);
+        }
+        fail();
+      })();
+      return $3.map(NilP)(lift2((s) => Monad0.Bind1().bind($6)((x) => Monad0.Applicative0().pure($Tuple(x, s)))));
+    }
+    return empty2;
+  }));
+};
+var runParserInfo = (dictMonadP) => (i) => runParserFully(dictMonadP)(i.infoPolicy)(i.infoParser);
+var runParserFully = (dictMonadP) => {
+  const Monad0 = dictMonadP.Monad0();
+  return (policy) => (p) => (args) => Monad0.Bind1().bind(runParser(dictMonadP)(policy)(CmdStart)(p)(args))((v) => {
+    if (v._2.tag === "Nil") {
+      return Monad0.Applicative0().pure(v._1);
+    }
+    if (v._2.tag === "Cons") {
+      return dictMonadP.errorP($ParseError2(
+        "UnexpectedError",
+        v._2._1,
+        $SomeParser($Parser("NilP", void 0))
+      ));
+    }
+    fail();
+  });
+};
+var runParser = (dictMonadP) => {
+  const Monad0 = dictMonadP.Monad0();
+  const disamb2 = disamb({
+    Applicative0: () => applicativeStateT(Monad0),
+    Bind1: () => bindStateT(Monad0)
+  });
+  const $0 = Monad0.Bind1();
+  const getPrefs = dictMonadP.getPrefs;
+  const pure4 = dictMonadP.Monad0().Applicative0().pure;
+  return (policy) => (isCmdStart) => (p) => (args) => {
+    const result = applyMaybe.apply((() => {
+      const $1 = evalParser(p);
+      if ($1.tag === "Just") {
+        return $Maybe("Just", Tuple($1._1));
+      }
+      return Nothing;
+    })())($Maybe("Just", args));
+    if (args.tag === "Nil") {
+      return dictMonadP.exitP(isCmdStart)(policy)(p)(result);
+    }
+    if (args.tag === "Cons") {
+      if (args._1 === "--" && (policy === "Intersperse" || policy === "NoIntersperse" || policy !== "AllPositionals")) {
+        return runParser(dictMonadP)(AllPositionals)(CmdCont)(p)(args._2);
+      }
+      const $1 = args._1;
+      const $2 = args._2;
+      return $0.bind(getPrefs)((prefs) => $0.bind(disamb2(!prefs.prefDisambiguate)(stepParser(dictMonadP)(prefs)(policy)($1)(p))($2))((v) => {
+        if (v._1.tag === "Nothing") {
+          const $3 = dictMonadP.errorP($ParseError2("UnexpectedError", $1, $SomeParser(p)));
+          if (result.tag === "Nothing") {
+            return $3;
+          }
+          if (result.tag === "Just") {
+            return pure4(result._1);
+          }
+          fail();
+        }
+        if (v._1.tag === "Just") {
+          return runParser(dictMonadP)((() => {
+            if (policy === "NoIntersperse") {
+              if ((() => {
+                const $3 = parseWord($1);
+                if ($3.tag === "Nothing") {
+                  return false;
+                }
+                if ($3.tag === "Just") {
+                  return true;
+                }
+                fail();
+              })()) {
+                return NoIntersperse;
+              }
+              return AllPositionals;
+            }
+            return policy;
+          })())(CmdCont)(v._1._1)(v._2);
+        }
+        fail();
+      }));
+    }
+    fail();
+  };
+};
+var treeMapParser = (g) => {
+  const hasArg = (v) => {
+    if (v.tag === "NilP") {
+      return false;
+    }
+    if (v.tag === "OptP") {
+      return v._1.optMain.tag === "ArgReader";
+    }
+    if (v.tag === "MultP") {
+      return hasArg(v._1._1) || hasArg(v._1._2);
+    }
+    if (v.tag === "AltP") {
+      return hasArg(v._1) || hasArg(v._2);
+    }
+    if (v.tag === "BindP") {
+      return resume$p((p) => (v1) => hasArg(p))((v$1) => false)(v._1);
+    }
+    fail();
+  };
+  const go = (v) => (v1) => (v2) => (v3) => (v4) => {
+    if (v4.tag === "NilP") {
+      return $OptTree("MultNode", []);
+    }
+    if (v4.tag === "OptP") {
+      if (optVisibilityOrd.compare(v4._1.optProps.propVisibility)(Internal) === "GT") {
+        return $OptTree("Leaf", v3({ hinfoMulti: v, hinfoDefault: v1, hinfoUnreachableArgs: v2 })(v4._1));
+      }
+      return $OptTree("MultNode", []);
+    }
+    if (v4.tag === "MultP") {
+      return $OptTree("MultNode", [go(v)(v1)(v2)(v3)(v4._1._1), go(v)(v1)(v2 || hasArg(v4._1._1))(v3)(v4._1._2)]);
+    }
+    if (v4.tag === "AltP") {
+      const $02 = evalParser(v4._1);
+      const d$p = v1 || (() => {
+        const $1 = evalParser(v4._2);
+        return (() => {
+          if ($02.tag === "Nothing") {
+            return false;
+          }
+          if ($02.tag === "Just") {
+            return true;
+          }
+          fail();
+        })() || (() => {
+          if ($1.tag === "Nothing") {
+            return false;
+          }
+          if ($1.tag === "Just") {
+            return true;
+          }
+          fail();
+        })();
+      })();
+      return $OptTree("AltNode", [go(v)(d$p)(v2)(v3)(v4._1), go(v)(d$p)(v2)(v3)(v4._2)]);
+    }
+    if (v4.tag === "BindP") {
+      return resume$p((p) => (k) => {
+        const go$p = go(true)(v1)(v2)(v3)(p);
+        const v5 = evalParser(p);
+        if (v5.tag === "Nothing") {
+          return go$p;
+        }
+        if (v5.tag === "Just") {
+          return $OptTree("MultNode", [go$p, go(true)(v1)(v2)(v3)($Parser("BindP", k(v5._1)))]);
+        }
+        fail();
+      })((v$1) => $OptTree("MultNode", []))(v4._1);
+    }
+    fail();
+  };
+  const $0 = go(false)(false)(false)(g);
+  return (x) => simplify2($0(x));
+};
+var mapParser = (f) => {
+  const flatten2 = (v) => {
+    if (v.tag === "Leaf") {
+      return [v._1];
+    }
+    if (v.tag === "MultNode") {
+      return arrayBind(v._1)(flatten2);
+    }
+    if (v.tag === "AltNode") {
+      return arrayBind(v._1)(flatten2);
+    }
+    fail();
+  };
+  const $0 = treeMapParser(f);
+  return (x) => flatten2($0(x));
+};
+
+// output-es/Options.Applicative.BashCompletion/index.js
+var $Richness = (tag, _1, _2) => ({ tag, _1, _2 });
+var fromFoldable24 = /* @__PURE__ */ foldrArray(Cons)(Nil);
+var identity29 = (x) => x;
+var fold4 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidArray)(identity3))();
+var sequence = /* @__PURE__ */ (() => traversableArray.traverse(applicativeEffect)(identity4))();
+var unLines = (xs) => foldlArray((v) => (v1) => {
+  if (v.init) {
+    return { init: false, acc: v1 };
+  }
+  return { init: false, acc: v.acc + "\n" + v1 };
+})({ init: true, acc: "" })(xs).acc;
+var fromFoldable110 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
+var Standard = /* @__PURE__ */ $Richness("Standard");
+var Enriched = (value0) => (value1) => $Richness("Enriched", value0, value1);
+var zshCompletionScript = (prog) => (progn) => {
+  const $0 = [
+    "#compdef " + progn,
+    "",
+    "local request",
+    "local completions",
+    "local word",
+    "local index=$((CURRENT - 1))",
+    "",
+    "request=(--bash-completion-enriched --bash-completion-index $index)",
+    "for arg in ${words[@]}; do",
+    "  request=(${request[@]} --bash-completion-word $arg)",
+    "done",
+    "",
+    "IFS=$'\\n' completions=($( " + prog + ' "${request[@]}" ))',
+    "",
+    "for word in $completions; do",
+    "  local -a parts",
+    "",
+    "  # Split the line at a tab if there is one.",
+    "  IFS=$'\\t' parts=($( echo $word ))",
+    "",
+    "  if [[ -n $parts[2] ]]; then",
+    '     if [[ $word[1] == "-" ]]; then',
+    '       local desc=("$parts[1] ($parts[2])")',
+    "       compadd -d desc -- $parts[1]",
+    "     else",
+    '       local desc=($(print -f  "%-019s -- %s" $parts[1] $parts[2]))',
+    "       compadd -l -d desc -- $parts[1]",
+    "     fi",
+    "  else",
+    "    compadd -f -- $word",
+    "  fi",
+    "done"
+  ];
+  return () => $0;
+};
+var fishCompletionScript = (prog) => (progn) => {
+  const $0 = [
+    " function _" + progn,
+    "    set -l cl (commandline --tokenize --current-process)",
+    "    # Hack around fish issue #3934",
+    "    set -l cn (commandline --tokenize --cut-at-cursor --current-process)",
+    "    set -l cn (count $cn)",
+    "    set -l tmpline --bash-completion-enriched --bash-completion-index $cn",
+    "    for arg in $cl",
+    "      set tmpline $tmpline --bash-completion-word $arg",
+    "    end",
+    "    for opt in (" + prog + " $tmpline)",
+    "      if test -d $opt",
+    '        echo -E "$opt/"',
+    "      else",
+    '        echo -E "$opt"',
+    "      end",
+    "    end",
+    "end",
+    "",
+    "complete --no-files --command " + progn + " --arguments '(_" + progn + ")'"
+  ];
+  return () => $0;
+};
+var bashCompletionScript = (prog) => (progn) => {
+  const $0 = [
+    "_" + progn + "()",
+    "{",
+    "    local CMDLINE",
+    "    local IFS=$'\\n'",
+    "    CMDLINE=(--bash-completion-index $COMP_CWORD)",
+    "",
+    "    for arg in ${COMP_WORDS[@]}; do",
+    "        CMDLINE=(${CMDLINE[@]} --bash-completion-word $arg)",
+    "    done",
+    "",
+    "    COMPREPLY=( $(" + prog + ' "${CMDLINE[@]}") )',
+    "}",
+    "",
+    "complete -o filenames -F _" + progn + " " + progn
+  ];
+  return () => $0;
+};
+var arraySplitAt = (idx) => (arr) => {
+  if (idx === 0) {
+    return { init: [], rest: arr };
+  }
+  return { init: slice(0)(idx)(arr), rest: slice(idx)(arr.length)(arr) };
+};
+var bashCompletionQuery = (pinfo) => (pprefs) => (richness) => (ws) => (i) => (v) => {
+  const v1 = arraySplitAt(i)(ws);
+  const filter_names = filter((() => {
+    const v22 = index(v1.rest)(0);
+    if (v22.tag === "Just") {
+      return startsWith(v22._1);
+    }
+    if (v22.tag === "Nothing") {
+      return (v$1) => true;
+    }
+    fail();
+  })());
+  const $0 = arrayMap(showOption);
+  const add_opt_help1 = (opt) => {
+    if (richness.tag === "Standard") {
+      return identity29;
+    }
+    if (richness.tag === "Enriched") {
+      const $1 = richness._1;
+      return arrayMap((o) => {
+        if (opt.optProps.propHelp.tag === "Nothing") {
+          return o;
+        }
+        if (opt.optProps.propHelp.tag === "Just") {
+          const $2 = displayS(renderFits(fits1)(1)($1)(opt.optProps.propHelp._1));
+          const $3 = $2 === "" ? [] : split("\n")($2);
+          return o + "	" + (() => {
+            if ($3.length > 0) {
+              const $4 = uncons($3);
+              const $5 = (() => {
+                if ($4.tag === "Just") {
+                  return $4._1;
+                }
+                fail();
+              })();
+              if ($5.tail.length === 0) {
+                return $5.head;
+              }
+              return $5.head + "...";
+            }
+            return "";
+          })();
+        }
+        fail();
+      });
+    }
+    fail();
+  };
+  const v2 = runCompletion(runParserFully(completionMonadP)(pinfo.infoPolicy)(pinfo.infoParser)(fromFoldable24(slice(1)(v1.init.length)(v1.init))))(pprefs);
+  if (v2.tag === "Just") {
+    if (v2._1.tag === "Left") {
+      const $1 = v2._1._1._2;
+      const $2 = sequence(mapParser((hinfo) => (opt) => {
+        if (opt.optMain.tag === "OptReader") {
+          if ($1 === "Intersperse" || $1 === "NoIntersperse" || $1 !== "AllPositionals") {
+            const $22 = add_opt_help1(opt)(filter_names($0(opt.optMain._1)));
+            return () => $22;
+          }
+          return () => [];
+        }
+        if (opt.optMain.tag === "FlagReader") {
+          if ($1 === "Intersperse" || $1 === "NoIntersperse" || $1 !== "AllPositionals") {
+            const $22 = add_opt_help1(opt)(filter_names($0(opt.optMain._1)));
+            return () => $22;
+          }
+          return () => [];
+        }
+        if (opt.optMain.tag === "ArgReader") {
+          if (hinfo.hinfoUnreachableArgs) {
+            return () => [];
+          }
+          return opt.optMain._1.crCompleter((() => {
+            const $22 = index(v1.rest)(0);
+            if ($22.tag === "Nothing") {
+              return "";
+            }
+            if ($22.tag === "Just") {
+              return $22._1;
+            }
+            fail();
+          })());
+        }
+        if (opt.optMain.tag === "CmdReader") {
+          if (hinfo.hinfoUnreachableArgs) {
+            return () => [];
+          }
+          const $22 = (() => {
+            if (richness.tag === "Standard") {
+              return identity29;
+            }
+            if (richness.tag === "Enriched") {
+              const $23 = richness._2;
+              return arrayMap((cmd) => {
+                const $3 = opt.optMain._3(cmd);
+                const $4 = (() => {
+                  if ($3.tag === "Just") {
+                    return $3._1.infoProgDesc;
+                  }
+                  if ($3.tag === "Nothing") {
+                    return Nothing;
+                  }
+                  fail();
+                })();
+                if ($4.tag === "Nothing") {
+                  return cmd;
+                }
+                if ($4.tag === "Just") {
+                  const $5 = displayS(renderFits(fits1)(1)($23)($4._1));
+                  const $6 = $5 === "" ? [] : split("\n")($5);
+                  return cmd + "	" + (() => {
+                    if ($6.length > 0) {
+                      const $7 = uncons($6);
+                      const $8 = (() => {
+                        if ($7.tag === "Just") {
+                          return $7._1;
+                        }
+                        fail();
+                      })();
+                      if ($8.tail.length === 0) {
+                        return $8.head;
+                      }
+                      return $8.head + "...";
+                    }
+                    return "";
+                  })();
+                }
+                fail();
+              });
+            }
+            fail();
+          })()(filter_names(opt.optMain._2));
+          return () => $22;
+        }
+        fail();
+      })(v2._1._1._1._1));
+      return () => {
+        const a$p = $2();
+        return fold4(a$p);
+      };
+    }
+    if (v2._1.tag === "Right") {
+      return v2._1._1((() => {
+        const $1 = index(v1.rest)(0);
+        if ($1.tag === "Nothing") {
+          return "";
+        }
+        if ($1.tag === "Just") {
+          return $1._1;
+        }
+        fail();
+      })());
+    }
+    fail();
+  }
+  if (v2.tag === "Nothing") {
+    return () => [];
+  }
+  fail();
+};
+var bashCompletionParser = (pinfo) => (pprefs) => $Parser(
+  "AltP",
+  parserFunctor.map((opts) => ({
+    execCompletion: (progn) => {
+      const $0 = opts(progn);
+      return () => {
+        const a$p = $0();
+        return unLines(a$p);
+      };
+    }
+  }))($Parser(
+    "MultP",
+    $MultPE(
+      $Parser(
+        "MultP",
+        $MultPE(
+          parserFunctor.map(bashCompletionQuery(pinfo)(pprefs))($Parser(
+            "AltP",
+            $Parser(
+              "MultP",
+              $MultPE(
+                $Parser(
+                  "MultP",
+                  $MultPE(
+                    flag$p(Enriched)($Mod(
+                      (x) => internal._1({
+                        flagNames: [$OptName("OptLong", "bash-completion-enriched"), ...x.flagNames],
+                        flagActive: x.flagActive
+                      }),
+                      $DefaultProp(
+                        internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
+                        internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+                      ),
+                      (x) => internal._3(x)
+                    )),
+                    option($$int3)($Mod(
+                      (x) => internal._1({
+                        optNames: [$OptName("OptLong", "bash-completion-option-desc-length"), ...x.optNames],
+                        optCompleter: x.optCompleter,
+                        optNoArgError: x.optNoArgError
+                      }),
+                      $DefaultProp(
+                        $Maybe("Just", 40),
+                        internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+                      ),
+                      (x) => internal._3(x)
+                    ))
+                  )
+                ),
+                option($$int3)($Mod(
+                  (x) => internal._1({
+                    optNames: [$OptName("OptLong", "bash-completion-command-desc-length"), ...x.optNames],
+                    optCompleter: x.optCompleter,
+                    optNoArgError: x.optNoArgError
+                  }),
+                  $DefaultProp(
+                    $Maybe("Just", 40),
+                    internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+                  ),
+                  (x) => internal._3(x)
+                ))
+              )
+            ),
+            $Parser("NilP", Standard)
+          )),
+          parserFunctor.map(fromFoldable110)($Parser(
+            "BindP",
+            manyM(option(readerAsk)($Mod(
+              (x) => internal._1({
+                optNames: [$OptName("OptLong", "bash-completion-word"), ...x.optNames],
+                optCompleter: x.optCompleter,
+                optNoArgError: x.optNoArgError
+              }),
+              $DefaultProp(
+                internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
+                internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+              ),
+              (x) => internal._3(x)
+            )))
+          ))
+        )
+      ),
+      option($$int3)($Mod(
+        (x) => internal._1({
+          optNames: [$OptName("OptLong", "bash-completion-index"), ...x.optNames],
+          optCompleter: x.optCompleter,
+          optNoArgError: x.optNoArgError
+        }),
+        $DefaultProp(
+          internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
+          internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+        ),
+        (x) => internal._3(x)
+      ))
+    )
+  )),
+  $Parser(
+    "AltP",
+    parserFunctor.map((opts) => ({
+      execCompletion: (progn) => {
+        const $0 = opts(progn);
+        return () => {
+          const a$p = $0();
+          return unLines(a$p);
+        };
+      }
+    }))(parserFunctor.map(bashCompletionScript)(option(readerAsk)($Mod(
+      (x) => internal._1({
+        optNames: [$OptName("OptLong", "bash-completion-script"), ...x.optNames],
+        optCompleter: x.optCompleter,
+        optNoArgError: x.optNoArgError
+      }),
+      $DefaultProp(
+        internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
+        internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+      ),
+      (x) => internal._3(x)
+    )))),
+    $Parser(
+      "AltP",
+      parserFunctor.map((opts) => ({
+        execCompletion: (progn) => {
+          const $0 = opts(progn);
+          return () => {
+            const a$p = $0();
+            return unLines(a$p);
+          };
+        }
+      }))(parserFunctor.map(fishCompletionScript)(option(readerAsk)($Mod(
+        (x) => internal._1({
+          optNames: [$OptName("OptLong", "fish-completion-script"), ...x.optNames],
+          optCompleter: x.optCompleter,
+          optNoArgError: x.optNoArgError
+        }),
+        $DefaultProp(
+          internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
+          internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+        ),
+        (x) => internal._3(x)
+      )))),
+      parserFunctor.map((opts) => ({
+        execCompletion: (progn) => {
+          const $0 = opts(progn);
+          return () => {
+            const a$p = $0();
+            return unLines(a$p);
+          };
+        }
+      }))(parserFunctor.map(zshCompletionScript)(option(readerAsk)($Mod(
+        (x) => internal._1({
+          optNames: [$OptName("OptLong", "zsh-completion-script"), ...x.optNames],
+          optCompleter: x.optCompleter,
+          optNoArgError: x.optNoArgError
+        }),
+        $DefaultProp(
+          internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
+          internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
+        ),
+        (x) => internal._3(x)
+      ))))
+    )
+  )
+);
+
+// output-es/Options.Applicative.Help.Types/index.js
+var chunkMonoid2 = /* @__PURE__ */ chunkMonoid(docSemigroup);
+var parserHelpMonoid = /* @__PURE__ */ monoidRecord()(/* @__PURE__ */ (() => {
+  const Semigroup0 = chunkMonoid2.Semigroup0();
+  const Semigroup0$1 = chunkMonoid2.Semigroup0();
+  const Semigroup0$2 = chunkMonoid2.Semigroup0();
+  const Semigroup0$3 = chunkMonoid2.Semigroup0();
+  const Semigroup0$4 = chunkMonoid2.Semigroup0();
+  const Semigroup0$5 = chunkMonoid2.Semigroup0();
+  const semigroupRecordCons1 = {
+    appendRecord: (v) => (ra) => (rb) => ({
+      helpBody: Semigroup0.append(ra.helpBody)(rb.helpBody),
+      helpError: Semigroup0$1.append(ra.helpError)(rb.helpError),
+      helpFooter: Semigroup0$2.append(ra.helpFooter)(rb.helpFooter),
+      helpHeader: Semigroup0$3.append(ra.helpHeader)(rb.helpHeader),
+      helpSuggestions: Semigroup0$4.append(ra.helpSuggestions)(rb.helpSuggestions),
+      helpUsage: Semigroup0$5.append(ra.helpUsage)(rb.helpUsage)
+    })
+  };
+  return {
+    memptyRecord: (v) => ({
+      helpBody: chunkMonoid2.mempty,
+      helpError: chunkMonoid2.mempty,
+      helpFooter: chunkMonoid2.mempty,
+      helpHeader: chunkMonoid2.mempty,
+      helpSuggestions: chunkMonoid2.mempty,
+      helpUsage: chunkMonoid2.mempty
+    }),
+    SemigroupRecord0: () => semigroupRecordCons1
+  };
+})());
+var helpText = (v) => {
+  const $0 = vsepChunks([v.helpError, v.helpSuggestions, v.helpHeader, v.helpUsage, v.helpBody, v.helpFooter]);
+  if ($0.tag === "Nothing") {
+    return Empty2;
+  }
+  if ($0.tag === "Just") {
+    return $0._1;
+  }
+  fail();
+};
+
+// output-es/Options.Applicative.Help.Core/index.js
+var fold5 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidArray)(identity3))();
+var chunkMonoid3 = /* @__PURE__ */ chunkMonoid(docSemigroup);
+var listToChunk2 = /* @__PURE__ */ listToChunk(docMonoid);
+var identity30 = (x) => x;
+var mempty2 = /* @__PURE__ */ (() => $Tuple(monoidMaybe(semigroupString).mempty, chunkMonoid3.mempty))();
+var usageHelp = (chunk) => ({
+  helpUsage: chunk,
+  helpBody: parserHelpMonoid.mempty.helpBody,
+  helpError: parserHelpMonoid.mempty.helpError,
+  helpFooter: parserHelpMonoid.mempty.helpFooter,
+  helpHeader: parserHelpMonoid.mempty.helpHeader,
+  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions
+});
+var suggestionsHelp = (chunk) => ({
+  helpSuggestions: chunk,
+  helpBody: parserHelpMonoid.mempty.helpBody,
+  helpError: parserHelpMonoid.mempty.helpError,
+  helpFooter: parserHelpMonoid.mempty.helpFooter,
+  helpHeader: parserHelpMonoid.mempty.helpHeader,
+  helpUsage: parserHelpMonoid.mempty.helpUsage
+});
+var intersperse2 = (sep) => {
+  const $0 = mapWithIndex((idx) => (e) => {
+    if (idx === 0) {
+      return [e];
+    }
+    return [sep, e];
+  });
+  return (x) => fold5($0(x));
+};
+var optDesc = (pprefs) => (style) => (info2) => (opt) => {
+  const suffix = info2.hinfoMulti ? stringChunk(pprefs.prefMultiSuffix) : chunkMonoid3.mempty;
+  const descs = arrayMap((x) => string3(showOption(x)))(sortBy(optNameOrd.compare)((() => {
+    if (opt.optMain.tag === "OptReader") {
+      return opt.optMain._1;
+    }
+    if (opt.optMain.tag === "FlagReader") {
+      return opt.optMain._1;
+    }
+    return [];
+  })()));
+  return (() => {
+    if (opt.optProps.propDescMod.tag === "Nothing") {
+      return identity30;
+    }
+    if (opt.optProps.propDescMod.tag === "Just") {
+      return functorMaybe.map(opt.optProps.propDescMod._1);
+    }
+    fail();
+  })()((() => {
+    const $0 = listToChunk2(intersperse2(style.descSep)(descs));
+    const $1 = stringChunk(opt.optProps.propMetaVar);
+    const $2 = (() => {
+      if ($0.tag === "Nothing") {
+        return $1;
+      }
+      if ($1.tag === "Nothing") {
+        return $0;
+      }
+      if ($0.tag === "Just" && $1.tag === "Just") {
+        return $Maybe("Just", $Doc2("Cat", $0._1, $Doc2("Cat", $Doc2("Char", " "), $1._1)));
+      }
+      fail();
+    })();
+    if ((() => {
+      if (info2.hinfoDefault && !style.descOptional) {
+        return true;
+      }
+      if (opt.optProps.propVisibility === "Hidden") {
+        return !style.descHidden;
+      }
+      return opt.optProps.propVisibility !== "Visible";
+    })()) {
+      return chunkMonoid3.mempty;
+    }
+    if ((() => {
+      if ($2.tag === "Nothing") {
+        return true;
+      }
+      if ($2.tag === "Just") {
+        return false;
+      }
+      fail();
+    })() || !style.descSurround) {
+      if ($2.tag === "Nothing") {
+        return suffix;
+      }
+      if (suffix.tag === "Nothing") {
+        return $2;
+      }
+      if ($2.tag === "Just" && suffix.tag === "Just") {
+        return $Maybe("Just", $Doc2("Cat", $2._1, suffix._1));
+      }
+      fail();
+    }
+    if (info2.hinfoDefault) {
+      const $32 = $2.tag === "Just" ? $Maybe(
+        "Just",
+        $Doc2(
+          "Cat",
+          $Doc2("Char", "["),
+          $Doc2("Cat", $2._1, $Doc2("Char", "]"))
+        )
+      ) : Nothing;
+      if ($32.tag === "Nothing") {
+        return suffix;
+      }
+      if (suffix.tag === "Nothing") {
+        return $32;
+      }
+      if ($32.tag === "Just" && suffix.tag === "Just") {
+        return $Maybe("Just", $Doc2("Cat", $32._1, suffix._1));
+      }
+      fail();
+    }
+    if (slice(1)(descs.length)(descs).length === 0) {
+      if ($2.tag === "Nothing") {
+        return suffix;
+      }
+      if (suffix.tag === "Nothing") {
+        return $2;
+      }
+      if ($2.tag === "Just" && suffix.tag === "Just") {
+        return $Maybe("Just", $Doc2("Cat", $2._1, suffix._1));
+      }
+      fail();
+    }
+    const $3 = $2.tag === "Just" ? $Maybe(
+      "Just",
+      $Doc2(
+        "Cat",
+        $Doc2("Char", "("),
+        $Doc2("Cat", $2._1, $Doc2("Char", ")"))
+      )
+    ) : Nothing;
+    if ($3.tag === "Nothing") {
+      return suffix;
+    }
+    if (suffix.tag === "Nothing") {
+      return $3;
+    }
+    if ($3.tag === "Just" && suffix.tag === "Just") {
+      return $Maybe("Just", $Doc2("Cat", $3._1, suffix._1));
+    }
+    fail();
+  })());
+};
+var headerHelp = (chunk) => ({
+  helpHeader: chunk,
+  helpBody: parserHelpMonoid.mempty.helpBody,
+  helpError: parserHelpMonoid.mempty.helpError,
+  helpFooter: parserHelpMonoid.mempty.helpFooter,
+  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
+  helpUsage: parserHelpMonoid.mempty.helpUsage
+});
+var fullDesc = (pprefs) => {
+  const style = { descSep: string3(","), descHidden: true, descOptional: true, descSurround: false };
+  const $0 = mapParser((info2) => (opt) => {
+    const n = optDesc(pprefs)(style)(info2)(opt);
+    if (opt.optProps.propShowDefault.tag === "Just") {
+      if ((() => {
+        if (n.tag === "Nothing") {
+          return false;
+        }
+        if (n.tag === "Just") {
+          return true;
+        }
+        fail();
+      })() && (() => {
+        if (opt.optProps.propHelp.tag === "Nothing") {
+          return false;
+        }
+        if (opt.optProps.propHelp.tag === "Just") {
+          return true;
+        }
+        fail();
+      })()) {
+        return $Maybe(
+          "Just",
+          $Tuple(
+            (() => {
+              if (n.tag === "Nothing") {
+                return Empty2;
+              }
+              if (n.tag === "Just") {
+                return n._1;
+              }
+              fail();
+            })(),
+            (() => {
+              if (opt.optProps.propHelp.tag === "Nothing") {
+                const $02 = $Doc2(
+                  "Cat",
+                  $Doc2("Char", "("),
+                  $Doc2(
+                    "Cat",
+                    $Doc2(
+                      "Cat",
+                      string3("default:"),
+                      $Doc2("Cat", $Doc2("Char", " "), string3(opt.optProps.propShowDefault._1))
+                    ),
+                    $Doc2("Char", ")")
+                  )
+                );
+                return $Doc2("Column", (k) => $Doc2("Nesting", (i) => $Doc2("Nest", k - i | 0, $02)));
+              }
+              if (opt.optProps.propHelp.tag === "Just") {
+                const $02 = $Doc2(
+                  "Cat",
+                  opt.optProps.propHelp._1,
+                  $Doc2(
+                    "Cat",
+                    $Doc2("Char", " "),
+                    $Doc2(
+                      "Cat",
+                      $Doc2("Char", "("),
+                      $Doc2(
+                        "Cat",
+                        $Doc2(
+                          "Cat",
+                          string3("default:"),
+                          $Doc2("Cat", $Doc2("Char", " "), string3(opt.optProps.propShowDefault._1))
+                        ),
+                        $Doc2("Char", ")")
+                      )
+                    )
+                  )
+                );
+                return $Doc2("Column", (k) => $Doc2("Nesting", (i) => $Doc2("Nest", k - i | 0, $02)));
+              }
+              fail();
+            })()
+          )
+        );
+      }
+      return Nothing;
+    }
+    if ((() => {
+      if (n.tag === "Nothing") {
+        return false;
+      }
+      if (n.tag === "Just") {
+        return true;
+      }
+      fail();
+    })() && (() => {
+      if (opt.optProps.propHelp.tag === "Nothing") {
+        return false;
+      }
+      if (opt.optProps.propHelp.tag === "Just") {
+        return true;
+      }
+      fail();
+    })()) {
+      return $Maybe(
+        "Just",
+        $Tuple(
+          (() => {
+            if (n.tag === "Nothing") {
+              return Empty2;
+            }
+            if (n.tag === "Just") {
+              return n._1;
+            }
+            fail();
+          })(),
+          (() => {
+            if (opt.optProps.propHelp.tag === "Nothing") {
+              return $Doc2(
+                "Column",
+                (k) => $Doc2("Nesting", (i) => $Doc2("Nest", k - i | 0, Empty2))
+              );
+            }
+            const $02 = (() => {
+              if (opt.optProps.propHelp.tag === "Nothing") {
+                return Empty2;
+              }
+              if (opt.optProps.propHelp.tag === "Just") {
+                return opt.optProps.propHelp._1;
+              }
+              fail();
+            })();
+            return $Doc2("Column", (k) => $Doc2("Nesting", (i) => $Doc2("Nest", k - i | 0, $02)));
+          })()
+        )
+      );
+    }
+    return Nothing;
+  });
+  return (x) => tabulate$p(24)(mapMaybe((x$1) => x$1)($0(x)));
+};
+var footerHelp = (chunk) => ({
+  helpFooter: chunk,
+  helpBody: parserHelpMonoid.mempty.helpBody,
+  helpError: parserHelpMonoid.mempty.helpError,
+  helpHeader: parserHelpMonoid.mempty.helpHeader,
+  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
+  helpUsage: parserHelpMonoid.mempty.helpUsage
+});
+var fold_tree = (v) => {
+  if (v.tag === "Leaf") {
+    return v._1;
+  }
+  if (v.tag === "MultNode") {
+    return foldrArray((x) => chunkBesideOrBelow(fold_tree(x)))(chunkMonoid3.mempty)(v._1);
+  }
+  if (v.tag === "AltNode") {
+    const $0 = filter((x) => {
+      if (x.tag === "Nothing") {
+        return false;
+      }
+      if (x.tag === "Just") {
+        return true;
+      }
+      fail();
+    })(arrayMap(fold_tree)(v._1));
+    if ($0.length === 1) {
+      return $0[0];
+    }
+    const $1 = foldrArray((v1) => (v2) => {
+      if (v1.tag === "Nothing") {
+        return v2;
+      }
+      if (v2.tag === "Nothing") {
+        return v1;
+      }
+      if (v1.tag === "Just" && v2.tag === "Just") {
+        return $Maybe(
+          "Just",
+          $Doc2(
+            "Cat",
+            v1._1,
+            $Doc2(
+              "Cat",
+              softline,
+              $Doc2("Cat", $Doc2("Char", "|"), $Doc2("Cat", softline, v2._1))
+            )
+          )
+        );
+      }
+      fail();
+    })(chunkMonoid3.mempty)($0);
+    if ($1.tag === "Just") {
+      return $Maybe(
+        "Just",
+        $Doc2(
+          "Cat",
+          $Doc2("Char", "("),
+          $Doc2("Cat", $1._1, $Doc2("Char", ")"))
+        )
+      );
+    }
+    return Nothing;
+  }
+  fail();
+};
+var errorHelp = (chunk) => ({
+  helpError: chunk,
+  helpBody: parserHelpMonoid.mempty.helpBody,
+  helpFooter: parserHelpMonoid.mempty.helpFooter,
+  helpHeader: parserHelpMonoid.mempty.helpHeader,
+  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
+  helpUsage: parserHelpMonoid.mempty.helpUsage
+});
+var cmdDesc = /* @__PURE__ */ mapParser((v) => (opt) => {
+  if (opt.optMain.tag === "CmdReader") {
+    return $Tuple(
+      opt.optMain._1,
+      tabulate$p(24)(arrayBind(reverse(opt.optMain._2))((cmd) => arrayBind((() => {
+        const $0 = opt.optMain._3(cmd);
+        if ($0.tag === "Just") {
+          return [$0._1.infoProgDesc];
+        }
+        return [];
+      })())((d) => [
+        $Tuple(
+          string3(cmd),
+          (() => {
+            const $0 = (() => {
+              if (d.tag === "Nothing") {
+                return Empty2;
+              }
+              if (d.tag === "Just") {
+                return d._1;
+              }
+              fail();
+            })();
+            return $Doc2("Column", (k) => $Doc2("Nesting", (i) => $Doc2("Nest", k - i | 0, $0)));
+          })()
+        )
+      ])))
+    );
+  }
+  return mempty2;
+});
+var briefDesc$p = (showOptional) => (pprefs) => {
+  const $0 = treeMapParser(optDesc(pprefs)({
+    descSep: string3("|"),
+    descHidden: false,
+    descOptional: showOptional,
+    descSurround: true
+  }));
+  return (x) => fold_tree($0(x));
+};
+var parserUsage = (pprefs) => (p) => (progn) => hsep2([
+  string3("Usage:"),
+  string3(progn),
+  (() => {
+    const $0 = briefDesc$p(true)(pprefs)(p);
+    const $1 = (() => {
+      if ($0.tag === "Nothing") {
+        return Empty2;
+      }
+      if ($0.tag === "Just") {
+        return $0._1;
+      }
+      fail();
+    })();
+    return $Doc2("Column", (k) => $Doc2("Nesting", (i) => $Doc2("Nest", k - i | 0, $1)));
+  })()
+]);
+var bodyHelp = (chunk) => ({
+  helpBody: chunk,
+  helpError: parserHelpMonoid.mempty.helpError,
+  helpFooter: parserHelpMonoid.mempty.helpFooter,
+  helpHeader: parserHelpMonoid.mempty.helpHeader,
+  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
+  helpUsage: parserHelpMonoid.mempty.helpUsage
+});
+var parserHelp = (pprefs) => (p) => bodyHelp(vsepChunks([
+  (() => {
+    const $0 = fullDesc(pprefs)(p);
+    if ($0.tag === "Just") {
+      return $Maybe(
+        "Just",
+        $Doc2(
+          "Cat",
+          string3("Available options:"),
+          $Doc2("Cat", $Doc2("FlatAlt", Line2, $Doc2("Char", " ")), $0._1)
+        )
+      );
+    }
+    return Nothing;
+  })(),
+  ...arrayMap((arr) => {
+    const $0 = uncons(arr);
+    const v = (() => {
+      if ($0.tag === "Just") {
+        return $0._1;
+      }
+      fail();
+    })();
+    const $1 = (() => {
+      if (v.head._1.tag === "Nothing") {
+        return "Available commands:";
+      }
+      if (v.head._1.tag === "Just") {
+        return v.head._1._1;
+      }
+      fail();
+    })();
+    const $2 = vcatChunks([v.head._2, ...arrayMap(snd)(v.tail)]);
+    if ($2.tag === "Just") {
+      return $Maybe(
+        "Just",
+        $Doc2(
+          "Cat",
+          string3($1),
+          $Doc2("Cat", $Doc2("FlatAlt", Line2, $Doc2("Char", " ")), $2._1)
+        )
+      );
+    }
+    return Nothing;
+  })(groupBy((x) => (y) => {
+    if (x._1.tag === "Nothing") {
+      return y._1.tag === "Nothing";
+    }
+    return x._1.tag === "Just" && y._1.tag === "Just" && x._1._1 === y._1._1;
+  })(cmdDesc(p)))
+]));
+
+// output-es/Data.Function.Memoize/index.js
+var $NatTrie = (_1, _2, _3) => ({ tag: "NatTrie", _1, _2, _3 });
+var tabulateNat = {
+  tabulate: (f) => {
+    const walk = (v) => (v1) => {
+      if (v.tag === "Nil") {
+        return v1._1;
+      }
+      if (v.tag === "Cons") {
+        if (!v._1) {
+          const $0 = v1._2;
+          const $1 = walk(v._2);
+          return defer((v$1) => force($1(force($0))));
+        }
+        if (v._1) {
+          const $0 = v1._3;
+          const $1 = walk(v._2);
+          return defer((v$1) => force($1(force($0))));
+        }
+      }
+      fail();
+    };
+    const build = (n) => $NatTrie(defer((v) => f(n)), defer((v) => build(n * 2 | 0)), defer((v) => build((n * 2 | 0) + 1 | 0)));
+    const trie = build(0);
+    const bits$p = (bits$p$a0$copy) => (bits$p$a1$copy) => {
+      let bits$p$a0 = bits$p$a0$copy, bits$p$a1 = bits$p$a1$copy, bits$p$c = true, bits$p$r;
+      while (bits$p$c) {
+        const v = bits$p$a0, v1 = bits$p$a1;
+        if (v1 === 0) {
+          bits$p$c = false;
+          bits$p$r = v;
+          continue;
+        }
+        bits$p$a0 = $List("Cons", (v1 & 1) !== 0, v);
+        bits$p$a1 = v1 >>> 1;
+      }
+      return bits$p$r;
+    };
+    const bits = bits$p(Nil);
+    return (n) => walk(bits(n))(trie);
+  }
+};
+var tabulateTuple = (dictTabulate) => (dictTabulate1) => ({
+  tabulate: (f) => {
+    const f$p = dictTabulate.tabulate((a) => dictTabulate1.tabulate((b) => f($Tuple(a, b))));
+    return (v) => {
+      const $0 = v._2;
+      const $1 = f$p(v._1);
+      return defer((v$1) => force(force($1)($0)));
+    };
+  }
+});
+var memoize = (dictTabulate) => (f) => {
+  const $0 = dictTabulate.tabulate(f);
+  return (x) => force($0(x));
+};
+var memoize2 = (dictTabulate) => (dictTabulate1) => {
+  const memoize1 = memoize(tabulateTuple(dictTabulate)(dictTabulate1));
+  return (f) => {
+    const $0 = memoize1((v) => f(v._1)(v._2));
+    return (a) => (b) => $0($Tuple(a, b));
+  };
+};
+
+// output-es/Options.Applicative.Help.Levenshtein/index.js
+var memoize22 = /* @__PURE__ */ memoize2(tabulateNat)(tabulateNat);
+var minimum2 = /* @__PURE__ */ minimum(ordInt)(/* @__PURE__ */ foldable1NonEmpty(foldableArray));
+var editDistance = (dictEq) => (xs) => (ys) => {
+  const dist = (v) => (v1) => {
+    if (v === 0) {
+      return v1;
+    }
+    if (v1 === 0) {
+      return v;
+    }
+    return minimum2($NonEmpty(
+      dist$p$lazy()(v - 1 | 0)(v1) + 1 | 0,
+      [dist$p$lazy()(v)(v1 - 1 | 0) + 1 | 0, dictEq.eq(xs[v - 1 | 0])(ys[v1 - 1 | 0]) ? dist$p$lazy()(v - 1 | 0)(v1 - 1 | 0) : 1 + dist$p$lazy()(v - 1 | 0)(v1 - 1 | 0) | 0]
+    ));
+  };
+  const dist$p$lazy = binding(() => memoize22((a) => (b) => dist(a)(b)));
+  const dist$p = dist$p$lazy();
+  return dist$p(xs.length)(ys.length);
+};
+
+// output-es/Options.Applicative.Extra/index.js
+var unWords = (xs) => foldlArray((v) => (v1) => {
+  if (v.init) {
+    return { init: false, acc: v1 };
+  }
+  return { init: false, acc: v.acc + " " + v1 };
+})({ init: true, acc: "" })(xs).acc;
+var fold6 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidArray)(identity3))();
+var mempty13 = /* @__PURE__ */ (() => chunkMonoid(docSemigroup).mempty)();
+var fold1 = /* @__PURE__ */ (() => foldableArray.foldMap(parserHelpMonoid)(identity3))();
+var mempty22 = (v) => () => {
+};
+var fromFoldable25 = /* @__PURE__ */ foldrArray(Cons)(Nil);
+var renderFailure = (failure) => (progn) => {
+  const v = failure(progn);
+  return $Tuple(
+    displayS(renderFits(fits1)(1)(v._2._2._1)(helpText(v._1))),
+    v._2._1
+  );
+};
+var parserFailure = (pprefs) => (pinfo) => (msg) => (ctx) => {
+  const suggestion_help = suggestionsHelp((() => {
+    if (msg.tag === "UnexpectedError") {
+      const $0 = msg._1;
+      const good = filter((a) => editDistance(eqChar)(toCharArray(a))(toCharArray($0)) < 3)(fold6(mapParser((v) => (v1) => {
+        if (v1.optMain.tag === "OptReader") {
+          return arrayMap(showOption)(v1.optMain._1);
+        }
+        if (v1.optMain.tag === "FlagReader") {
+          return arrayMap(showOption)(v1.optMain._1);
+        }
+        if (v1.optMain.tag === "ArgReader") {
+          return [];
+        }
+        if (v1.optMain.tag === "CmdReader") {
+          if (v.hinfoUnreachableArgs) {
+            return [];
+          }
+          return v1.optMain._2;
+        }
+        fail();
+      })(msg._2._1)));
+      return applyMaybe.apply((() => {
+        const $1 = good.length < 2 ? stringChunk("Did you mean this?") : stringChunk("Did you mean one of these?");
+        if ($1.tag === "Just") {
+          return $Maybe("Just", appendWithLine($1._1));
+        }
+        return Nothing;
+      })())((() => {
+        const $1 = vcatChunks(arrayMap(stringChunk)(good));
+        if ($1.tag === "Just") {
+          return $Maybe("Just", indent(4)($1._1));
+        }
+        return Nothing;
+      })());
+    }
+    return mempty13;
+  })());
+  const show_full_help = (() => {
+    if (msg.tag === "ShowHelpText") {
+      return true;
+    }
+    if (msg.tag === "MissingError" && msg._1 === "CmdStart" && pprefs.prefShowHelpOnEmpty) {
+      return true;
+    }
+    return pprefs.prefShowHelpOnError;
+  })();
+  const exit_code = (() => {
+    if (msg.tag === "ErrorMsg") {
+      return pinfo.infoFailureCode;
+    }
+    if (msg.tag === "MissingError") {
+      return pinfo.infoFailureCode;
+    }
+    if (msg.tag === "ExpectsArgError") {
+      return pinfo.infoFailureCode;
+    }
+    if (msg.tag === "UnexpectedError") {
+      return pinfo.infoFailureCode;
+    }
+    if (msg.tag === "ShowHelpText") {
+      return Success;
+    }
+    if (msg.tag === "InfoMsg") {
+      return Success;
+    }
+    fail();
+  })();
+  const error_help = errorHelp((() => {
+    if (msg.tag === "ShowHelpText") {
+      return mempty13;
+    }
+    if (msg.tag === "ErrorMsg") {
+      return stringChunk(msg._1);
+    }
+    if (msg.tag === "InfoMsg") {
+      return stringChunk(msg._1);
+    }
+    if (msg.tag === "MissingError") {
+      if (msg._1 === "CmdStart" && pprefs.prefShowHelpOnEmpty) {
+        return mempty13;
+      }
+      const $0 = stringChunk("Missing:");
+      const $1 = briefDesc$p(false)(pprefs)(msg._2._1);
+      if ($0.tag === "Nothing") {
+        return $1;
+      }
+      if ($1.tag === "Nothing") {
+        return $0;
+      }
+      if ($0.tag === "Just" && $1.tag === "Just") {
+        return $Maybe("Just", $Doc2("Cat", $0._1, $Doc2("Cat", $Doc2("Char", " "), $1._1)));
+      }
+      fail();
+    }
+    if (msg.tag === "ExpectsArgError") {
+      return stringChunk("The option `" + msg._1 + "` expects an argument.");
+    }
+    if (msg.tag === "UnexpectedError") {
+      return stringChunk(startsWith("-")(msg._1) ? "Invalid option `" + msg._1 + "'" : "Invalid argument `" + msg._1 + "'");
+    }
+    fail();
+  })());
+  return (progn) => $Tuple(
+    (() => {
+      const $0 = (names, pinfo$p) => fold1([
+        (() => {
+          const h = headerHelp(pinfo$p.infoHeader);
+          const f = footerHelp(pinfo$p.infoFooter);
+          if (show_full_help) {
+            return fold1([h, f, parserHelp(pprefs)(pinfo$p.infoParser)]);
+          }
+          return parserHelpMonoid.mempty;
+        })(),
+        msg.tag === "InfoMsg" ? parserHelpMonoid.mempty : usageHelp(vcatChunks([
+          $Maybe("Just", parserUsage(pprefs)(pinfo$p.infoParser)(unWords([progn, ...names]))),
+          pinfo$p.infoProgDesc.tag === "Just" ? $Maybe("Just", indent(2)(pinfo$p.infoProgDesc._1)) : Nothing
+        ])),
+        suggestion_help,
+        error_help
+      ]);
+      const v = index(ctx)(0);
+      if (v.tag === "Nothing") {
+        return $0([], pinfo);
+      }
+      if (v.tag === "Just") {
+        return $0(reverse(arrayMap((v$1) => v$1._1)(ctx)), v._1._2);
+      }
+      fail();
+    })(),
+    $Tuple(exit_code, $Tuple(pprefs.prefColumns, void 0))
+  );
+};
+var helper = /* @__PURE__ */ (() => abortOption(ShowHelpText)(foldableArray.foldMap(modMonoid)(identity3)([
+  $Mod(
+    optionFieldsHasName.name($OptName("OptLong", "help")),
+    $DefaultProp(Nothing, Nothing),
+    identity26
+  ),
+  $Mod(
+    optionFieldsHasName.name($OptName("OptShort", "h")),
+    $DefaultProp(Nothing, Nothing),
+    identity26
+  ),
+  help("Show this help text"),
+  hidden
+])))();
+var getProgName = () => {
+  const a$p = argv();
+  const $0 = index(a$p)(1);
+  const $1 = (() => {
+    if ($0.tag === "Just") {
+      const $12 = split("/")($0._1);
+      return index($12)($12.length - 1 | 0);
+    }
+    if ($0.tag === "Nothing") {
+      return Nothing;
+    }
+    fail();
+  })();
+  if ($1.tag === "Nothing") {
+    return "";
+  }
+  if ($1.tag === "Just") {
+    return $1._1;
+  }
+  fail();
+};
+var getArgs = () => {
+  const a$p = argv();
+  return slice(2)(a$p.length)(a$p);
+};
+var exitSuccess = /* @__PURE__ */ (() => exit(boundedEnumExitCode.fromEnum(Success)))();
+var handleParseResult = (v) => {
+  if (v.tag === "Success") {
+    const $0 = v._1;
+    return () => $0;
+  }
+  if (v.tag === "Failure") {
+    const $0 = v._1;
+    return () => {
+      const progn = getProgName();
+      const v1 = renderFailure($0)(progn);
+      writeString(v1._2 === "Success" ? process.stdout : process.stderr)(UTF8)(v1._1 + "\n")(mempty22)();
+      return exit(boundedEnumExitCode.fromEnum(v1._2))();
+    };
+  }
+  if (v.tag === "CompletionInvoked") {
+    const $0 = v._1;
+    return () => {
+      const progn = getProgName();
+      const msg = $0.execCompletion(progn)();
+      writeString(process.stdout)(UTF8)(msg)(mempty22)();
+      return exitSuccess();
+    };
+  }
+  fail();
+};
+var execParserPure = (pprefs) => (pinfo) => (args) => {
+  const v = runParserFully(pMonadP)(pinfo.infoPolicy)($Parser(
+    "AltP",
+    parserFunctor.map(Left)(bashCompletionParser(pinfo)(pprefs)),
+    parserFunctor.map(Right)(pinfo.infoParser)
+  ))(fromFoldable25(args))([])(pprefs);
+  if (v._1.tag === "Right") {
+    if (v._1._1.tag === "Right") {
+      return $ParserResult("Success", v._1._1._1);
+    }
+    if (v._1._1.tag === "Left") {
+      return $ParserResult("CompletionInvoked", v._1._1._1);
+    }
+    fail();
+  }
+  if (v._1.tag === "Left") {
+    return $ParserResult("Failure", parserFailure(pprefs)(pinfo)(v._1._1)(v._2));
+  }
+  fail();
+};
 
 // output-es/Data.String.Unicode/index.js
 var convert = (f) => {
@@ -19703,9 +26099,9 @@ var toLowerSimple = /* @__PURE__ */ convert(uTowlower);
 var toUpperSimple = /* @__PURE__ */ convert(uTowupper);
 
 // output-es/Parsing.Token/index.js
-var identity24 = (x) => x;
+var identity31 = (x) => x;
 var choice3 = /* @__PURE__ */ choice(foldableArray);
-var toUnfoldable10 = /* @__PURE__ */ toUnfoldable2(unfoldableArray);
+var toUnfoldable11 = /* @__PURE__ */ toUnfoldable2(unfoldableArray);
 var theReservedNames = (v) => {
   if (v.caseSensitive) {
     return sortBy(ordString.compare)(v.reservedNames);
@@ -19991,7 +26387,7 @@ var whiteSpace$p = (v) => {
 var makeTokenParser = (v) => {
   const $0 = withErrorMessage(satisfy((v$1) => v$1 === "-"))("'-'");
   const $1 = withErrorMessage(satisfy((v$1) => v$1 === "+"))("'+'");
-  const sign1 = (v2, $22, $32, $42, $52) => {
+  const sign12 = (v2, $22, $32, $42, $52) => {
     const $62 = v2._1;
     const $72 = v2._2;
     return $22((v3) => $22((v1) => $0(
@@ -20016,10 +26412,10 @@ var makeTokenParser = (v) => {
                 if ($132) {
                   return $42(v4$1, $122);
                 }
-                return $52(v2, identity24);
+                return $52(v2, identity31);
               });
             },
-            (state2, a) => $22((v2$1) => $52(state2, identity24))
+            (state2, a) => $22((v2$1) => $52(state2, identity31))
           )));
         });
       },
@@ -20028,7 +26424,7 @@ var makeTokenParser = (v) => {
   };
   const $2 = oneOf(["o", "O"]);
   const $3 = some(alternativeParserT)(lazyParserT)(octDigit);
-  const octal = (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $2(
+  const octal2 = (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $2(
     state1,
     more,
     lift12,
@@ -20064,7 +26460,7 @@ var makeTokenParser = (v) => {
     ))))
   )));
   const $4 = whiteSpace$p(v);
-  const semi2 = (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => string2(";")(
+  const semi = (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => string2(";")(
     state1,
     more,
     lift12,
@@ -20073,7 +26469,7 @@ var makeTokenParser = (v) => {
   ))));
   const $5 = oneOf(["x", "X"]);
   const $6 = some(alternativeParserT)(lazyParserT)(hexDigit);
-  const hexadecimal = (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $5(
+  const hexadecimal2 = (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $5(
     state1,
     more,
     lift12,
@@ -20108,7 +26504,7 @@ var makeTokenParser = (v) => {
       })
     ))))
   )));
-  const fraction = withErrorMessage((() => {
+  const fraction2 = withErrorMessage((() => {
     const $72 = withErrorMessage(satisfy((v$1) => v$1 === "."))("'.'");
     return (state1, more, lift12, $$throw2, done) => more((v1) => $72(
       state1,
@@ -20163,7 +26559,7 @@ var makeTokenParser = (v) => {
   })())("end of string gap");
   const escapeEmpty = withErrorMessage(satisfy((v$1) => v$1 === "&"))("'&'");
   const $7 = some(alternativeParserT)(lazyParserT)(digit);
-  const decimal = (state1, more, lift12, $$throw2, done) => more((v1) => $7(
+  const decimal2 = (state1, more, lift12, $$throw2, done) => more((v1) => $7(
     state1,
     more,
     lift12,
@@ -20198,23 +26594,23 @@ var makeTokenParser = (v) => {
     return pow(10)(toNumber(e));
   };
   const $8 = oneOf(["e", "E"]);
-  const exponent$p = withErrorMessage((state1, more, lift12, $$throw2, done) => more((v1) => $8(
+  const exponent$p2 = withErrorMessage((state1, more, lift12, $$throw2, done) => more((v1) => $8(
     state1,
     more,
     lift12,
     $$throw2,
-    (state2, a) => more((v2) => more((v1$1) => sign1(
+    (state2, a) => more((v2) => more((v1$1) => sign12(
       state2,
       more,
       lift12,
       $$throw2,
       (state2$1, a$1) => more((v2$1) => {
-        const $92 = withErrorMessage(decimal)("exponent");
+        const $92 = withErrorMessage(decimal2)("exponent");
         return more((v1$2) => $92(state2$1, more, lift12, $$throw2, (state2$2, a$2) => more((v2$2) => done(state2$2, power(a$1(a$2))))));
       })
     )))
   )))("exponent");
-  const fractExponent = (n) => (v2, $92, $102, $112, $122) => {
+  const fractExponent2 = (n) => (v2, $92, $102, $112, $122) => {
     const $132 = v2._1;
     const $142 = v2._2;
     return $92((v3) => {
@@ -20224,10 +26620,10 @@ var makeTokenParser = (v) => {
           if ($162) {
             return $112(v4, $153);
           }
-          return $92((v1) => exponent$p(v2, $92, $102, $112, (state2, a) => $92((v2$1) => $122(state2, toNumber(n) * a))));
+          return $92((v1) => exponent$p2(v2, $92, $102, $112, (state2, a) => $92((v2$1) => $122(state2, toNumber(n) * a))));
         });
       };
-      return $92((v1) => fraction(
+      return $92((v1) => fraction2(
         $ParseState($132, $142, false),
         $92,
         $102,
@@ -20236,7 +26632,7 @@ var makeTokenParser = (v) => {
           const $162 = (state2$1, a$1) => $92((v2$2) => $122(state2$1, (toNumber(n) + a) * a$1));
           const $17 = state2._1;
           const $18 = state2._2;
-          return $92((v3$1) => exponent$p(
+          return $92((v3$1) => exponent$p2(
             $ParseState($17, $18, false),
             $92,
             $102,
@@ -20255,13 +26651,13 @@ var makeTokenParser = (v) => {
       ));
     });
   };
-  const decimalFloat = (state1, more, lift12, $$throw2, done) => more((v1) => decimal(
+  const decimalFloat = (state1, more, lift12, $$throw2, done) => more((v1) => decimal2(
     state1,
     more,
     lift12,
     $$throw2,
     (state2, a) => more((v2) => {
-      const $92 = fractExponent(a);
+      const $92 = fractExponent2(a);
       const $102 = state2._1;
       const $112 = state2._2;
       return more((v3) => more((v1$1) => $92(
@@ -20281,7 +26677,7 @@ var makeTokenParser = (v) => {
       )));
     })
   ));
-  const zeroNumber = withErrorMessage((() => {
+  const zeroNumber2 = withErrorMessage((() => {
     const $92 = withErrorMessage(satisfy((v$1) => v$1 === "0"))("'0'");
     return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => $92(
       state1,
@@ -20291,7 +26687,7 @@ var makeTokenParser = (v) => {
       (state2, a) => more((v2$1) => more((v3) => {
         const $102 = state2._1;
         const $112 = state2._2;
-        return more((v3$1) => hexadecimal(
+        return more((v3$1) => hexadecimal2(
           $ParseState($102, $112, false),
           more,
           lift12,
@@ -20303,7 +26699,7 @@ var makeTokenParser = (v) => {
               }
               const $142 = state2._1;
               const $152 = state2._2;
-              return more((v3$2) => octal(
+              return more((v3$2) => octal2(
                 $ParseState($142, $152, false),
                 more,
                 lift12,
@@ -20315,7 +26711,7 @@ var makeTokenParser = (v) => {
                     }
                     const $18 = state2._1;
                     const $19 = state2._2;
-                    return more((v3$3) => decimal(
+                    return more((v3$3) => decimal2(
                       $ParseState($18, $19, false),
                       more,
                       lift12,
@@ -20342,7 +26738,7 @@ var makeTokenParser = (v) => {
     )));
   })())("");
   const $9 = whiteSpace$p(v);
-  const comma2 = (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => string2(",")(
+  const comma = (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => string2(",")(
     state1,
     more,
     lift12,
@@ -20499,7 +26895,7 @@ var makeTokenParser = (v) => {
                 ));
               });
             };
-            return $17((v1) => $17((v3$2) => decimal(
+            return $17((v1) => $17((v3$2) => decimal2(
               $ParseState($25, $26, false),
               $17,
               $18,
@@ -20907,7 +27303,7 @@ var makeTokenParser = (v) => {
           $$throw2,
           (state2, a) => more((v2) => done(
             state2,
-            fromCharArray(toUnfoldable10(foldableList.foldr((v1$1) => (v2$1) => {
+            fromCharArray(toUnfoldable11(foldableList.foldr((v1$1) => (v2$1) => {
               if (v1$1.tag === "Nothing") {
                 return v2$1;
               }
@@ -20934,7 +27330,7 @@ var makeTokenParser = (v) => {
         const $18 = (state2, a) => more((v2$1) => more((v3) => $17(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a)))));
         const $19 = state1._1;
         const $20 = state1._2;
-        return more((v3) => zeroNumber(
+        return more((v3) => zeroNumber2(
           $ParseState($19, $20, false),
           more,
           lift12,
@@ -20944,7 +27340,7 @@ var makeTokenParser = (v) => {
               if ($22) {
                 return $$throw2(v4, $21);
               }
-              return decimal(state1, more, lift12, $$throw2, $18);
+              return decimal2(state1, more, lift12, $$throw2, $18);
             });
           },
           $18
@@ -20956,7 +27352,7 @@ var makeTokenParser = (v) => {
       const $18 = whiteSpace$p(v);
       return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => {
         const $19 = (state2, a) => more((v2$1) => more((v3) => $18(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a)))));
-        return more((v1$1) => more((v2$1) => more((v1$2) => sign1(
+        return more((v1$1) => more((v2$1) => more((v1$2) => sign12(
           state1,
           more,
           lift12,
@@ -20969,7 +27365,7 @@ var makeTokenParser = (v) => {
             (state3, a$1) => more((v4) => more((v2$3) => more((v1$3) => {
               const $20 = state3._1;
               const $21 = state3._2;
-              return more((v3$1) => zeroNumber(
+              return more((v3$1) => zeroNumber2(
                 $ParseState($20, $21, false),
                 more,
                 lift12,
@@ -20979,7 +27375,7 @@ var makeTokenParser = (v) => {
                     if ($23) {
                       return $$throw2(v4$1, $22);
                     }
-                    return decimal(state3, more, lift12, $$throw2, (state2$1, a$2) => more((v2$4) => $19(state2$1, a(a$2))));
+                    return decimal2(state3, more, lift12, $$throw2, (state2$1, a$2) => more((v2$4) => $19(state2$1, a(a$2))));
                   });
                 },
                 (state2$1, a$2) => more((v2$4) => $19(state2$1, a(a$2)))
@@ -20991,12 +27387,12 @@ var makeTokenParser = (v) => {
     })())("integer"),
     float: withErrorMessage((() => {
       const $17 = whiteSpace$p(v);
-      return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v1$1) => decimal(
+      return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v1$1) => decimal2(
         state1,
         more,
         lift12,
         $$throw2,
-        (state2, a) => more((v2$1) => fractExponent(a)(
+        (state2, a) => more((v2$1) => fractExponent2(a)(
           state2,
           more,
           lift12,
@@ -21007,7 +27403,7 @@ var makeTokenParser = (v) => {
     })())("float"),
     naturalOrFloat: withErrorMessage((() => {
       const $17 = withErrorMessage(satisfy((v$1) => v$1 === "0"))("'0'");
-      const $18 = fractExponent(0);
+      const $18 = fractExponent2(0);
       const $19 = whiteSpace$p(v);
       return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => {
         const $20 = (state2, a) => more((v2$1) => more((v3) => $19(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a)))));
@@ -21073,7 +27469,7 @@ var makeTokenParser = (v) => {
                     ));
                   });
                 };
-                return more((v1$2) => more((v3$3) => hexadecimal(
+                return more((v1$2) => more((v3$3) => hexadecimal2(
                   $ParseState($24, $25, false),
                   more,
                   lift12,
@@ -21083,7 +27479,7 @@ var makeTokenParser = (v) => {
                       if ($28) {
                         return $26(v4, $27);
                       }
-                      return octal(
+                      return octal2(
                         $ParseState($24, $25, false),
                         more,
                         lift12,
@@ -21100,9 +27496,9 @@ var makeTokenParser = (v) => {
         });
       }));
     })())("number"),
-    decimal,
-    hexadecimal,
-    octal,
+    decimal: decimal2,
+    hexadecimal: hexadecimal2,
+    octal: octal2,
     symbol: (name2) => {
       const $17 = whiteSpace$p(v);
       return (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => string2(name2)(
@@ -21200,8 +27596,8 @@ var makeTokenParser = (v) => {
         (state2, a) => more((v2$1) => more((v3) => $17(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => more((v2$2) => done(state3, "]"))))))
       ))));
     })())(p),
-    semi: semi2,
-    comma: comma2,
+    semi,
+    comma,
     colon: (() => {
       const $17 = whiteSpace$p(v);
       return (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => string2(":")(
@@ -21222,10 +27618,10 @@ var makeTokenParser = (v) => {
         (state2, a) => more((v2$1) => more((v3) => $17(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => more((v2$2) => done(state3, "."))))))
       ))));
     })(),
-    semiSep: (p) => sepBy(p)(semi2),
-    semiSep1: (p) => sepBy1(p)(semi2),
-    commaSep: (p) => sepBy(p)(comma2),
-    commaSep1: (p) => sepBy1(p)(comma2)
+    semiSep: (p) => sepBy(p)(semi),
+    semiSep1: (p) => sepBy1(p)(semi),
+    commaSep: (p) => sepBy(p)(comma),
+    commaSep1: (p) => sepBy1(p)(comma)
   };
 };
 
@@ -21253,51 +27649,29 @@ var sepBy1_try = (p) => (sep) => {
     (state2, a) => more((v2$1) => more((v3) => $0(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, $NonEmpty(a, a$1))))))
   )));
 };
-var sepBy_try = (p) => (sep) => {
-  const $0 = sepBy1_try(p)(sep);
-  return (v2, $1, $2, $3, $4) => {
-    const $5 = v2._1;
-    const $6 = v2._2;
-    return $1((v3) => $1((v1) => $0(
-      $ParseState($5, $6, false),
-      $1,
-      $2,
-      (v4, $7) => {
-        const $8 = v4._3;
-        return $1((v5) => {
-          if ($8) {
-            return $3(v4, $7);
-          }
-          return $4(v2, Nil);
-        });
-      },
-      (state2, a) => $1((v2$1) => $4(state2, $List("Cons", a._1, a._2)))
-    )));
-  };
-};
 
 // output-es/Parse/index.js
-var fromFoldable18 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
-var fromFoldable19 = /* @__PURE__ */ (() => fromFoldableImpl(foldableNonEmptyList.foldr))();
-var onlyIf = (b) => (a) => {
+var fromFoldable26 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
+var fromFoldable111 = /* @__PURE__ */ (() => fromFoldableImpl(foldableNonEmptyList.foldr))();
+var onlyIf2 = (b) => (a) => {
   const $0 = b ? ((state1, v, v1, v2, done) => done(state1, void 0)) : fail2("No alternative");
   return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a$1) => more((v2) => done(state2, a))));
 };
 var choose2 = /* @__PURE__ */ choose(altParserT);
 var fanin3 = /* @__PURE__ */ fanin(categoryFn)(choiceFn);
-var identity25 = (x) => x;
+var identity32 = (x) => x;
 var paragraphLetter = /* @__PURE__ */ satisfy((c) => c !== '"' && c !== "$" && !isSpace(toCharCode(c)));
-var operators = (binaryOp) => fromFoldable18(listMap(arrayMap((v) => $Operator(
+var operators = (binaryOp2) => fromFoldable26(listMap(arrayMap((v) => $Operator(
   "Infix",
   (() => {
-    const $0 = binaryOp(v.op);
+    const $0 = binaryOp2(v.op);
     return (v1, $1, $2, $3, $4) => {
       const $5 = v1._3;
       return $0(v1, $1, $2, (v2, $6) => $3($ParseState(v2._1, v2._2, $5), $6), $4);
     };
   })(),
   v.assoc
-)))(listMap(fromFoldable19)(groupBy2((x) => (y) => x.prec === y.prec)(sortBy2((x) => (x$1) => {
+)))(listMap(fromFoldable111)(groupBy2((x) => (y) => x.prec === y.prec)(sortBy2((x) => (x$1) => {
   const $0 = ordInt.compare(x.prec)(x$1.prec);
   if ($0 === "GT") {
     return LT;
@@ -21398,7 +27772,7 @@ var paragraphElem = (expr$p) => token.lexeme((() => {
     ))));
   };
 })());
-var paragraph = (expr$p) => token.lexeme(between(string2('"""'))(string2('"""'))((() => {
+var paragraph2 = (expr$p) => token.lexeme(between(string2('"""'))(string2('"""'))((() => {
   const $0 = many2(alternativeParserT)(lazyParserT)(paragraphElem(expr$p));
   return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => token.whiteSpace(
     state1,
@@ -21413,7 +27787,7 @@ var rBracket = /* @__PURE__ */ (() => {
   const $0 = token.symbol("]");
   return (state1, more, lift12, $$throw2, done) => more((v1) => $0(state1, more, lift12, $$throw2, (state2, a) => more((v2) => done(state2, void 0))));
 })();
-var topLevel = (p) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => token.whiteSpace(
+var topLevel2 = (p) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => token.whiteSpace(
   state1,
   more,
   lift12,
@@ -21437,7 +27811,7 @@ var keyword = (str$p) => {
   }
   return throwException(error(str$p + " is not a reserved word"))();
 };
-var imports_ = /* @__PURE__ */ manyRec2(/* @__PURE__ */ (() => {
+var imports_2 = /* @__PURE__ */ manyRec2(/* @__PURE__ */ (() => {
   const $0 = keyword("import");
   const $1 = joinWith("/");
   const $2 = sepBy1(token.identifier)(token.reservedOp("."));
@@ -21452,13 +27826,13 @@ var imports_ = /* @__PURE__ */ manyRec2(/* @__PURE__ */ (() => {
       lift12,
       $$throw2,
       (state2$1, a$1) => more((v2$2) => {
-        const $3 = $1(fromFoldable19(a$1));
+        const $3 = $1(fromFoldable111(a$1));
         return more((v4) => done(state2$1, $3));
       })
     ))))
   )));
 })());
-var withImports = (p) => topLevel((state1, more, lift12, $$throw2, done) => more((v1) => imports_(
+var withImports2 = (p) => topLevel2((state1, more, lift12, $$throw2, done) => more((v1) => imports_2(
   state1,
   more,
   lift12,
@@ -21470,7 +27844,7 @@ var ident = (state1, more, lift12, $$throw2, done) => more((v1) => token.identif
   more,
   lift12,
   $$throw2,
-  (state2, a) => more((v2) => onlyIf(!isCtrName(a))(a)(state2, more, lift12, $$throw2, done))
+  (state2, a) => more((v2) => onlyIf2(!isCtrName(a))(a)(state2, more, lift12, $$throw2, done))
 ));
 var field = (p) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => ident(
   state1,
@@ -21528,7 +27902,7 @@ var ctr = (state1, more, lift12, $$throw2, done) => more((v1) => token.identifie
   more,
   lift12,
   $$throw2,
-  (state2, a) => more((v2) => onlyIf(isCtrName(a))(a)(state2, more, lift12, $$throw2, done))
+  (state2, a) => more((v2) => onlyIf2(isCtrName(a))(a)(state2, more, lift12, $$throw2, done))
 ));
 var simplePattern = (pattern$p) => {
   const $0 = token.brackets((state1, v, v1, v2, done) => done(state1, PListEmpty));
@@ -21692,13 +28066,13 @@ var simplePattern = (pattern$p) => {
     ));
   };
 };
-var pattern = /* @__PURE__ */ (() => {
+var pattern2 = /* @__PURE__ */ (() => {
   const $0 = buildExprParser(operators((op) => (state1, more, lift12, $$throw2, done) => more((v1) => token.operator(
     state1,
     more,
     lift12,
     $$throw2,
-    (state2, a) => more((v2) => onlyIf(":" === definitely("absurd")(charAt2(0)(a)) && op === a)((\u03C0) => (\u03C0$p) => $Pattern(
+    (state2, a) => more((v2) => onlyIf2(":" === definitely("absurd")(charAt2(0)(a)) && op === a)((\u03C0) => (\u03C0$p) => $Pattern(
       "PConstr",
       a,
       $List("Cons", \u03C0, $List("Cons", \u03C0$p, Nil))
@@ -21745,9 +28119,9 @@ var pattern = /* @__PURE__ */ (() => {
   const go = go$lazy();
   return go;
 })();
-var varDefs = (expr$p) => {
+var varDefs2 = (expr$p) => {
   const $0 = keyword("let");
-  const $1 = sepBy1_try((state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => pattern(
+  const $1 = sepBy1_try((state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v2$1) => more((v1$1) => pattern2(
     state1,
     more,
     lift12,
@@ -21771,14 +28145,14 @@ var varDefs = (expr$p) => {
     (state2, a) => more((v2$1) => more((v3) => $1(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a$1)))))
   )));
 };
-var clause_uncurried = (expr$p) => (delim) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => pattern(
+var clause_uncurried = (expr$p) => (delim2) => (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => pattern2(
   state1,
   more,
   lift12,
   $$throw2,
   (state2, a) => more((v2$1) => {
     const $0 = Tuple(a);
-    return more((v3) => more((v2$2) => more((v1$1) => delim(
+    return more((v3) => more((v2$2) => more((v1$1) => delim2(
       state2,
       more,
       lift12,
@@ -21787,8 +28161,8 @@ var clause_uncurried = (expr$p) => (delim) => (state1, more, lift12, $$throw2, d
     ))));
   })
 )));
-var clause_curried = (expr$p) => (delim) => {
-  const $0 = some3(simplePattern(pattern));
+var clause_curried = (expr$p) => (delim2) => {
+  const $0 = some3(simplePattern(pattern2));
   return (state1, more, lift12, $$throw2, done) => more((v1) => more((v2) => more((v1$1) => $0(
     state1,
     more,
@@ -21796,7 +28170,7 @@ var clause_curried = (expr$p) => (delim) => {
     $$throw2,
     (state2, a) => more((v2$1) => {
       const $1 = Tuple(a);
-      return more((v3) => more((v2$2) => more((v1$2) => delim(
+      return more((v3) => more((v2$2) => more((v1$2) => delim2(
         state2,
         more,
         lift12,
@@ -21815,7 +28189,7 @@ var clause_curried = (expr$p) => (delim) => {
     })
   ))));
 };
-var recDefs = (expr$p) => {
+var recDefs2 = (expr$p) => {
   const $0 = keyword("let");
   const $1 = sepBy1_try((() => {
     const $12 = clause_curried(expr$p)(equals);
@@ -21838,14 +28212,14 @@ var recDefs = (expr$p) => {
     (state2, a) => more((v2$1) => more((v3) => $1(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, a$1)))))
   )));
 };
-var defs = (expr$p) => {
+var defs2 = (expr$p) => {
   const $0 = choose2((() => {
-    const $02 = varDefs(expr$p);
+    const $02 = varDefs2(expr$p);
     return (v1, $1, $2, $3, $4) => {
       const $5 = v1._3;
       return $02(v1, $1, $2, (v2, $6) => $3($ParseState(v2._1, v2._2, $5), $6), $4);
     };
-  })())(recDefs(expr$p));
+  })())(recDefs2(expr$p));
   return (state1, more, lift12, $$throw2, done) => more((v1) => $0(
     state1,
     more,
@@ -21911,9 +28285,9 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
           const $6 = keyword("else");
           const $7 = keyword("fun");
           const $8 = branches(go$lazy())(clause_curried);
-          const $9 = sepBy1(defs(go$lazy()))(token.semi);
+          const $9 = sepBy1(defs2(go$lazy()))(token.semi);
           const $10 = (() => {
-            const $102 = paragraph(go$lazy());
+            const $102 = paragraph2(go$lazy());
             const $11 = between(token.symbol("[|"))(token.symbol("|]"))((() => {
               const $112 = Matrix2();
               const $122 = token.parens((state1$1, more$1, lift1$1, throw$1, done$1) => more$1((v2$1) => more$1((v1$1) => ident(
@@ -22172,7 +28546,7 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
                                                     $24,
                                                     $25,
                                                     $34,
-                                                    (state2$1, a$1) => $24((v2$5) => $24((v3$2) => pattern(
+                                                    (state2$1, a$1) => $24((v2$5) => $24((v3$2) => pattern2(
                                                       state2$1,
                                                       $24,
                                                       $25,
@@ -22201,7 +28575,7 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
                                                 }));
                                               });
                                             };
-                                            return $24((v2$2) => $24((v2$3) => $24((v1$1) => $24((v1$2) => pattern(
+                                            return $24((v2$2) => $24((v2$3) => $24((v1$1) => $24((v1$2) => pattern2(
                                               $ParseState($28, $29, false),
                                               $24,
                                               $25,
@@ -22335,10 +28709,10 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
                                                             if ($38) {
                                                               return $33($ParseState(v4$2._1, v4$2._2, false), $37);
                                                             }
-                                                            return $34($ParseState($31, $32, false), identity25);
+                                                            return $34($ParseState($31, $32, false), identity32);
                                                           });
                                                         },
-                                                        (state2$1, a$1) => $23((v2$2) => $34(state2$1, identity25))
+                                                        (state2$1, a$1) => $23((v2$2) => $34(state2$1, identity32))
                                                       )));
                                                     });
                                                   },
@@ -22376,10 +28750,10 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
                                                       if ($34) {
                                                         return $29($ParseState(v4$1._1, v4$1._2, false), $33);
                                                       }
-                                                      return $30($ParseState($27, $28, false), identity25);
+                                                      return $30($ParseState($27, $28, false), identity32);
                                                     });
                                                   },
-                                                  (state2$1, a$1) => $23((v2$2) => $30(state2$1, identity25))
+                                                  (state2$1, a$1) => $23((v2$2) => $30(state2$1, identity32))
                                                 )));
                                               });
                                             },
@@ -22881,13 +29255,13 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
             more$1,
             lift1$1,
             throw$1,
-            (state2$1, a$1) => more$1((v2$1) => onlyIf(op === a$1)((() => {
+            (state2$1, a$1) => more$1((v2$1) => onlyIf2(op === a$1)((() => {
               if (op === ".") {
                 return (e) => (e$p) => {
                   if (e$p.tag === "Var") {
                     return $Expr2("Project", e, e$p._1);
                   }
-                  return throwException(error('Field names are not first class; got "' + intercalate4("\n")(removeDocWS(prettyExpr1(annUnit).pretty(e$p)).lines) + '".'))();
+                  return throwException(error('Field names are not first class; got "' + renderWithIndent(0)(prettyExpr1(annUnit).pretty(e$p)) + '".'))();
                 };
               }
               if (":" === definitely("absurd")(charAt2(0)(a$1))) {
@@ -22922,19 +29296,6 @@ var expr_$lazy = /* @__PURE__ */ binding(() => {
   return go;
 });
 var expr_ = /* @__PURE__ */ expr_$lazy();
-var module_ = /* @__PURE__ */ withImports(/* @__PURE__ */ (() => {
-  const $0 = sepBy_try(defs(expr_))(token.semi);
-  return (state1, more, lift12, $$throw2, done) => more((v2) => more((v1) => more((v1$1) => $0(
-    state1,
-    more,
-    lift12,
-    $$throw2,
-    (state2, a) => more((v2$1) => {
-      const $1 = $Module(bindList.bind(a)(identity7));
-      return more((v2$2) => more((v3) => token.semi(state2, more, lift12, $$throw2, (state3, a$1) => more((v4) => done(state3, $1)))));
-    })
-  ))));
-})());
 
 // output-es/Data.Argonaut.Decode.Error/index.js
 var $JsonDecodeError = (tag, _1, _2) => ({ tag, _1, _2 });
@@ -22975,11 +29336,11 @@ var parseJson = (x) => {
 };
 
 // output-es/Primitive.Defs/index.js
-var toUnfoldable11 = /* @__PURE__ */ (() => {
+var toUnfoldable14 = /* @__PURE__ */ (() => {
   const $0 = toArrayWithKey(Tuple);
   return (x) => toUnfoldable(unfoldableArray)($0(x));
 })();
-var fromFoldable20 = /* @__PURE__ */ fromFoldable2(foldableArray);
+var fromFoldable27 = /* @__PURE__ */ fromFoldable2(foldableArray);
 var foldM4 = (dictMonad) => (f) => (b0) => foldableDict.foldl((b) => (a) => dictMonad.Bind1().bind(b)((a$1) => f(a$1)(a)))(dictMonad.Applicative0().pure(b0));
 var disjointUnion3 = /* @__PURE__ */ disjointUnion(mapDictString);
 var unary2 = /* @__PURE__ */ unary(boundedJoinSemilatticeUni);
@@ -23045,7 +29406,7 @@ var log3 = (v2) => {
   fail();
 };
 var lessThanEquals = /* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asIntNumberOrString)(asIntNumberOrString)((a1) => (a2) => a1 <= a2)(/* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asNumberString)(asNumberString)((a1) => (a2) => a1 <= a2)((a1) => (a2) => a1 <= a2));
-var lessThan = /* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asIntNumberOrString)(asIntNumberOrString)((a1) => (a2) => a1 < a2)(/* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asNumberString)(asNumberString)((a1) => (a2) => a1 < a2)((a1) => (a2) => a1 < a2));
+var lessThan2 = /* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asIntNumberOrString)(asIntNumberOrString)((a1) => (a2) => a1 < a2)(/* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asNumberString)(asNumberString)((a1) => (a2) => a1 < a2)((a1) => (a2) => a1 < a2));
 var greaterThanEquals = /* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asIntNumberOrString)(asIntNumberOrString)((a1) => (a2) => a1 >= a2)(/* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asNumberString)(asNumberString)((a1) => (a2) => a1 >= a2)((a1) => (a2) => a1 >= a2));
 var greaterThan = /* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asIntNumberOrString)(asIntNumberOrString)((a1) => (a2) => a1 > a2)(/* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asNumberString)(asNumberString)((a1) => (a2) => a1 > a2)((a1) => (a2) => a1 > a2));
 var fromJsonVal = (dictMonadWithGraphAlloc) => {
@@ -23090,7 +29451,7 @@ var fromJsonVal = (dictMonadWithGraphAlloc) => {
         const $3 = v1._1;
         return Bind1.bind(fromJsonVal(dictMonadWithGraphAlloc)(dictMonadEffect)($2))((v2) => Applicative0.pure($Tuple($1, $Tuple($3, v2))));
       });
-    })(toUnfoldable11(obj)))((entries) => $$new((a) => Val(a)(Nothing))(Leaf2)($BaseVal("Dictionary", fromFoldable20(entries)))));
+    })(toUnfoldable14(obj)))((entries) => $$new((a) => Val(a)(Nothing))(Leaf2)($BaseVal("Dictionary", fromFoldable27(entries)))));
   };
 };
 var loadJson = /* @__PURE__ */ $Tuple(
@@ -23404,7 +29765,7 @@ var debugLog = /* @__PURE__ */ $Tuple(
     }
   })
 );
-var primitives = /* @__PURE__ */ fromFoldable20([
+var primitives = /* @__PURE__ */ fromFoldable27([
   /* @__PURE__ */ $Tuple(
     ":",
     /* @__PURE__ */ $Val(void 0, Nothing, /* @__PURE__ */ $BaseVal("Fun", /* @__PURE__ */ $Fun("PartialConstr", ":", Nil)))
@@ -23443,7 +29804,7 @@ var primitives = /* @__PURE__ */ fromFoldable20([
     fwd: /* @__PURE__ */ union6(asBooleanBoolean)(asBooleanBoolean)(asIntNumberOrString)(asIntNumberOrString)(eqIntImpl)(/* @__PURE__ */ unionStr(asBooleanBoolean)(asNumberString)(eqNumberImpl)(eqStringImpl))
   }),
   /* @__PURE__ */ binary2("/=")({ i1: intOrNumberOrString, i2: intOrNumberOrString, o: $$boolean, fwd: notEquals }),
-  /* @__PURE__ */ binary2("<")({ i1: intOrNumberOrString, i2: intOrNumberOrString, o: $$boolean, fwd: lessThan }),
+  /* @__PURE__ */ binary2("<")({ i1: intOrNumberOrString, i2: intOrNumberOrString, o: $$boolean, fwd: lessThan2 }),
   /* @__PURE__ */ binary2(">")({ i1: intOrNumberOrString, i2: intOrNumberOrString, o: $$boolean, fwd: greaterThan }),
   /* @__PURE__ */ binary2("<=")({ i1: intOrNumberOrString, i2: intOrNumberOrString, o: $$boolean, fwd: lessThanEquals }),
   /* @__PURE__ */ binary2(">=")({ i1: intOrNumberOrString, i2: intOrNumberOrString, o: $$boolean, fwd: greaterThanEquals }),
@@ -23462,3618 +29823,19 @@ var primitives = /* @__PURE__ */ fromFoldable20([
   /* @__PURE__ */ binaryZero22("rem")({ i: $$int, o: $$int, fwd: rem })
 ]);
 
-// output-es/ProgCxt/index.js
-var union7 = /* @__PURE__ */ (() => setSet(ordDVertex$p).union)();
-var unions2 = /* @__PURE__ */ (() => {
-  const go = (go$a0$copy) => (go$a1$copy) => {
-    let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-    while (go$c) {
-      const b = go$a0, v = go$a1;
-      if (v.tag === "Nil") {
-        go$c = false;
-        go$r = b;
-        continue;
-      }
-      if (v.tag === "Cons") {
-        go$a0 = unionWith(ordDVertex$p)($$const)(b)(v._1);
-        go$a1 = v._2;
-        continue;
-      }
-      fail();
-    }
-    return go$r;
-  };
-  return go(Leaf2);
-})();
-var identity26 = (x) => x;
-var verticesProgCxtVertex = {
-  vertices: (v) => union7(unions13(listMap(verticesValVertex.vertices)(mapObjectString.values(v.primitives))))(unions2(listMap(verticesModuleVertex.vertices)(v.mods)))
-};
-var functorProgCxt = {
-  map: (f) => (m) => ({ primitives: _fmapObject(m.primitives, functorVal.map(f)), mods: listMap(functorModule.map(f))(m.mods) })
-};
-var foldableProgCxt = {
-  foldl: (f) => (z) => (m) => {
-    const go = (go$a0$copy) => (go$a1$copy) => {
-      let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-      while (go$c) {
-        const b = go$a0, v = go$a1;
-        if (v.tag === "Nil") {
-          go$c = false;
-          go$r = b;
-          continue;
-        }
-        if (v.tag === "Cons") {
-          go$a0 = foldableModule.foldl(f)(b)(v._1);
-          go$a1 = v._2;
-          continue;
-        }
-        fail();
-      }
-      return go$r;
-    };
-    return fold((z$1) => (v) => foldableVal.foldl(f)(z$1))(go(z)(m.mods))(m.primitives);
-  },
-  foldr: (f) => (z) => (m) => foldableList.foldr((() => {
-    const $0 = foldrDefault(foldableModule)(f);
-    return (b) => (a) => $0(a)(b);
-  })())(foldableEnv.foldr(f)(z)(m.primitives))(m.mods),
-  foldMap: (dictMonoid) => {
-    const foldMap3 = foldableList.foldMap(dictMonoid);
-    const foldMap5 = foldableEnv.foldMap(dictMonoid);
-    return (f) => (m) => dictMonoid.Semigroup0().append(foldMap3(foldableModule.foldMap(dictMonoid)(f))(m.mods))(foldMap5(f)(m.primitives));
-  }
-};
-var traversableProgCxt = {
-  traverse: (dictApplicative) => {
-    const Apply0 = dictApplicative.Apply0();
-    const traverse3 = traversableList.traverse(dictApplicative);
-    const traverse4 = traversableModule.traverse(dictApplicative);
-    const traverse5 = traversableEnv.traverse(dictApplicative);
-    return (f) => (m) => Apply0.apply(Apply0.Functor0().map((v1) => (v2) => ({ primitives: v2, mods: v1 }))(traverse3(traverse4(f))(m.mods)))(traverse5(f)(m.primitives));
-  },
-  sequence: (dictApplicative) => (v) => traversableProgCxt.traverse(dictApplicative)(identity26)(v),
-  Functor0: () => functorProgCxt,
-  Foldable1: () => foldableProgCxt
-};
-
-// output-es/Module/index.js
-var all3 = /* @__PURE__ */ (() => foldableList.foldMap(/* @__PURE__ */ (() => {
-  const semigroupConj1 = { append: (v) => (v1) => v && v1 };
-  return { mempty: true, Semigroup0: () => semigroupConj1 };
-})()))();
-var elem2 = /* @__PURE__ */ (() => {
-  const any1 = foldableList.foldMap(/* @__PURE__ */ (() => {
-    const semigroupDisj1 = { append: (v) => (v1) => v || v1 };
-    return { mempty: false, Semigroup0: () => semigroupDisj1 };
-  })());
-  return (x) => any1(($0) => x === $0);
-})();
-var fromFoldable21 = /* @__PURE__ */ (() => foldableSet.foldr(Cons)(Nil))();
-var boundedLattice2 = { BoundedJoinSemilattice0: () => boundedJoinSemilatticeUni, BoundedMeetSemilattice1: () => boundedMeetSemilatticeUni };
-var unions4 = /* @__PURE__ */ (() => {
-  const go = (go$a0$copy) => (go$a1$copy) => {
-    let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-    while (go$c) {
-      const b = go$a0, v = go$a1;
-      if (v.tag === "Nil") {
-        go$c = false;
-        go$r = b;
-        continue;
-      }
-      if (v.tag === "Cons") {
-        go$a0 = unionWith(ordDVertex$p)($$const)(b)(v._1);
-        go$a1 = v._2;
-        continue;
-      }
-      fail();
-    }
-    return go$r;
-  };
-  return go(Leaf2);
-})();
-var union8 = /* @__PURE__ */ (() => setSet(ordDVertex$p).union)();
-var parse = (dictMonadError) => {
-  const $0 = dictMonadError.MonadThrow0();
-  const $1 = $0.Monad0().Applicative0().pure;
-  return (src) => {
-    const $2 = runParserT1(src);
-    return (x) => {
-      const $3 = $2(x);
-      if ($3.tag === "Left") {
-        return $0.throwError(error(showParseError.show($3._1)));
-      }
-      if ($3.tag === "Right") {
-        return $1($3._1);
-      }
-      fail();
-    };
-  };
-};
-var loadProgCxt = (dictMonadAff) => (dictMonadError) => (dictMonadReader) => (dictLoadFile) => dictMonadAff.MonadEffect0().Monad0().Applicative0().pure({
-  primitives,
-  mods: Nil
-});
-var loadModuleGraph = (dictMonadAff) => {
-  const Monad0 = dictMonadAff.MonadEffect0().Monad0();
-  const $0 = Monad0.Bind1();
-  const $1 = Monad0.Applicative0();
-  return (dictMonadError) => {
-    const parse1 = parse(dictMonadError);
-    const desugarModuleFwd = moduleFwd(dictMonadError)(boundedLattice2);
-    return (dictMonadReader) => {
-      const ask = dictMonadReader.MonadAsk0().ask;
-      return (dictLoadFile) => {
-        const loadFile3 = loadFile(dictLoadFile)(Monad0)(dictMonadError)(dictMonadAff);
-        return (roots) => {
-          const collectModules = (visited) => (graph) => (modules) => (imports) => {
-            if (imports.tag === "Nil") {
-              return $1.pure($Tuple(graph, modules));
-            }
-            if (imports.tag === "Cons") {
-              if ((() => {
-                const $2 = lookup2(ordString)(imports._1)(visited);
-                if ($2.tag === "Nothing") {
-                  return false;
-                }
-                if ($2.tag === "Just") {
-                  return true;
-                }
-                fail();
-              })()) {
-                return collectModules(visited)(graph)(modules)(imports._2);
-              }
-              return $0.bind($0.bind(ask)((v) => $0.bind(loadFile3(v.fluidSrcPaths)(imports._1 + ".fld"))((src) => $0.bind(parse1(src)(module_))((v1) => {
-                const $2 = v1._2;
-                return $0.bind(desugarModuleFwd(v1._1))((mod$p) => $1.pure($Tuple(
-                  mod$p,
-                  imports._1 === "lib/prelude" ? $2 : $List("Cons", "lib/prelude", $2)
-                )));
-              }))))((v) => collectModules(insert(ordString)(imports._1)()(visited))(insert(ordString)(imports._1)(v._2)(graph))(insert(ordString)(imports._1)(v._1)(modules))(foldableList.foldr(Cons)(imports._2)(v._2)));
-            }
-            fail();
-          };
-          return $0.bind(collectModules(Leaf2)(Leaf2)(Leaf2)(roots))((v) => {
-            const $2 = v._1;
-            return $1.pure({
-              roots,
-              topsorted: (() => {
-                const go = (go$a0$copy) => (go$a1$copy) => {
-                  let go$a0 = go$a0$copy, go$a1 = go$a1$copy, go$c = true, go$r;
-                  while (go$c) {
-                    const v$1 = go$a0, v1 = go$a1;
-                    if (v$1.tag === "Nil") {
-                      go$c = false;
-                      go$r = reverse2(v1);
-                      continue;
-                    }
-                    const v2 = find(foldableList)((mod) => {
-                      const v22 = lookup2(ordString)(mod)($2);
-                      if (v22.tag === "Nothing") {
-                        return true;
-                      }
-                      if (v22.tag === "Just") {
-                        return all3((dep) => !elem2(dep)(v$1))(v22._1);
-                      }
-                      fail();
-                    })(v$1);
-                    if (v2.tag === "Nothing") {
-                      go$c = false;
-                      go$r = throwException(error("Modules contain circular imports"))();
-                      continue;
-                    }
-                    if (v2.tag === "Just") {
-                      go$a0 = deleteBy(eqStringImpl)(v2._1)(v$1);
-                      go$a1 = $List("Cons", v2._1, v1);
-                      continue;
-                    }
-                    fail();
-                  }
-                  return go$r;
-                };
-                return go(fromFoldable21(functorMap.map((v$1) => {
-                })($2)))(Nil);
-              })(),
-              graph: $2,
-              modules: v._2
-            });
-          });
-        };
-      };
-    };
-  };
-};
-var initialConfig = (dictMonadAff) => {
-  const Monad0 = dictMonadAff.MonadEffect0().Monad0();
-  const $0 = bindStateT(Monad0);
-  const $1 = monadAllocAllocT(Monad0);
-  const Applicative0 = $1.Monad0().Applicative0();
-  const fresh1 = $1.fresh;
-  const alloc1 = traversableProgCxt.traverse(Applicative0)((v) => fresh1);
-  const applicativeStateT2 = applicativeStateT(Monad0);
-  const traverse1 = traversableMap.traverse(applicativeStateT2);
-  const alloc2 = traversableModule.traverse(Applicative0)((v) => fresh1);
-  const runWithGraphT_spy2 = runWithGraphT_spy({
-    Applicative0: () => applicativeStateT(Monad0),
-    Bind1: () => bindStateT(Monad0)
-  })(graphGraphImpl);
-  const monadAffState2 = monadAffState(dictMonadAff);
-  const monadAffState1 = monadAffState(monadAffState2);
-  const $2 = monadAffState2.MonadEffect0().Monad0();
-  const $3 = dictMonadAff.MonadEffect0().Monad0();
-  return (dictMonadError) => {
-    const eval_progCxt2 = eval_progCxt(monadWithGraphAllocWithGr(dictMonadError));
-    return (dictMonadReader) => {
-      const eval_progCxt1 = eval_progCxt2(monadReaderStateT(monadReaderStateT(dictMonadReader)))(monadAffState1);
-      return (dictLoadFile) => {
-        const eval_progCxt22 = eval_progCxt1((() => {
-          const loadFileFromPath1 = dictLoadFile.loadFileFromPath(dictMonadError)(dictMonadAff);
-          return {
-            loadFileFromPath: (dictMonadError1) => (dictMonadAff1) => (x) => {
-              const $4 = loadFileFromPath1(x);
-              return (s) => $2.Bind1().bind((s$1) => $3.Bind1().bind($4)((x$1) => $3.Applicative0().pure($Tuple(x$1, s$1))))((x$1) => $2.Applicative0().pure($Tuple(
-                x$1,
-                s
-              )));
-            }
-          };
-        })());
-        return (dictFV) => (e) => (progCxt) => (moduleCxt) => Monad0.Bind1().bind(runAllocT(Monad0)($0.bind(alloc1(progCxt))((progCxt$p) => $0.bind(traverse1(alloc2)(moduleCxt.modules))((modules$p) => $0.bind(runWithGraphT_spy2(eval_progCxt22(progCxt$p)({
-          modules: modules$p,
-          graph: moduleCxt.graph,
-          roots: moduleCxt.roots,
-          topsorted: moduleCxt.topsorted
-        }))(union8(verticesProgCxtVertex.vertices(progCxt$p))(unions4(listMap(verticesModuleVertex.vertices)(foldableMap.foldr(Cons)(Nil)(modules$p))))))((v) => applicativeStateT2.pure($Tuple(
-          progCxt$p,
-          $Tuple(
-            modules$p,
-            (() => {
-              const $4 = dictFV.fv(e);
-              return filterWithKey2((x) => {
-                const $5 = setSet(ordString).member(x)($4);
-                return (v$1) => $5;
-              })(v._2);
-            })()
-          )
-        ))))))(0))((v) => Monad0.Applicative0().pure({ n: v._1, progCxt: v._2._2._1, "\u03B3": v._2._2._2._2 }));
-      };
-    };
-  };
-};
-var prepConfig = (dictMonadAff) => {
-  const Monad0 = dictMonadAff.MonadEffect0().Monad0();
-  const $0 = Monad0.Bind1();
-  const loadModuleGraph1 = loadModuleGraph(dictMonadAff);
-  const initialConfig1 = initialConfig(dictMonadAff);
-  return (dictMonadError) => {
-    const loadModuleGraph2 = loadModuleGraph1(dictMonadError);
-    const desug1 = exprFwd(boundedLattice2)(dictMonadError)(joinSemilatticeUnit);
-    const initialConfig2 = initialConfig1(dictMonadError);
-    return (dictMonadReader) => {
-      const loadModuleGraph3 = loadModuleGraph2(dictMonadReader);
-      const initialConfig3 = initialConfig2(dictMonadReader);
-      return (dictLoadFile) => {
-        const loadModuleGraph4 = loadModuleGraph3(dictLoadFile);
-        const initialConfig4 = initialConfig3(dictLoadFile)(fVExpr);
-        return (progCxt) => (fluidSrc) => $0.bind(parse(dictMonadError)(fluidSrc)(withImports(expr_)))((v) => {
-          const $1 = v._1;
-          return $0.bind(loadModuleGraph4($List("Cons", "lib/prelude", v._2)))((moduleCxt) => $0.bind(desug1($1))((e) => $0.bind(initialConfig4(e)(progCxt)(moduleCxt))((gconfig) => Monad0.Applicative0().pure({
-            s: $1,
-            e,
-            gconfig
-          }))));
-        });
-      };
-    };
-  };
-};
-
-// output-es/Node.Encoding/index.js
-var $Encoding = (tag) => tag;
-var UTF8 = /* @__PURE__ */ $Encoding("UTF8");
-
-// output-es/Node.FS.Constants/foreign.js
-import { constants } from "node:fs";
-var f_OK = constants.F_OK;
-var r_OK = constants.R_OK;
-var w_OK = constants.W_OK;
-var x_OK = constants.X_OK;
-var copyFile_EXCL = constants.COPYFILE_EXCL;
-var copyFile_FICLONE = constants.COPYFILE_FICLONE;
-var copyFile_FICLONE_FORCE = constants.COPYFILE_FICLONE_FORCE;
-
-// output-es/Node.FS.Async/foreign.js
-import {
-  access,
-  copyFile,
-  mkdtemp,
-  rename,
-  truncate,
-  chown,
-  chmod,
-  stat,
-  lstat,
-  link as link2,
-  symlink,
-  readlink,
-  realpath,
-  unlink,
-  rmdir,
-  rm,
-  mkdir,
-  readdir,
-  utimes,
-  readFile,
-  writeFile,
-  appendFile,
-  open,
-  read as read3,
-  write as write2,
-  close
-} from "node:fs";
-
-// output-es/Node.FS.Async/index.js
-var handleCallback = (cb) => (err, a) => {
-  const v = nullable(err, Nothing, Just);
-  if (v.tag === "Nothing") {
-    return cb($Either("Right", a))();
-  }
-  if (v.tag === "Just") {
-    return cb($Either("Left", v._1))();
-  }
-  fail();
-};
-var readTextFile = (encoding) => (file) => (cb) => {
-  const $0 = {
-    encoding: (() => {
-      if (encoding === "ASCII") {
-        return "ASCII";
-      }
-      if (encoding === "UTF8") {
-        return "UTF8";
-      }
-      if (encoding === "UTF16LE") {
-        return "UTF16LE";
-      }
-      if (encoding === "UCS2") {
-        return "UCS2";
-      }
-      if (encoding === "Base64") {
-        return "Base64";
-      }
-      if (encoding === "Latin1") {
-        return "Latin1";
-      }
-      if (encoding === "Binary") {
-        return "Binary";
-      }
-      if (encoding === "Hex") {
-        return "Hex";
-      }
-      fail();
-    })()
-  };
-  return () => readFile(file, $0, handleCallback(cb));
-};
-var stat2 = (file) => (cb) => () => stat(file, handleCallback(cb));
-
-// output-es/Node.FS.Aff/index.js
-var toAff1 = (f) => (a) => {
-  const $0 = f(a);
-  return makeAff((k) => {
-    const $1 = $0(k);
-    return () => {
-      $1();
-      return nonCanceler;
-    };
-  });
-};
-var toAff2 = (f) => (a) => (b) => {
-  const $0 = f(a)(b);
-  return makeAff((k) => {
-    const $1 = $0(k);
-    return () => {
-      $1();
-      return nonCanceler;
-    };
-  });
-};
-
-// output-es/Node.FS.Stats/foreign.js
-var isFileImpl = (s) => s.isFile();
-
-// output-es/Module.Node/index.js
-var $$try3 = /* @__PURE__ */ $$try(monadErrorAff);
-var loadFileNodeT = (dictMonad) => {
-  const Bind1 = dictMonad.Bind1();
-  const $0 = Bind1.Apply0().Functor0();
-  const $1 = dictMonad.Applicative0();
-  return {
-    loadFileFromPath: (dictMonadError) => (dictMonadAff) => (v) => bindReaderT(Bind1).bind(dictMonadAff.liftAff($$try3(toAff1(stat2)(v))))((stats) => {
-      if (stats.tag === "Right" && isFileImpl(stats._1)) {
-        const $22 = $0.map(Just);
-        const $3 = dictMonadAff.liftAff(toAff2(readTextFile)(UTF8)(v));
-        return (x) => $22($3(x));
-      }
-      const $2 = $1.pure(Nothing);
-      return (v$1) => $2;
-    })
-  };
-};
-
-// output-es/Options.Applicative.Internal.Utils/index.js
-var whitespaceRegex = /* @__PURE__ */ (() => {
-  const v = regex("\\s+")(noFlags);
-  if (v.tag === "Left") {
-    return _crashWith("whitespaceRegex: `\\s+` seems to be invlaid, err: " + v._1);
-  }
-  if (v.tag === "Right") {
-    return v._1;
-  }
-  fail();
-})();
-var startsWith = (p) => (s) => {
-  const $0 = indexOf2(p)(s);
-  if ($0.tag === "Nothing") {
-    return false;
-  }
-  return $0.tag === "Just" && $0._1 === 0;
-};
-var apApplyFlipped = (dictApply) => (a) => (b) => dictApply.apply(dictApply.Functor0().map(applyFlipped)(a))(b);
-
-// output-es/Text.PrettyPrint.Leijen/index.js
-var $Doc = (tag, _1, _2) => ({ tag, _1, _2 });
-var $Docs = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
-var $LazySimpleDoc = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
-var $SimpleDoc = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
-var max3 = (x) => (y) => {
-  const v = ordInt.compare(x)(y);
-  if (v === "LT") {
-    return y;
-  }
-  if (v === "EQ") {
-    return x;
-  }
-  if (v === "GT") {
-    return x;
-  }
-  fail();
-};
-var min2 = (x) => (y) => {
-  const v = ordInt.compare(x)(y);
-  if (v === "LT") {
-    return x;
-  }
-  if (v === "EQ") {
-    return x;
-  }
-  if (v === "GT") {
-    return y;
-  }
-  fail();
-};
-var SFail = /* @__PURE__ */ $SimpleDoc("SFail");
-var SEmpty = /* @__PURE__ */ $SimpleDoc("SEmpty");
-var SFail$p = /* @__PURE__ */ $LazySimpleDoc("SFail'");
-var SEmpty$p = /* @__PURE__ */ $LazySimpleDoc("SEmpty'");
-var Fail = /* @__PURE__ */ $Doc("Fail");
-var Empty = /* @__PURE__ */ $Doc("Empty");
-var Line = /* @__PURE__ */ $Doc("Line");
-var Nil3 = /* @__PURE__ */ $Docs("Nil");
-var text2 = (v) => {
-  if (v === "") {
-    return Empty;
-  }
-  return $Doc("Text", toCodePointArray(v).length, v);
-};
-var forceSimpleDoc = (v) => {
-  if (v.tag === "SFail'") {
-    return SFail;
-  }
-  if (v.tag === "SEmpty'") {
-    return SEmpty;
-  }
-  if (v.tag === "SChar'") {
-    return $SimpleDoc("SChar", v._1, forceSimpleDoc(force(v._2)));
-  }
-  if (v.tag === "SText'") {
-    return $SimpleDoc("SText", v._1, v._2, forceSimpleDoc(force(v._3)));
-  }
-  if (v.tag === "SLine'") {
-    return $SimpleDoc("SLine", v._1, forceSimpleDoc(force(v._2)));
-  }
-  fail();
-};
-var renderFits = (fits) => (rfrac) => (w) => (headNode) => {
-  const r = max3(0)(min2(w)(unsafeClamp(round(toNumber(w) * rfrac))));
-  const nicest$p = (n) => (k) => (i) => (ds) => (x) => (y) => {
-    const x$p = best(n)(k)($Docs("Cons", i, x, ds));
-    if (fits(w)(min2(n)(k))(min2(w - k | 0)((r - k | 0) + n | 0))(x$p)) {
-      return x$p;
-    }
-    return best(n)(k)($Docs("Cons", i, y, ds));
-  };
-  const best = (v) => (v1) => (v2) => {
-    if (v2.tag === "Nil") {
-      return SEmpty$p;
-    }
-    if (v2.tag === "Cons") {
-      if (v2._2.tag === "Fail") {
-        return SFail$p;
-      }
-      if (v2._2.tag === "Empty") {
-        return best(v)(v1)(v2._3);
-      }
-      if (v2._2.tag === "Char") {
-        const k$p = v1 + 1 | 0;
-        return $LazySimpleDoc("SChar'", v2._2._1, defer((v3) => best(v)(k$p)(v2._3)));
-      }
-      if (v2._2.tag === "Text") {
-        const k$p = v1 + v2._2._1 | 0;
-        return $LazySimpleDoc("SText'", v2._2._1, v2._2._2, defer((v3) => best(v)(k$p)(v2._3)));
-      }
-      if (v2._2.tag === "Line") {
-        return $LazySimpleDoc("SLine'", v2._1, defer((v3) => best(v2._1)(v2._1)(v2._3)));
-      }
-      if (v2._2.tag === "FlatAlt") {
-        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1, v2._3));
-      }
-      if (v2._2.tag === "Cat") {
-        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1, $Docs("Cons", v2._1, v2._2._2, v2._3)));
-      }
-      if (v2._2.tag === "Nest") {
-        return best(v)(v1)($Docs("Cons", v2._1 + v2._2._1 | 0, v2._2._2, v2._3));
-      }
-      if (v2._2.tag === "Union") {
-        return nicest$p(v)(v1)(v2._1)(v2._3)(v2._2._1)(v2._2._2);
-      }
-      if (v2._2.tag === "Column") {
-        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1(v1), v2._3));
-      }
-      if (v2._2.tag === "Columns") {
-        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1($Maybe("Just", w)), v2._3));
-      }
-      if (v2._2.tag === "Nesting") {
-        return best(v)(v1)($Docs("Cons", v2._1, v2._2._1(v2._1), v2._3));
-      }
-    }
-    fail();
-  };
-  return forceSimpleDoc(best(0)(0)($Docs("Cons", 0, headNode, Nil3)));
-};
-var foldr1 = (dictMonoid) => {
-  const mempty = dictMonoid.mempty;
-  return (f) => (x) => {
-    const $0 = unsnoc(x);
-    if ($0.tag === "Nothing") {
-      return mempty;
-    }
-    if ($0.tag === "Just") {
-      return foldrArray(f)($0._1.last)($0._1.init);
-    }
-    fail();
-  };
-};
-var flatten = (v) => {
-  if (v.tag === "FlatAlt") {
-    return v._2;
-  }
-  if (v.tag === "Cat") {
-    return $Doc("Cat", flatten(v._1), flatten(v._2));
-  }
-  if (v.tag === "Nest") {
-    return $Doc("Nest", v._1, flatten(v._2));
-  }
-  if (v.tag === "Line") {
-    return Fail;
-  }
-  if (v.tag === "Union") {
-    return flatten(v._1);
-  }
-  if (v.tag === "Column") {
-    return $Doc("Column", (x) => flatten(v._1(x)));
-  }
-  if (v.tag === "Columns") {
-    return $Doc("Columns", (x) => flatten(v._1(x)));
-  }
-  if (v.tag === "Nesting") {
-    return $Doc("Nesting", (x) => flatten(v._1(x)));
-  }
-  return v;
-};
-var softline = /* @__PURE__ */ $Doc(
-  "Union",
-  /* @__PURE__ */ flatten(/* @__PURE__ */ $Doc("FlatAlt", Line, /* @__PURE__ */ $Doc("Char", " "))),
-  /* @__PURE__ */ $Doc("FlatAlt", Line, /* @__PURE__ */ $Doc("Char", " "))
-);
-var fits1 = (fits1$a0$copy) => (fits1$a1$copy) => (fits1$a2$copy) => (fits1$a3$copy) => {
-  let fits1$a0 = fits1$a0$copy, fits1$a1 = fits1$a1$copy, fits1$a2 = fits1$a2$copy, fits1$a3 = fits1$a3$copy, fits1$c = true, fits1$r;
-  while (fits1$c) {
-    const v = fits1$a0, v1 = fits1$a1, v2 = fits1$a2, v3 = fits1$a3;
-    if (v2 < 0) {
-      fits1$c = false;
-      fits1$r = false;
-      continue;
-    }
-    if (v3.tag === "SFail'") {
-      fits1$c = false;
-      fits1$r = false;
-      continue;
-    }
-    if (v3.tag === "SEmpty'") {
-      fits1$c = false;
-      fits1$r = true;
-      continue;
-    }
-    if (v3.tag === "SChar'") {
-      fits1$a0 = v;
-      fits1$a1 = v1;
-      fits1$a2 = v2 - 1 | 0;
-      fits1$a3 = force(v3._2);
-      continue;
-    }
-    if (v3.tag === "SText'") {
-      fits1$a0 = v;
-      fits1$a1 = v1;
-      fits1$a2 = v2 - v3._1 | 0;
-      fits1$a3 = force(v3._3);
-      continue;
-    }
-    if (v3.tag === "SLine'") {
-      fits1$c = false;
-      fits1$r = true;
-      continue;
-    }
-    fail();
-  }
-  return fits1$r;
-};
-var displayS = (v) => {
-  if (v.tag === "SFail") {
-    return _crashWith("@SFail@ can not appear uncaught in a rendered @SimpleDoc@");
-  }
-  if (v.tag === "SEmpty") {
-    return "";
-  }
-  if (v.tag === "SChar") {
-    return fromCharArray([v._1]) + displayS(v._2);
-  }
-  if (v.tag === "SText") {
-    return v._2 + displayS(v._3);
-  }
-  if (v.tag === "SLine") {
-    return (v._1 <= 0 ? "\n" : "\n" + fromCharArray(replicate(v._1)(" "))) + displayS(v._2);
-  }
-  fail();
-};
-var beside2 = (x) => (y) => $Doc("Cat", x, y);
-var docSemigroup = { append: beside2 };
-var docMonoid = { mempty: Empty, Semigroup0: () => docSemigroup };
-var foldr11 = /* @__PURE__ */ foldr1(docMonoid);
-var string3 = /* @__PURE__ */ (() => {
-  const $0 = arrayMap(text2);
-  const $1 = split("\n");
-  return (x) => foldlArray((v) => (v1) => {
-    if (v.init) {
-      return { init: false, acc: v1 };
-    }
-    return { init: false, acc: $Doc("Cat", v.acc, $Doc("Cat", $Doc("FlatAlt", Line, $Doc("Char", " ")), v1)) };
-  })({ init: true, acc: Empty })($0($1(x))).acc;
-})();
-var fillBreak = (f) => (x) => $Doc(
-  "Column",
-  (k1) => $Doc(
-    "Cat",
-    x,
-    $Doc(
-      "Column",
-      (k2) => {
-        const $0 = k2 - k1 | 0;
-        if ($0 > f) {
-          return $Doc("Nest", f, $Doc("FlatAlt", Line, Empty));
-        }
-        const $1 = f - $0 | 0;
-        const $2 = $1 <= 0 ? "" : fromCharArray(replicate($1)(" "));
-        if ($2 === "") {
-          return Empty;
-        }
-        return $Doc("Text", toCodePointArray($2).length, $2);
-      }
-    )
-  )
-);
-var appendWithSpace = (x) => (y) => $Doc("Cat", x, $Doc("Cat", $Doc("Char", " "), y));
-var hsep = /* @__PURE__ */ foldr11(appendWithSpace);
-var appendWithLinebreak = (x) => (y) => $Doc("Cat", x, $Doc("Cat", $Doc("FlatAlt", Line, Empty), y));
-var vcat = /* @__PURE__ */ foldr11(appendWithLinebreak);
-var appendWithLine = (x) => (y) => $Doc("Cat", x, $Doc("Cat", $Doc("FlatAlt", Line, $Doc("Char", " ")), y));
-var indent = (i) => (d) => {
-  const $0 = i <= 0 ? "" : fromCharArray(replicate(i)(" "));
-  return $Doc(
-    "Column",
-    (k) => $Doc(
-      "Nesting",
-      (i$1) => $Doc("Nest", k - i$1 | 0, $Doc("Nest", i, $Doc("Cat", $0 === "" ? Empty : $Doc("Text", toCodePointArray($0).length, $0), d)))
-    )
-  );
-};
-
-// output-es/Options.Applicative.Help.Chunk/index.js
-var chunkMonoid = (dictSemigroup) => {
-  const chunkSemigroup1 = {
-    append: (v1) => (v2) => {
-      if (v1.tag === "Nothing") {
-        return v2;
-      }
-      if (v2.tag === "Nothing") {
-        return v1;
-      }
-      if (v1.tag === "Just" && v2.tag === "Just") {
-        return $Maybe("Just", dictSemigroup.append(v1._1)(v2._1));
-      }
-      fail();
-    }
-  };
-  return { mempty: Nothing, Semigroup0: () => chunkSemigroup1 };
-};
-var mempty1 = /* @__PURE__ */ (() => chunkMonoid(docSemigroup).mempty)();
-var vcatChunks = /* @__PURE__ */ foldrArray((v1) => (v2) => {
-  if (v1.tag === "Nothing") {
-    return v2;
-  }
-  if (v2.tag === "Nothing") {
-    return v1;
-  }
-  if (v1.tag === "Just" && v2.tag === "Just") {
-    return $Maybe(
-      "Just",
-      $Doc(
-        "Cat",
-        v1._1,
-        $Doc("Cat", $Doc("FlatAlt", Line, $Doc("Char", " ")), v2._1)
-      )
-    );
-  }
-  fail();
-})(mempty1);
-var vsepChunks = /* @__PURE__ */ foldrArray((v1) => (v2) => {
-  if (v1.tag === "Nothing") {
-    return v2;
-  }
-  if (v2.tag === "Nothing") {
-    return v1;
-  }
-  if (v1.tag === "Just" && v2.tag === "Just") {
-    return $Maybe(
-      "Just",
-      $Doc(
-        "Cat",
-        v1._1,
-        $Doc(
-          "Cat",
-          $Doc("FlatAlt", Line, $Doc("Char", " ")),
-          $Doc(
-            "Cat",
-            Empty,
-            $Doc("Cat", $Doc("FlatAlt", Line, $Doc("Char", " ")), v2._1)
-          )
-        )
-      )
-    );
-  }
-  fail();
-})(mempty1);
-var chunkBesideOrBelow = (v1) => (v2) => {
-  if (v1.tag === "Nothing") {
-    return v2;
-  }
-  if (v2.tag === "Nothing") {
-    return v1;
-  }
-  if (v1.tag === "Just" && v2.tag === "Just") {
-    return $Maybe("Just", $Doc("Cat", v1._1, $Doc("Cat", softline, v2._1)));
-  }
-  fail();
-};
-var listToChunk = (dictMonoid) => {
-  const mempty23 = chunkMonoid(dictMonoid.Semigroup0()).mempty;
-  const fold12 = foldableArray.foldMap(dictMonoid)(identity3);
-  return (v) => {
-    if (v.length === 0) {
-      return mempty23;
-    }
-    return $Maybe("Just", fold12(v));
-  };
-};
-var stringChunk = (v) => {
-  if (v === "") {
-    return mempty1;
-  }
-  return $Maybe("Just", v === "" ? Empty : $Doc("Text", toCodePointArray(v).length, v));
-};
-var paragraph2 = /* @__PURE__ */ (() => {
-  const $0 = foldrArray((x) => {
-    const $02 = stringChunk(x);
-    return (v2) => {
-      if ($02.tag === "Nothing") {
-        return v2;
-      }
-      if (v2.tag === "Nothing") {
-        return $02;
-      }
-      if ($02.tag === "Just" && v2.tag === "Just") {
-        return $Maybe("Just", $Doc("Cat", $02._1, $Doc("Cat", softline, v2._1)));
-      }
-      fail();
-    };
-  })(mempty1);
-  return (x) => $0(x === "" ? [] : split2(whitespaceRegex)(x));
-})();
-var tabulate$p = (v) => (v1) => {
-  if (v1.length === 0) {
-    return mempty1;
-  }
-  return $Maybe(
-    "Just",
-    vcat(arrayMap((v2) => indent(2)($Doc(
-      "Cat",
-      fillBreak(v)(v2._1),
-      $Doc("Cat", $Doc("Char", " "), v2._2)
-    )))(v1))
-  );
-};
-
-// output-es/Control.Monad.Free/index.js
-var $Free = (_1, _2) => ({ tag: "Free", _1, _2 });
-var $FreeView = (tag, _1, _2) => ({ tag, _1, _2 });
-var toView = (toView$a0$copy) => {
-  let toView$a0 = toView$a0$copy, toView$c = true, toView$r;
-  while (toView$c) {
-    const v = toView$a0;
-    if (v._1.tag === "Return") {
-      const v2 = uncons4(v._2);
-      if (v2.tag === "Nothing") {
-        toView$c = false;
-        toView$r = $FreeView("Return", v._1._1);
-        continue;
-      }
-      if (v2.tag === "Just") {
-        toView$a0 = (() => {
-          const $0 = v2._1._1(v._1._1);
-          return $Free(
-            $0._1,
-            (() => {
-              if ($0._2.tag === "CatNil") {
-                return v2._1._2;
-              }
-              if (v2._1._2.tag === "CatNil") {
-                return $0._2;
-              }
-              if ($0._2.tag === "CatCons") {
-                return $CatList("CatCons", $0._2._1, $CatQueue($0._2._2._1, $List("Cons", v2._1._2, $0._2._2._2)));
-              }
-              fail();
-            })()
-          );
-        })();
-        continue;
-      }
-      fail();
-    }
-    if (v._1.tag === "Bind") {
-      toView$c = false;
-      toView$r = $FreeView(
-        "Bind",
-        v._1._1,
-        (a) => {
-          const $0 = v._1._2(a);
-          return $Free(
-            $0._1,
-            (() => {
-              if ($0._2.tag === "CatNil") {
-                return v._2;
-              }
-              if (v._2.tag === "CatNil") {
-                return $0._2;
-              }
-              if ($0._2.tag === "CatCons") {
-                return $CatList("CatCons", $0._2._1, $CatQueue($0._2._2._1, $List("Cons", v._2, $0._2._2._2)));
-              }
-              fail();
-            })()
-          );
-        }
-      );
-      continue;
-    }
-    fail();
-  }
-  return toView$r;
-};
-var resume$p = (k) => (j) => (f) => {
-  const v = toView(f);
-  if (v.tag === "Return") {
-    return j(v._1);
-  }
-  if (v.tag === "Bind") {
-    return k(v._1)(v._2);
-  }
-  fail();
-};
-var freeMonad = { Applicative0: () => freeApplicative, Bind1: () => freeBind };
-var freeFunctor = { map: (k) => (f) => freeBind.bind(f)((x) => freeApplicative.pure(k(x))) };
-var freeBind = { bind: (v) => (k) => $Free(v._1, snoc2(v._2)(k)), Apply0: () => freeApply };
-var freeApply = {
-  apply: (f) => (a) => $Free(f._1, snoc2(f._2)((f$p) => $Free(a._1, snoc2(a._2)((a$p) => freeApplicative.pure(f$p(a$p)))))),
-  Functor0: () => freeFunctor
-};
-var freeApplicative = { pure: (x) => $Free($FreeView("Return", x), CatNil), Apply0: () => freeApply };
-var freeMonadRec = {
-  tailRecM: (k) => (a) => {
-    const $0 = k(a);
-    return $Free(
-      $0._1,
-      snoc2($0._2)((v) => {
-        if (v.tag === "Loop") {
-          return freeMonadRec.tailRecM(k)(v._1);
-        }
-        if (v.tag === "Done") {
-          return $Free($FreeView("Return", v._1), CatNil);
-        }
-        fail();
-      })
-    );
-  },
-  Monad0: () => freeMonad
-};
-
-// output-es/Options.Applicative.Types/index.js
-var $ArgPolicy = (tag) => tag;
-var $Backtracking = (tag) => tag;
-var $Context = (_1, _2) => ({ tag: "Context", _1, _2 });
-var $IsCmdStart = (tag) => tag;
-var $MultPE = (_1, _2) => ({ tag: "MultPE", _1, _2 });
-var $OptName = (tag, _1) => ({ tag, _1 });
-var $OptReader = (tag, _1, _2, _3) => ({ tag, _1, _2, _3 });
-var $OptTree = (tag, _1) => ({ tag, _1 });
-var $OptVisibility = (tag) => tag;
-var $ParseError2 = (tag, _1, _2) => ({ tag, _1, _2 });
-var $Parser = (tag, _1, _2) => ({ tag, _1, _2 });
-var $ParserResult = (tag, _1) => ({ tag, _1 });
-var $SomeParser = (_1) => ({ tag: "SomeParser", _1 });
-var apply3 = /* @__PURE__ */ (() => {
-  const $0 = applyExceptT(monadIdentity);
-  return (v) => (v1) => (r) => $0.apply(v(r))(v1(r));
-})();
-var bind = /* @__PURE__ */ (() => bindReaderT(bindExceptT(monadIdentity)).bind)();
-var Internal = /* @__PURE__ */ $OptVisibility("Internal");
-var Hidden = /* @__PURE__ */ $OptVisibility("Hidden");
-var Visible = /* @__PURE__ */ $OptVisibility("Visible");
-var CmdStart = /* @__PURE__ */ $IsCmdStart("CmdStart");
-var CmdCont = /* @__PURE__ */ $IsCmdStart("CmdCont");
-var Backtrack = /* @__PURE__ */ $Backtracking("Backtrack");
-var Intersperse = /* @__PURE__ */ $ArgPolicy("Intersperse");
-var NoIntersperse = /* @__PURE__ */ $ArgPolicy("NoIntersperse");
-var AllPositionals = /* @__PURE__ */ $ArgPolicy("AllPositionals");
-var NilP = (value0) => $Parser("NilP", value0);
-var ShowHelpText = /* @__PURE__ */ $ParseError2("ShowHelpText");
-var ExpectsArgError = (value0) => $ParseError2("ExpectsArgError", value0);
-var readerAsk = /* @__PURE__ */ (() => applicativeExceptT(monadIdentity).pure)();
-var readMFunctor = {
-  map: (f) => (v) => (x) => {
-    const $0 = v(x);
-    if ($0.tag === "Left") {
-      return $Either("Left", $0._1);
-    }
-    if ($0.tag === "Right") {
-      return $Either("Right", f($0._1));
-    }
-    fail();
-  }
-};
-var readMApply = { apply: (v) => (v1) => apply3(v)(v1), Functor0: () => readMFunctor };
-var readMApplicative = {
-  pure: /* @__PURE__ */ (() => {
-    const $0 = applicativeExceptT(monadIdentity);
-    return (x) => {
-      const $1 = $0.pure(x);
-      return (v) => $1;
-    };
-  })(),
-  Apply0: () => readMApply
-};
-var parseErrorSemigroup = { append: (v) => (m) => m };
-var optVisibilityEq = {
-  eq: (x) => (y) => {
-    if (x === "Internal") {
-      return y === "Internal";
-    }
-    if (x === "Hidden") {
-      return y === "Hidden";
-    }
-    return x === "Visible" && y === "Visible";
-  }
-};
-var optVisibilityOrd = {
-  compare: (x) => (y) => {
-    if (x === "Internal") {
-      if (y === "Internal") {
-        return EQ;
-      }
-      return LT;
-    }
-    if (y === "Internal") {
-      return GT;
-    }
-    if (x === "Hidden") {
-      if (y === "Hidden") {
-        return EQ;
-      }
-      return LT;
-    }
-    if (y === "Hidden") {
-      return GT;
-    }
-    if (x === "Visible" && y === "Visible") {
-      return EQ;
-    }
-    fail();
-  },
-  Eq0: () => optVisibilityEq
-};
-var optNameEq = {
-  eq: (x) => (y) => {
-    if (x.tag === "OptShort") {
-      return y.tag === "OptShort" && x._1 === y._1;
-    }
-    return x.tag === "OptLong" && y.tag === "OptLong" && x._1 === y._1;
-  }
-};
-var optNameOrd = {
-  compare: (x) => (y) => {
-    if (x.tag === "OptShort") {
-      if (y.tag === "OptShort") {
-        return ordChar.compare(x._1)(y._1);
-      }
-      return LT;
-    }
-    if (y.tag === "OptShort") {
-      return GT;
-    }
-    if (x.tag === "OptLong" && y.tag === "OptLong") {
-      return ordString.compare(x._1)(y._1);
-    }
-    fail();
-  },
-  Eq0: () => optNameEq
-};
-var completerSemigroup = {
-  append: (v) => (v1) => (s) => {
-    const $0 = v(s);
-    const $1 = v1(s);
-    return () => {
-      const a$p = $0();
-      const a$p$1 = $1();
-      return [...a$p, ...a$p$1];
-    };
-  }
-};
-var completerMonoid = { mempty: (v) => () => [], Semigroup0: () => completerSemigroup };
-var parserInfoFunctor = {
-  map: (f) => (i) => ({
-    infoParser: parserFunctor.map(f)(i.infoParser),
-    infoFailureCode: i.infoFailureCode,
-    infoFooter: i.infoFooter,
-    infoFullDesc: i.infoFullDesc,
-    infoHeader: i.infoHeader,
-    infoPolicy: i.infoPolicy,
-    infoProgDesc: i.infoProgDesc
-  })
-};
-var parserFunctor = {
-  map: (v) => (v1) => {
-    if (v1.tag === "NilP") {
-      return $Parser("NilP", v(v1._1));
-    }
-    if (v1.tag === "OptP") {
-      return $Parser("OptP", optionFunctor.map(v)(v1._1));
-    }
-    if (v1.tag === "MultP") {
-      return $Parser("MultP", $MultPE(parserFunctor.map((v3) => (x) => v(v3(x)))(v1._1._1), v1._1._2));
-    }
-    if (v1.tag === "AltP") {
-      return $Parser("AltP", parserFunctor.map(v)(v1._1), parserFunctor.map(v)(v1._2));
-    }
-    if (v1.tag === "BindP") {
-      return $Parser(
-        "BindP",
-        $Free(v1._1._1, snoc2(v1._1._2)((x) => $Free($FreeView("Return", v(x)), CatNil)))
-      );
-    }
-    fail();
-  }
-};
-var optionFunctor = { map: (f) => (o) => ({ optMain: optReaderFunctor.map(f)(o.optMain), optProps: o.optProps }) };
-var optReaderFunctor = {
-  map: (v) => (v1) => {
-    if (v1.tag === "OptReader") {
-      const $0 = v1._2;
-      return $OptReader(
-        "OptReader",
-        v1._1,
-        {
-          crReader: (x) => {
-            const $1 = $0.crReader(x);
-            if ($1.tag === "Left") {
-              return $Either("Left", $1._1);
-            }
-            if ($1.tag === "Right") {
-              return $Either("Right", v($1._1));
-            }
-            fail();
-          },
-          crCompleter: $0.crCompleter
-        },
-        v1._3
-      );
-    }
-    if (v1.tag === "FlagReader") {
-      return $OptReader("FlagReader", v1._1, v(v1._2));
-    }
-    if (v1.tag === "ArgReader") {
-      const $0 = v1._1;
-      return $OptReader(
-        "ArgReader",
-        {
-          crReader: (x) => {
-            const $1 = $0.crReader(x);
-            if ($1.tag === "Left") {
-              return $Either("Left", $1._1);
-            }
-            if ($1.tag === "Right") {
-              return $Either("Right", v($1._1));
-            }
-            fail();
-          },
-          crCompleter: $0.crCompleter
-        }
-      );
-    }
-    if (v1.tag === "CmdReader") {
-      return $OptReader(
-        "CmdReader",
-        v1._1,
-        v1._2,
-        (x) => {
-          const $0 = v1._3(x);
-          if ($0.tag === "Just") {
-            return $Maybe("Just", parserInfoFunctor.map(v)($0._1));
-          }
-          return Nothing;
-        }
-      );
-    }
-    fail();
-  }
-};
-var parserApply = { apply: (a) => (b) => $Parser("MultP", $MultPE(a, b)), Functor0: () => parserFunctor };
-var manyM = (p) => freeMonadRec.tailRecM((acc) => $Free(
-  $FreeView(
-    "Bind",
-    $Parser("AltP", parserFunctor.map(Loop)(p), $Parser("NilP", $Step("Done", void 0))),
-    (x) => $Free($FreeView("Return", x), CatNil)
-  ),
-  snoc2(CatNil)((aa) => $Free(
-    $FreeView(
-      "Return",
-      (() => {
-        if (aa.tag === "Loop") {
-          return $Step("Loop", $List("Cons", aa._1, acc));
-        }
-        if (aa.tag === "Done") {
-          return $Step("Done", reverse2(acc));
-        }
-        fail();
-      })()
-    ),
-    CatNil
-  ))
-))(Nil);
-
-// output-es/Options.Applicative.Builder.Internal/index.js
-var $DefaultProp = (_1, _2) => ({ tag: "DefaultProp", _1, _2 });
-var $Mod = (_1, _2, _3) => ({ tag: "Mod", _1, _2, _3 });
-var lookup4 = /* @__PURE__ */ lookup(foldableArray)(eqString);
-var identity27 = (x) => x;
-var Mod = (value0) => (value1) => (value2) => $Mod(value0, value1, value2);
-var optionFieldsHasName = { name: (n) => (fields) => ({ optNames: [n, ...fields.optNames], optCompleter: fields.optCompleter, optNoArgError: fields.optNoArgError }) };
-var mkCommand = (m) => {
-  const v = m._1({ cmdCommands: [], cmdGroup: Nothing });
-  const $0 = v.cmdCommands;
-  return $Tuple(v.cmdGroup, $Tuple(arrayMap(fst)($0), $Tuple((v1) => lookup4(v1)($0), void 0)));
-};
-var modSemigroup = {
-  append: (v) => (v1) => $Mod((x) => v1._1(v._1(x)), $DefaultProp(v1._2._1.tag === "Nothing" ? v._2._1 : v1._2._1, v1._2._2.tag === "Nothing" ? v._2._2 : v1._2._2), (x) => v1._3(v._3(x)))
-};
-var modMonoid = { mempty: /* @__PURE__ */ $Mod(identity27, /* @__PURE__ */ $DefaultProp(Nothing, Nothing), identity27), Semigroup0: () => modSemigroup };
-var optionMod = /* @__PURE__ */ Mod(identity27)(/* @__PURE__ */ $DefaultProp(Nothing, Nothing));
-var internal = /* @__PURE__ */ optionMod((p) => ({ propVisibility: Internal, propDescMod: p.propDescMod, propHelp: p.propHelp, propMetaVar: p.propMetaVar, propShowDefault: p.propShowDefault }));
-var baseProps = /* @__PURE__ */ (() => ({
-  propMetaVar: "",
-  propVisibility: Visible,
-  propHelp: chunkMonoid(docSemigroup).mempty,
-  propShowDefault: Nothing,
-  propDescMod: Nothing
-}))();
-var mkProps = (v) => (g) => {
-  const $0 = g(baseProps);
-  return {
-    propShowDefault: applyMaybe.apply(v._2)(v._1),
-    propDescMod: $0.propDescMod,
-    propHelp: $0.propHelp,
-    propMetaVar: $0.propMetaVar,
-    propVisibility: $0.propVisibility
-  };
-};
-var mkParser = (v) => (g) => (rdr) => {
-  const o = $Parser("OptP", { optMain: rdr, optProps: mkProps(v)(g) });
-  if (v._1.tag === "Nothing") {
-    return o;
-  }
-  if (v._1.tag === "Just") {
-    return $Parser("AltP", o, $Parser("NilP", v._1._1));
-  }
-  fail();
-};
-
-// output-es/Options.Applicative.Builder/index.js
-var identity28 = (x) => x;
-var mempty12 = /* @__PURE__ */ (() => chunkMonoid(docSemigroup).mempty)();
-var min3 = (x) => (y) => {
-  const v = optVisibilityOrd.compare(x)(y);
-  if (v === "LT") {
-    return x;
-  }
-  if (v === "EQ") {
-    return x;
-  }
-  if (v === "GT") {
-    return y;
-  }
-  fail();
-};
-var fold3 = /* @__PURE__ */ (() => foldableArray.foldMap(modMonoid)(identity3))();
-var progDesc = (s) => (i) => ({
-  infoProgDesc: paragraph2(s),
-  infoFailureCode: i.infoFailureCode,
-  infoFooter: i.infoFooter,
-  infoFullDesc: i.infoFullDesc,
-  infoHeader: i.infoHeader,
-  infoParser: i.infoParser,
-  infoPolicy: i.infoPolicy
-});
-var option = (r) => (m) => {
-  const $0 = optionMod((p) => ({ propMetaVar: "ARG", propDescMod: p.propDescMod, propHelp: p.propHelp, propShowDefault: p.propShowDefault, propVisibility: p.propVisibility }));
-  const $1 = m._1($0._1({ optNames: [], optCompleter: completerMonoid.mempty, optNoArgError: ExpectsArgError }));
-  return mkParser($DefaultProp(
-    m._2._1.tag === "Nothing" ? $0._2._1 : m._2._1,
-    m._2._2.tag === "Nothing" ? $0._2._2 : m._2._2
-  ))((x) => m._3($0._3(x)))($OptReader("OptReader", $1.optNames, { crCompleter: $1.optCompleter, crReader: r }, $1.optNoArgError));
-};
-var subparser = (m) => {
-  const $0 = optionMod((p) => ({ propMetaVar: "COMMAND", propDescMod: p.propDescMod, propHelp: p.propHelp, propShowDefault: p.propShowDefault, propVisibility: p.propVisibility }));
-  const v1 = mkCommand(m);
-  return mkParser($DefaultProp(
-    m._2._1.tag === "Nothing" ? $0._2._1 : m._2._1,
-    m._2._2.tag === "Nothing" ? $0._2._2 : m._2._2
-  ))((x) => m._3($0._3(x)))($OptReader("CmdReader", v1._1, v1._2._1, v1._2._2._1));
-};
-var hidden = /* @__PURE__ */ optionMod((p) => ({
-  propVisibility: min3(Hidden)(p.propVisibility),
-  propDescMod: p.propDescMod,
-  propHelp: p.propHelp,
-  propMetaVar: p.propMetaVar,
-  propShowDefault: p.propShowDefault
-}));
-var help = (s) => optionMod((p) => ({
-  propHelp: paragraph2(s),
-  propDescMod: p.propDescMod,
-  propMetaVar: p.propMetaVar,
-  propShowDefault: p.propShowDefault,
-  propVisibility: p.propVisibility
-}));
-var header = (s) => (i) => ({
-  infoHeader: paragraph2(s),
-  infoFailureCode: i.infoFailureCode,
-  infoFooter: i.infoFooter,
-  infoFullDesc: i.infoFullDesc,
-  infoParser: i.infoParser,
-  infoPolicy: i.infoPolicy,
-  infoProgDesc: i.infoProgDesc
-});
-var flag$p = (actv) => (v) => mkParser(v._2)(v._3)((() => {
-  const $0 = v._1({ flagNames: [], flagActive: actv });
-  return $OptReader("FlagReader", $0.flagNames, $0.flagActive);
-})());
-var eitherReader = (f) => bind(readerAsk)((x) => {
-  const $0 = f(x);
-  if ($0.tag === "Left") {
-    const $1 = monadThrowExceptT(monadIdentity).throwError($ParseError2("ErrorMsg", $0._1));
-    return (v) => $1;
-  }
-  if ($0.tag === "Right") {
-    return readMApplicative.pure($0._1);
-  }
-  fail();
-});
-var $$int2 = /* @__PURE__ */ eitherReader((s) => {
-  const v = fromString(s);
-  if (v.tag === "Nothing") {
-    return $Either("Left", "Can't parse as Int: `" + showStringImpl(s) + "`");
-  }
-  if (v.tag === "Just") {
-    return $Either("Right", v._1);
-  }
-  fail();
-});
-var defaultPrefs = {
-  prefMultiSuffix: "",
-  prefDisambiguate: false,
-  prefShowHelpOnError: false,
-  prefShowHelpOnEmpty: false,
-  prefBacktrack: Backtrack,
-  prefColumns: 80
-};
-var command = (cmd) => (pinfo) => $Mod(
-  (p) => ({ cmdCommands: [$Tuple(cmd, pinfo), ...p.cmdCommands], cmdGroup: p.cmdGroup }),
-  $DefaultProp(Nothing, Nothing),
-  identity27
-);
-var abortOption = (err) => (m) => {
-  const $0 = fold3([
-    $Mod(
-      (p) => ({ optNoArgError: (v) => err, optCompleter: p.optCompleter, optNames: p.optNames }),
-      $DefaultProp(Nothing, Nothing),
-      identity27
-    ),
-    $Mod(
-      identity28,
-      $DefaultProp($Maybe("Just", identity28), Nothing),
-      identity28
-    ),
-    optionMod((p) => ({ propMetaVar: "", propDescMod: p.propDescMod, propHelp: p.propHelp, propShowDefault: p.propShowDefault, propVisibility: p.propVisibility }))
-  ]);
-  return option((() => {
-    const $1 = monadThrowExceptT(monadIdentity).throwError(err);
-    return (v) => $1;
-  })())($Mod(
-    (x) => m._1($0._1(x)),
-    $DefaultProp(m._2._1.tag === "Nothing" ? $0._2._1 : m._2._1, m._2._2.tag === "Nothing" ? $0._2._2 : m._2._2),
-    (x) => m._3($0._3(x))
-  ));
-};
-
-// output-es/Node.Process/foreign.js
-import process from "process";
-function exit(code) {
-  return () => {
-    process.exit(code);
-  };
-}
-function copyArray(xs) {
-  return () => xs.slice();
-}
-
-// output-es/Node.Process/index.js
-var argv = /* @__PURE__ */ (() => copyArray(process.argv))();
-
-// output-es/Node.Stream/foreign.js
-function writeStringImpl(w) {
-  return (enc) => (s) => (done) => () => w.write(s, enc, done);
-}
-
-// output-es/Node.Stream/index.js
-var writeString = (w) => (enc) => (s) => (cb) => writeStringImpl(w)((() => {
-  if (enc === "ASCII") {
-    return "ASCII";
-  }
-  if (enc === "UTF8") {
-    return "UTF8";
-  }
-  if (enc === "UTF16LE") {
-    return "UTF16LE";
-  }
-  if (enc === "UCS2") {
-    return "UCS2";
-  }
-  if (enc === "Base64") {
-    return "Base64";
-  }
-  if (enc === "Latin1") {
-    return "Latin1";
-  }
-  if (enc === "Binary") {
-    return "Binary";
-  }
-  if (enc === "Hex") {
-    return "Hex";
-  }
-  fail();
-})())(s)((x) => cb(nullable(x, Nothing, Just))());
-
-// output-es/Options.Applicative.Internal/index.js
-var $ComplResult = (tag, _1, _2) => ({ tag, _1, _2 });
-var $TStep = (tag, _1, _2) => ({ tag, _1, _2 });
-var monadReaderT2 = /* @__PURE__ */ monadReaderT(monadIdentity);
-var monadStateT = { Applicative0: () => applicativeStateT(monadReaderT2), Bind1: () => bindStateT(monadReaderT2) };
-var apply4 = /* @__PURE__ */ (() => applyExceptT(monadStateT).apply)();
-var bind2 = /* @__PURE__ */ (() => bindExceptT(monadStateT).bind)();
-var pure2 = /* @__PURE__ */ (() => applicativeExceptT(monadStateT).pure)();
-var alt = /* @__PURE__ */ (() => altExceptT(parseErrorSemigroup)(monadStateT).alt)();
-var lift1 = (m) => bindStateT(monadReaderT2).bind(m)((a) => applicativeStateT(monadReaderT2).pure($Either(
-  "Right",
-  a
-)));
-var modify_ = /* @__PURE__ */ (() => {
-  const $0 = monadStateStateT(monadReaderT2);
-  return (f) => $0.state((s) => $Tuple(void 0, f(s)));
-})();
-var throwError = /* @__PURE__ */ (() => monadThrowExceptT(monadStateT).throwError)();
-var identity29 = (x) => x;
-var TNil = /* @__PURE__ */ $TStep("TNil");
-var ComplResult = (value0) => $ComplResult("ComplResult", value0);
-var runListT = (dictMonad) => (xs) => dictMonad.Bind1().bind(xs)((s) => {
-  if (s.tag === "TNil") {
-    return dictMonad.Applicative0().pure(Nil);
-  }
-  if (s.tag === "TCons") {
-    const $0 = Cons(s._1);
-    return dictMonad.Bind1().bind(runListT(dictMonad)(s._2))((a$p) => dictMonad.Applicative0().pure($0(a$p)));
-  }
-  fail();
-});
-var runCompletion = (v) => (prefs) => {
-  const v1 = v(prefs);
-  if (v1.tag === "ComplResult") {
-    return Nothing;
-  }
-  if (v1.tag === "ComplParser") {
-    return $Maybe("Just", $Either("Left", $Tuple(v1._1, v1._2)));
-  }
-  if (v1.tag === "ComplOption") {
-    return $Maybe("Just", $Either("Right", v1._1));
-  }
-  fail();
-};
-var pFunctor = {
-  map: (f) => (v) => (s) => {
-    const $0 = v(s);
-    return (x) => {
-      const $1 = $0(x);
-      return $Tuple(
-        (() => {
-          if ($1._1.tag === "Left") {
-            return $Either("Left", $1._1._1);
-          }
-          if ($1._1.tag === "Right") {
-            return $Either("Right", f($1._1._1));
-          }
-          fail();
-        })(),
-        $1._2
-      );
-    };
-  }
-};
-var pApply = { apply: (v) => (v1) => apply4(v)(v1), Functor0: () => pFunctor };
-var pBind = { bind: (v) => (k) => bind2(v)((a) => k(a)), Apply0: () => pApply };
-var pApplicative = { pure: (a) => pure2(a), Apply0: () => pApply };
-var pMonad = { Applicative0: () => pApplicative, Bind1: () => pBind };
-var pAlt = { alt: (v) => (v1) => alt(v)(v1), Functor0: () => pFunctor };
-var pMonadP$lazy = /* @__PURE__ */ binding(() => ({
-  enterContext: (name2) => (pinfo) => lift1(modify_(cons2($Context(name2, pinfo)))),
-  exitContext: lift1(modify_(drop(1))),
-  getPrefs: lift1((s) => monadReaderT2.Bind1().bind(Identity)((x) => monadReaderT2.Applicative0().pure($Tuple(x, s)))),
-  missingArgP: (e) => (v) => pMonadP$lazy().errorP(e),
-  exitP: (i) => (v) => (p) => {
-    const $0 = throwError($ParseError2("MissingError", i, $SomeParser(p)));
-    return (x) => {
-      if (x.tag === "Nothing") {
-        return $0;
-      }
-      if (x.tag === "Just") {
-        return pure2(x._1);
-      }
-      fail();
-    };
-  },
-  errorP: (x) => throwError(x),
-  Monad0: () => pMonad,
-  Alt1: () => pAlt
-}));
-var pMonadP = /* @__PURE__ */ pMonadP$lazy();
-var complResultMonad = { Applicative0: () => complResultApplicative, Bind1: () => complResultBind };
-var complResultFunctor = { map: (f) => (a) => complResultBind.bind(a)((a$p) => complResultApplicative.pure(f(a$p))) };
-var complResultBind = {
-  bind: (m) => (f) => {
-    if (m.tag === "ComplResult") {
-      return f(m._1);
-    }
-    if (m.tag === "ComplParser") {
-      return $ComplResult("ComplParser", m._1, m._2);
-    }
-    if (m.tag === "ComplOption") {
-      return $ComplResult("ComplOption", m._1);
-    }
-    fail();
-  },
-  Apply0: () => complResultApply
-};
-var complResultApply = {
-  apply: (f) => (a) => {
-    if (f.tag === "ComplResult") {
-      if (a.tag === "ComplResult") {
-        return complResultApplicative.pure(f._1(a._1));
-      }
-      if (a.tag === "ComplParser") {
-        return $ComplResult("ComplParser", a._1, a._2);
-      }
-      if (a.tag === "ComplOption") {
-        return $ComplResult("ComplOption", a._1);
-      }
-      fail();
-    }
-    if (f.tag === "ComplParser") {
-      return $ComplResult("ComplParser", f._1, f._2);
-    }
-    if (f.tag === "ComplOption") {
-      return $ComplResult("ComplOption", f._1);
-    }
-    fail();
-  },
-  Functor0: () => complResultFunctor
-};
-var complResultApplicative = { pure: ComplResult, Apply0: () => complResultApply };
-var monadReaderT1 = /* @__PURE__ */ monadReaderT(complResultMonad);
-var alt1 = /* @__PURE__ */ (() => altExceptT(parseErrorSemigroup)(monadReaderT1).alt)();
-var apply1 = /* @__PURE__ */ (() => applyExceptT(monadReaderT1).apply)();
-var pure22 = /* @__PURE__ */ (() => applicativeExceptT(monadReaderT1).pure)();
-var bind1 = /* @__PURE__ */ (() => bindExceptT(monadReaderT1).bind)();
-var lift3 = (m) => monadReaderT1.Bind1().bind(m)((a) => monadReaderT1.Applicative0().pure($Either("Right", a)));
-var completionFunctor = {
-  map: (f) => (v) => (x) => {
-    const $0 = v(x);
-    if ($0.tag === "ComplResult") {
-      return $ComplResult(
-        "ComplResult",
-        (() => {
-          if ($0._1.tag === "Left") {
-            return $Either("Left", $0._1._1);
-          }
-          if ($0._1.tag === "Right") {
-            return $Either("Right", f($0._1._1));
-          }
-          fail();
-        })()
-      );
-    }
-    if ($0.tag === "ComplParser") {
-      return $ComplResult("ComplParser", $0._1, $0._2);
-    }
-    if ($0.tag === "ComplOption") {
-      return $ComplResult("ComplOption", $0._1);
-    }
-    fail();
-  }
-};
-var completionAlt = { alt: (v) => (v1) => alt1(v)(v1), Functor0: () => completionFunctor };
-var completionApply = { apply: (v) => (v1) => apply1(v)(v1), Functor0: () => completionFunctor };
-var completionApplicative = { pure: (a) => pure22(a), Apply0: () => completionApply };
-var completionBind = { bind: (v) => (k) => bind1(v)((a) => k(a)), Apply0: () => completionApply };
-var completionMonad = { Applicative0: () => completionApplicative, Bind1: () => completionBind };
-var completionMonadP = {
-  enterContext: (v) => (v1) => pure22(),
-  exitContext: /* @__PURE__ */ pure22(),
-  getPrefs: /* @__PURE__ */ lift3(ComplResult),
-  missingArgP: (v) => (x) => lift3((v$1) => $ComplResult("ComplOption", x)),
-  exitP: (v) => (a) => (p) => (v1) => lift3((v$1) => $ComplResult("ComplParser", $SomeParser(p), a)),
-  errorP: (x) => monadThrowExceptT(monadReaderT1).throwError(x),
-  Monad0: () => completionMonad,
-  Alt1: () => completionAlt
-};
-var bimapTStep = (v) => (v1) => (v2) => {
-  if (v2.tag === "TNil") {
-    return TNil;
-  }
-  if (v2.tag === "TCons") {
-    return $TStep("TCons", v(v2._1), v1(v2._2));
-  }
-  fail();
-};
-var listTFunctor = (dictMonad) => ({
-  map: (f) => (v) => {
-    const $0 = bimapTStep(f)(listTFunctor(dictMonad).map(f));
-    return dictMonad.Bind1().bind(v)((a$p) => dictMonad.Applicative0().pure($0(a$p)));
-  }
-});
-var listTAlt = (dictMonad) => {
-  const listTFunctor1 = listTFunctor(dictMonad);
-  return {
-    alt: (xs) => (ys) => dictMonad.Bind1().bind(xs)((s) => {
-      if (s.tag === "TNil") {
-        return ys;
-      }
-      if (s.tag === "TCons") {
-        return dictMonad.Applicative0().pure($TStep("TCons", s._1, listTAlt(dictMonad).alt(s._2)(ys)));
-      }
-      fail();
-    }),
-    Functor0: () => listTFunctor1
-  };
-};
-var listTPlus = (dictMonad) => {
-  const listTAlt1 = listTAlt(dictMonad);
-  return { empty: dictMonad.Applicative0().pure(TNil), Alt0: () => listTAlt1 };
-};
-var hoistList = (dictMonad) => foldrArray((x) => (xt) => dictMonad.Applicative0().pure($TStep("TCons", x, xt)))(listTPlus(dictMonad).empty);
-var listTMonadTrans = {
-  lift: (dictMonad) => {
-    const empty3 = listTPlus(dictMonad).empty;
-    return (x) => dictMonad.Bind1().bind(x)((a$p) => dictMonad.Applicative0().pure($TStep("TCons", a$p, empty3)));
-  }
-};
-var cut = (dictMonad) => listTMonadTrans.lift({
-  Applicative0: () => applicativeStateT(dictMonad),
-  Bind1: () => bindStateT(dictMonad)
-})(monadStateStateT(dictMonad).state((v) => $Tuple(void 0, true)));
-var nondetTMonadTrans = {
-  lift: (dictMonad) => {
-    const $0 = listTMonadTrans.lift({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) });
-    return (x) => $0((s) => dictMonad.Bind1().bind(x)((x$1) => dictMonad.Applicative0().pure($Tuple(x$1, s))));
-  }
-};
-var listTBind = (dictMonad) => ({
-  bind: (xs) => (f) => dictMonad.Bind1().bind(xs)((s) => {
-    if (s.tag === "TNil") {
-      return dictMonad.Applicative0().pure(TNil);
-    }
-    if (s.tag === "TCons") {
-      return listTAlt(dictMonad).alt(f(s._1))(listTBind(dictMonad).bind(s._2)(f));
-    }
-    fail();
-  }),
-  Apply0: () => listTApply(dictMonad)
-});
-var listTApply = (dictMonad) => {
-  const listTFunctor1 = listTFunctor(dictMonad);
-  return {
-    apply: (() => {
-      const $0 = listTBind(dictMonad);
-      return (f) => (a) => $0.bind(f)((f$p) => $0.bind(a)((a$p) => listTApplicative(dictMonad).pure(f$p(a$p))));
-    })(),
-    Functor0: () => listTFunctor1
-  };
-};
-var listTApplicative = (dictMonad) => ({
-  pure: (() => {
-    const $0 = hoistList(dictMonad);
-    return (x) => $0([x]);
-  })(),
-  Apply0: () => listTApply(dictMonad)
-});
-var listTAlternative = (dictMonad) => {
-  const listTApplicative1 = listTApplicative(dictMonad);
-  const listTPlus1 = listTPlus(dictMonad);
-  return { Applicative0: () => listTApplicative1, Plus1: () => listTPlus1 };
-};
-var nondetTAltOp = (dictMonad) => {
-  const monadStateT1 = { Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) };
-  const listTBind1 = listTBind(monadStateT1);
-  const lift6 = listTMonadTrans.lift(monadStateT1);
-  const $$get3 = monadStateStateT(dictMonad).state((s) => $Tuple(s, s));
-  const $0 = listTAlternative(monadStateT1);
-  const empty3 = $0.Plus1().empty;
-  return (m1) => (m2) => listTAlt(monadStateT1).alt(m1)(listTBind1.bind(lift6($$get3))((s) => listTBind1.bind(!s ? $0.Applicative0().pure() : empty3)(() => m2)));
-};
-var nondetTFunctor = (dictMonad) => ({ map: (f) => listTFunctor({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).map(f) });
-var nondetTAlt = (dictMonad) => {
-  const nondetTFunctor1 = nondetTFunctor(dictMonad);
-  return {
-    alt: (v) => (v1) => listTAlt({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).alt(v)(v1),
-    Functor0: () => nondetTFunctor1
-  };
-};
-var nondetTPlus = (dictMonad) => {
-  const nondetTAlt1 = nondetTAlt(dictMonad);
-  return {
-    empty: listTPlus({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).empty,
-    Alt0: () => nondetTAlt1
-  };
-};
-var nondetTApply = (dictMonad) => {
-  const nondetTFunctor1 = nondetTFunctor(dictMonad);
-  return {
-    apply: (v) => (v1) => listTApply({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).apply(v)(v1),
-    Functor0: () => nondetTFunctor1
-  };
-};
-var nondetTApplicative = (dictMonad) => {
-  const nondetTApply1 = nondetTApply(dictMonad);
-  return {
-    pure: (x) => listTApplicative({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).pure(x),
-    Apply0: () => nondetTApply1
-  };
-};
-var nondetTBind = (dictMonad) => {
-  const nondetTApply1 = nondetTApply(dictMonad);
-  return {
-    bind: (v) => (f) => listTBind({ Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) }).bind(v)((x) => f(x)),
-    Apply0: () => nondetTApply1
-  };
-};
-var takeListT = (dictMonad) => {
-  const empty3 = listTPlus(dictMonad).empty;
-  return (v) => {
-    if (v === 0) {
-      return (v$1) => empty3;
-    }
-    const $0 = bimapTStep(identity29)(takeListT(dictMonad)(v - 1 | 0));
-    return (x) => dictMonad.Bind1().bind(x)((a$p) => dictMonad.Applicative0().pure($0(a$p)));
-  };
-};
-var disamb = (dictMonad) => {
-  const Bind1 = dictMonad.Bind1();
-  const evalStateT2 = evalStateT(Bind1.Apply0().Functor0());
-  const monadStateT1 = { Applicative0: () => applicativeStateT(dictMonad), Bind1: () => bindStateT(dictMonad) };
-  const takeListT1 = takeListT(monadStateT1);
-  return (allow_amb) => (xs) => Bind1.bind(evalStateT2(runListT(monadStateT1)(takeListT1(allow_amb ? 1 : 2)(xs)))(false))((xs$p) => dictMonad.Applicative0().pure(xs$p.tag === "Cons" && xs$p._2.tag === "Nil" ? $Maybe("Just", xs$p._1) : Nothing));
-};
-
-// output-es/Options.Applicative.Common/index.js
-var $OptWord = (_1, _2) => ({ tag: "OptWord", _1, _2 });
-var fromFoldable24 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
-var any2 = /* @__PURE__ */ (() => foldableArray.foldMap(/* @__PURE__ */ (() => {
-  const semigroupDisj1 = { append: (v) => (v1) => v || v1 };
-  return { mempty: false, Semigroup0: () => semigroupDisj1 };
-})()))();
-var elem3 = /* @__PURE__ */ (() => {
-  const any1 = foldableArray.foldMap(/* @__PURE__ */ (() => {
-    const semigroupDisj1 = { append: (v) => (v1) => v || v1 };
-    return { mempty: false, Semigroup0: () => semigroupDisj1 };
-  })());
-  return (x) => any1((y) => {
-    if (x.tag === "OptShort") {
-      return y.tag === "OptShort" && x._1 === y._1;
-    }
-    return x.tag === "OptLong" && y.tag === "OptLong" && x._1 === y._1;
-  });
-})();
-var simplify = (v) => {
-  if (v.tag === "Leaf") {
-    return $OptTree("Leaf", v._1);
-  }
-  if (v.tag === "MultNode") {
-    const v1 = arrayBind(v._1)((x) => {
-      const $0 = simplify(x);
-      if ($0.tag === "MultNode") {
-        return $0._1;
-      }
-      return [$0];
-    });
-    if (v1.length === 1) {
-      return v1[0];
-    }
-    return $OptTree("MultNode", v1);
-  }
-  if (v.tag === "AltNode") {
-    const v1 = arrayBind(v._1)((x) => {
-      const $0 = simplify(x);
-      if ($0.tag === "AltNode") {
-        return $0._1;
-      }
-      if ($0.tag === "MultNode" && $0._1.length === 0) {
-        return [];
-      }
-      return [$0];
-    });
-    if (v1.length === 0) {
-      return $OptTree("MultNode", []);
-    }
-    if (v1.length === 1) {
-      return v1[0];
-    }
-    return $OptTree("AltNode", v1);
-  }
-  fail();
-};
-var showOption = (v) => {
-  if (v.tag === "OptLong") {
-    return "--" + v._1;
-  }
-  if (v.tag === "OptShort") {
-    return fromCharArray(["-", v._1]);
-  }
-  fail();
-};
-var parseWord = /* @__PURE__ */ (() => {
-  const $0 = foldrArray(Cons)(Nil);
-  return (x) => {
-    const $1 = $0(toCharArray(x));
-    if ($1.tag === "Cons" && $1._1 === "-") {
-      if ($1._2.tag === "Cons" && $1._2._1 === "-") {
-        return $Maybe(
-          "Just",
-          (() => {
-            const v2 = span((v3) => v3 !== "=")($1._2._2);
-            if (v2.rest.tag === "Nil") {
-              return $OptWord($OptName("OptLong", fromCharArray(fromFoldable24($1._2._2))), Nothing);
-            }
-            if (v2.rest.tag === "Cons") {
-              return $OptWord(
-                $OptName("OptLong", fromCharArray(fromFoldable24(v2.init))),
-                $Maybe("Just", fromCharArray(fromFoldable24(v2.rest._2)))
-              );
-            }
-            fail();
-          })()
-        );
-      }
-      if ($1._2.tag === "Nil") {
-        return Nothing;
-      }
-      if ($1._2.tag === "Cons") {
-        return $Maybe(
-          "Just",
-          $OptWord(
-            $OptName("OptShort", $1._2._1),
-            $1._2._2.tag !== "Nil" ? $Maybe("Just", fromCharArray(fromFoldable24($1._2._2))) : Nothing
-          )
-        );
-      }
-      fail();
-    }
-    return Nothing;
-  };
-})();
-var isOptionPrefix = (v) => (v1) => {
-  if (v.tag === "OptShort") {
-    return v1.tag === "OptShort" && v._1 === v1._1;
-  }
-  return v.tag === "OptLong" && v1.tag === "OptLong" && startsWith(v._1)(v1._1);
-};
-var optMatches = (dictMonadP) => {
-  const Monad0 = dictMonadP.Monad0();
-  const bindStateT2 = bindStateT(Monad0);
-  const monadStateStateT2 = monadStateStateT(Monad0);
-  const $$get3 = monadStateStateT2.state((s) => $Tuple(s, s));
-  const $0 = applicativeStateT(Monad0);
-  const $1 = dictMonadP.Monad0().Applicative0().pure;
-  return (disambiguate) => (opt) => (v) => {
-    if (opt.tag === "OptReader") {
-      const $2 = (disambiguate ? any2(isOptionPrefix(v._1))(opt._1) : elem3(v._1)(opt._1)) ? $Maybe("Just", void 0) : Nothing;
-      if ($2.tag === "Just") {
-        return $Maybe(
-          "Just",
-          bindStateT2.bind($$get3)((args) => {
-            const missing_arg = dictMonadP.missingArgP(opt._3(showOption(v._1)))(opt._2.crCompleter);
-            return bindStateT2.bind((() => {
-              if (v._2.tag === "Nothing") {
-                if (args.tag === "Nil") {
-                  return (s) => Monad0.Bind1().bind(missing_arg)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
-                }
-                if (args.tag === "Cons") {
-                  return $0.pure($Tuple(args._1, args._2));
-                }
-                fail();
-              }
-              if (v._2.tag === "Just") {
-                return $0.pure($Tuple(v._2._1, args));
-              }
-              fail();
-            })())((v1) => {
-              const $3 = v1._1;
-              const $4 = v1._2;
-              return bindStateT2.bind(monadStateStateT2.state((v$1) => $Tuple(void 0, $4)))(() => {
-                const $5 = opt._2.crReader($3);
-                if ($5.tag === "Right") {
-                  const $6 = $1($5._1);
-                  return (s) => Monad0.Bind1().bind($6)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
-                }
-                if ($5.tag === "Left") {
-                  const $6 = dictMonadP.errorP($5._1.tag === "ErrorMsg" ? $ParseError2("ErrorMsg", "option " + showOption(v._1) + ": " + $5._1._1) : $5._1);
-                  return (s) => Monad0.Bind1().bind($6)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
-                }
-                fail();
-              });
-            });
-          })
-        );
-      }
-      if ($2.tag === "Nothing") {
-        return Nothing;
-      }
-      fail();
-    }
-    if (opt.tag === "FlagReader" && (disambiguate ? any2(isOptionPrefix(v._1))(opt._1) : elem3(v._1)(opt._1)) && ((() => {
-      if (v._1.tag === "OptShort") {
-        return true;
-      }
-      if (v._1.tag === "OptLong") {
-        return false;
-      }
-      fail();
-    })() || (() => {
-      if (v._2.tag === "Nothing") {
-        return true;
-      }
-      if (v._2.tag === "Just") {
-        return false;
-      }
-      fail();
-    })())) {
-      return $Maybe(
-        "Just",
-        bindStateT2.bind($$get3)((args) => bindStateT2.bind((() => {
-          if (v._2.tag === "Just") {
-            const $2 = $List("Cons", fromCharArray(["-", ...toCharArray(v._2._1)]), args);
-            return monadStateStateT2.state((v$1) => $Tuple(void 0, $2));
-          }
-          return monadStateStateT2.state((v$1) => $Tuple(void 0, args));
-        })())(() => $0.pure(opt._2)))
-      );
-    }
-    return Nothing;
-  };
-};
-var evalParser = (v) => {
-  if (v.tag === "NilP") {
-    return $Maybe("Just", v._1);
-  }
-  if (v.tag === "OptP") {
-    return Nothing;
-  }
-  if (v.tag === "MultP") {
-    return applyMaybe.apply(evalParser(v._1._1))(evalParser(v._1._2));
-  }
-  if (v.tag === "AltP") {
-    const $0 = evalParser(v._1);
-    const $1 = evalParser(v._2);
-    if ($0.tag === "Nothing") {
-      return $1;
-    }
-    return $0;
-  }
-  if (v.tag === "BindP") {
-    return resume$p((p) => (k) => {
-      const $0 = evalParser(p);
-      if ($0.tag === "Just") {
-        return evalParser($Parser("BindP", k($0._1)));
-      }
-      if ($0.tag === "Nothing") {
-        return Nothing;
-      }
-      fail();
-    })(Just)(v._1);
-  }
-  fail();
-};
-var searchParser = (dictMonad) => {
-  const nondetTPlus2 = nondetTPlus(dictMonad);
-  const empty3 = nondetTPlus2.empty;
-  const $0 = nondetTFunctor(dictMonad);
-  const nondetTAltOp2 = nondetTAltOp(dictMonad);
-  const oneOf1 = foldrArray(nondetTPlus2.Alt0().alt)(nondetTPlus2.empty);
-  return (v) => (v1) => {
-    if (v1.tag === "NilP") {
-      return empty3;
-    }
-    if (v1.tag === "OptP") {
-      return v(v1._1);
-    }
-    if (v1.tag === "MultP") {
-      const $1 = v1._1._1;
-      const $2 = v1._1._2;
-      return nondetTAltOp2($0.map((p1$p) => $Parser("MultP", $MultPE(p1$p, $2)))(searchParser(dictMonad)(v)($1)))($0.map((p2$p) => $Parser(
-        "MultP",
-        $MultPE($1, p2$p)
-      ))(searchParser(dictMonad)(v)($2)));
-    }
-    if (v1.tag === "AltP") {
-      return oneOf1([searchParser(dictMonad)(v)(v1._1), searchParser(dictMonad)(v)(v1._2)]);
-    }
-    if (v1.tag === "BindP") {
-      return resume$p((p) => (k) => oneOf1([
-        $0.map((p$p) => $Parser(
-          "BindP",
-          $Free(
-            $FreeView("Bind", p$p, (x) => $Free($FreeView("Return", x), CatNil)),
-            snoc2(CatNil)(k)
-          )
-        ))(searchParser(dictMonad)(v)(p)),
-        (() => {
-          const v2 = evalParser(p);
-          if (v2.tag === "Nothing") {
-            return empty3;
-          }
-          if (v2.tag === "Just") {
-            return searchParser(dictMonad)(v)($Parser("BindP", k(v2._1)));
-          }
-          fail();
-        })()
-      ]))((v$1) => empty3)(v1._1);
-    }
-    fail();
-  };
-};
-var searchOpt = (dictMonadP) => {
-  const $0 = dictMonadP.Monad0();
-  const monadStateT2 = { Applicative0: () => applicativeStateT($0), Bind1: () => bindStateT($0) };
-  const searchParser1 = searchParser(monadStateT2);
-  const optMatches1 = optMatches(dictMonadP);
-  const lift2 = nondetTMonadTrans.lift(monadStateT2);
-  const $1 = dictMonadP.Alt1().Functor0();
-  const empty3 = nondetTPlus(monadStateT2).empty;
-  return (pprefs) => (w) => searchParser1((opt) => {
-    const v = optMatches1(pprefs.prefDisambiguate && optVisibilityOrd.compare(opt.optProps.propVisibility)(Internal) === "GT")(opt.optMain)(w);
-    if (v.tag === "Just") {
-      return lift2((s) => $1.map((v1) => $Tuple($Parser("NilP", v1._1), v1._2))(v._1(s)));
-    }
-    if (v.tag === "Nothing") {
-      return empty3;
-    }
-    fail();
-  });
-};
-var stepParser = (dictMonadP) => {
-  const searchOpt1 = searchOpt(dictMonadP);
-  return (v) => (v1) => (v2) => (v3) => {
-    if (v1 === "AllPositionals") {
-      return searchArg(dictMonadP)(v)(v2)(v3);
-    }
-    if (v1 === "ForwardOptions") {
-      const v42 = parseWord(v2);
-      if (v42.tag === "Just") {
-        return nondetTAlt((() => {
-          const $0 = dictMonadP.Monad0();
-          return { Applicative0: () => applicativeStateT($0), Bind1: () => bindStateT($0) };
-        })()).alt(searchOpt1(v)(v42._1)(v3))(searchArg(dictMonadP)(v)(v2)(v3));
-      }
-      if (v42.tag === "Nothing") {
-        return searchArg(dictMonadP)(v)(v2)(v3);
-      }
-      fail();
-    }
-    const v4 = parseWord(v2);
-    if (v4.tag === "Just") {
-      return searchOpt1(v)(v4._1)(v3);
-    }
-    if (v4.tag === "Nothing") {
-      return searchArg(dictMonadP)(v)(v2)(v3);
-    }
-    fail();
-  };
-};
-var searchArg = (dictMonadP) => {
-  const Monad0 = dictMonadP.Monad0();
-  const monadStateT2 = { Applicative0: () => applicativeStateT(Monad0), Bind1: () => bindStateT(Monad0) };
-  const searchParser1 = searchParser(monadStateT2);
-  const $0 = nondetTApplicative(monadStateT2);
-  const cut2 = cut(monadStateT2);
-  const lift2 = nondetTMonadTrans.lift(monadStateT2);
-  const bindStateT2 = bindStateT(Monad0);
-  const $1 = applyStateT(Monad0);
-  const monadStateStateT2 = monadStateStateT(Monad0);
-  const $$get3 = monadStateStateT2.state((s) => $Tuple(s, s));
-  const $2 = dictMonadP.Alt1().Functor0();
-  const Apply0 = Monad0.Bind1().Apply0();
-  const exitContext = dictMonadP.exitContext;
-  const $3 = nondetTFunctor(monadStateT2);
-  const empty3 = nondetTPlus(monadStateT2).empty;
-  const $4 = dictMonadP.Monad0().Applicative0().pure;
-  return (prefs) => (arg) => searchParser1((opt) => nondetTBind(monadStateT2).bind(opt.optMain.tag === "ArgReader" ? cut2 : $0.pure())(() => {
-    if (opt.optMain.tag === "CmdReader") {
-      const $5 = opt.optMain._3(arg);
-      if ($5.tag === "Just") {
-        if (prefs.prefBacktrack === "NoBacktrack") {
-          const $6 = $5._1;
-          return lift2(bindStateT2.bind($1.apply($1.Functor0().map($$const)($$get3))(monadStateStateT2.state((v) => $Tuple(void 0, Nil))))((args) => {
-            const $7 = Apply0.apply(Apply0.Functor0().map($$const)(Apply0.apply(Apply0.Functor0().map((v) => identity)(dictMonadP.enterContext(arg)($6)))(runParserInfo(dictMonadP)($6)(args))))(exitContext);
-            return (s) => $2.map((v1) => $Tuple($Parser("NilP", v1._1), v1._2))(Monad0.Bind1().bind($7)((x) => Monad0.Applicative0().pure($Tuple(
-              x,
-              s
-            ))));
-          }));
-        }
-        if (prefs.prefBacktrack === "Backtrack") {
-          const $6 = $5._1;
-          return $3.map(NilP)(lift2((args) => Apply0.apply(Apply0.Functor0().map($$const)(Apply0.apply(Apply0.Functor0().map((v) => identity)(dictMonadP.enterContext(arg)($6)))(runParser(dictMonadP)($6.infoPolicy)(CmdStart)($6.infoParser)(args))))(exitContext)));
-        }
-        if (prefs.prefBacktrack === "SubparserInline") {
-          const $6 = $5._1;
-          return lift2(bindStateT2.bind((() => {
-            const $7 = dictMonadP.enterContext(arg)($6);
-            return (s) => Monad0.Bind1().bind($7)((x) => Monad0.Applicative0().pure($Tuple(x, s)));
-          })())(() => applicativeStateT(Monad0).pure($6.infoParser)));
-        }
-        fail();
-      }
-      if ($5.tag === "Nothing") {
-        return empty3;
-      }
-      fail();
-    }
-    if (opt.optMain.tag === "ArgReader") {
-      const $5 = opt.optMain._1.crReader(arg);
-      const $6 = (() => {
-        if ($5.tag === "Left") {
-          return dictMonadP.errorP($5._1);
-        }
-        if ($5.tag === "Right") {
-          return $4($5._1);
-        }
-        fail();
-      })();
-      return $3.map(NilP)(lift2((s) => Monad0.Bind1().bind($6)((x) => Monad0.Applicative0().pure($Tuple(x, s)))));
-    }
-    return empty3;
-  }));
-};
-var runParserInfo = (dictMonadP) => (i) => runParserFully(dictMonadP)(i.infoPolicy)(i.infoParser);
-var runParserFully = (dictMonadP) => {
-  const Monad0 = dictMonadP.Monad0();
-  return (policy) => (p) => (args) => Monad0.Bind1().bind(runParser(dictMonadP)(policy)(CmdStart)(p)(args))((v) => {
-    if (v._2.tag === "Nil") {
-      return Monad0.Applicative0().pure(v._1);
-    }
-    if (v._2.tag === "Cons") {
-      return dictMonadP.errorP($ParseError2(
-        "UnexpectedError",
-        v._2._1,
-        $SomeParser($Parser("NilP", void 0))
-      ));
-    }
-    fail();
-  });
-};
-var runParser = (dictMonadP) => {
-  const Monad0 = dictMonadP.Monad0();
-  const disamb2 = disamb({
-    Applicative0: () => applicativeStateT(Monad0),
-    Bind1: () => bindStateT(Monad0)
-  });
-  const $0 = Monad0.Bind1();
-  const getPrefs = dictMonadP.getPrefs;
-  const pure4 = dictMonadP.Monad0().Applicative0().pure;
-  return (policy) => (isCmdStart) => (p) => (args) => {
-    const result = applyMaybe.apply((() => {
-      const $1 = evalParser(p);
-      if ($1.tag === "Just") {
-        return $Maybe("Just", Tuple($1._1));
-      }
-      return Nothing;
-    })())($Maybe("Just", args));
-    if (args.tag === "Nil") {
-      return dictMonadP.exitP(isCmdStart)(policy)(p)(result);
-    }
-    if (args.tag === "Cons") {
-      if (args._1 === "--" && (policy === "Intersperse" || policy === "NoIntersperse" || policy !== "AllPositionals")) {
-        return runParser(dictMonadP)(AllPositionals)(CmdCont)(p)(args._2);
-      }
-      const $1 = args._1;
-      const $2 = args._2;
-      return $0.bind(getPrefs)((prefs) => $0.bind(disamb2(!prefs.prefDisambiguate)(stepParser(dictMonadP)(prefs)(policy)($1)(p))($2))((v) => {
-        if (v._1.tag === "Nothing") {
-          const $3 = dictMonadP.errorP($ParseError2("UnexpectedError", $1, $SomeParser(p)));
-          if (result.tag === "Nothing") {
-            return $3;
-          }
-          if (result.tag === "Just") {
-            return pure4(result._1);
-          }
-          fail();
-        }
-        if (v._1.tag === "Just") {
-          return runParser(dictMonadP)((() => {
-            if (policy === "NoIntersperse") {
-              if ((() => {
-                const $3 = parseWord($1);
-                if ($3.tag === "Nothing") {
-                  return false;
-                }
-                if ($3.tag === "Just") {
-                  return true;
-                }
-                fail();
-              })()) {
-                return NoIntersperse;
-              }
-              return AllPositionals;
-            }
-            return policy;
-          })())(CmdCont)(v._1._1)(v._2);
-        }
-        fail();
-      }));
-    }
-    fail();
-  };
-};
-var treeMapParser = (g) => {
-  const hasArg = (v) => {
-    if (v.tag === "NilP") {
-      return false;
-    }
-    if (v.tag === "OptP") {
-      return v._1.optMain.tag === "ArgReader";
-    }
-    if (v.tag === "MultP") {
-      return hasArg(v._1._1) || hasArg(v._1._2);
-    }
-    if (v.tag === "AltP") {
-      return hasArg(v._1) || hasArg(v._2);
-    }
-    if (v.tag === "BindP") {
-      return resume$p((p) => (v1) => hasArg(p))((v$1) => false)(v._1);
-    }
-    fail();
-  };
-  const go = (v) => (v1) => (v2) => (v3) => (v4) => {
-    if (v4.tag === "NilP") {
-      return $OptTree("MultNode", []);
-    }
-    if (v4.tag === "OptP") {
-      if (optVisibilityOrd.compare(v4._1.optProps.propVisibility)(Internal) === "GT") {
-        return $OptTree("Leaf", v3({ hinfoMulti: v, hinfoDefault: v1, hinfoUnreachableArgs: v2 })(v4._1));
-      }
-      return $OptTree("MultNode", []);
-    }
-    if (v4.tag === "MultP") {
-      return $OptTree("MultNode", [go(v)(v1)(v2)(v3)(v4._1._1), go(v)(v1)(v2 || hasArg(v4._1._1))(v3)(v4._1._2)]);
-    }
-    if (v4.tag === "AltP") {
-      const $02 = evalParser(v4._1);
-      const d$p = v1 || (() => {
-        const $1 = evalParser(v4._2);
-        return (() => {
-          if ($02.tag === "Nothing") {
-            return false;
-          }
-          if ($02.tag === "Just") {
-            return true;
-          }
-          fail();
-        })() || (() => {
-          if ($1.tag === "Nothing") {
-            return false;
-          }
-          if ($1.tag === "Just") {
-            return true;
-          }
-          fail();
-        })();
-      })();
-      return $OptTree("AltNode", [go(v)(d$p)(v2)(v3)(v4._1), go(v)(d$p)(v2)(v3)(v4._2)]);
-    }
-    if (v4.tag === "BindP") {
-      return resume$p((p) => (k) => {
-        const go$p = go(true)(v1)(v2)(v3)(p);
-        const v5 = evalParser(p);
-        if (v5.tag === "Nothing") {
-          return go$p;
-        }
-        if (v5.tag === "Just") {
-          return $OptTree("MultNode", [go$p, go(true)(v1)(v2)(v3)($Parser("BindP", k(v5._1)))]);
-        }
-        fail();
-      })((v$1) => $OptTree("MultNode", []))(v4._1);
-    }
-    fail();
-  };
-  const $0 = go(false)(false)(false)(g);
-  return (x) => simplify($0(x));
-};
-var mapParser = (f) => {
-  const flatten2 = (v) => {
-    if (v.tag === "Leaf") {
-      return [v._1];
-    }
-    if (v.tag === "MultNode") {
-      return arrayBind(v._1)(flatten2);
-    }
-    if (v.tag === "AltNode") {
-      return arrayBind(v._1)(flatten2);
-    }
-    fail();
-  };
-  const $0 = treeMapParser(f);
-  return (x) => flatten2($0(x));
-};
-
-// output-es/Options.Applicative.BashCompletion/index.js
-var $Richness = (tag, _1, _2) => ({ tag, _1, _2 });
-var fromFoldable25 = /* @__PURE__ */ foldrArray(Cons)(Nil);
-var identity30 = (x) => x;
-var fold4 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidArray)(identity3))();
-var sequence = /* @__PURE__ */ (() => traversableArray.traverse(applicativeEffect)(identity4))();
-var unLines = (xs) => foldlArray((v) => (v1) => {
-  if (v.init) {
-    return { init: false, acc: v1 };
-  }
-  return { init: false, acc: v.acc + "\n" + v1 };
-})({ init: true, acc: "" })(xs).acc;
-var fromFoldable110 = /* @__PURE__ */ (() => fromFoldableImpl(foldableList.foldr))();
-var Standard = /* @__PURE__ */ $Richness("Standard");
-var Enriched = (value0) => (value1) => $Richness("Enriched", value0, value1);
-var zshCompletionScript = (prog) => (progn) => {
-  const $0 = [
-    "#compdef " + progn,
-    "",
-    "local request",
-    "local completions",
-    "local word",
-    "local index=$((CURRENT - 1))",
-    "",
-    "request=(--bash-completion-enriched --bash-completion-index $index)",
-    "for arg in ${words[@]}; do",
-    "  request=(${request[@]} --bash-completion-word $arg)",
-    "done",
-    "",
-    "IFS=$'\\n' completions=($( " + prog + ' "${request[@]}" ))',
-    "",
-    "for word in $completions; do",
-    "  local -a parts",
-    "",
-    "  # Split the line at a tab if there is one.",
-    "  IFS=$'\\t' parts=($( echo $word ))",
-    "",
-    "  if [[ -n $parts[2] ]]; then",
-    '     if [[ $word[1] == "-" ]]; then',
-    '       local desc=("$parts[1] ($parts[2])")',
-    "       compadd -d desc -- $parts[1]",
-    "     else",
-    '       local desc=($(print -f  "%-019s -- %s" $parts[1] $parts[2]))',
-    "       compadd -l -d desc -- $parts[1]",
-    "     fi",
-    "  else",
-    "    compadd -f -- $word",
-    "  fi",
-    "done"
-  ];
-  return () => $0;
-};
-var fishCompletionScript = (prog) => (progn) => {
-  const $0 = [
-    " function _" + progn,
-    "    set -l cl (commandline --tokenize --current-process)",
-    "    # Hack around fish issue #3934",
-    "    set -l cn (commandline --tokenize --cut-at-cursor --current-process)",
-    "    set -l cn (count $cn)",
-    "    set -l tmpline --bash-completion-enriched --bash-completion-index $cn",
-    "    for arg in $cl",
-    "      set tmpline $tmpline --bash-completion-word $arg",
-    "    end",
-    "    for opt in (" + prog + " $tmpline)",
-    "      if test -d $opt",
-    '        echo -E "$opt/"',
-    "      else",
-    '        echo -E "$opt"',
-    "      end",
-    "    end",
-    "end",
-    "",
-    "complete --no-files --command " + progn + " --arguments '(_" + progn + ")'"
-  ];
-  return () => $0;
-};
-var bashCompletionScript = (prog) => (progn) => {
-  const $0 = [
-    "_" + progn + "()",
-    "{",
-    "    local CMDLINE",
-    "    local IFS=$'\\n'",
-    "    CMDLINE=(--bash-completion-index $COMP_CWORD)",
-    "",
-    "    for arg in ${COMP_WORDS[@]}; do",
-    "        CMDLINE=(${CMDLINE[@]} --bash-completion-word $arg)",
-    "    done",
-    "",
-    "    COMPREPLY=( $(" + prog + ' "${CMDLINE[@]}") )',
-    "}",
-    "",
-    "complete -o filenames -F _" + progn + " " + progn
-  ];
-  return () => $0;
-};
-var arraySplitAt = (idx) => (arr) => {
-  if (idx === 0) {
-    return { init: [], rest: arr };
-  }
-  return { init: slice(0)(idx)(arr), rest: slice(idx)(arr.length)(arr) };
-};
-var bashCompletionQuery = (pinfo) => (pprefs) => (richness) => (ws) => (i) => (v) => {
-  const v1 = arraySplitAt(i)(ws);
-  const filter_names = filter((() => {
-    const v22 = index(v1.rest)(0);
-    if (v22.tag === "Just") {
-      return startsWith(v22._1);
-    }
-    if (v22.tag === "Nothing") {
-      return (v$1) => true;
-    }
-    fail();
-  })());
-  const $0 = arrayMap(showOption);
-  const add_opt_help1 = (opt) => {
-    if (richness.tag === "Standard") {
-      return identity30;
-    }
-    if (richness.tag === "Enriched") {
-      const $1 = richness._1;
-      return arrayMap((o) => {
-        if (opt.optProps.propHelp.tag === "Nothing") {
-          return o;
-        }
-        if (opt.optProps.propHelp.tag === "Just") {
-          const $2 = displayS(renderFits(fits1)(1)($1)(opt.optProps.propHelp._1));
-          const $3 = $2 === "" ? [] : split("\n")($2);
-          return o + "	" + (() => {
-            if ($3.length > 0) {
-              const $4 = uncons($3);
-              const $5 = (() => {
-                if ($4.tag === "Just") {
-                  return $4._1;
-                }
-                fail();
-              })();
-              if ($5.tail.length === 0) {
-                return $5.head;
-              }
-              return $5.head + "...";
-            }
-            return "";
-          })();
-        }
-        fail();
-      });
-    }
-    fail();
-  };
-  const v2 = runCompletion(runParserFully(completionMonadP)(pinfo.infoPolicy)(pinfo.infoParser)(fromFoldable25(slice(1)(v1.init.length)(v1.init))))(pprefs);
-  if (v2.tag === "Just") {
-    if (v2._1.tag === "Left") {
-      const $1 = v2._1._1._2;
-      const $2 = sequence(mapParser((hinfo) => (opt) => {
-        if (opt.optMain.tag === "OptReader") {
-          if ($1 === "Intersperse" || $1 === "NoIntersperse" || $1 !== "AllPositionals") {
-            const $22 = add_opt_help1(opt)(filter_names($0(opt.optMain._1)));
-            return () => $22;
-          }
-          return () => [];
-        }
-        if (opt.optMain.tag === "FlagReader") {
-          if ($1 === "Intersperse" || $1 === "NoIntersperse" || $1 !== "AllPositionals") {
-            const $22 = add_opt_help1(opt)(filter_names($0(opt.optMain._1)));
-            return () => $22;
-          }
-          return () => [];
-        }
-        if (opt.optMain.tag === "ArgReader") {
-          if (hinfo.hinfoUnreachableArgs) {
-            return () => [];
-          }
-          return opt.optMain._1.crCompleter((() => {
-            const $22 = index(v1.rest)(0);
-            if ($22.tag === "Nothing") {
-              return "";
-            }
-            if ($22.tag === "Just") {
-              return $22._1;
-            }
-            fail();
-          })());
-        }
-        if (opt.optMain.tag === "CmdReader") {
-          if (hinfo.hinfoUnreachableArgs) {
-            return () => [];
-          }
-          const $22 = (() => {
-            if (richness.tag === "Standard") {
-              return identity30;
-            }
-            if (richness.tag === "Enriched") {
-              const $23 = richness._2;
-              return arrayMap((cmd) => {
-                const $3 = opt.optMain._3(cmd);
-                const $4 = (() => {
-                  if ($3.tag === "Just") {
-                    return $3._1.infoProgDesc;
-                  }
-                  if ($3.tag === "Nothing") {
-                    return Nothing;
-                  }
-                  fail();
-                })();
-                if ($4.tag === "Nothing") {
-                  return cmd;
-                }
-                if ($4.tag === "Just") {
-                  const $5 = displayS(renderFits(fits1)(1)($23)($4._1));
-                  const $6 = $5 === "" ? [] : split("\n")($5);
-                  return cmd + "	" + (() => {
-                    if ($6.length > 0) {
-                      const $7 = uncons($6);
-                      const $8 = (() => {
-                        if ($7.tag === "Just") {
-                          return $7._1;
-                        }
-                        fail();
-                      })();
-                      if ($8.tail.length === 0) {
-                        return $8.head;
-                      }
-                      return $8.head + "...";
-                    }
-                    return "";
-                  })();
-                }
-                fail();
-              });
-            }
-            fail();
-          })()(filter_names(opt.optMain._2));
-          return () => $22;
-        }
-        fail();
-      })(v2._1._1._1._1));
-      return () => {
-        const a$p = $2();
-        return fold4(a$p);
-      };
-    }
-    if (v2._1.tag === "Right") {
-      return v2._1._1((() => {
-        const $1 = index(v1.rest)(0);
-        if ($1.tag === "Nothing") {
-          return "";
-        }
-        if ($1.tag === "Just") {
-          return $1._1;
-        }
-        fail();
-      })());
-    }
-    fail();
-  }
-  if (v2.tag === "Nothing") {
-    return () => [];
-  }
-  fail();
-};
-var bashCompletionParser = (pinfo) => (pprefs) => $Parser(
-  "AltP",
-  parserFunctor.map((opts) => ({
-    execCompletion: (progn) => {
-      const $0 = opts(progn);
-      return () => {
-        const a$p = $0();
-        return unLines(a$p);
-      };
-    }
-  }))($Parser(
-    "MultP",
-    $MultPE(
-      $Parser(
-        "MultP",
-        $MultPE(
-          parserFunctor.map(bashCompletionQuery(pinfo)(pprefs))($Parser(
-            "AltP",
-            $Parser(
-              "MultP",
-              $MultPE(
-                $Parser(
-                  "MultP",
-                  $MultPE(
-                    flag$p(Enriched)($Mod(
-                      (x) => internal._1({
-                        flagNames: [$OptName("OptLong", "bash-completion-enriched"), ...x.flagNames],
-                        flagActive: x.flagActive
-                      }),
-                      $DefaultProp(
-                        internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
-                        internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-                      ),
-                      (x) => internal._3(x)
-                    )),
-                    option($$int2)($Mod(
-                      (x) => internal._1({
-                        optNames: [$OptName("OptLong", "bash-completion-option-desc-length"), ...x.optNames],
-                        optCompleter: x.optCompleter,
-                        optNoArgError: x.optNoArgError
-                      }),
-                      $DefaultProp(
-                        $Maybe("Just", 40),
-                        internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-                      ),
-                      (x) => internal._3(x)
-                    ))
-                  )
-                ),
-                option($$int2)($Mod(
-                  (x) => internal._1({
-                    optNames: [$OptName("OptLong", "bash-completion-command-desc-length"), ...x.optNames],
-                    optCompleter: x.optCompleter,
-                    optNoArgError: x.optNoArgError
-                  }),
-                  $DefaultProp(
-                    $Maybe("Just", 40),
-                    internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-                  ),
-                  (x) => internal._3(x)
-                ))
-              )
-            ),
-            $Parser("NilP", Standard)
-          )),
-          parserFunctor.map(fromFoldable110)($Parser(
-            "BindP",
-            manyM(option(readerAsk)($Mod(
-              (x) => internal._1({
-                optNames: [$OptName("OptLong", "bash-completion-word"), ...x.optNames],
-                optCompleter: x.optCompleter,
-                optNoArgError: x.optNoArgError
-              }),
-              $DefaultProp(
-                internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
-                internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-              ),
-              (x) => internal._3(x)
-            )))
-          ))
-        )
-      ),
-      option($$int2)($Mod(
-        (x) => internal._1({
-          optNames: [$OptName("OptLong", "bash-completion-index"), ...x.optNames],
-          optCompleter: x.optCompleter,
-          optNoArgError: x.optNoArgError
-        }),
-        $DefaultProp(
-          internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
-          internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-        ),
-        (x) => internal._3(x)
-      ))
-    )
-  )),
-  $Parser(
-    "AltP",
-    parserFunctor.map((opts) => ({
-      execCompletion: (progn) => {
-        const $0 = opts(progn);
-        return () => {
-          const a$p = $0();
-          return unLines(a$p);
-        };
-      }
-    }))(parserFunctor.map(bashCompletionScript)(option(readerAsk)($Mod(
-      (x) => internal._1({
-        optNames: [$OptName("OptLong", "bash-completion-script"), ...x.optNames],
-        optCompleter: x.optCompleter,
-        optNoArgError: x.optNoArgError
-      }),
-      $DefaultProp(
-        internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
-        internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-      ),
-      (x) => internal._3(x)
-    )))),
-    $Parser(
-      "AltP",
-      parserFunctor.map((opts) => ({
-        execCompletion: (progn) => {
-          const $0 = opts(progn);
-          return () => {
-            const a$p = $0();
-            return unLines(a$p);
-          };
-        }
-      }))(parserFunctor.map(fishCompletionScript)(option(readerAsk)($Mod(
-        (x) => internal._1({
-          optNames: [$OptName("OptLong", "fish-completion-script"), ...x.optNames],
-          optCompleter: x.optCompleter,
-          optNoArgError: x.optNoArgError
-        }),
-        $DefaultProp(
-          internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
-          internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-        ),
-        (x) => internal._3(x)
-      )))),
-      parserFunctor.map((opts) => ({
-        execCompletion: (progn) => {
-          const $0 = opts(progn);
-          return () => {
-            const a$p = $0();
-            return unLines(a$p);
-          };
-        }
-      }))(parserFunctor.map(zshCompletionScript)(option(readerAsk)($Mod(
-        (x) => internal._1({
-          optNames: [$OptName("OptLong", "zsh-completion-script"), ...x.optNames],
-          optCompleter: x.optCompleter,
-          optNoArgError: x.optNoArgError
-        }),
-        $DefaultProp(
-          internal._2._1.tag === "Nothing" ? Nothing : internal._2._1,
-          internal._2._2.tag === "Nothing" ? Nothing : internal._2._2
-        ),
-        (x) => internal._3(x)
-      ))))
-    )
-  )
-);
-
-// output-es/Options.Applicative.Help.Types/index.js
-var chunkMonoid2 = /* @__PURE__ */ chunkMonoid(docSemigroup);
-var parserHelpMonoid = /* @__PURE__ */ monoidRecord()(/* @__PURE__ */ (() => {
-  const Semigroup0 = chunkMonoid2.Semigroup0();
-  const Semigroup0$1 = chunkMonoid2.Semigroup0();
-  const Semigroup0$2 = chunkMonoid2.Semigroup0();
-  const Semigroup0$3 = chunkMonoid2.Semigroup0();
-  const Semigroup0$4 = chunkMonoid2.Semigroup0();
-  const Semigroup0$5 = chunkMonoid2.Semigroup0();
-  const semigroupRecordCons1 = {
-    appendRecord: (v) => (ra) => (rb) => ({
-      helpBody: Semigroup0.append(ra.helpBody)(rb.helpBody),
-      helpError: Semigroup0$1.append(ra.helpError)(rb.helpError),
-      helpFooter: Semigroup0$2.append(ra.helpFooter)(rb.helpFooter),
-      helpHeader: Semigroup0$3.append(ra.helpHeader)(rb.helpHeader),
-      helpSuggestions: Semigroup0$4.append(ra.helpSuggestions)(rb.helpSuggestions),
-      helpUsage: Semigroup0$5.append(ra.helpUsage)(rb.helpUsage)
-    })
-  };
-  return {
-    memptyRecord: (v) => ({
-      helpBody: chunkMonoid2.mempty,
-      helpError: chunkMonoid2.mempty,
-      helpFooter: chunkMonoid2.mempty,
-      helpHeader: chunkMonoid2.mempty,
-      helpSuggestions: chunkMonoid2.mempty,
-      helpUsage: chunkMonoid2.mempty
-    }),
-    SemigroupRecord0: () => semigroupRecordCons1
-  };
-})());
-var helpText = (v) => {
-  const $0 = vsepChunks([v.helpError, v.helpSuggestions, v.helpHeader, v.helpUsage, v.helpBody, v.helpFooter]);
-  if ($0.tag === "Nothing") {
-    return Empty;
-  }
-  if ($0.tag === "Just") {
-    return $0._1;
-  }
-  fail();
-};
-
-// output-es/Options.Applicative.Help.Core/index.js
-var fold5 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidArray)(identity3))();
-var chunkMonoid3 = /* @__PURE__ */ chunkMonoid(docSemigroup);
-var listToChunk2 = /* @__PURE__ */ listToChunk(docMonoid);
-var identity31 = (x) => x;
-var mempty2 = /* @__PURE__ */ (() => $Tuple(monoidMaybe(semigroupString).mempty, chunkMonoid3.mempty))();
-var usageHelp = (chunk) => ({
-  helpUsage: chunk,
-  helpBody: parserHelpMonoid.mempty.helpBody,
-  helpError: parserHelpMonoid.mempty.helpError,
-  helpFooter: parserHelpMonoid.mempty.helpFooter,
-  helpHeader: parserHelpMonoid.mempty.helpHeader,
-  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions
-});
-var suggestionsHelp = (chunk) => ({
-  helpSuggestions: chunk,
-  helpBody: parserHelpMonoid.mempty.helpBody,
-  helpError: parserHelpMonoid.mempty.helpError,
-  helpFooter: parserHelpMonoid.mempty.helpFooter,
-  helpHeader: parserHelpMonoid.mempty.helpHeader,
-  helpUsage: parserHelpMonoid.mempty.helpUsage
-});
-var intersperse2 = (sep) => {
-  const $0 = mapWithIndex((idx) => (e) => {
-    if (idx === 0) {
-      return [e];
-    }
-    return [sep, e];
-  });
-  return (x) => fold5($0(x));
-};
-var optDesc = (pprefs) => (style) => (info2) => (opt) => {
-  const suffix = info2.hinfoMulti ? stringChunk(pprefs.prefMultiSuffix) : chunkMonoid3.mempty;
-  const descs = arrayMap((x) => string3(showOption(x)))(sortBy(optNameOrd.compare)((() => {
-    if (opt.optMain.tag === "OptReader") {
-      return opt.optMain._1;
-    }
-    if (opt.optMain.tag === "FlagReader") {
-      return opt.optMain._1;
-    }
-    return [];
-  })()));
-  return (() => {
-    if (opt.optProps.propDescMod.tag === "Nothing") {
-      return identity31;
-    }
-    if (opt.optProps.propDescMod.tag === "Just") {
-      return functorMaybe.map(opt.optProps.propDescMod._1);
-    }
-    fail();
-  })()((() => {
-    const $0 = listToChunk2(intersperse2(style.descSep)(descs));
-    const $1 = stringChunk(opt.optProps.propMetaVar);
-    const $2 = (() => {
-      if ($0.tag === "Nothing") {
-        return $1;
-      }
-      if ($1.tag === "Nothing") {
-        return $0;
-      }
-      if ($0.tag === "Just" && $1.tag === "Just") {
-        return $Maybe("Just", $Doc("Cat", $0._1, $Doc("Cat", $Doc("Char", " "), $1._1)));
-      }
-      fail();
-    })();
-    if ((() => {
-      if (info2.hinfoDefault && !style.descOptional) {
-        return true;
-      }
-      if (opt.optProps.propVisibility === "Hidden") {
-        return !style.descHidden;
-      }
-      return opt.optProps.propVisibility !== "Visible";
-    })()) {
-      return chunkMonoid3.mempty;
-    }
-    if ((() => {
-      if ($2.tag === "Nothing") {
-        return true;
-      }
-      if ($2.tag === "Just") {
-        return false;
-      }
-      fail();
-    })() || !style.descSurround) {
-      if ($2.tag === "Nothing") {
-        return suffix;
-      }
-      if (suffix.tag === "Nothing") {
-        return $2;
-      }
-      if ($2.tag === "Just" && suffix.tag === "Just") {
-        return $Maybe("Just", $Doc("Cat", $2._1, suffix._1));
-      }
-      fail();
-    }
-    if (info2.hinfoDefault) {
-      const $32 = $2.tag === "Just" ? $Maybe(
-        "Just",
-        $Doc(
-          "Cat",
-          $Doc("Char", "["),
-          $Doc("Cat", $2._1, $Doc("Char", "]"))
-        )
-      ) : Nothing;
-      if ($32.tag === "Nothing") {
-        return suffix;
-      }
-      if (suffix.tag === "Nothing") {
-        return $32;
-      }
-      if ($32.tag === "Just" && suffix.tag === "Just") {
-        return $Maybe("Just", $Doc("Cat", $32._1, suffix._1));
-      }
-      fail();
-    }
-    if (slice(1)(descs.length)(descs).length === 0) {
-      if ($2.tag === "Nothing") {
-        return suffix;
-      }
-      if (suffix.tag === "Nothing") {
-        return $2;
-      }
-      if ($2.tag === "Just" && suffix.tag === "Just") {
-        return $Maybe("Just", $Doc("Cat", $2._1, suffix._1));
-      }
-      fail();
-    }
-    const $3 = $2.tag === "Just" ? $Maybe(
-      "Just",
-      $Doc(
-        "Cat",
-        $Doc("Char", "("),
-        $Doc("Cat", $2._1, $Doc("Char", ")"))
-      )
-    ) : Nothing;
-    if ($3.tag === "Nothing") {
-      return suffix;
-    }
-    if (suffix.tag === "Nothing") {
-      return $3;
-    }
-    if ($3.tag === "Just" && suffix.tag === "Just") {
-      return $Maybe("Just", $Doc("Cat", $3._1, suffix._1));
-    }
-    fail();
-  })());
-};
-var headerHelp = (chunk) => ({
-  helpHeader: chunk,
-  helpBody: parserHelpMonoid.mempty.helpBody,
-  helpError: parserHelpMonoid.mempty.helpError,
-  helpFooter: parserHelpMonoid.mempty.helpFooter,
-  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
-  helpUsage: parserHelpMonoid.mempty.helpUsage
-});
-var fullDesc = (pprefs) => {
-  const style = { descSep: string3(","), descHidden: true, descOptional: true, descSurround: false };
-  const $0 = mapParser((info2) => (opt) => {
-    const n = optDesc(pprefs)(style)(info2)(opt);
-    if (opt.optProps.propShowDefault.tag === "Just") {
-      if ((() => {
-        if (n.tag === "Nothing") {
-          return false;
-        }
-        if (n.tag === "Just") {
-          return true;
-        }
-        fail();
-      })() && (() => {
-        if (opt.optProps.propHelp.tag === "Nothing") {
-          return false;
-        }
-        if (opt.optProps.propHelp.tag === "Just") {
-          return true;
-        }
-        fail();
-      })()) {
-        return $Maybe(
-          "Just",
-          $Tuple(
-            (() => {
-              if (n.tag === "Nothing") {
-                return Empty;
-              }
-              if (n.tag === "Just") {
-                return n._1;
-              }
-              fail();
-            })(),
-            (() => {
-              if (opt.optProps.propHelp.tag === "Nothing") {
-                const $02 = $Doc(
-                  "Cat",
-                  $Doc("Char", "("),
-                  $Doc(
-                    "Cat",
-                    $Doc(
-                      "Cat",
-                      string3("default:"),
-                      $Doc("Cat", $Doc("Char", " "), string3(opt.optProps.propShowDefault._1))
-                    ),
-                    $Doc("Char", ")")
-                  )
-                );
-                return $Doc("Column", (k) => $Doc("Nesting", (i) => $Doc("Nest", k - i | 0, $02)));
-              }
-              if (opt.optProps.propHelp.tag === "Just") {
-                const $02 = $Doc(
-                  "Cat",
-                  opt.optProps.propHelp._1,
-                  $Doc(
-                    "Cat",
-                    $Doc("Char", " "),
-                    $Doc(
-                      "Cat",
-                      $Doc("Char", "("),
-                      $Doc(
-                        "Cat",
-                        $Doc(
-                          "Cat",
-                          string3("default:"),
-                          $Doc("Cat", $Doc("Char", " "), string3(opt.optProps.propShowDefault._1))
-                        ),
-                        $Doc("Char", ")")
-                      )
-                    )
-                  )
-                );
-                return $Doc("Column", (k) => $Doc("Nesting", (i) => $Doc("Nest", k - i | 0, $02)));
-              }
-              fail();
-            })()
-          )
-        );
-      }
-      return Nothing;
-    }
-    if ((() => {
-      if (n.tag === "Nothing") {
-        return false;
-      }
-      if (n.tag === "Just") {
-        return true;
-      }
-      fail();
-    })() && (() => {
-      if (opt.optProps.propHelp.tag === "Nothing") {
-        return false;
-      }
-      if (opt.optProps.propHelp.tag === "Just") {
-        return true;
-      }
-      fail();
-    })()) {
-      return $Maybe(
-        "Just",
-        $Tuple(
-          (() => {
-            if (n.tag === "Nothing") {
-              return Empty;
-            }
-            if (n.tag === "Just") {
-              return n._1;
-            }
-            fail();
-          })(),
-          (() => {
-            if (opt.optProps.propHelp.tag === "Nothing") {
-              return $Doc(
-                "Column",
-                (k) => $Doc("Nesting", (i) => $Doc("Nest", k - i | 0, Empty))
-              );
-            }
-            const $02 = (() => {
-              if (opt.optProps.propHelp.tag === "Nothing") {
-                return Empty;
-              }
-              if (opt.optProps.propHelp.tag === "Just") {
-                return opt.optProps.propHelp._1;
-              }
-              fail();
-            })();
-            return $Doc("Column", (k) => $Doc("Nesting", (i) => $Doc("Nest", k - i | 0, $02)));
-          })()
-        )
-      );
-    }
-    return Nothing;
-  });
-  return (x) => tabulate$p(24)(mapMaybe((x$1) => x$1)($0(x)));
-};
-var footerHelp = (chunk) => ({
-  helpFooter: chunk,
-  helpBody: parserHelpMonoid.mempty.helpBody,
-  helpError: parserHelpMonoid.mempty.helpError,
-  helpHeader: parserHelpMonoid.mempty.helpHeader,
-  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
-  helpUsage: parserHelpMonoid.mempty.helpUsage
-});
-var fold_tree = (v) => {
-  if (v.tag === "Leaf") {
-    return v._1;
-  }
-  if (v.tag === "MultNode") {
-    return foldrArray((x) => chunkBesideOrBelow(fold_tree(x)))(chunkMonoid3.mempty)(v._1);
-  }
-  if (v.tag === "AltNode") {
-    const $0 = filter((x) => {
-      if (x.tag === "Nothing") {
-        return false;
-      }
-      if (x.tag === "Just") {
-        return true;
-      }
-      fail();
-    })(arrayMap(fold_tree)(v._1));
-    if ($0.length === 1) {
-      return $0[0];
-    }
-    const $1 = foldrArray((v1) => (v2) => {
-      if (v1.tag === "Nothing") {
-        return v2;
-      }
-      if (v2.tag === "Nothing") {
-        return v1;
-      }
-      if (v1.tag === "Just" && v2.tag === "Just") {
-        return $Maybe(
-          "Just",
-          $Doc(
-            "Cat",
-            v1._1,
-            $Doc(
-              "Cat",
-              softline,
-              $Doc("Cat", $Doc("Char", "|"), $Doc("Cat", softline, v2._1))
-            )
-          )
-        );
-      }
-      fail();
-    })(chunkMonoid3.mempty)($0);
-    if ($1.tag === "Just") {
-      return $Maybe(
-        "Just",
-        $Doc(
-          "Cat",
-          $Doc("Char", "("),
-          $Doc("Cat", $1._1, $Doc("Char", ")"))
-        )
-      );
-    }
-    return Nothing;
-  }
-  fail();
-};
-var errorHelp = (chunk) => ({
-  helpError: chunk,
-  helpBody: parserHelpMonoid.mempty.helpBody,
-  helpFooter: parserHelpMonoid.mempty.helpFooter,
-  helpHeader: parserHelpMonoid.mempty.helpHeader,
-  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
-  helpUsage: parserHelpMonoid.mempty.helpUsage
-});
-var cmdDesc = /* @__PURE__ */ mapParser((v) => (opt) => {
-  if (opt.optMain.tag === "CmdReader") {
-    return $Tuple(
-      opt.optMain._1,
-      tabulate$p(24)(arrayBind(reverse(opt.optMain._2))((cmd) => arrayBind((() => {
-        const $0 = opt.optMain._3(cmd);
-        if ($0.tag === "Just") {
-          return [$0._1.infoProgDesc];
-        }
-        return [];
-      })())((d) => [
-        $Tuple(
-          string3(cmd),
-          (() => {
-            const $0 = (() => {
-              if (d.tag === "Nothing") {
-                return Empty;
-              }
-              if (d.tag === "Just") {
-                return d._1;
-              }
-              fail();
-            })();
-            return $Doc("Column", (k) => $Doc("Nesting", (i) => $Doc("Nest", k - i | 0, $0)));
-          })()
-        )
-      ])))
-    );
-  }
-  return mempty2;
-});
-var briefDesc$p = (showOptional) => (pprefs) => {
-  const $0 = treeMapParser(optDesc(pprefs)({
-    descSep: string3("|"),
-    descHidden: false,
-    descOptional: showOptional,
-    descSurround: true
-  }));
-  return (x) => fold_tree($0(x));
-};
-var parserUsage = (pprefs) => (p) => (progn) => hsep([
-  string3("Usage:"),
-  string3(progn),
-  (() => {
-    const $0 = briefDesc$p(true)(pprefs)(p);
-    const $1 = (() => {
-      if ($0.tag === "Nothing") {
-        return Empty;
-      }
-      if ($0.tag === "Just") {
-        return $0._1;
-      }
-      fail();
-    })();
-    return $Doc("Column", (k) => $Doc("Nesting", (i) => $Doc("Nest", k - i | 0, $1)));
-  })()
-]);
-var bodyHelp = (chunk) => ({
-  helpBody: chunk,
-  helpError: parserHelpMonoid.mempty.helpError,
-  helpFooter: parserHelpMonoid.mempty.helpFooter,
-  helpHeader: parserHelpMonoid.mempty.helpHeader,
-  helpSuggestions: parserHelpMonoid.mempty.helpSuggestions,
-  helpUsage: parserHelpMonoid.mempty.helpUsage
-});
-var parserHelp = (pprefs) => (p) => bodyHelp(vsepChunks([
-  (() => {
-    const $0 = fullDesc(pprefs)(p);
-    if ($0.tag === "Just") {
-      return $Maybe(
-        "Just",
-        $Doc(
-          "Cat",
-          string3("Available options:"),
-          $Doc("Cat", $Doc("FlatAlt", Line, $Doc("Char", " ")), $0._1)
-        )
-      );
-    }
-    return Nothing;
-  })(),
-  ...arrayMap((arr) => {
-    const $0 = uncons(arr);
-    const v = (() => {
-      if ($0.tag === "Just") {
-        return $0._1;
-      }
-      fail();
-    })();
-    const $1 = (() => {
-      if (v.head._1.tag === "Nothing") {
-        return "Available commands:";
-      }
-      if (v.head._1.tag === "Just") {
-        return v.head._1._1;
-      }
-      fail();
-    })();
-    const $2 = vcatChunks([v.head._2, ...arrayMap(snd)(v.tail)]);
-    if ($2.tag === "Just") {
-      return $Maybe(
-        "Just",
-        $Doc(
-          "Cat",
-          string3($1),
-          $Doc("Cat", $Doc("FlatAlt", Line, $Doc("Char", " ")), $2._1)
-        )
-      );
-    }
-    return Nothing;
-  })(groupBy((x) => (y) => {
-    if (x._1.tag === "Nothing") {
-      return y._1.tag === "Nothing";
-    }
-    return x._1.tag === "Just" && y._1.tag === "Just" && x._1._1 === y._1._1;
-  })(cmdDesc(p)))
-]));
-
-// output-es/Data.Function.Memoize/index.js
-var $NatTrie = (_1, _2, _3) => ({ tag: "NatTrie", _1, _2, _3 });
-var tabulateNat = {
-  tabulate: (f) => {
-    const walk = (v) => (v1) => {
-      if (v.tag === "Nil") {
-        return v1._1;
-      }
-      if (v.tag === "Cons") {
-        if (!v._1) {
-          const $0 = v1._2;
-          const $1 = walk(v._2);
-          return defer((v$1) => force($1(force($0))));
-        }
-        if (v._1) {
-          const $0 = v1._3;
-          const $1 = walk(v._2);
-          return defer((v$1) => force($1(force($0))));
-        }
-      }
-      fail();
-    };
-    const build = (n) => $NatTrie(defer((v) => f(n)), defer((v) => build(n * 2 | 0)), defer((v) => build((n * 2 | 0) + 1 | 0)));
-    const trie = build(0);
-    const bits$p = (bits$p$a0$copy) => (bits$p$a1$copy) => {
-      let bits$p$a0 = bits$p$a0$copy, bits$p$a1 = bits$p$a1$copy, bits$p$c = true, bits$p$r;
-      while (bits$p$c) {
-        const v = bits$p$a0, v1 = bits$p$a1;
-        if (v1 === 0) {
-          bits$p$c = false;
-          bits$p$r = v;
-          continue;
-        }
-        bits$p$a0 = $List("Cons", (v1 & 1) !== 0, v);
-        bits$p$a1 = v1 >>> 1;
-      }
-      return bits$p$r;
-    };
-    const bits = bits$p(Nil);
-    return (n) => walk(bits(n))(trie);
-  }
-};
-var tabulateTuple = (dictTabulate) => (dictTabulate1) => ({
-  tabulate: (f) => {
-    const f$p = dictTabulate.tabulate((a) => dictTabulate1.tabulate((b) => f($Tuple(a, b))));
-    return (v) => {
-      const $0 = v._2;
-      const $1 = f$p(v._1);
-      return defer((v$1) => force(force($1)($0)));
-    };
-  }
-});
-var memoize = (dictTabulate) => (f) => {
-  const $0 = dictTabulate.tabulate(f);
-  return (x) => force($0(x));
-};
-var memoize2 = (dictTabulate) => (dictTabulate1) => {
-  const memoize1 = memoize(tabulateTuple(dictTabulate)(dictTabulate1));
-  return (f) => {
-    const $0 = memoize1((v) => f(v._1)(v._2));
-    return (a) => (b) => $0($Tuple(a, b));
-  };
-};
-
-// output-es/Options.Applicative.Help.Levenshtein/index.js
-var memoize22 = /* @__PURE__ */ memoize2(tabulateNat)(tabulateNat);
-var minimum2 = /* @__PURE__ */ minimum(ordInt)(/* @__PURE__ */ foldable1NonEmpty(foldableArray));
-var editDistance = (dictEq) => (xs) => (ys) => {
-  const dist = (v) => (v1) => {
-    if (v === 0) {
-      return v1;
-    }
-    if (v1 === 0) {
-      return v;
-    }
-    return minimum2($NonEmpty(
-      dist$p$lazy()(v - 1 | 0)(v1) + 1 | 0,
-      [dist$p$lazy()(v)(v1 - 1 | 0) + 1 | 0, dictEq.eq(xs[v - 1 | 0])(ys[v1 - 1 | 0]) ? dist$p$lazy()(v - 1 | 0)(v1 - 1 | 0) : 1 + dist$p$lazy()(v - 1 | 0)(v1 - 1 | 0) | 0]
-    ));
-  };
-  const dist$p$lazy = binding(() => memoize22((a) => (b) => dist(a)(b)));
-  const dist$p = dist$p$lazy();
-  return dist$p(xs.length)(ys.length);
-};
-
-// output-es/Options.Applicative.Extra/index.js
-var unWords = (xs) => foldlArray((v) => (v1) => {
-  if (v.init) {
-    return { init: false, acc: v1 };
-  }
-  return { init: false, acc: v.acc + " " + v1 };
-})({ init: true, acc: "" })(xs).acc;
-var fold6 = /* @__PURE__ */ (() => foldableArray.foldMap(monoidArray)(identity3))();
-var mempty13 = /* @__PURE__ */ (() => chunkMonoid(docSemigroup).mempty)();
-var fold1 = /* @__PURE__ */ (() => foldableArray.foldMap(parserHelpMonoid)(identity3))();
-var mempty22 = (v) => () => {
-};
-var fromFoldable26 = /* @__PURE__ */ foldrArray(Cons)(Nil);
-var renderFailure = (failure) => (progn) => {
-  const v = failure(progn);
-  return $Tuple(
-    displayS(renderFits(fits1)(1)(v._2._2._1)(helpText(v._1))),
-    v._2._1
-  );
-};
-var parserFailure = (pprefs) => (pinfo) => (msg) => (ctx) => {
-  const suggestion_help = suggestionsHelp((() => {
-    if (msg.tag === "UnexpectedError") {
-      const $0 = msg._1;
-      const good = filter((a) => editDistance(eqChar)(toCharArray(a))(toCharArray($0)) < 3)(fold6(mapParser((v) => (v1) => {
-        if (v1.optMain.tag === "OptReader") {
-          return arrayMap(showOption)(v1.optMain._1);
-        }
-        if (v1.optMain.tag === "FlagReader") {
-          return arrayMap(showOption)(v1.optMain._1);
-        }
-        if (v1.optMain.tag === "ArgReader") {
-          return [];
-        }
-        if (v1.optMain.tag === "CmdReader") {
-          if (v.hinfoUnreachableArgs) {
-            return [];
-          }
-          return v1.optMain._2;
-        }
-        fail();
-      })(msg._2._1)));
-      return applyMaybe.apply((() => {
-        const $1 = good.length < 2 ? stringChunk("Did you mean this?") : stringChunk("Did you mean one of these?");
-        if ($1.tag === "Just") {
-          return $Maybe("Just", appendWithLine($1._1));
-        }
-        return Nothing;
-      })())((() => {
-        const $1 = vcatChunks(arrayMap(stringChunk)(good));
-        if ($1.tag === "Just") {
-          return $Maybe("Just", indent(4)($1._1));
-        }
-        return Nothing;
-      })());
-    }
-    return mempty13;
-  })());
-  const show_full_help = (() => {
-    if (msg.tag === "ShowHelpText") {
-      return true;
-    }
-    if (msg.tag === "MissingError" && msg._1 === "CmdStart" && pprefs.prefShowHelpOnEmpty) {
-      return true;
-    }
-    return pprefs.prefShowHelpOnError;
-  })();
-  const exit_code = (() => {
-    if (msg.tag === "ErrorMsg") {
-      return pinfo.infoFailureCode;
-    }
-    if (msg.tag === "MissingError") {
-      return pinfo.infoFailureCode;
-    }
-    if (msg.tag === "ExpectsArgError") {
-      return pinfo.infoFailureCode;
-    }
-    if (msg.tag === "UnexpectedError") {
-      return pinfo.infoFailureCode;
-    }
-    if (msg.tag === "ShowHelpText") {
-      return Success;
-    }
-    if (msg.tag === "InfoMsg") {
-      return Success;
-    }
-    fail();
-  })();
-  const error_help = errorHelp((() => {
-    if (msg.tag === "ShowHelpText") {
-      return mempty13;
-    }
-    if (msg.tag === "ErrorMsg") {
-      return stringChunk(msg._1);
-    }
-    if (msg.tag === "InfoMsg") {
-      return stringChunk(msg._1);
-    }
-    if (msg.tag === "MissingError") {
-      if (msg._1 === "CmdStart" && pprefs.prefShowHelpOnEmpty) {
-        return mempty13;
-      }
-      const $0 = stringChunk("Missing:");
-      const $1 = briefDesc$p(false)(pprefs)(msg._2._1);
-      if ($0.tag === "Nothing") {
-        return $1;
-      }
-      if ($1.tag === "Nothing") {
-        return $0;
-      }
-      if ($0.tag === "Just" && $1.tag === "Just") {
-        return $Maybe("Just", $Doc("Cat", $0._1, $Doc("Cat", $Doc("Char", " "), $1._1)));
-      }
-      fail();
-    }
-    if (msg.tag === "ExpectsArgError") {
-      return stringChunk("The option `" + msg._1 + "` expects an argument.");
-    }
-    if (msg.tag === "UnexpectedError") {
-      return stringChunk(startsWith("-")(msg._1) ? "Invalid option `" + msg._1 + "'" : "Invalid argument `" + msg._1 + "'");
-    }
-    fail();
-  })());
-  return (progn) => $Tuple(
-    (() => {
-      const $0 = (names, pinfo$p) => fold1([
-        (() => {
-          const h = headerHelp(pinfo$p.infoHeader);
-          const f = footerHelp(pinfo$p.infoFooter);
-          if (show_full_help) {
-            return fold1([h, f, parserHelp(pprefs)(pinfo$p.infoParser)]);
-          }
-          return parserHelpMonoid.mempty;
-        })(),
-        msg.tag === "InfoMsg" ? parserHelpMonoid.mempty : usageHelp(vcatChunks([
-          $Maybe("Just", parserUsage(pprefs)(pinfo$p.infoParser)(unWords([progn, ...names]))),
-          pinfo$p.infoProgDesc.tag === "Just" ? $Maybe("Just", indent(2)(pinfo$p.infoProgDesc._1)) : Nothing
-        ])),
-        suggestion_help,
-        error_help
-      ]);
-      const v = index(ctx)(0);
-      if (v.tag === "Nothing") {
-        return $0([], pinfo);
-      }
-      if (v.tag === "Just") {
-        return $0(reverse(arrayMap((v$1) => v$1._1)(ctx)), v._1._2);
-      }
-      fail();
-    })(),
-    $Tuple(exit_code, $Tuple(pprefs.prefColumns, void 0))
-  );
-};
-var helper = /* @__PURE__ */ (() => abortOption(ShowHelpText)(foldableArray.foldMap(modMonoid)(identity3)([
-  $Mod(
-    optionFieldsHasName.name($OptName("OptLong", "help")),
-    $DefaultProp(Nothing, Nothing),
-    identity27
-  ),
-  $Mod(
-    optionFieldsHasName.name($OptName("OptShort", "h")),
-    $DefaultProp(Nothing, Nothing),
-    identity27
-  ),
-  help("Show this help text"),
-  hidden
-])))();
-var getProgName = () => {
-  const a$p = argv();
-  const $0 = index(a$p)(1);
-  const $1 = (() => {
-    if ($0.tag === "Just") {
-      const $12 = split("/")($0._1);
-      return index($12)($12.length - 1 | 0);
-    }
-    if ($0.tag === "Nothing") {
-      return Nothing;
-    }
-    fail();
-  })();
-  if ($1.tag === "Nothing") {
-    return "";
-  }
-  if ($1.tag === "Just") {
-    return $1._1;
-  }
-  fail();
-};
-var getArgs = () => {
-  const a$p = argv();
-  return slice(2)(a$p.length)(a$p);
-};
-var exitSuccess = /* @__PURE__ */ (() => exit(boundedEnumExitCode.fromEnum(Success)))();
-var handleParseResult = (v) => {
-  if (v.tag === "Success") {
-    const $0 = v._1;
-    return () => $0;
-  }
-  if (v.tag === "Failure") {
-    const $0 = v._1;
-    return () => {
-      const progn = getProgName();
-      const v1 = renderFailure($0)(progn);
-      writeString(v1._2 === "Success" ? process.stdout : process.stderr)(UTF8)(v1._1 + "\n")(mempty22)();
-      return exit(boundedEnumExitCode.fromEnum(v1._2))();
-    };
-  }
-  if (v.tag === "CompletionInvoked") {
-    const $0 = v._1;
-    return () => {
-      const progn = getProgName();
-      const msg = $0.execCompletion(progn)();
-      writeString(process.stdout)(UTF8)(msg)(mempty22)();
-      return exitSuccess();
-    };
-  }
-  fail();
-};
-var execParserPure = (pprefs) => (pinfo) => (args) => {
-  const v = runParserFully(pMonadP)(pinfo.infoPolicy)($Parser(
-    "AltP",
-    parserFunctor.map(Left)(bashCompletionParser(pinfo)(pprefs)),
-    parserFunctor.map(Right)(pinfo.infoParser)
-  ))(fromFoldable26(args))([])(pprefs);
-  if (v._1.tag === "Right") {
-    if (v._1._1.tag === "Right") {
-      return $ParserResult("Success", v._1._1._1);
-    }
-    if (v._1._1.tag === "Left") {
-      return $ParserResult("CompletionInvoked", v._1._1._1);
-    }
-    fail();
-  }
-  if (v._1.tag === "Left") {
-    return $ParserResult("Failure", parserFailure(pprefs)(pinfo)(v._1._1)(v._2));
-  }
-  fail();
-};
-
 // output-es/Fluid/index.js
-var $Command = (_1) => ({ tag: "Evaluate", _1 });
+var $Command = (tag, _1) => ({ tag, _1 });
 var $EvalArgs = (_1) => ({ tag: "EvalArgs", _1 });
 var bind3 = /* @__PURE__ */ (() => bindReaderT(bindAff).bind)();
-var monadAffNodeT = /* @__PURE__ */ monadAffReader(monadAffAff);
-var monadErrorErrorNodeT = /* @__PURE__ */ monadErrorReaderT(monadErrorAff);
-var monadReaderFileCxtNodeT = /* @__PURE__ */ monadReaderReaderT(monadAff);
 var loadFileNodeT2 = /* @__PURE__ */ loadFileNodeT(monadAff);
-var loadProgCxt2 = /* @__PURE__ */ loadProgCxt(monadAffNodeT)(monadErrorErrorNodeT)(monadReaderFileCxtNodeT)(loadFileNodeT2);
+var monadErrorErrorNodeT = /* @__PURE__ */ monadErrorReaderT(monadErrorAff);
+var monadAffNodeT = /* @__PURE__ */ monadAffReader(monadAffAff);
 var loadFile2 = /* @__PURE__ */ loadFile(loadFileNodeT2)(/* @__PURE__ */ monadReaderT(monadAff))(monadErrorErrorNodeT)(monadAffNodeT);
+var monadReaderFileCxtNodeT = /* @__PURE__ */ monadReaderReaderT(monadAff);
 var prepConfig2 = /* @__PURE__ */ prepConfig(monadAffNodeT)(monadErrorErrorNodeT)(monadReaderFileCxtNodeT)(loadFileNodeT2);
 var graphEval2 = /* @__PURE__ */ graphEval(monadAffNodeT)(monadReaderFileCxtNodeT)(loadFileNodeT2)(monadErrorErrorNodeT);
-var Evaluate = (value0) => $Command(value0);
+var Evaluate = (value0) => $Command("Evaluate", value0);
+var Migrate = (value0) => $Command("Migrate", value0);
 var parseLocal = /* @__PURE__ */ $Parser(
   "AltP",
   /* @__PURE__ */ flag$p(true)(/* @__PURE__ */ (() => {
@@ -27130,26 +29892,64 @@ var parseEvaluate = /* @__PURE__ */ (() => $Parser(
     })()))
   )
 ))();
-var evaluate = (v) => {
-  const $0 = v._1.fileName;
+var migrate = (v) => {
   const fluidSrcPaths = [v._1.fluidSrcPath, ...v._1.local ? ["node_modules/@explorable-viz/fluid/dist/fluid/fluid"] : []];
-  return bind3(loadProgCxt2)((progCxt) => bind3(loadFile2(fluidSrcPaths)($0))((fluidSrc) => bind3(prepConfig2(progCxt)(fluidSrc))((v1) => bind3(graphEval2(v1.gconfig)(v1.e))((v2) => {
-    const $1 = _pure(functorVal.map((v$1) => {
-    })(v2["out\u03B1"]));
-    return (v$1) => $1;
-  }))))({ fluidSrcPaths });
+  return bind3(loadFile2(fluidSrcPaths)(v._1.fileName))((fluidSrc) => {
+    const v1 = runParserT1(fluidSrc)(withImports2(expr_));
+    if (v1.tag === "Left") {
+      const $0 = _pure(prettyParseError(v1._1));
+      return (v$1) => $0;
+    }
+    if (v1.tag === "Right") {
+      const $0 = _pure(renderWithIndent(0)(prettyExpr1(annUnit).pretty(v1._1._1)));
+      return (v$1) => $0;
+    }
+    fail();
+  })({ fluidSrcPaths });
 };
-var dispatchCommand = (v) => _bind(evaluate(v._1))((v1) => _liftEffect(log(intercalate4("\n")(removeDocWS(prettyVal(highlightableUnit).pretty(v1)).lines))));
-var commands = /* @__PURE__ */ (() => ({ evaluate: parserFunctor.map(Evaluate)(parseEvaluate) }))();
-var commandParser = /* @__PURE__ */ (() => subparser(command("evaluate")(progDesc("Evaluate a file")({
-  infoParser: commands.evaluate,
-  infoFullDesc: true,
-  infoProgDesc: mempty12,
-  infoHeader: mempty12,
-  infoFooter: mempty12,
-  infoFailureCode: $$Error,
-  infoPolicy: Intersperse
-}))))();
+var evaluate = (v) => {
+  const fluidSrcPaths = [v._1.fluidSrcPath, ...v._1.local ? ["node_modules/@explorable-viz/fluid/dist/fluid/fluid"] : []];
+  return bind3(loadFile2(fluidSrcPaths)(v._1.fileName))((fluidSrc) => bind3(prepConfig2(primitives)(fluidSrc))((v1) => bind3(graphEval2(v1.gconfig)(v1.e))((v2) => {
+    const $0 = _pure(functorVal.map((v$1) => {
+    })(v2["out\u03B1"]));
+    return (v$1) => $0;
+  })))({ fluidSrcPaths });
+};
+var dispatchCommand = (v) => {
+  if (v.tag === "Evaluate") {
+    return _bind(evaluate(v._1))((v1) => _liftEffect(log(renderWithIndent(0)(prettyVal(highlightableUnit).pretty(v1)))));
+  }
+  if (v.tag === "Migrate") {
+    return _bind(migrate(v._1))((r) => _liftEffect(log(r)));
+  }
+  fail();
+};
+var commands = /* @__PURE__ */ (() => ({ evaluate: parserFunctor.map(Evaluate)(parseEvaluate), migrate: parserFunctor.map(Migrate)(parseEvaluate) }))();
+var commandParser = /* @__PURE__ */ subparser(/* @__PURE__ */ (() => {
+  const $0 = command("evaluate")(progDesc("Evaluate a file")({
+    infoParser: commands.evaluate,
+    infoFullDesc: true,
+    infoProgDesc: mempty12,
+    infoHeader: mempty12,
+    infoFooter: mempty12,
+    infoFailureCode: $$Error,
+    infoPolicy: Intersperse
+  }));
+  const $1 = command("migrate")(progDesc("Migrate a file")({
+    infoParser: commands.migrate,
+    infoFullDesc: true,
+    infoProgDesc: mempty12,
+    infoHeader: mempty12,
+    infoFooter: mempty12,
+    infoFailureCode: $$Error,
+    infoPolicy: Intersperse
+  }));
+  return $Mod(
+    (x) => $1._1($0._1(x)),
+    $DefaultProp($1._2._1.tag === "Nothing" ? $0._2._1 : $1._2._1, $1._2._2.tag === "Nothing" ? $0._2._2 : $1._2._2),
+    (x) => $1._3($0._3(x))
+  );
+})());
 var callback = (v) => {
   if (v.tag === "Left") {
     return log(showErrorImpl(v._1));
