@@ -114,10 +114,10 @@
     style-mod "^4.1.0"
     w3c-keyname "^2.2.4"
 
-"@explorable-viz/fluid@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@explorable-viz/fluid/-/fluid-0.11.0.tgz#0070018a4773208c92283adf7d6d8eb7349264ff"
-  integrity sha512-hHy+tnh6Ab5XwwVUbdUFHQQW/tWQglOc4Q9hkSPOcsN3Ul4BVcPyTG+K4xcujDyll8x0E8uslCaTtiKIuJTVKA==
+"@explorable-viz/fluid@0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@explorable-viz/fluid/-/fluid-0.11.1.tgz#42e7deb3d0b316c60d80ae7174e7f6e7fe9a629c"
+  integrity sha512-fFCPzrhvxlnEtJ0bui3MjW8+wVUomp4rkwJdaW1eWz7/BdLImIJpUMx9U701Kfi0o8iol9mNIxuvLJ7tBvretA==
   dependencies:
     "@codemirror/commands" "^6.8.1"
     "@codemirror/lang-python" "^6.2.1"
