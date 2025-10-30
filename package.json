@@ -22,6 +22,7 @@
     "@explorable-viz/fluid": "0.11.3"
   },
   "devDependencies": {
-    "puppeteer": "23.11.1"
+    "puppeteer": "23.11.1",
+    "//": "Set Puppeteer to same version as used by Fluid or risk browser version mismatch"
   }
 }
