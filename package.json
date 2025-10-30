@@ -19,7 +19,7 @@
   },
   "packageManager": "yarn@1.22.22",
   "dependencies": {
-    "@explorable-viz/fluid": "0.11.1"
+    "@explorable-viz/fluid": "0.11.3"
   },
   "devDependencies": {
     "puppeteer": "23.2.0"
