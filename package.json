@@ -22,6 +22,6 @@
     "@explorable-viz/fluid": "0.11.3"
   },
   "devDependencies": {
-    "puppeteer": "23.2.0"
+    "puppeteer": "23.11.1"
   }
 }
