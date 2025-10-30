@@ -1,3 +1,6 @@
+[![develop](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml)
+[![GitHub pages](https://github.com/explorable-viz/fluid-article/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/pages/pages-build-deployment)
+
 # fluid-article
 Template repo for Fluid article. To create a new online article:
 
