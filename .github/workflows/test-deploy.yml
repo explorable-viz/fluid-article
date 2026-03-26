@@ -45,7 +45,7 @@ jobs:
         npx install-website article
         cd website/article
         yarn install
-        yarn build
+        BASE_PATH=/fluid-article yarn build
     - name: gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
