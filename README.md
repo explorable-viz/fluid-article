@@ -1,52 +1,39 @@
-[![develop](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml)
+[![test-deploy](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml)
 [![GitHub pages](https://github.com/explorable-viz/fluid-article/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/pages/pages-build-deployment)
 
 # fluid-article
-Template repo for Fluid article. To create a new online article:
 
-- Create a new repository from this template
-- In the Workflow Permissions settings for the new repo, enable the following for GitHub Actions:
+Template repo for Fluid article websites, built with SvelteKit.
+
+## Creating a new article
+
+1. Create a new repository from this template
+2. In the repo's Workflow Permissions settings, enable:
    - Read and write permissions
    - Create and approve pull requests
-- Once the `test-deploy` workflow has succeeded, go to the Pages settings for the repo and configure GitHub Pages to deploy from the `gh-pages` branch
-- When `pages-build-deployment` completes your website should be live
+3. Once the `test-deploy` workflow succeeds, configure GitHub Pages to deploy from the `gh-pages` branch
 
-## Running website locally
+## Running locally
 
-### Software required
-- git
-- Node.js >=18.0.0
-- yarn >= 1.22
+Requires [Node.js](https://nodejs.org/) >= 22.
 
-Windows users may also require
-- Ubuntu WSL
+```bash
+yarn install
+yarn setup
+cd website/article
+yarn install
+yarn dev
+```
 
-### Installation
+For a production-like preview:
 
-1. Run `yarn install`
-2. Run `yarn install-website article` to copy the example `article` website from `@exploreable-viz/fluid`
+```bash
+yarn build
+yarn preview
+```
 
-### Bundling website
+## Testing
 
-To bundle a website:
-1. Run `yarn bundle-website $WEBSITE_NAME`
-
-This will create a folder in `dist` called `$WEBSITE_NAME`.
-
-### Serving website Locally
-
-To run the website in the browser:
-1. run `npx http-serve dist/$WEBSITE_NAME -a 127.0.0.1 -c-1`
-2. Open browser at localhost
-
-### Running Puppeteer tests
-
-To run your website tests:
-1. Run `yarn test-website $WEBSITE_NAME`
-
-### Convenience commands for single website
-
-If you have a single website called `article`, the following are synonyms for the above:
-- `yarn bundle`
-- `yarn serve`
-- `yarn test`
+```bash
+yarn test
+```

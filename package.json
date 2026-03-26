@@ -1,10 +1,11 @@
 {
   "name": "@explorable-viz/fluid-article",
-  "version": "0.1",
-  "description": "Template article for Fluid article.",
+  "version": "0.2",
+  "private": true,
+  "description": "Template for Fluid article websites.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/explorable-viz/fluid.git"
+    "url": "git+https://github.com/explorable-viz/fluid-article.git"
   },
   "author": "Fluid Contributors",
   "license": "MIT",
@@ -12,17 +13,16 @@
     "url": "https://github.com/explorable-viz/fluid/issues"
   },
   "scripts": {
-    "bundle": "yarn bundle-website article",
-    "bundle-serve": "yarn bundle && yarn serve",
-    "serve": "npx http-serve dist/article",
-    "test": "yarn test-website article"
+    "setup": "npx install-website article",
+    "dev": "cd website/article && yarn dev",
+    "build": "cd website/article && yarn build",
+    "preview": "cd website/article && yarn preview",
+    "test": "cd website/article && yarn test"
   },
-  "packageManager": "yarn@1.22.22",
   "dependencies": {
-    "@explorable-viz/fluid": "0.12.2"
+    "@explorable-viz/fluid": "0.12.4"
   },
   "devDependencies": {
-    "puppeteer": "23.11.1",
-    "//": "Set Puppeteer to same version as used by Fluid or risk browser version mismatch"
+    "puppeteer": "23.11.1"
   }
 }
