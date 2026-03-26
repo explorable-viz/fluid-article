@@ -13,7 +13,7 @@ Template repo for Fluid article websites, built with SvelteKit.
    - Create and approve pull requests
 3. Once `test-deploy` workflow succeeds, configure GitHub Pages to deploy from `gh-pages` branch
 
-## Running locally
+## Setup
 
 Requires [Node.js](https://nodejs.org/) >= 22.
 
@@ -22,17 +22,25 @@ yarn install
 npx install-website article
 cd website/article
 yarn install
+```
+
+## Running locally
+
+From `website/article/`:
+
+```bash
 yarn dev
 ```
 
-For production-like preview:
+Production-like preview:
 
 ```bash
-yarn build
-yarn preview
+yarn build && yarn preview
 ```
 
 ## Testing
+
+From `website/article/`:
 
 ```bash
 yarn test
