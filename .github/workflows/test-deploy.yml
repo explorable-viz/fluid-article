@@ -4,6 +4,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  FLUID_SCRIPT: node_modules/@explorable-viz/fluid/script
+
 jobs:
   test:
     strategy:
@@ -16,37 +19,41 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 22
-    - run: |
-        shopt -s extglob nullglob globstar
-      if: runner.os == 'Linux'
-    - name: run-test
+    - name: setup
       run: |
         yarn install
-        yarn install-website article
-        set -x -e
-        yarn bundle-website article
-        export PUPPETEER_CACHE_DIR=$GITHUB_WORKSPACE/
-        # requires Puppeteer to be installed at same version as used in Fluid
-        yarn puppeteer browsers install chrome
-        yarn puppeteer browsers install firefox
-        yarn test-website article
+        npx install-website article
+        cd website/article
+        yarn install
+    - name: test
+      run: |
+        cd website/article
+        yarn test
 
   deploy-website:
     runs-on: ubuntu-22.04
     needs: test
-    # Use branch 'website' to experiment with deploy-website
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/website'
+    if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v4
-      - name: build
-        run: |
-          yarn install
-          set -x -e
-          yarn install-website article
-          yarn bundle-website article
-      - name: gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/article
-          keep_files: false
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+    - name: build
+      run: |
+        yarn install
+        npx install-website article
+        cd website/article
+        yarn install
+        yarn build
+    - name: gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: website/article/build
+        keep_files: false
+    - name: test deployed website
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        ./$FLUID_SCRIPT/util/test-deployed-website.sh https://explorable-viz.github.io/fluid-article website/article
