@@ -22,18 +22,10 @@ jobs:
         npx install-website article
         cd website/article
         yarn install
-    - name: build
-      run: |
-        cd website/article
-        yarn build
     - name: test
       run: |
         cd website/article
-        yarn puppeteer browsers install chrome
-        yarn puppeteer browsers install firefox
-        npx vite preview --port 8080 --host 127.0.0.1 --strictPort &
-        sleep 3
-        node -e "import('./test.mjs').then(({ main }) => main()).then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); })"
+        yarn test
 
   deploy-website:
     runs-on: ubuntu-22.04
