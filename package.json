@@ -13,7 +13,7 @@
     "url": "https://github.com/explorable-viz/fluid/issues"
   },
   "dependencies": {
-    "@explorable-viz/fluid": "0.12.4"
+    "@explorable-viz/fluid": "0.12.5"
   },
   "devDependencies": {
     "puppeteer": "23.11.1"
