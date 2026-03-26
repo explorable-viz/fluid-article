@@ -12,13 +12,6 @@
   "bugs": {
     "url": "https://github.com/explorable-viz/fluid/issues"
   },
-  "scripts": {
-    "setup": "npx install-website article",
-    "dev": "cd website/article && yarn dev",
-    "build": "cd website/article && yarn build",
-    "preview": "cd website/article && yarn preview",
-    "test": "cd website/article && yarn test"
-  },
   "dependencies": {
     "@explorable-viz/fluid": "0.12.4"
   },
