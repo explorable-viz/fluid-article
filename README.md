@@ -1,17 +1,17 @@
-[![test-deploy](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml)
+[![test-deploy](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml/badge.svg?branch=main)](https://github.com/explorable-viz/fluid-article/actions/workflows/test-deploy.yml)
 [![GitHub pages](https://github.com/explorable-viz/fluid-article/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/explorable-viz/fluid-article/actions/workflows/pages/pages-build-deployment)
 
 # fluid-article
 
 Template repo for Fluid article websites, built with SvelteKit.
 
-## Creating a new article
+## Creating new article
 
-1. Create a new repository from this template
-2. In the repo's Workflow Permissions settings, enable:
+1. Create new repository from this template
+2. In repo Workflow Permissions settings, enable:
    - Read and write permissions
    - Create and approve pull requests
-3. Once the `test-deploy` workflow succeeds, configure GitHub Pages to deploy from the `gh-pages` branch
+3. Once `test-deploy` workflow succeeds, configure GitHub Pages to deploy from `gh-pages` branch
 
 ## Running locally
 
@@ -19,13 +19,13 @@ Requires [Node.js](https://nodejs.org/) >= 22.
 
 ```bash
 yarn install
-yarn setup
+npx install-website article
 cd website/article
 yarn install
 yarn dev
 ```
 
-For a production-like preview:
+For production-like preview:
 
 ```bash
 yarn build
